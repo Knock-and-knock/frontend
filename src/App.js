@@ -9,7 +9,6 @@ function App() {
         <img src={logo} alt='logo' className='logo-image'/>
       </div>
       <div className="header">
-        <img src="user-icon.svg" alt="User Icon" className="profile-image" />
         <div className="profile-info">
           <h2 className="profile-name">홍길동보호자님</h2>
           <p className="profile-subtext">홍길동</p>

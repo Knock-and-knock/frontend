@@ -7,7 +7,8 @@
 
 .top-nav{
   display: flex;
-  align-items: left;
+  justify-content: center;
+  align-items: center;
   height: 80px;
 }
 .logo-image{
@@ -33,11 +34,13 @@
 }
 
 .profile-name {
+  text-align: center;
   font-size: 18px;
   margin: 0;
 }
 
 .profile-subtext {
+  text-align: center;
   color: #555;
   margin: 0;
 }
