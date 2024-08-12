@@ -1,23 +1,36 @@
 .container {
   max-width: 390px;
   margin: 0 auto;
-  padding: 20px;
+  height: 100vh;
   font-family: Arial, sans-serif;
+  background-color: #FFF8F3;
 }
 
-.top-nav{
+.logo-nav{
   display: flex;
   justify-content: center;
   align-items: center;
   height: 80px;
 }
 .logo-image{
-  width:20%;
-  height: 70%;
+  width:15%;
+  height: 50%;
+}
+.top-nav{
+  padding-top: 80px;
 }
 
+.white-back{
+  background-color: #fff;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  box-shadow: 0px 0px 7px #888;
+  height: 36vh;
+  position: relative;
+}
 .header {
   display: flex;
+  padding: 20px;
   align-items: center;
   margin-bottom: 20px;
 }
@@ -46,17 +59,25 @@
 }
 
 .main-section {
-  background-color: #f5f5f5;
-  padding: 20px;
   border-radius: 10px;
+  padding: 20px;
   margin-bottom: 20px;
   text-align: center;
+  background-color: #FF961B;
+  position: absolute;
+  top: 36%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  width: 37vh;
+  box-shadow: 0px 3px 7px #888;
 }
 
 .main-text {
   margin-top: 10px;
   font-size: 16px;
   font-weight: bold;
+  color: #fff;
 }
 
 .icon {
@@ -66,13 +87,17 @@
 
 .button-group {
   display: flex;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 70px;
   justify-content: space-between;
   margin-bottom: 20px;
 }
 
 .button {
   flex: 1;
-  background-color: #f5f5f5;
+  background-color: #fff;
+  box-shadow: 1px 2px 4px #888;
   padding: 20px;
   border-radius: 10px;
   margin-right: 10px;
@@ -170,6 +195,16 @@
   .container {
     max-width: 1024px;
     padding: 60px;
+  }
+  .top-nav{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+  }
+  .logo-image{
+    width:10%;
+    height: 40%;
   }
 
   .profile-image {
