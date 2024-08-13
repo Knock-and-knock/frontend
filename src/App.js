@@ -1,6 +1,5 @@
 import React from 'react';
-import './App.css';
-import logo from './image/logo.png';
+import logo from 'image/logo.png';
 
 function App() {
   return (
@@ -10,7 +9,7 @@ function App() {
       </div>
       <div className="header">
         <div className="profile-info">
-          <h2 className="profile-name">홍길동보호자님</h2>
+          <h2 className="profile-name">zxczxc</h2>
           <p className="profile-subtext">홍길동</p>
         </div>
       </div>

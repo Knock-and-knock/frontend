@@ -1,0 +1,148 @@
+.container {
+  max-width: 390px;
+  margin: 0 auto;
+  
+  font-family: Arial, sans-serif;
+  background-color: white;
+  min-height: 100vh; /* 전체 높이로 채우기 */
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  padding: 20px;
+  align-items: center;
+  background-color: white;
+}
+
+
+.header-info {
+  width: 100%;
+  align-items: center;
+  background-color: white;
+}
+
+.back-icon{
+  width: 8%;
+  height: 8%;
+}
+
+.home-icon{
+  width: 10%;
+  height: 10%;
+}
+
+.header-name {
+  text-align: center;
+  font-size: 22px;
+  
+}
+
+.main-container {
+  flex: 1;
+  width: 100%;
+  height: 100%;
+  background-color: #F8FBFF;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.main-section {
+  width: 80%;
+  padding: 20px;
+  margin-left: 15px;
+  margin-right: 15px;
+  border: 1px solid #ccc;
+  border-radius: 15px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+#detailed-reserve {
+  border-width: 3px;
+  border-color: #80BAFF;
+  box-shadow: 1px 2px 4px #888;
+}
+
+#go-reserve {
+  border-width: 3px;
+  border-color: #80BAFF;
+  background-color: #80BAFF;
+  box-shadow: 1px 2px 4px #888;
+}
+
+.main-text {
+  font-size: 18px;
+  color: #888;
+  margin: 10px 0;
+}
+
+#detailed-reserve-text {
+  color: #80BAFF;
+}
+
+#go-reserve-text {
+  color: white;
+}
+
+.main-link {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* 반응형 디자인 */
+@media (min-width: 768px) {
+  .container {
+    max-width: 768px;
+    padding: 40px;
+  }
+
+  .header {
+    margin-bottom: 30px;
+  }
+
+  .profile-image {
+    width: 80px;
+    height: 80px;
+  }
+
+  .profile-name {
+    font-size: 24px;
+  }
+
+  .main-section {
+    padding: 30px;
+  }
+
+  .main-text {
+    font-size: 20px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    max-width: 1024px;
+    padding: 60px;
+  }
+
+  .profile-image {
+    width: 100px;
+    height: 100px;
+  }
+
+  .profile-name {
+    font-size: 28px;
+  }
+
+  .main-section {
+    padding: 40px;
+  }
+
+  .main-text {
+    font-size: 24px;
+  }
+}
