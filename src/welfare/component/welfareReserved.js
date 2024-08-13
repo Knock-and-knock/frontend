@@ -1,5 +1,5 @@
 import React from 'react';
-import 'welfare/css/WelfareMain.css';
+import 'welfare/css/WelfareReserved.css';
 import back from "image/Back.png";
 import home from "image/gohome.png";
 import welfare from "image/welfare.png";
