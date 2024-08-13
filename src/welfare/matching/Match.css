@@ -1,0 +1,10 @@
+@media (min-width: 390px) {
+  .container{
+    max-width: 390px;
+    margin: 0 auto;
+    height: 100vh;
+    font-family: 'Nanum Gothic', sans-serif;
+    position: relative;
+  }
+
+}

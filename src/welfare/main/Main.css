@@ -1,0 +1,286 @@
+@media (min-width: 390px) {
+  .containerA {
+    max-width: 390px;
+    margin: 0 auto;
+    height: 100vh;
+    font-family: 'Nanum Gothic', sans-serif;
+    background-color: #fff8f3;
+    position: relative;
+  }
+  .containerB {
+    max-width: 390px;
+    margin: 0 auto;
+    height: 100vh;
+    font-family: 'Nanum Gothic', sans-serif;
+    background-color: #F8FBFF;
+    position: relative;
+  }
+
+
+  .button-group {
+    display: flex;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 100px;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+
+  .button {
+    flex: 1;
+    background-color: #fff;
+    box-shadow: 1px 2px 4px #888;
+    padding: 10px;
+    border-radius: 10px;
+    margin-right: 10px;
+    text-align: center;
+  }
+
+  .button:last-child {
+    margin-right: 0;
+  }
+
+  .button-text {
+    margin-top: 10px;
+    font-size: 16px;
+  }
+}
+
+/* 반응형 디자인 */
+
+@media (min-width: 360px) {
+  .container {
+    max-width: 360px;
+    margin: 0 auto;
+    height: 100vh;
+    font-family: Arial, sans-serif;
+    background-color: #fff8f3;
+  }
+
+  .logo-nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80px;
+  }
+  .logo-image {
+    width: 15%;
+    height: 50%;
+  }
+  .top-nav {
+    padding-top: 80px;
+  }
+
+  .white-back {
+    background-color: #fff;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    box-shadow: 0px 0px 7px #888;
+    height: 36vh;
+    position: relative;
+  }
+  .header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  .profile-image {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+
+  .profile-info {
+    flex-grow: 1;
+  }
+
+  .profile-name {
+    text-align: center;
+    font-size: 18px;
+    margin: 0;
+  }
+
+  .profile-subtext {
+    text-align: center;
+    color: #555;
+    margin: 0;
+  }
+
+  .button-group {
+    display: flex;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 100px;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+
+  .button {
+    flex: 1;
+    background-color: #fff;
+    box-shadow: 1px 2px 4px #888;
+    padding: 10px;
+    border-radius: 10px;
+    margin-right: 10px;
+    text-align: center;
+  }
+
+  .button:last-child {
+    margin-right: 0;
+  }
+
+  .button-text {
+    margin-top: 10px;
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 500px) {
+  .container {
+    max-width: 500px;
+    margin: 0 auto;
+    height: 100vh;
+    font-family: Arial, sans-serif;
+    background-color: #fff8f3;
+  }
+
+  .logo-nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80px;
+  }
+  .logo-image {
+    width: 15%;
+    height: 50%;
+  }
+  .top-nav {
+    padding-top: 50px;
+  }
+
+  .white-back {
+    background-color: #fff;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    box-shadow: 0px 0px 7px #888;
+    height: 36vh;
+    position: relative;
+  }
+  .header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  .profile-image {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+
+  .profile-info {
+    flex-grow: 1;
+  }
+
+  .profile-name {
+    text-align: center;
+    font-size: 18px;
+    margin: 0;
+  }
+
+  .profile-subtext {
+    text-align: center;
+    color: #555;
+    margin: 0;
+  }
+
+  .button-group {
+    display: flex;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 100px;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+
+  .button {
+    flex: 1;
+    background-color: #fff;
+    box-shadow: 1px 2px 4px #888;
+    padding: 10px;
+    border-radius: 10px;
+    margin-right: 10px;
+    text-align: center;
+  }
+
+  .button:last-child {
+    margin-right: 0;
+  }
+
+  .button-text {
+    margin-top: 10px;
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    max-width: 1024px;
+    padding: 60px;
+  }
+  .top-nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+  }
+  .logo-image {
+    width: 10%;
+    height: 40%;
+  }
+
+  .profile-image {
+    width: 100px;
+    height: 100px;
+  }
+
+  .profile-name {
+    font-size: 28px;
+  }
+
+  .main-section {
+    padding: 40px;
+  }
+
+  .main-text {
+    font-size: 24px;
+  }
+
+  .icon {
+    width: 80px;
+    height: 80px;
+  }
+
+  .button {
+    padding: 40px;
+  }
+
+  .button-text {
+    font-size: 18px;
+  }
+
+  .card-section {
+    padding: 40px;
+  }
+
+  .card-text {
+    font-size: 18px;
+  }
+
+  .card-link {
+    font-size: 18px;
+  }
+}
