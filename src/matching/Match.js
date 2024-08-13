@@ -1,6 +1,6 @@
-import "welfare/matching/Match.css";
-import "welfare/matching/header/Header.css";
-import Header from "./header/Header";
+import Header from "matching/header/Header";
+import "matching/header/Header.css";
+import "matching/Match.css";
 import FYIInput from "./notice/FYIInput";
 import FYINotice from "./notice/FYINotice";
 

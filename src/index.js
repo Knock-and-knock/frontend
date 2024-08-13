@@ -1,9 +1,9 @@
 import 'index.css';
+import Match from 'matching/Match';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import reportWebVitals from 'reportWebVitals';
 import * as serviceWorkerRegistration from 'serviceWorkerRegistration';
-import Match from 'welfare/matching/Match';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

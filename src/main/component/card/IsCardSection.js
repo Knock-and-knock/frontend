@@ -1,5 +1,5 @@
 import card from "image/card.png";
-import 'welfare/main/component/card/CardSectionB.css';
+import 'main/component/card/CardSectionB.css';
 
 function CardSection(props) {
   return (

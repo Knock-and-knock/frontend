@@ -1,5 +1,5 @@
 import chatbot from "image/chatimage.png";
-import 'welfare/main/component/chat/ChatSection.css';
+import 'main/component/chat/ChatSection.css';
 
 function ChatSection(props) {
   return (

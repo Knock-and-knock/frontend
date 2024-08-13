@@ -1,6 +1,6 @@
-import 'welfare/main/component/header/HeaderA.css';
-import LogoNav from "welfare/main/component/header/LogoNav";
-import ProfileA from "welfare/main/component/header/ProfileA";
+import 'main/component/header/HeaderA.css';
+import LogoNav from "main/component/header/LogoNav";
+import ProfileA from "main/component/header/ProfileA";
 
 function Header(props) {
   return (
