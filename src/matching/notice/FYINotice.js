@@ -1,4 +1,4 @@
-import "welfare/matching/notice/Notice.css";
+import "matching/notice/Notice.css";
 
 function FYINotice(props) {
   return (

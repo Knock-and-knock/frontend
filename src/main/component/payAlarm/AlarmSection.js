@@ -1,5 +1,5 @@
 import alarm from "image/payAlarm.png";
-import 'welfare/main/component/payAlarm/AlarmSection.css';
+import 'main/component/payAlarm/AlarmSection.css';
 
 function AlarmSection(props) {
   return (

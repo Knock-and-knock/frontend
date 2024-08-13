@@ -1,7 +1,7 @@
-import "welfare/main/Main.css";
-import ChatSection from "welfare/main/component/chat/ChatSection";
-import HeaderA from "welfare/main/component/header/HeaderA";
-import ButtonGroup from "welfare/main/component/serviceBtn/ButtonGroup";
+import ChatSection from "main/component/chat/ChatSection";
+import HeaderA from "main/component/header/HeaderA";
+import ButtonGroup from "main/component/serviceBtn/ButtonGroup";
+import "main/Main.css";
 import CardSection from "./component/card/CardSection";
 import CardTag from "./component/card/CardTag";
 

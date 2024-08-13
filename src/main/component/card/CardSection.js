@@ -1,6 +1,6 @@
 import info from "image/icon/info.png";
-import 'welfare/main/component/card/CardSectionA.css';
-import CreateCard from "welfare/main/component/card/CreateCard";
+import 'main/component/card/CardSectionA.css';
+import CreateCard from "main/component/card/CreateCard";
 
 function CardSection(props) {
   return (
