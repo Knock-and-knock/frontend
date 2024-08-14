@@ -4,7 +4,7 @@ import back from "image/Back.png";
 import home from "image/gohome.png";
 import welfare from "image/welfare.png";
 
-function App() {
+function WelfareMain() {
   return (
     <div className="container">
       <div className="header">
@@ -32,4 +32,4 @@ function App() {
   );
 }
 
-export default App;
+export default WelfareMain;
