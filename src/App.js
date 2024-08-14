@@ -4,6 +4,7 @@ import MainB from 'main/MainB';
 import Match from 'matching/Match';
 import Matching from 'matching/notice/Matching';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import WelfareMain from 'welfare/component/welfareMain';
 
 function App(props) {
   return (
@@ -14,6 +15,7 @@ function App(props) {
           <Route path="/match" element={<Match />} />
           <Route path="/matching" element={<Matching />} />
           <Route path="/voicechat" element={<VoiceChat />} />
+          <Route path="/welfare" element={<WelfareMain />} />
         </Routes>
       </BrowserRouter>
   );

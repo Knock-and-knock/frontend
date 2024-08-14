@@ -21,7 +21,7 @@
   height: 36vh;
   position: relative;
 }
-.header {
+.main-header {
   display: flex;
   align-items: center;
   height: 8vh;
