@@ -1,7 +1,7 @@
 import React from 'react';
 import 'welfare/css/WelfareReserveModal.css';
 
-function App() {
+function WelfareReserveModal() {
   return (
     <div className="container">
 
@@ -30,4 +30,4 @@ function App() {
   );
 }
 
-export default App;
+export default WelfareReserveModal;

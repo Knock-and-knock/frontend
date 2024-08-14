@@ -3,7 +3,7 @@ import 'welfare/css/WelfareReservedList.css';
 import back from "image/Back.png";
 import home from "image/gohome.png";
 
-function App() {
+function WelfareReservedList() {
   return (
     <div className="container">
 
@@ -55,4 +55,4 @@ function App() {
   );
 }
 
-export default App;
+export default WelfareReservedList;

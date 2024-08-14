@@ -1,7 +1,7 @@
 import React from 'react';
 import 'welfare/css/WelfareReserveCancelModal.css';
 
-function App() {
+function WelfareReserveCancelModal() {
   return (
     <div className="container">
 
@@ -21,4 +21,4 @@ function App() {
   );
 }
 
-export default App;
+export default WelfareReserveCancelModal;
