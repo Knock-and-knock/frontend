@@ -1,15 +1,14 @@
 import 'index.css';
-import Match from 'matching/Match';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import reportWebVitals from 'reportWebVitals';
-import * as serviceWorkerRegistration from 'serviceWorkerRegistration';
+import './index.css';
+import WelfareReserved from 'welfare/component/welfareReserved.js';
+import * as serviceWorkerRegistration from './serviceWorkerRegistration';
+import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <Match/>
-  </React.StrictMode>
+    <WelfareReserved />
 );
 
 // If you want your app to work offline and load faster, you can change
