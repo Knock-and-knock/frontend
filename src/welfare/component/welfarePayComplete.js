@@ -2,7 +2,7 @@ import React from 'react';
 import 'welfare/css/WelfarePayComplete.css';
 
 
-function App() {
+function WelfarePayComplete() {
   return (
     <div className="container">
       <div className="header">
@@ -29,4 +29,4 @@ function App() {
   );
 }
 
-export default App;
+export default WelfarePayComplete;
