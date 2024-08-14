@@ -1,9 +1,8 @@
+import 'matching/button/button.css';
 
-function SkipBtn(props) {
+function SkipBtn({handleNextBtn}) {
   return (
-    <div >
-      
-    </div>
+    <button type="button" className="skipBtn" onClick={handleNextBtn}>건너뛰기</button>
   );
 }
 
