@@ -23,6 +23,7 @@
   margin-left: 2%;
   font-size: 22px;
   font-weight: bold;
+  color: #2c2c2c;
 }
 
 .header-date {
@@ -51,6 +52,11 @@ hr {
 #pay-title {
   font-size: 20px;
   font-weight: bold;
+  color: #2c2c2c;
+}
+
+hr {
+  border: 1px solid #d9d9d9;
 }
 
 #dotted {
@@ -71,17 +77,20 @@ hr {
   font-size: 18px;
   font-weight: bold;
   float: right;
+  color: #2c2c2c;
 }
 
 .pay-info-tprice {
   font-size: 18px;
   font-weight: bold;
+  color: #2c2c2c;
 }
 
 .pay-info-price {
   font-size: 22px;
   font-weight: bold;
   float: right;
+  color: #2c2c2c;
 }
 
 
