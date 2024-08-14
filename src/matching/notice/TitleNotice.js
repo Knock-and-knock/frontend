@@ -1,3 +1,4 @@
+import "matching/notice/Notice.css";
 
 function TitleNotice(props) {
   return (

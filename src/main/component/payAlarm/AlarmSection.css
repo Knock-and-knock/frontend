@@ -1,4 +1,4 @@
-.main-section {
+.alarm-section {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -20,7 +20,7 @@
     height: 20%;
   }
 }
-.chat-button {
+.alarm-button {
   display: flex;
   align-items: center;
   justify-content: center;

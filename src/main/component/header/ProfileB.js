@@ -1,3 +1,4 @@
+import 'main/component/header/HeaderB.css';
 
 function Profile(props) {
   return (

@@ -5,6 +5,11 @@
     height: 100vh;
     font-family: 'Nanum Gothic', sans-serif;
     position: relative;
+    background-color: #fff;
+  }
+  input:focus{
+    outline: none;
+    border-bottom: #80BAFF;
   }
 
 }
