@@ -3,7 +3,7 @@ import 'welfare/css/WelfareInputHeight.css'
 import back from 'image/Back.png';
 import home from "image/gohome.png";
 
-function WelfareInputBirth() {
+function WelfareInputHeight() {
     return (
     <div className="container">
         <div className="header">
@@ -36,4 +36,4 @@ function WelfareInputBirth() {
     );
 }
 
-export default WelfareInputBirth;
+export default WelfareInputHeight;
