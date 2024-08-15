@@ -2,7 +2,7 @@ import 'index.css';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import Welfare from 'welfare/component/WelfareReservedList';
+import Welfare from 'welfare/component/WelfareInputHeight';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
 

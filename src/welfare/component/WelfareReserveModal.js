@@ -1,7 +1,17 @@
 import React from 'react';
+import {useState, useEffect} from 'react';
 import 'welfare/css/WelfareReserveModal.css';
 
 function WelfareReserveModal() {
+  const [today, setToday] = useState('');
+
+  useEffect(() => {
+    const currentDate = new Date();
+    const formattedDate = currentDate.toISOString().slice(0, 10);
+    setToday(formattedDate);
+  }, []);
+
+
   return (
     <div className="container">
 
@@ -10,7 +20,7 @@ function WelfareReserveModal() {
           <p className="main-text" id="reserve-title">가정간병 돌봄</p>
           
           <hr></hr>
-          <div id="reserve-info-container1"><span className="reserve-info-text">날짜</span><input id="insert-date" type="date"></input></div>
+          <div id="reserve-info-container1"><span className="reserve-info-text">날짜</span><input id="insert-date" type="date" value={today}></input></div>
           <div id="reserve-info-container2"><span className="reserve-info-text">시간</span>
             <select id="insert-time" type="dropbox">
             <option value="option1">3시간 (09:00 ~ 12:00)</option>
