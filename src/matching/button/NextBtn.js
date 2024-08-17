@@ -1,11 +1,11 @@
-import 'matching/button/button.css';
+import "matching/button/button.css";
 
 function NextBtn({ handleNextBtn, isDisabled }) {
   return (
-    <button 
-      type="button" 
-      className="nextBtn" 
-      onClick={handleNextBtn} 
+    <button
+      type="button"
+      className="nextBtn"
+      onClick={handleNextBtn}
       disabled={isDisabled}
     >
       다음

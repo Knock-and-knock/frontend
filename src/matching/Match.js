@@ -44,7 +44,7 @@ function Match(props) {
       {info === 1 ? (
         <FYIInput handleIsInfoChange={handleIsInfoChange} />
       ) : (
-        <TitleInput />
+        <TitleInput handleIsInfoChange={handleIsInfoChange} />
       )}
       <div className="btnContainer">
         {info === 1 ? (
@@ -55,7 +55,7 @@ function Match(props) {
         {info === 1 ? (
           <NextBtn handleNextBtn={handleNextBtn} isDisabled={!isInfo} />
         ) : (
-          <SubmitBtn handleSubmitBtn={handleSubmitBtn} />
+          <SubmitBtn handleSubmitBtn={handleSubmitBtn} isDisabled={!isInfo} />
         )}
       </div>
     </div>
