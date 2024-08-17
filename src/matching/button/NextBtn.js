@@ -1,8 +1,15 @@
 import 'matching/button/button.css';
 
-function NextBtn({handleNextBtn}) {
+function NextBtn({ handleNextBtn, isDisabled }) {
   return (
-    <button type="button" className="nextBtn" onClick={handleNextBtn}>다음</button>
+    <button 
+      type="button" 
+      className="nextBtn" 
+      onClick={handleNextBtn} 
+      disabled={isDisabled}
+    >
+      다음
+    </button>
   );
 }
 
