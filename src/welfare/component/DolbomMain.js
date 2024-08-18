@@ -16,7 +16,7 @@ function DolbomMain() {
     setSelectedId(id);
   };
 
-  // 선택된 요소에 따라 스타일 적용
+  // 선택된 요소에 스타일 적용
   const getStyle = (id) => {
     return {
       backgroundColor: selectedId === id ? '#80BAFF' : '',
@@ -47,6 +47,7 @@ function DolbomMain() {
         </div>
 
         </div>;
+
       case 'housework':
         return <div className="info-container">
         <img src={housework1} alt='일상가사' className='img-info'/>
@@ -67,6 +68,7 @@ function DolbomMain() {
         </div>
 
         </div>;
+
       case 'hanwool':
         return <div className="info-container">
         
@@ -83,6 +85,7 @@ function DolbomMain() {
         </div>
 
         </div>;
+        
       default:
         return null;
     }
