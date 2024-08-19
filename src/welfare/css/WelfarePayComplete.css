@@ -110,6 +110,12 @@ hr {
   border-width: 3px;
   border-color: #80BAFF;
   background-color: #80BAFF;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 20px;
+  margin-bottom: 5%;
 }
 
 .main-text {
@@ -125,6 +131,7 @@ hr {
 
 #go-main-text {
   color: white;
+  font-weight: bold;
 }
 
 .main-link {

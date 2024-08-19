@@ -1,10 +1,11 @@
+/* WelfareInputGender.module.css */
+
 .container {
   max-width: 390px;
   margin: 0 auto;
-  
   font-family: Arial, sans-serif;
   background-color: white;
-  min-height: 100vh; /* 전체 높이로 채우기 */
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
@@ -15,7 +16,6 @@
   background-color: white;
 }
 
-
 .header-info {
   width: 100%;
   align-items: center;
@@ -24,13 +24,13 @@
   justify-content: space-between;
 }
 
-.back-icon{
+.back-icon {
   margin-top: 0%;
   width: 8%;
   height: 8%;
 }
 
-.home-icon{
+.home-icon {
   margin-top: 0%;
   width: 10%;
   height: 10%;
@@ -52,7 +52,7 @@
   justify-content: space-between;
 }
 
-#infomation-container {
+.infomation-container {
   margin-left: 15px;
   margin-right: 15px;
   margin-top: 10%;
@@ -65,32 +65,22 @@
   color: #2c2c2c;
 }
 
-#input-container {
-  margin: 0 auto;
+.gender-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin-bottom: 60%;
 }
 
-.input-height, .input-weight {
-  border: none;
-  border-bottom: 1px solid #d9d9d9;
-  width: 120px;
+.gender-section {
+  width: 80%;
+  padding: 20px;
+  margin-left: 15px;
+  margin-right: 15px;
+  border: 1px solid #ccc;
+  border-radius: 15px;
+  box-shadow: 0px 2px 2px #888;
   text-align: center;
-  font-size: 18px;
-  color: #2c2c2c;
-}
-
-.input-height:focus, .input-weight:focus {
-  outline: none;
-  border-color: #80BAFF;
-}
-
-#cm {
-  margin-right: 20px;
-  font-size: 18px;
-}
-
-#kg {
-  font-size: 18px;
 }
 
 .main-section {
@@ -103,7 +93,19 @@
   text-align: center;
 }
 
-#go-input-height {
+.gender-text {
+  font-size: 18px;
+  font-weight: bold;
+  color: #2c2c2c;
+  margin: 10px 0;
+}
+
+.image-gender {
+  margin-top: 40px;
+  margin-bottom: 10px;
+}
+
+.go-input-address {
   border-width: 3px;
   border-color: #80BAFF;
   background-color: #80BAFF;
@@ -122,10 +124,9 @@
   margin: 10px 0;
 }
 
-#go-input-height-text {
+.go-input-address-text {
   color: white;
   font-size: 18px;
-  
 }
 
 .main-link {

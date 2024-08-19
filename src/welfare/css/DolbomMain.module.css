@@ -1,7 +1,6 @@
 .container {
   max-width: 390px;
   margin: 0 auto;
-  
   font-family: Arial, sans-serif;
   background-color: white;
   min-height: 100vh; /* 전체 높이로 채우기 */
@@ -15,7 +14,6 @@
   background-color: white;
 }
 
-
 .header-info {
   width: 100%;
   align-items: center;
@@ -24,13 +22,13 @@
   justify-content: space-between;
 }
 
-.back-icon{
+.back-icon {
   margin-top: 0%;
   width: 8%;
   height: 8%;
 }
 
-.home-icon{
+.home-icon {
   margin-top: 0%;
   width: 10%;
   height: 10%;
@@ -87,11 +85,10 @@
   font-weight: bold;
 }
 
-.info-container{
+.info-container {
   width: 92%;
   margin-left: 15px;
   margin-right: 15px;
-  margin: 0 auto;
 }
 
 .img-info {
@@ -140,7 +137,8 @@
   font-weight: bold;
 }
 
-#go-reserve-nursing {
+/* 기존의 #go-reserve-nursing을 .go-reserve-nursing으로 변경 */
+.go-reserve-nursing {
   width: 100%;
   height: 60px;
   margin-top: 10%;
@@ -153,8 +151,8 @@
   justify-content: center;
 }
 
-
-#go-reserve-nursing-text {
+/* 기존의 #go-reserve-nursing-text을 .go-reserve-nursing-text로 변경 */
+.go-reserve-nursing-text {
   color: white;
   font-size: 18px;
   font-weight: bold;
