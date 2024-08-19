@@ -7,12 +7,9 @@ import MainA from 'main/MainA';
 import MainB from 'main/MainB';
 import Match from 'matching/Match';
 import Matching from 'matching/notice/Matching';
-<<<<<<< HEAD
 import Register from 'signUp/component/Register';
-=======
 import WelfareMain from 'welfare/component/welfareMain';
-import Register from 'signUp/Register';
->>>>>>> develop
+
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import SignUpSuccess from 'signUp/component/SignUpSuccess';
 import InfoInput from 'signUp/component/InfoInput';
