@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import "./LoginOptionModal.css";
 import Modal from 'react-modal';
 import { useNavigate } from 'react-router-dom';
+import arrow from 'image/icon/arrow.png';
 
 function LoginOptionModal(props) {
     const navigate =useNavigate();
@@ -31,7 +32,8 @@ function LoginOptionModal(props) {
     return (
         <div>
             <div className="login-option">
-                <p className="text-normal" onClick={handleOpenModal}>다른 로그인 방법</p>
+                <p className="text-normal" >다른 로그인 방법</p>
+                <img src={arrow} alt="다른로그인방법" className="icon-arrow" onClick={handleOpenModal}/> 
             </div>
             <Modal isOpen={isOpen} onRequestClose={closeModal} className="login-modal" style={customStyles}>
                 <div className="modal-content">

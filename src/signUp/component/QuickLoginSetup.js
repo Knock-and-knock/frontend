@@ -1,5 +1,5 @@
 import React from 'react';
-import SignUpHeader from './component/header/SignUpHeader';
+import SignUpHeader from './header/SignUpHeader';
 import { Link } from 'react-router-dom';
 
 function QuickLoginSetup(props) {
@@ -17,8 +17,8 @@ function QuickLoginSetup(props) {
                 </div>
                 </div>
             <div className="signUpBtn">
-                <Link to="/signUpSuccess" className="backBtn">건너뛰기</Link>
-                <Link to="/pinSetup" className="nextBtn">설정</Link>
+                <Link to="../signUpSuccess" className="backBtn">건너뛰기</Link>
+                <Link to="../pinSetup" className="nextBtn">설정</Link>
             </div>
         </div>
     );

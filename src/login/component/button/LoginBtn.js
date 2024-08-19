@@ -4,7 +4,7 @@ import "./LoginBtn.css";
 function LoginBtn(props) {
     return (
         <div className="btn-wrap">
-            <button type="button" className="loginBtn">로그인</button>
+            <button type="submit" className="loginBtn">로그인</button>
         </div>
     );
 }

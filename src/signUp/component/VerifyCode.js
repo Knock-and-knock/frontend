@@ -1,6 +1,7 @@
 import React from 'react';
-import SignUpHeader from './component/header/SignUpHeader';
+
 import { Link } from 'react-router-dom';
+import SignUpHeader from './header/SignUpHeader';
 
 function VerifyCode(props) {
     return (
@@ -10,8 +11,8 @@ function VerifyCode(props) {
 
             </div>
             <div className="signUpBtn">
-                <Link to="/infoInput" className="backBtn">이전</Link>
-                <Link to="/roleCheck" className="nextBtn">다음</Link>
+                <Link to="../infoInput" className="backBtn">이전</Link>
+                <Link to="../roleCheck" className="nextBtn">다음</Link>
             </div>
         </div>
     );
