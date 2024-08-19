@@ -1,0 +1,33 @@
+.header {
+    padding: 20px;
+    align-items: center;
+    background-color: white;
+  }
+  
+  
+  .header-info {
+    width: 100%;
+    align-items: center;
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .back-icon{
+    margin-top: 0%;
+    width: 8%;
+    height: 8%;
+  }
+  
+  .home-icon{
+    margin-top: 0%;
+    width: 10%;
+    height: 10%;
+  }
+  
+  .header-name {
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
+    color: #2c2c2c;
+  }
