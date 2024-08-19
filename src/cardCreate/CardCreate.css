@@ -1,0 +1,56 @@
+*{
+  color: #2c2c2c;
+}
+.card-create-container{
+  padding: 0 5%;
+}
+.cardName{
+  font-size: 22px;
+  font-weight: bold;
+}
+.create-card-image{
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+}
+.boon-group{
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+.medical, .insurance, .cashback{
+  text-align: center;
+  justify-content: center;
+  padding: 4%;
+  font-size: 18px;
+}
+.anuualContainer{
+  border: 1px solid #D9D9D9;
+  border-radius: 20px;
+  padding: 0 5%;
+}
+.anuual-title{
+  margin: 10px 0;
+  font-size: 20px;
+  font-weight: bold;
+}
+.anuual-text{
+  display: flex;
+  padding: 10px 0;
+  justify-content: space-between;
+}
+hr{
+  border:1px solid #D9D9D9;
+}
+.appBtn{
+  width: 100%;
+  border-radius: 15px;
+  border: none;
+  background-color: #80BAFF;
+  color: #fff;
+  padding: 20px;
+  margin-top: 20px;
+  font-size: 18px;
+  font-weight: bold;
+}
+

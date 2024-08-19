@@ -1,3 +1,4 @@
+import CardCreate from 'cardCreate/CardCreate';
 import VoiceChat from 'chat/VoiceChat';
 import MainA from 'main/MainA';
 import MainB from 'main/MainB';
@@ -16,6 +17,7 @@ function App(props) {
           <Route path="/matching" element={<Matching />} />
           <Route path="/voicechat" element={<VoiceChat />} />
           <Route path="/welfare" element={<WelfareMain />} />
+          <Route path="/cardcreate" element={<CardCreate/>} />
         </Routes>
       </BrowserRouter>
   );
