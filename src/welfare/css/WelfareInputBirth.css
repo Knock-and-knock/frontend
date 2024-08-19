@@ -78,6 +78,10 @@
   color: #2c2c2c;
 }
 
+.input-date:focus {
+  outline: none;
+}
+
 .input-divide {
   margin-left: 15px;
   margin-right: 15px;

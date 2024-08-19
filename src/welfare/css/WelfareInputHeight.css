@@ -79,6 +79,11 @@
   color: #2c2c2c;
 }
 
+.input-height:focus, .input-weight:focus {
+  outline: none;
+  border-color: #80BAFF;
+}
+
 #cm {
   margin-right: 20px;
   font-size: 18px;

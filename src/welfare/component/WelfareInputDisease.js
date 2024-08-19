@@ -95,8 +95,8 @@ function WelfareInputDisease() {
           {renderContent()}
       </div>
 
-        <div className="main-section" id="go-input-height">
-          <p className="main-text" id="go-input-height-text">다음</p>
+        <div className="main-section" id="go-input-spec">
+          <p className="main-text" id="go-input-spec-text">다음</p>
         </div>
 
 

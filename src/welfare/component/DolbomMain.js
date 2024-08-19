@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import 'welfare/css/DolbomMain.css';
 import back from "image/Back.png";
 import home from "image/gohome.png";
-import housework1 from "image/housework1.png";
-import nursing1 from "image/nursing1.png";
+import housework1 from "image/housework.png";
+import nursing1 from "image/nursing.png";
+import hanwool1 from "image/hanwool.png";
 import dolbomi from "image/dolbomi.png";
 
 function DolbomMain() {
@@ -71,13 +72,13 @@ function DolbomMain() {
 
       case 'hanwool':
         return <div className="info-container">
-        
-        ★ 이미지 잘 갖고와서 꾸미기!! ★
-        <br></br>
-        <br></br>
-
+        <img src={hanwool1} alt='한울돌봄' className='img-info'/>
+        <img src={dolbomi} alt='똑돌보미' className='img-info'/>
+        <p className='info-title'>한울 돌봄 비용</p>
+        <p>※ 한울 돌봄은 이용기간 1달을 기준으로 하며</p>
+        <p>※ 최대 12개월까지 신청 가능합니다.</p>
         <div className='info-price-container'>
-            <span className='info-option'>9시간 (09:00 ~ 18:00)</span><span className='info-price'>225,000 원</span>
+            <span className='info-option'>9시간 (09:00 ~ 18:00)</span><span className='info-price'>1개월 (2,000,000 원)</span>
         </div>
         
         <div className="main-section" id="go-reserve-nursing">

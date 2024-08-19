@@ -22,8 +22,8 @@ function WelfareInputAddress() {
         </div>
 
       
-        <div id="Address-container">
-          <div id='Address-section'>
+        <div id="address-container">
+          <div id='address-section'>
             <input id='input-address' type="text" placeholder="도로명, 지번, 건물명 검색"></input>
             <img src={glasses} alt='돋보기'></img>
           </div>
