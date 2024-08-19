@@ -1,0 +1,38 @@
+.signup-container{
+    width: 100%;
+    height: 60vh;
+    padding: 10vh 0;
+    max-width: 400px;
+    margin: 0 auto;
+    text-align: center;
+    box-sizing: border-box;
+    /* border: 1px solid green;  */
+}
+.signUpBtn{
+    display: flex;
+    justify-content: center;
+    /* border: 1px solid blue; */
+}
+.backBtn{
+    background-color: #E1E6EC;
+    color:#686868;
+    border: none;
+    width: 120px;
+    padding: 15px;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+}
+.nextBtn{
+    background-color: #80BAFF;
+    color:#fff;
+    margin-left: 10px;
+    border: none;
+    width: 220px;
+    padding: 15px;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+}

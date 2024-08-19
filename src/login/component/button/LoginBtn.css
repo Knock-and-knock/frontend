@@ -1,0 +1,14 @@
+.loginBtn{
+    background-color: #80BAFF;
+    color:#fff;
+    border: none;
+    width: 80%;
+    padding: 15px;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0 auto;
+}
+.btn-wrap{
+    display: flex;
+}
