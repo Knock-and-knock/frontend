@@ -1,9 +1,15 @@
+import "matching/button/button.css";
 
-function NextBtn(props) {
+function NextBtn({ handleNextBtn, isDisabled }) {
   return (
-    <div>
-      
-    </div>
+    <button
+      type="button"
+      className="nextBtn"
+      onClick={handleNextBtn}
+      disabled={isDisabled}
+    >
+      다음
+    </button>
   );
 }
 

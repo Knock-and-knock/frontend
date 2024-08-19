@@ -1,8 +1,8 @@
 import HeaderB from "main/component/header/HeaderB";
 import ButtonGroup from "main/component/serviceBtn/ButtonGroup";
 import "main/Main.css";
-import CardTag from "./component/card/CardTag";
-import IsCardSection from "./component/card/IsCardSection";
+import CardTagB from "./component/card/CardTagB";
+import IsCardSectionB from "./component/card/IsCardSectionB";
 import AlarmSection from "./component/payAlarm/AlarmSection";
 
 function MainB() {
@@ -11,8 +11,8 @@ function MainB() {
       <HeaderB />
       <AlarmSection />
       <ButtonGroup />
-      <CardTag/>
-      <IsCardSection />
+      <CardTagB/>
+      <IsCardSectionB />
     </div>
   );
 }
