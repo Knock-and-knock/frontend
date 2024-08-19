@@ -1,10 +1,6 @@
 
-function CreateCard(props) {
-  return (
-    <a href="#" className="card-link">
-      카드 발급하기
-    </a>
-  );
+function CreateCard({handleCardCreate}) {
+  return <p onClick={handleCardCreate}>카드 발급하기</p>;
 }
 
 export default CreateCard;

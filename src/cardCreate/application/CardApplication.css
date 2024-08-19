@@ -1,0 +1,54 @@
+.card-app-container{
+  margin: 0 auto;
+  padding: 0 20px;
+  height: 100vh;
+}
+.app-title{
+  font-size: 20px;
+  font-weight: bolder;
+  color: #2c2c2c;
+  display: flex;
+  justify-content: space-between;
+}
+.title-text{
+  line-height: 180%;
+}
+.app-input-container{
+  input{
+    width: 345px;
+    height: 5vh;
+    margin-top: 10px;
+    border: none;
+    border-bottom: 2px solid #D9D9D9;
+    font-size: 18px;
+  }
+  .firstInput{
+    width: 130px;
+  }
+  .secInput{
+    margin-left: 10px;
+    width: 200px;
+  }
+  input:focus{
+    outline: none;
+    border-bottom: 2px solid #80BAFF;
+  }
+  .titleInput{
+    width: 80px;
+    height: 18px;
+    margin: 10px;
+    font-size: 18px;
+  }
+  p{
+    font-size: 18px;
+    margin-bottom: 30px;
+  }
+}
+.app-input{
+  margin-top: 20px;
+  span{
+    font-size:18px;
+    color:#2c2c2c;
+    font-weight: 600;
+  }
+}

@@ -1,0 +1,33 @@
+.cardCreate-header {
+  padding: 20px 0;
+  align-items: center;
+  background-color: white;
+}
+
+
+.header-info {
+  width: 100%;
+  align-items: center;
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+}
+
+.back-icon{
+  margin-top: 0%;
+  width: 8%;
+  height: 8%;
+}
+
+.home-icon{
+  margin-top: 0%;
+  width: 20px;
+  height: 20px;
+}
+
+.header-name {
+  text-align: center;
+  font-size: 22px;
+  font-weight: bold;
+  color: #2c2c2c;
+}

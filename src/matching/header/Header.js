@@ -1,7 +1,7 @@
 
 function Header(props) {
   return (
-    <div className="header-wrap">
+    <div className="match-header-wrap">
       <p className="headtitle">매칭하기</p>
     </div>
   );

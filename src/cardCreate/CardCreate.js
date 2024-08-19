@@ -3,9 +3,14 @@ import card from "image/create-card-image.png";
 import cashback from "image/icon/cashback.png";
 import insurance from "image/icon/insurance.png";
 import medical from "image/icon/medical.png";
+import { useNavigate } from "react-router-dom";
 import CardCreateHeader from "./header/CardCreateHeader";
 
 function CardCreate(props) {
+  const navigate=useNavigate();
+  const handleApp=()=>{
+    navigate("/cardapp1");
+  }
   return (
     <div className="card-create-container">
       <CardCreateHeader />
@@ -57,7 +62,7 @@ function CardCreate(props) {
           </span>
         </div>
       </div>
-      <button className="appBtn">신청하기</button>
+      <button className="appBtn" onClick={handleApp}>신청하기</button>
     </div>
   );
 }

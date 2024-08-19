@@ -15,12 +15,12 @@
     height: 5vh;
     margin-top: 20px;
     border: none;
-    border-bottom: 1px solid #D9D9D9;
+    border-bottom: 2px solid #D9D9D9;
     font-size: 18px;
   }
   input:focus{
     outline: none;
-    border-bottom: 1px solid #80BAFF;
+    border-bottom: 2px solid #80BAFF;
   }
   .titleInput{
     width: 80px;

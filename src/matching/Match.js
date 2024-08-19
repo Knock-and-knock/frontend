@@ -38,7 +38,7 @@ function Match(props) {
   };
 
   return (
-    <div className="container">
+    <div className="match-container">
       <Header />
       {info === 1 ? <FYINotice /> : <TitleNotice />}
       {info === 1 ? (
