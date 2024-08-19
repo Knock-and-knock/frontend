@@ -2,14 +2,13 @@ import React, { useState, useRef } from 'react';
 import styles from 'welfare/css/WelfareCheckPW.module.css'; // CSS 모듈 import
 import back from 'image/Back.png';
 import home from "image/gohome.png";
-import graycircle from "image/graycircle.png";
-import bluecircle from "image/bluecircle.png";
 
 function WelfareCheckPW() {
     const [password, setPassword] = useState("");
     const inputRef = useRef(null);
 
     const handleCircleClick = () => {
+        // 이미지 클릭 시 숨겨진 input에 포커스를 줌
         inputRef.current.focus();
     };
 
@@ -33,30 +32,24 @@ function WelfareCheckPW() {
                     <p className={styles.infomation}>결제 비밀번호를 입력하세요</p>
                 </div>
 
-                <div className={styles["password-container"]}>
-                    <div className={styles["password-section"]} onClick={handleCircleClick}>
+                <div className={styles["password-container"]} onClick={handleCircleClick}>
+                    <div className={styles["password-section"]}>
                         {[1, 2, 3, 4, 5, 6].map((index) => (
-                            <img
+                            <div
                                 key={index}
-                                className={styles.circle}
-                                src={password.length >= index ? bluecircle : graycircle}
-                                alt={password.length >= index ? '파란색' : '회색'}
+                                className={password.length >= index ? styles.bluecircle : styles.graycircle}
                             />
                         ))}
                     </div>
                 </div>
 
+                {/* 숨겨진 input 요소 */}
                 <input
                     ref={inputRef}
                     type="number"
                     value={password}
                     onChange={handleChange}
                     className={styles["hidden-input"]}
-                    style={{ 
-                        opacity: 0, 
-                        position: 'absolute', 
-                        zIndex: -1 
-                    }}
                 />
 
                 <div className={`${styles["main-section"]} ${styles["go-pay"]}`}>

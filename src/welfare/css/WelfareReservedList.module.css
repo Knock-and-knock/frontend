@@ -1,7 +1,6 @@
 .container {
   max-width: 390px;
   margin: 0 auto;
-  
   font-family: Arial, sans-serif;
   background-color: white;
   min-height: 100vh; /* 전체 높이로 채우기 */
@@ -19,7 +18,6 @@ hr {
   background-color: white;
 }
 
-
 .header-info {
   width: 100%;
   align-items: center;
@@ -28,13 +26,13 @@ hr {
   justify-content: space-between;
 }
 
-.back-icon{
+.back-icon {
   margin-top: 0%;
   width: 8%;
   height: 8%;
 }
 
-.home-icon{
+.home-icon {
   margin-top: 0%;
   width: 10%;
   height: 10%;
@@ -55,10 +53,9 @@ hr {
   display: flex;
   align-items: center;
   flex-direction: column;
-  
 }
 
-#info-container {
+.info-container {
   margin-bottom: 6%;
 }
 
@@ -83,12 +80,11 @@ hr {
   position: relative;
 }
 
-#detailed-reserve {
+.detailed-reserve {
   border-width: 3px;
   border-color: #ccc;
   box-shadow: 1px 2px 4px #888;
 }
-
 
 .main-text {
   font-size: 18px;
@@ -96,36 +92,36 @@ hr {
   margin: 10px 0;
 }
 
-#detailed-reserved-title {
+.detailed-reserved-title {
   font-size: 22px;
   font-weight: bold;
   color: #007bff;
 }
 
-#detailed-reserved-date {
+.detailed-reserved-date {
   font-size: 18px;
   color: #686868;
 }
 
-#detailed-reserved-cancel-container {
+.detailed-reserved-cancel-container {
   margin-top: -7px;
 }
 
-#detailed-reserved-info-container1 {
+.detailed-reserved-info-container1 {
   margin-top: 14px;
 }
 
-#detailed-reserved-info-container2 {
+.detailed-reserved-info-container2 {
   margin-top: -6px;
   margin-bottom: 15px;
 }
 
-#detailed-reserved-info-container3 {
+.detailed-reserved-info-container3 {
   margin-top: -2px;
   margin-bottom: 8px;
 }
 
-#detailed-reserved-cancel {
+.detailed-reserved-cancel {
   float: right;
   text-align: center;
   width: 80px;
@@ -152,13 +148,13 @@ hr {
   color: #686868;
 }
 
-#total-price-text {
+.total-price-text {
   font-size: 20px;
   font-weight: bold;
   color: #2c2c2c;
 }
 
-#total-price-number {
+.total-price-number {
   float: right;
   font-size: 20px;
   font-weight: bold;

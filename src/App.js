@@ -7,13 +7,15 @@ import WelfareInputBirth from 'welfare/component/WelfareInputBirth';
 import WelfareInputDisease from 'welfare/component/WelfareInputDisease';
 import WelfareInputGender from 'welfare/component/WelfareInputGender';
 import WelfareInputHeight from 'welfare/component/WelfareInputHeight';
-// import WelfareList from 'welfare/component/WelfareList';
-// import WelfareMain from 'welfare/component/WelfareMain';
-// import WelfarePayComplete from 'welfare/component/WelfarePayComplete';
-// import WelfareReserveCancelModal from 'welfare/component/WelfareReserveCancelModal';
-// import WelfareReservedList from 'welfare/component/WelfareReservedList';
-// import WelfareReserveModal from 'welfare/component/WelfareReserveModal';
-// import WelfareSetPW from 'welfare/component/WelfareSetPW';
+import WelfareList from 'welfare/component/WelfareList';
+import WelfareMain from 'welfare/component/WelfareMain';
+import WelfarePayComplete from 'welfare/component/WelfarePayComplete';
+import WelfareReserveCancelModal from 'welfare/component/WelfareReserveCancelModal';
+import WelfareReservedList from 'welfare/component/WelfareReservedList';
+import WelfareNursingModal from 'welfare/component/WelfareNursingModal';
+import WelfareHouseworkModal from 'welfare/component/WelfareHouseworkModal';
+import WelfareHanwoolModal from 'welfare/component/WelfareHanwoolModal';
+import WelfareSetPW from 'welfare/component/WelfareSetPW';
 import CardCreate from 'cardCreate/CardCreate';
 import VoiceChat from 'chat/VoiceChat';
 import LoginBio from 'login/LoginBio';
@@ -38,21 +40,24 @@ function App(props) {
   return (
     <BrowserRouter>
         <Routes>
-          <Route path="/DolbomMain" element={<DolbomMain />} />
-          <Route path="/WelfareCheckPW" element={<WelfareCheckPW />} />
-          <Route path="/WelfareCheckSpec" element={<WelfareCheckSpec />} />
-          <Route path="/WelfareInputAddress" element={<WelfareInputAddress />} />
-          <Route path="/WelfareInputBirth" element={<WelfareInputBirth />} />
-          <Route path="/WelfareInputDisease" element={<WelfareInputDisease />} />
-          <Route path="/WelfareInputGender" element={<WelfareInputGender />} />
-          <Route path="/WelfareInputHeight" element={<WelfareInputHeight />} />
-          {/* <Route path="/WelfareList" element={<WelfareList />} />
-          <Route path="/WelfareMain" element={<WelfareMain />} />
-          <Route path="/WelfarePayComplete" element={<WelfarePayComplete />} />
-          <Route path="/WelfareReserveCancelModal" element={<WelfareReserveCancelModal />} />
-          <Route path="/WelfareReservedList" element={<WelfareReservedList />} />
-          <Route path="/WelfareReserveModal" element={<WelfareReserveModal />} />
-          <Route path="/WelfareSetPW" element={<WelfareSetPW />} /> */}
+          <Route path="/dolbomMain" element={<DolbomMain />} />
+          <Route path="/welfareCheckPW" element={<WelfareCheckPW />} />
+          <Route path="/welfareCheckSpec" element={<WelfareCheckSpec />} />
+          <Route path="/welfareInputAddress" element={<WelfareInputAddress />} />
+          <Route path="/welfareInputBirth" element={<WelfareInputBirth />} />
+          <Route path="/welfareInputDisease" element={<WelfareInputDisease />} />
+          <Route path="/welfareInputGender" element={<WelfareInputGender />} />
+          <Route path="/welfareInputHeight" element={<WelfareInputHeight />} />
+          <Route path="/welfareList" element={<WelfareList />} />
+          <Route path="/welfareMain" element={<WelfareMain />} />
+          <Route path="/welfarePayComplete" element={<WelfarePayComplete />} />
+          <Route path="/welfareReserveCancelModal" element={<WelfareReserveCancelModal />} />
+          <Route path="/welfareReservedList" element={<WelfareReservedList />} />
+          <Route path="/welfareNursingModal" element={<WelfareNursingModal />} />
+          <Route path="/welfareHouseworkModal" element={<WelfareHouseworkModal />} />
+          <Route path="/welfareHanwoolModal" element={<WelfareHanwoolModal />} />
+          <Route path="/welfareSetPW" element={<WelfareSetPW />} />
+
           <Route path="/main" element={<MainA />} />
           <Route path="/nokmain" element={<MainB />} />
           <Route path="/match" element={<Match />} />

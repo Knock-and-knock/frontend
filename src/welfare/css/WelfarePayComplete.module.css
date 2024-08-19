@@ -4,14 +4,12 @@
   font-family: Arial, sans-serif;
   background-color: white;
   min-height: 100vh; /* 전체 높이로 채우기 */
-  
 }
 
 .header {
   padding: 10px;
   background-color: white;
 }
-
 
 .header-info {
   width: 100%;
@@ -40,7 +38,6 @@
 .main-container {
   width: 90%;
   height: 100%;
-  /* background-color: #48ffc2; */
   margin: 0 auto;
   margin-top: 10%;
 }
@@ -49,22 +46,18 @@ hr {
   border: 1px solid #d9d9d9;
 }
 
-#pay-title {
+.pay-title {
   font-size: 20px;
   font-weight: bold;
   color: #2c2c2c;
 }
 
-hr {
-  border: 1px solid #d9d9d9;
-}
-
-#dotted {
+dotted-hr {
   border: none;
   border: 1px dashed #d9d9d9;
 }
 
-#gender {
+.gender {
   color: #686868;
 }
 
@@ -93,8 +86,6 @@ hr {
   color: #2c2c2c;
 }
 
-
-
 .main-section {
   width: 90%;
   height: 100%;
@@ -106,7 +97,7 @@ hr {
   margin-top: 70%;
 }
 
-#go-main {
+.go-main {
   border-width: 3px;
   border-color: #80BAFF;
   background-color: #80BAFF;
@@ -125,11 +116,7 @@ hr {
   color: white;
 }
 
-#detailed-reserve-text {
-  color: #80BAFF;
-}
-
-#go-main-text {
+.go-main-text {
   color: white;
   font-weight: bold;
 }
@@ -159,7 +146,6 @@ hr {
   .main-text {
     font-size: 20px;
   }
-
 }
 
 @media (min-width: 1024px) {
@@ -175,5 +161,4 @@ hr {
   .main-text {
     font-size: 24px;
   }
-
 }

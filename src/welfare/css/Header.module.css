@@ -1,0 +1,31 @@
+.header-container {
+  padding-top: 20px;
+  background-color: white;
+  width: 360px;
+  margin: 0 auto;
+}
+
+.header-info {
+  width: 100%;
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.back-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.home-icon {
+  width: 32px;
+  height: 32px;
+}
+
+.header-name {
+  text-align: center;
+  font-size: 22px;
+  font-weight: bold;
+  color: #2c2c2c;
+}
