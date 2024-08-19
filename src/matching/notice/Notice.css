@@ -14,9 +14,22 @@
     width: 325px;
     height: 5vh;
     margin-top: 20px;
-    padding-left: 20px;
     border: none;
     border-bottom: 1px solid #D9D9D9;
     font-size: 18px;
+  }
+  input:focus{
+    outline: none;
+    border-bottom: 1px solid #80BAFF;
+  }
+  .titleInput{
+    width: 80px;
+    height: 18px;
+    margin: 10px;
+    font-size: 18px;
+  }
+  p{
+    font-size: 18px;
+    margin-bottom: 30px;
   }
 }

@@ -1,0 +1,31 @@
+.voicechat-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 100vh;
+  background-color: #FFF8F3;
+}
+
+.chatbot {
+  align-items: center;
+  margin-top: 30vh;
+  width: 80%;
+}
+
+.chat-startBtn {
+  margin-bottom: 20px;
+  padding: 20px 20px;
+  font-size: 20px;
+  border: none;
+  border-radius: 10px;
+  background-color: #FF961B;
+  color: #fff;
+  cursor: pointer;
+  position: fixed;
+  font-weight: bold;
+  width: 350px;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%); /* 버튼을 가로로 중앙 정렬 */
+}

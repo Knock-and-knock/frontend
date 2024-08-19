@@ -1,9 +1,8 @@
+import 'matching/button/button.css';
 
-function NextBtn(props) {
+function NextBtn({handleNextBtn}) {
   return (
-    <div>
-      
-    </div>
+    <button type="button" className="nextBtn" onClick={handleNextBtn}>다음</button>
   );
 }
 
