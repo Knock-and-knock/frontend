@@ -8,48 +8,48 @@ function SignUpHeader(props) {
       // 경로에 따라 제목을 설정하는 함수
       const getTitle = (pathname) => {
         switch (pathname) {
-            case '/signUp':
+            case '/signUp/register':
                 return (
                     <>
                         <p>아이디와 비밀번호를</p>
                         <p>입력해 주세요</p> 
                     </>
                 );
-            case '/infoInput':
+            case '/signUp/infoInput':
                 return (
                     <>
                         <p>이름과 전화번호를</p>
                         <p>입력해 주세요</p>
                     </>
                 );
-            case '/verifyCode':
+            case '/signUp/verifyCode':
                 return (
                     <>
                         <p>문자로 전송된</p>
                         <p>인증번호 6자리를 입력해주세요</p> 
                     </>
                 );
-            case '/roleCheck':
+            case '/signUp/roleCheck':
                 return (
                     <>
                         <p>보호자인가요?</p>
                     </>
                 );
-            case '/quickLoginSetup':
+            case '/signUp/quickLoginSetup':
                 return (
                     <>
                          <p>빠른 로그인을 위해</p>
                          <p>간편한 방법을 설정하시겠어요?</p>
                     </>
                 );
-            case '/pinSetup':
+            case '/signUp/pinSetup':
                 return (
                     <>
                             <p>로그인에 사용할</p>
                             <p>간편비밀번호 6자리를 입력하세요</p>
                     </>
                 );
-            case '/pinCheck':
+            case '/signUp/pinCheck':
                 return (
                     <>
                             <p>동일한 비밀번호를</p>

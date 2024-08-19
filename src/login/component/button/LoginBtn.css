@@ -8,6 +8,8 @@
     font-size: 18px;
     font-weight: bold;
     margin: 0 auto;
+    bottom: 20px;
+    margin-bottom: 20px;
 }
 .btn-wrap{
     display: flex;

@@ -1,5 +1,5 @@
 import React from 'react';
-import SignUpHeader from './component/header/SignUpHeader';
+import SignUpHeader from './header/SignUpHeader';
 
 function PinCheck(props) {
     return (
