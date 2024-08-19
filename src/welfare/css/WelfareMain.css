@@ -135,15 +135,6 @@
     margin-bottom: 30px;
   }
 
-  .profile-image {
-    width: 80px;
-    height: 80px;
-  }
-
-  .profile-name {
-    font-size: 24px;
-  }
-
   .main-section {
     padding: 30px;
   }
@@ -157,15 +148,6 @@
   .container {
     max-width: 1024px;
     padding: 60px;
-  }
-
-  .profile-image {
-    width: 100px;
-    height: 100px;
-  }
-
-  .profile-name {
-    font-size: 28px;
   }
 
   .main-section {

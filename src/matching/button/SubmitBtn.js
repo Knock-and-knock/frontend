@@ -1,9 +1,15 @@
-import 'matching/button/button.css';
+import "matching/button/button.css";
 
-function SubmitBtn({handleSubmitBtn}) {
-
+function SubmitBtn({ handleSubmitBtn, isDisabled }) {
   return (
-    <button type="button" className="submitBtn" onClick={handleSubmitBtn}>매칭알림 보내기</button>
+    <button
+      type="button"
+      className="submitBtn"
+      onClick={handleSubmitBtn}
+      disabled={isDisabled}
+    >
+      매칭알림 보내기
+    </button>
   );
 }
 

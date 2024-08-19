@@ -1,8 +1,8 @@
 import 'matching/button/button.css';
 
-function SkipBtn({handleNextBtn}) {
+function SkipBtn({handleBackPageBtn}) {
   return (
-    <button type="button" className="skipBtn" onClick={handleNextBtn}>건너뛰기</button>
+    <button type="button" className="skipBtn" onClick={handleBackPageBtn}>이전</button>
   );
 }
 
