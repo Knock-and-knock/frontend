@@ -14,9 +14,9 @@ function CardCreateHeader() {
     switch (pathname) {
       case "/cardCreate":
         return "카드신청";
-        case "/cardapp":
+        case "/cardapp1":
           return "카드신청";
-          case "/cardapp/app2":
+          case "/cardapp2":
           return "카드신청";
       default:
         return null;

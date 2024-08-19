@@ -20,7 +20,7 @@
     margin-top: 10px;
     border: none;
     border-bottom: 2px solid #D9D9D9;
-    font-size: 18px;
+    font-size: 16px;
   }
   .firstInput{
     width: 130px;
@@ -33,22 +33,33 @@
     outline: none;
     border-bottom: 2px solid #80BAFF;
   }
-  .titleInput{
-    width: 80px;
-    height: 18px;
-    margin: 10px;
-    font-size: 18px;
-  }
-  p{
-    font-size: 18px;
-    margin-bottom: 30px;
-  }
 }
 .app-input{
   margin-top: 20px;
   span{
-    font-size:18px;
+    font-size:16px;
     color:#2c2c2c;
     font-weight: 600;
+  }
+  .caption-text{
+    font-size: 16px;
+    margin-top: 8px;
+    color: #A09E9E;
+    line-height: 160%;
+  }
+}
+.bankSelectMenu{
+  height: 46px;
+  width: 130px;
+  border: none;
+  border-bottom: 2px solid #D9D9D9;
+  font-size: 16px;
+  color: #A09E9E;
+  option{
+    color: #2c2c2c;
+  }
+  input::focus{
+    border: none;
+    border-bottom: 2px solid #D9D9D9;
   }
 }
