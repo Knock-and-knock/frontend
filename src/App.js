@@ -36,6 +36,7 @@ function App(props) {
           <Route path="/pinSetup" element={<PinSetup/>} /> 
           <Route path="/pinCheck" element={<PinCheck/>} />   
           <Route path="/signUpSuccess" element={<SignUpSuccess/>} />
+
         </Routes>
       </BrowserRouter>
   );
