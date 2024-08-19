@@ -7,6 +7,7 @@ import MainA from 'main/MainA';
 import MainB from 'main/MainB';
 import Match from 'matching/Match';
 import Matching from 'matching/notice/Matching';
+import WelfareMain from 'welfare/component/welfareMain';
 import Register from 'signUp/Register';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import SignUpSuccess from 'signUp/SignUpSuccess';
@@ -26,6 +27,8 @@ function App(props) {
           <Route path="/match" element={<Match />} />
           <Route path="/matching" element={<Matching />} />
           <Route path="/voicechat" element={<VoiceChat />} />
+          <Route path="/welfare" element={<WelfareMain />} />
+          <Route path="/cardcreate" element={<CardCreate/>} />
           <Route path="/loginBio" element={<LoginBio />} />
           <Route path="/loginId" element={<LoginId />} />
           <Route path="/loginPw" element={<LoginPw />} />
@@ -37,7 +40,6 @@ function App(props) {
           <Route path="/pinSetup" element={<PinSetup/>} /> 
           <Route path="/pinCheck" element={<PinCheck/>} />   
           <Route path="/signUpSuccess" element={<SignUpSuccess/>} />
-
         </Routes>
       </BrowserRouter>
   );
