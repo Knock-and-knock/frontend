@@ -1,16 +1,18 @@
+.loginBtn-wrap{
+    width: 100%;
+    text-align: center;
+    position: absolute;
+    bottom: 30px;
+}
 .loginBtn{
     background-color: #80BAFF;
     color:#fff;
     border: none;
-    width: 80%;
     padding: 15px;
     border-radius: 10px;
-    font-size: 18px;
+    font-size: 20px;
     font-weight: bold;
-    margin: 0 auto;
-    bottom: 20px;
-    margin-bottom: 20px;
-}
-.btn-wrap{
-    display: flex;
+    width: 350px;
+    height: 55px;
+    box-sizing: border-box;
 }
