@@ -13,9 +13,12 @@ import WelfareInputHeight from "welfare/component/WelfareInputHeight";
 // import WelfareReservedList from 'welfare/component/WelfareReservedList';
 // import WelfareReserveModal from 'welfare/component/WelfareReserveModal';
 // import WelfareSetPW from 'welfare/component/WelfareSetPW';
-import CardApplication1 from "cardCreate/application/CardApplication1";
-import CardApplication2 from "cardCreate/application/CardApplication2";
-import CardApplication3 from "cardCreate/application/CardApplication3";
+import Agreement from "cardCreate/application/Agreement";
+import CardApp from "cardCreate/application/CardApp";
+import CreditInfo from "cardCreate/application/CreditInfo";
+import DefaultInfo from "cardCreate/application/DefaultInfo";
+import ExtraInfo from "cardCreate/application/ExtraInfo";
+import FundSourceInfo from "cardCreate/application/FundSourceInfo";
 import CardCreate from "cardCreate/CardCreate";
 import VoiceChat from "chat/VoiceChat";
 import LoginBio from "login/LoginBio";
@@ -61,12 +64,16 @@ function App(props) {
         <Route path="/match" element={<Match />} />
         <Route path="/matching" element={<Matching />} />
         <Route path="/voicechat" element={<VoiceChat />} />
-        <Route path="/cardcreate" element={<CardCreate />} />
         <Route path="/welfare" element={<WelfareMain />} />
         <Route path="/loginBio" element={<LoginBio />} />
-        <Route path="/cardapp1" element={<CardApplication1 />} />
-        <Route path="/cardapp2" element={<CardApplication2 />} />
-        <Route path="/cardapp3" element={<CardApplication3 />} />
+        <Route path="/cardcreate" element={<CardCreate />} />
+        <Route path="/cardapp/*" element={<CardApp />}>
+          <Route path="defaultinfo" element={<DefaultInfo />} />
+          <Route path="extrainfo" element={<ExtraInfo />} />
+          <Route path="agreement" element={<Agreement />} />
+          <Route path="creditinfo" element={<CreditInfo />} />
+          <Route path="fundsourceinfo" element={<FundSourceInfo />} />
+        </Route>
         <Route path="/loginId" element={<LoginId />} />
         <Route path="/loginPw" element={<LoginPw />} />
         <Route path="/signUp/*" element={<SignUpMain />}>

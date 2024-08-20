@@ -2,21 +2,21 @@ import "cardCreate/application/CardApplication.css";
 import Header from "cardCreate/header/CardCreateHeader";
 import { useNavigate } from "react-router-dom";
 
-function CardApplication3(props) {
+function DefaultInfo(props) {
   const navigate = useNavigate();
-  const handlePage3=()=>{
-    navigate("/cardapp3");
+  const handlePaging=()=>{
+    navigate("/cardapp/extrainfo");
   }
   return (
     <div className="card-app-container">
       <Header />
       <div className="app-title">
         <div className="title-text">
-          <span>추가정보를</span>
+          <span>기본정보를</span>
           <br />
-          <span>입력해 주세요</span>
+          <span>확인해 주세요</span>
         </div>
-        <div className="pageNumber">2/8</div>
+        <div className="pageNumber">1/8</div>
       </div>
       <div className="app-input-container">
         <div className="app-input">
@@ -28,9 +28,9 @@ function CardApplication3(props) {
           <input placeholder="전화번호" />
         </div>
       </div>
-      <button className="appBtn" onClick={handlePage3}>다음</button>
+      <button className="appBtn" onClick={handlePaging}>다음</button>
     </div>
   );
 }
 
-export default CardApplication3;
+export default DefaultInfo;
