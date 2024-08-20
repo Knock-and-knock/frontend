@@ -5,7 +5,7 @@
   padding-left: 20px;
   bottom: 30px;
 }
-.skipBtn, .backBtn{
+.skipBtn, .match-backBtn{
   background-color: #E1E6EC;
   color:#686868;
   border: none;
@@ -16,7 +16,7 @@
   font-weight: bold;
 }
 
-.nextBtn, .submitBtn{
+.match-nextBtn, .submitBtn{
   background-color: #80BAFF;
   color:#fff;
   margin-left: 10px;
@@ -27,9 +27,9 @@
   font-size: 18px;
   font-weight: bold;
 }
-.skipBtn:active, .backBtn:active{
+.skipBtn:active, .match-backBtn:active{
   background-color:#CBD6E3;
 }
-.nextBtn:active, .submitBtn:active{
+.match-nextBtn:active, .submitBtn:active{
   background-color:#4E98F0;
 }

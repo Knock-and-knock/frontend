@@ -4,7 +4,7 @@ function NextBtn({ handleNextBtn, isDisabled }) {
   return (
     <button
       type="button"
-      className="nextBtn"
+      className="match-nextBtn"
       onClick={handleNextBtn}
       disabled={isDisabled}
     >

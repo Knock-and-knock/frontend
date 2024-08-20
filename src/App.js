@@ -1,4 +1,3 @@
-
 import DolbomMain from 'welfare/component/DolbomMain';
 import WelfareCheckPW from 'welfare/component/WelfareCheckPW';
 import WelfareCheckSpec from 'welfare/component/WelfareCheckSpec';
@@ -18,7 +17,13 @@ import WelfareHanwoolModal from 'welfare/component/WelfareHanwoolModal';
 import WelfareSetPW from 'welfare/component/WelfareSetPW';
 import WelfareInputTotal from 'welfare/component/welfareInputTotal';
 
-import CardCreate from 'cardCreate/CardCreate';
+import Agreement from "cardCreate/application/Agreement";
+import CardApp from "cardCreate/application/CardApp";
+import CreditInfo from "cardCreate/application/CreditInfo";
+import DefaultInfo from "cardCreate/application/DefaultInfo";
+import ExtraInfo from "cardCreate/application/ExtraInfo";
+import FundSourceInfo from "cardCreate/application/FundSourceInfo";
+import CardCreate from "cardCreate/CardCreate";
 import VoiceChat from 'chat/VoiceChat';
 import LoginBio from 'login/LoginBio';
 import LoginId from 'login/LoginId';
@@ -75,6 +80,23 @@ function App(props) {
           <Route path="/matching" element={<Matching />} />
           <Route path="/voicechat" element={<VoiceChat />} />
           <Route path="/cardcreate" element={<CardCreate/>} />
+            
+            <Route path="/main" element={<MainA />} />
+        <Route path="/nokmain" element={<MainB />} />
+        <Route path="/match" element={<Match />} />
+        <Route path="/matching" element={<Matching />} />
+        <Route path="/voicechat" element={<VoiceChat />} />
+        <Route path="/welfare" element={<WelfareMain />} />
+        <Route path="/loginBio" element={<LoginBio />} />
+        <Route path="/cardcreate" element={<CardCreate />} />
+        <Route path="/cardapp/*" element={<CardApp />}>
+          <Route path="defaultinfo" element={<DefaultInfo />} />
+          <Route path="extrainfo" element={<ExtraInfo />} />
+          <Route path="agreement" element={<Agreement />} />
+          <Route path="creditinfo" element={<CreditInfo />} />
+          <Route path="fundsourceinfo" element={<FundSourceInfo />} />
+        </Route>
+
           <Route path="/loginbio" element={<LoginBio />} />
           <Route path="/loginid" element={<LoginId />} />
           <Route path="/loginpw" element={<LoginPw />} />

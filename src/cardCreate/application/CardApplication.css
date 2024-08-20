@@ -1,0 +1,233 @@
+@media (max-width: 767px) {
+  .card-app-container {
+    margin: 0 auto;
+    padding: 0 20px;
+    height: 100vh;
+  }
+  .app-title {
+    font-size: 22px;
+    font-weight: bolder;
+    color: #2c2c2c;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    .pageNumber {
+      margin-top: 5px;
+      font-size: 20px;
+    }
+  }
+  .title-text {
+    line-height: 180%;
+  }
+  .app-input-container {
+    input {
+      width: 98%;
+      height: 5vh;
+      margin-top: 10px;
+      border: none;
+      border-bottom: 2px solid #d9d9d9;
+      font-size: 16px;
+    }
+    .firstInput {
+      width: 36%;
+    }
+    .secInput {
+      margin-left: 10px;
+      width: 58%;
+    }
+    input:focus {
+      outline: none;
+      border-bottom: 2px solid #80baff;
+    }
+  }
+  .app-input {
+    margin-top: 20px;
+    span {
+      font-size: 16px;
+      color: #2c2c2c;
+      font-weight: 600;
+    }
+    .caption-text {
+      font-size: 16px;
+      margin-top: 8px;
+      color: #a09e9e;
+      line-height: 160%;
+    }
+  }
+  .bankSelectMenu {
+    height: 46px;
+    width: 36%;
+    border: none;
+    border-bottom: 2px solid #d9d9d9;
+    font-size: 16px;
+    color: #a09e9e;
+    option {
+      color: #2c2c2c;
+    }
+    input::focus {
+      border: none;
+      border-bottom: 2px solid #d9d9d9;
+    }
+  }
+  /*동의 섹션*/
+  .agreement-title-section {
+    margin-top: 30px;
+  }
+  .agreement-section {
+    max-height: 58%;
+    overflow-y: auto;
+  }
+  .checkbox-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  .top-accordion,
+  .bottom-accordion {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  .top-accordion {
+    border-radius: 10px 10px 0 0;
+  }
+  .bottom-accordion {
+    border-radius: 0 0 10px 10px;
+  }
+
+  .accordion-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+    padding: 15px;
+    font-size: 18px;
+  }
+
+  .accordion-content {
+    padding: 15px;
+    border-top: 1px solid #ddd;
+    max-height: 300px;
+    overflow-y: auto;
+  }
+
+  .appBtn {
+    width: 100%;
+    padding: 15px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+  }
+
+  .appBtn:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  .custom-checkbox {
+    padding-left: 15px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 18px;
+    color: #2c2c2c;
+    font-weight: bold;
+  }
+  .checkboxName {
+    display: flex;
+    align-items: center;
+  }
+
+  .custom-checkbox input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+
+  .checkmark {
+    display: inline-block;
+    height: 20px;
+    width: 20px;
+    background-color: #fff;
+    border: 2px solid #d9d9d9;
+    border-radius: 15px;
+    margin-right: 10px;
+    position: relative;
+  }
+  .sub-checkmark {
+    display: inline-block;
+    height: 16px;
+    width: 16px;
+    background-color: #fff;
+    border: 2px solid #d9d9d9;
+    border-radius: 5px;
+    margin-right: 10px;
+    position: relative;
+  }
+
+  .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+  .sub-checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+
+  .custom-checkbox input:checked ~ .checkmark {
+    background-color: #80baff;
+    border-color: #80baff;
+  }
+  .custom-checkbox input:checked ~ .sub-checkmark {
+    background-color: #80baff;
+    border-color: #80baff;
+  }
+
+  .custom-checkbox input:checked ~ .checkmark:after {
+    display: block;
+  }
+  .custom-checkbox input:checked ~ .sub-checkmark:after {
+    display: block;
+  }
+
+  .custom-checkbox .checkmark:after {
+    left: 6px;
+    top: 1px;
+    width: 6px;
+    height: 12px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+  }
+  .custom-checkbox .sub-checkmark:after {
+    left: 4px;
+    top: -1px;
+    width: 6px;
+    height: 12px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+  }
+  .fullSelectMenu {
+    height: 46px;
+    width: 98%;
+    border: none;
+    border-bottom: 2px solid #d9d9d9;
+    font-size: 16px;
+    color: #a09e9e;
+    option {
+      color: #2c2c2c;
+    }
+    input::focus {
+      border: none;
+      border-bottom: 2px solid #d9d9d9;
+    }
+  }
+}
+
+
