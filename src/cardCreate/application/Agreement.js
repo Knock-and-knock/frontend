@@ -1,5 +1,5 @@
 import "cardCreate/application/CardApplication.css";
-import Header from "cardCreate/header/CardCreateHeader";
+import Header from "header/Header";
 import arrow from "image/icon/agreearrow.png";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";

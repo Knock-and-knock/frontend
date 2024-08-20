@@ -1,4 +1,4 @@
-import CardCreateHeader from 'cardCreate/header/CardCreateHeader';
+import Header from 'header/Header';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCardCreate } from './CardApp';
@@ -60,7 +60,7 @@ function FundSourceInfo(props) {
 
   return (
     <div className="card-app-container">
-      <CardCreateHeader />
+      <Header />
       <div className="app-title">
         <div className="title-text">
           <span>자금세탁 방지를 위한</span>

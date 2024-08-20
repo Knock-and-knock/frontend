@@ -1,4 +1,4 @@
-import "cardCreate/header/CardCreateHeader.css";
+import styles from "cardCreate/header/CardCreateHeader.css";
 import back from "image/Back.png";
 import home from "image/gohome.png";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -24,12 +24,6 @@ function CardCreateHeader() {
         return "카드신청";
       case "/cardapp/fundsourceinfo":
         return "카드신청";
-      case "/cardapp/":
-        return "카드신청";
-      case "/cardapp/":
-        return "카드신청";
-      case "/cardapp/":
-        return "카드신청";
       default:
         return null;
     }
@@ -37,21 +31,26 @@ function CardCreateHeader() {
 
   return (
     <header>
-      <div className="cardCreate-header-wrap">
-        <div className="cardCreate-header">
-          <div className="header-info">
-            <img
-              src={back}
-              alt="뒤로가기"
-              className="back-icon"
-              onClick={handleBack}
-            />
-            <p className="header-name">{getTitle(location.pathname)}</p>
-            <img src={home} alt="홈 가기" className="home-icon" />
-          </div>
+      <div className={styles["header-container"]}>
+        <div className={styles["header-info"]}>
+          <img
+            src={back}
+            alt="뒤로가기"
+            className={styles["back-icon"]}
+            onClick={handleBack}
+          />
+          <p className={styles["header-name"]}>{getTitle(location.pathname)}</p>
+          <img
+            src={home}
+            alt="홈 가기"
+            className={styles["home-icon"]}
+            onClick={() => navigate("/main")}
+          />
         </div>
       </div>
     </header>
   );
 }
 export default CardCreateHeader;
+
+

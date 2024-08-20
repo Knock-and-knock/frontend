@@ -1,5 +1,5 @@
 import "cardCreate/application/CardApplication.css";
-import Header from "cardCreate/header/CardCreateHeader";
+import Header from "header/Header";
 import { useNavigate } from "react-router-dom";
 
 function DefaultInfo(props) {
