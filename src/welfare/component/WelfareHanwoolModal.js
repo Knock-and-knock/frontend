@@ -1,10 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import styles from 'welfare/css/WelfareReserveModal.module.css';
+import { useNavigate } from 'react-router-dom';
 
 function WelfareHanwoolModal({ closeModal }) { 
   const [today, setToday] = useState('');
   const [endDate, setEndDate] = useState('');
-  const [duration, setDuration] = useState(1); 
+  const [duration, setDuration] = useState(1);
+  const navigate = useNavigate();
+
+  const goInputBirth = () => {
+      navigate('/welfareInputBirth');
+  }
+
 
   useEffect(() => {
     const currentDate = new Date();
@@ -78,7 +85,7 @@ function WelfareHanwoolModal({ closeModal }) {
           </div>
 
           <span className={`${styles["main-text"]} ${styles["reserve-cancel"]}`} onClick={closeModal}>닫기</span>
-          <span className={`${styles["main-text"]} ${styles["reserve-yeah"]}`}>다음</span>
+          <span className={`${styles["main-text"]} ${styles["reserve-yeah"]}`} onClick={goInputBirth}>다음</span>
         </div>
     </div>
   );

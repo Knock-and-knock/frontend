@@ -1,9 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import styles from 'welfare/css/WelfareReserveModal.module.css';
+import { useNavigate } from 'react-router-dom';
 
 function WelfareNursingModal({ closeModal }) { 
   const [today, setToday] = useState('');
   const [price, setPrice] = useState(75000); // 기본 가격은 75,000 원 (3시간 기준)
+  const navigate = useNavigate();
+
+  const goInputBirth = () => {
+      navigate('/welfareInputBirth');
+  }
 
   useEffect(() => {
     const currentDate = new Date();
@@ -63,7 +69,7 @@ function WelfareNursingModal({ closeModal }) {
           </div>
 
           <span className={`${styles["main-text"]} ${styles["reserve-cancel"]}`} onClick={closeModal}>닫기</span>
-          <span className={`${styles["main-text"]} ${styles["reserve-yeah"]}`}>다음</span>
+          <span className={`${styles["main-text"]} ${styles["reserve-yeah"]}`} onClick={goInputBirth}>다음</span>
         </div>
     </div>
   );

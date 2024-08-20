@@ -157,7 +157,7 @@
 
 .input-guitar:focus {
   outline: none;
-  border-color: #80BAFF;
+  border-bottom: 1px solid #80BAFF;
 }
 
 .go-input-spec {

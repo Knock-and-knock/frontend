@@ -12,8 +12,29 @@ function Header() {
         switch (pathname) {
             case '/dolbomMain':
                 return '복지 서비스 예약하기';
+            case '/welfareCheckPW':
+                return '결제하기';
+            case '/welfareCheckSpec':
+                return '복지 서비스 예약하기';
+            case '/welfareInputAddress':
+                return '복지 서비스 예약하기';
+            case '/welfareInputBirth':
+                return '복지 서비스 예약하기';
+            case '/welfareInputDisease':
+                return '복지 서비스 예약하기';
+            case '/welfareInputGender':
+                return '복지 서비스 예약하기';
+            case '/welfareInputHeight':
+                return '복지 서비스 예약하기';
+            case '/welfareList':
+                return '복지 서비스 예약하기';
+            case '/welfareMain':
+                return '복지 서비스';
             case '/welfareReservedList':
-                return '예약된 복지 서비스';
+                return '복지 서비스 예약내역';
+            case '/welfareSetPW':
+                return '간편 결제 등록';
+            
             default:
                 return null;
         }

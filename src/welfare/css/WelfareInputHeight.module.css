@@ -67,7 +67,7 @@
 
 .input-container {
   margin: 0 auto;
-  margin-bottom: 60%;
+  margin-bottom: 100%;
 }
 
 .input-height,
@@ -83,7 +83,7 @@
 .input-height:focus,
 .input-weight:focus {
   outline: none;
-  border-color: #80BAFF;
+  border-bottom: 1px solid #80BAFF;
 }
 
 .cm {

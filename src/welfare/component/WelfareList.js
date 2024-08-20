@@ -1,13 +1,20 @@
 import React from 'react';
-import styles from 'welfare/css/WelfareList.module.css'; // CSS 모듈 import
-import back from "image/Back.png";
-import home from "image/gohome.png";
+import styles from 'welfare/css/WelfareList.module.css';
 import moonhwaro from "image/moonhwaro.png";
 import education from "image/education.png";
 import job from "image/job.png";
 import bokjiro from "image/bokjiro.png";
+import { useNavigate } from 'react-router-dom';
+import Header from 'header/Header.js';
 
 function WelfareList() {
+    const navigate = useNavigate();
+
+    const goDolbomMain = () => {
+        navigate('/dolbomMain');
+    }
+
+
     const goBokjiro = (id) => {
       if(id === 'bokjiro') {
         window.location.href = "https://www.bokjiro.go.kr/ssis-tbu/index.do";
@@ -35,13 +42,7 @@ function WelfareList() {
     return (
         <div className={styles.container}>
 
-            <div className={styles.header}>
-                <div className={styles["header-info"]}>
-                    <img src={back} alt="뒤로가기" className={styles["back-icon"]} />
-                    <p className={styles["header-name"]}>예약된 복지 서비스</p>
-                    <img src={home} alt="홈 가기" className={styles["home-icon"]} />
-                </div>
-            </div>
+        <Header />
 
             <div className={styles["main-container"]}>
                 <div className={`${styles["foryou-section"]} ${styles["detailed-reserve"]}`}>
@@ -49,7 +50,7 @@ function WelfareList() {
                     <div className={styles["go-reserve-container"]}>
                         <span className={`${styles["main-text"]} ${styles["foryou-service"]}`}>노인 돌봄 서비스</span>
                     </div>
-                    <span className={styles["go-reserve"]}>예약하러 가기</span>
+                    <span className={styles["go-reserve"]} onClick={goDolbomMain}>예약하러 가기</span>
                 </div>
 
                 <div className={styles["main-section-container"]}>
@@ -86,7 +87,7 @@ function WelfareList() {
                     </div>
 
                     <div className={`${styles["main-section"]} ${styles["detailed-welfare"]}`} onClick={() => goBokjiro('bokjiro')}>
-                        <p className={`${styles["main-text"]} ${styles["welfare-intro"]}`}>복지 정보를 한 곳에</p>
+                        <p className={`${styles["main-text"]} ${styles["welfare-intro"]}`}>복지 정보를 한번에</p>
                         <div className={styles["welfare-title-container"]}>
                             <p className={`${styles["main-text"]} ${styles["welfare-title1"]}`}>복지로</p>
                             <p className={`${styles["main-text"]} ${styles["welfare-title2"]}`}>바로가기</p>

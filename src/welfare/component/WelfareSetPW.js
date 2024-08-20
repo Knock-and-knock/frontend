@@ -1,7 +1,6 @@
 import React, { useState, useRef } from 'react';
 import styles from 'welfare/css/WelfareSetPW.module.css'; // CSS 모듈 import
-import back from 'image/Back.png';
-import home from "image/gohome.png";
+import Header from 'header/Header.js';
 
 function WelfareSetPW() {
     const [password, setPassword] = useState("");
@@ -18,13 +17,7 @@ function WelfareSetPW() {
 
     return (
         <div className={styles.container}>
-            <div className={styles.header}>
-                <div className={styles["header-info"]}>
-                    <img src={back} alt="뒤로가기" className={styles["back-icon"]} />
-                    <p className={styles["header-name"]}>복지 서비스 예약하기</p>
-                    <img src={home} alt="홈 가기" className={styles["home-icon"]} />
-                </div>
-            </div>
+            <Header />
 
             <div className={styles["main-container"]}>
                 <div className={styles["pay-container"]}>

@@ -14,6 +14,7 @@ function WelfarePayComplete() {
       </div>
 
       <div className={styles["main-container"]}>
+      
         <hr />
         <p className={styles["pay-title"]}>
           손동희 <span className={styles.gender}>(남성)</span>

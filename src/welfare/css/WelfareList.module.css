@@ -12,39 +12,6 @@ hr {
   border: 1px solid #d9d9d9;
 }
 
-.header {
-  padding: 20px;
-  align-items: center;
-  background-color: white;
-}
-
-.header-info {
-  width: 100%;
-  align-items: center;
-  background-color: white;
-  display: flex;
-  justify-content: space-between;
-}
-
-.back-icon {
-  margin-top: 0%;
-  width: 8%;
-  height: 8%;
-}
-
-.home-icon {
-  margin-top: 0%;
-  width: 10%;
-  height: 10%;
-}
-
-.header-name {
-  text-align: center;
-  font-size: 22px;
-  font-weight: bold;
-  color: #2c2c2c;
-}
-
 .main-container {
   flex: 1;
   width: 100%;
@@ -72,8 +39,8 @@ hr {
 }
 
 .foryou-section {
-  width: 85%;
-  padding: 0px 10px 10px 10px;
+  width: 80%;
+  padding: 5px 20px 20px 20px;
   margin-left: 15px;
   margin-right: 15px;
   border-radius: 15px;
@@ -84,7 +51,7 @@ hr {
 
 .main-section {
   width: 85%;
-  padding: 0px 10px 10px 10px;
+  padding: 10px 15px 10px 15px;
   margin-left: 5px;
   margin-right: 5px;
   border-radius: 15px;

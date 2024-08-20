@@ -1,12 +1,17 @@
 import React, { useState } from 'react';
 import styles from 'welfare/css/WelfareInputDisease.module.css'; // CSS 모듈 import
-import back from 'image/Back.png';
-import home from "image/gohome.png";
 import check from "image/check.png";
 import checked from "image/checked.png";
+import { useNavigate } from 'react-router-dom';
+import Header from 'header/Header.js';
 
 function WelfareInputDisease() {
   const [selectedId, setSelectedId] = useState(null);
+  const navigate = useNavigate();
+
+    const goCheckSpec = () => {
+        navigate('/welfareCheckSpec');
+    }
 
   const handleClick = (id) => {
     setSelectedId(id);
@@ -45,13 +50,7 @@ function WelfareInputDisease() {
 
   return (
     <div className={styles.container}>
-      <div className={styles.header}>
-        <div className={styles["header-info"]}>
-          <img src={back} alt="뒤로가기" className={styles["back-icon"]} />
-          <p className={styles["header-name"]}>복지 서비스 예약하기</p>
-          <img src={home} alt="홈 가기" className={styles["home-icon"]} />
-        </div>
-      </div>
+      <Header />
 
       <div className={styles["main-container"]}>
         <div className={styles["infomation-container"]}>
@@ -90,7 +89,7 @@ function WelfareInputDisease() {
         <div className={styles["content-display"]}>{renderContent()}</div>
 
         <div className={`${styles["main-section"]} ${styles["go-input-spec"]}`}>
-          <p className={`${styles["main-text"]} ${styles["go-input-spec-text"]}`}>다음</p>
+          <p className={`${styles["main-text"]} ${styles["go-input-spec-text"]}`} onClick={goCheckSpec}>다음</p>
         </div>
       </div>
     </div>

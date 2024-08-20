@@ -16,6 +16,8 @@ import WelfareNursingModal from 'welfare/component/WelfareNursingModal';
 import WelfareHouseworkModal from 'welfare/component/WelfareHouseworkModal';
 import WelfareHanwoolModal from 'welfare/component/WelfareHanwoolModal';
 import WelfareSetPW from 'welfare/component/WelfareSetPW';
+import WelfareInputTotal from 'welfare/component/welfareInputTotal';
+
 import CardCreate from 'cardCreate/CardCreate';
 import VoiceChat from 'chat/VoiceChat';
 import LoginBio from 'login/LoginBio';
@@ -43,11 +45,7 @@ function App(props) {
           <Route path="/dolbomMain" element={<DolbomMain />} />
           <Route path="/welfareCheckPW" element={<WelfareCheckPW />} />
           <Route path="/welfareCheckSpec" element={<WelfareCheckSpec />} />
-          <Route path="/welfareInputAddress" element={<WelfareInputAddress />} />
-          <Route path="/welfareInputBirth" element={<WelfareInputBirth />} />
-          <Route path="/welfareInputDisease" element={<WelfareInputDisease />} />
-          <Route path="/welfareInputGender" element={<WelfareInputGender />} />
-          <Route path="/welfareInputHeight" element={<WelfareInputHeight />} />
+
           <Route path="/welfareList" element={<WelfareList />} />
           <Route path="/welfareMain" element={<WelfareMain />} />
           <Route path="/welfarePayComplete" element={<WelfarePayComplete />} />
@@ -57,6 +55,14 @@ function App(props) {
           <Route path="/welfareHouseworkModal" element={<WelfareHouseworkModal />} />
           <Route path="/welfareHanwoolModal" element={<WelfareHanwoolModal />} />
           <Route path="/welfareSetPW" element={<WelfareSetPW />} />
+          
+          <Route path="/welfareInputTotal/*" element={<WelfareInputTotal />} >
+            <Route path="welfareInputAddress" element={<WelfareInputAddress />} />
+            <Route path="welfareInputBirth" element={<WelfareInputBirth />} />
+            <Route path="welfareInputDisease" element={<WelfareInputDisease />} />
+            <Route path="welfareInputGender" element={<WelfareInputGender />} />
+            <Route path="welfareInputHeight" element={<WelfareInputHeight />} />
+          </Route>
 
           <Route path="/main" element={<MainA />} />
           <Route path="/nokmain" element={<MainB />} />
