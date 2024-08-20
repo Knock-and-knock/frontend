@@ -46,14 +46,20 @@ export function call(api, method, request) {
 }
 
 export function signin(userDTO) {
-  return call("http://localhost:9999/auth/login", "POST", userDTO).then(
+  console.log(userDTO);
+  return call("http://192.168.0.11:9090/api/v1/auth/login", "POST", userDTO).then(
     (response) => {
       console.log(response);
-      if (response.token) {
+      if (response.accessToken) {
         // 로컬 스토리지에 토큰 저장
-        localStorage.setItem(ACCESS_TOKEN, response.token);
+        localStorage.setItem(ACCESS_TOKEN, response.accessToken);
         // token이 존재하는 경우 Todo 화면으로 리디렉트
-        window.location.href = "/main";
+        if(response.userType === "PROTECTOR"){
+          window.location.href = "/nokmain";
+        }else{
+          window.location.href = "/main";
+        }
+        
       }
     }
   );
@@ -62,6 +68,6 @@ export function signout() {
   localStorage.setItem(ACCESS_TOKEN, null);
   window.location.href = "/loginId";
 }
-export function signup(userDTO) {
-  return call("http://localhost:9999/auth/signup", "POST", userDTO);
-}
+// export function signup(userDTO) {
+//   return call("http://localhost:9999/auth/signup", "POST", userDTO);
+// }

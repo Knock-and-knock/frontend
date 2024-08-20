@@ -1,113 +1,103 @@
 .container {
   max-width: 390px;
   margin: 0 auto;
-  
   font-family: Arial, sans-serif;
   background-color: white;
   min-height: 100vh; /* 전체 높이로 채우기 */
-  display: flex;
-  flex-direction: column;
 }
 
 .header {
-  padding: 20px;
-  align-items: center;
+  padding: 10px;
   background-color: white;
 }
-
 
 .header-info {
   width: 100%;
-  align-items: center;
   background-color: white;
-  display: flex;
-  justify-content: space-between;
-}
-
-.back-icon{
-  margin-top: 0%;
-  width: 8%;
-  height: 8%;
-}
-
-.home-icon{
-  margin-top: 0%;
-  width: 10%;
-  height: 10%;
 }
 
 .header-name {
-  text-align: center;
+  margin-top: 30%;
+  margin-left: 2%;
   font-size: 22px;
   font-weight: bold;
   color: #2c2c2c;
+}
+
+.header-date {
+  margin-left: 3%;
+  margin-top: 1%;
+  font-size: 18px;
+  color: #888;
+}
+
+.pay-com {
+  color: #007bff;
 }
 
 .main-container {
-  flex: 1;
-  width: 100%;
+  width: 90%;
   height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-#pay-container {
-  margin-left: 15px;
-  margin-right: 15px;
+  margin: 0 auto;
   margin-top: 10%;
-  text-align: center;
 }
 
-.infomation {
+hr {
+  border: 1px solid #d9d9d9;
+}
+
+.pay-title {
+  font-size: 20px;
   font-weight: bold;
-  font-size: 22px;
-  margin-top: -15px;
   color: #2c2c2c;
 }
 
-#password-container {
-  margin-bottom: 100%;
-  margin-left: 15px;
-  margin-right: 15px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+dotted-hr {
+  border: none;
+  border: 1px dashed #d9d9d9;
 }
 
-#password-section {
-  display: flex;
-  width: 80%;
-  justify-content: space-between;
+.gender {
+  color: #686868;
 }
 
-#password-section img {
-  width: 30px;
-  height: 30px;
+.pay-info-cate {
+  font-size: 18px;
+  color: #686868;
 }
 
-#input-address:focus {
-  outline: none;
-  border-color: #80BAFF;
+.pay-info-title {
+  font-size: 18px;
+  font-weight: bold;
+  float: right;
+  color: #2c2c2c;
 }
 
-#input-address-detail:focus {
-  outline: none;
-  border-color: #80BAFF;
+.pay-info-tprice {
+  font-size: 18px;
+  font-weight: bold;
+  color: #2c2c2c;
+}
+
+.pay-info-price {
+  font-size: 22px;
+  font-weight: bold;
+  float: right;
+  color: #2c2c2c;
 }
 
 .main-section {
-  width: 80%;
-  padding: 20px;
-  margin-left: 15px;
-  margin-right: 15px;
+  width: 90%;
+  height: 100%;
+  padding: 10px;
   border: 1px solid #ccc;
   border-radius: 15px;
   text-align: center;
+  margin: 0 auto;
+  margin-top: 70%;
 }
 
-#go-pay {
+.go-main {
   border-width: 3px;
   border-color: #80BAFF;
   background-color: #80BAFF;
@@ -120,16 +110,15 @@
 }
 
 .main-text {
+  text-align: center;
+  margin: 0 auto;
   font-size: 18px;
-  font-weight: bold;
-  color: #888;
-  margin: 10px 0;
+  color: white;
 }
 
-#go-pay-text {
+.go-main-text {
   color: white;
-  font-size: 18px;
-  
+  font-weight: bold;
 }
 
 .main-link {

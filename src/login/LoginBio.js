@@ -1,17 +1,17 @@
-import React from 'react';
-import LoginOptionModal from './component/modal/LoginOptionModal';
+import fingerprint from 'image/icon/fingerprint.svg';
 import LoginBtn from './component/button/LoginBtn';
 import LoginHeader from './component/header/LoginHeader';
-import bio from 'image/icon/bio.png';
 
 function LoginBio(props) {
     return (
         <div>
             <LoginHeader/>
             <div className="login-container">
-                <img src={bio} alt="생체인증로그인" className="icon-bio" /> 
+                <div className='icon-bio'>
+                    <div className='circle'/>
+                    <img src={fingerprint} alt="생체인증로그인" className="fingerprint" /> 
+                </div>
             </div>
-            <LoginOptionModal/>
             <LoginBtn/>
         </div>
     );

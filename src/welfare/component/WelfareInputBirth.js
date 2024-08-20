@@ -1,18 +1,31 @@
-import React from 'react';
-import styles from 'welfare/css/WelfareInputBirth.module.css'; // CSS 모듈 import
-import back from 'image/Back.png';
-import home from "image/gohome.png";
+import React, { useState } from 'react';
+import styles from 'welfare/css/WelfareInputBirth.module.css';
+import { useNavigate } from 'react-router-dom';
+import Header from 'header/Header.js';
 
 function WelfareInputBirth() {
+    const [yearPlaceholder, setYearPlaceholder] = useState('년');
+    const [monthPlaceholder, setMonthPlaceholder] = useState('월');
+    const [dayPlaceholder, setDayPlaceholder] = useState('일');
+    const navigate = useNavigate();
+
+    const goInputHeight = () => {
+        navigate('/welfareInputHeight');
+    }
+
+    const handleFocus = (setPlaceholder) => {
+        setPlaceholder('');
+    };
+
+    const handleBlur = (value, setPlaceholder, defaultPlaceholder) => {
+        if (!value) {
+            setPlaceholder(defaultPlaceholder);
+        }
+    };
+
     return (
         <div className={styles.container}>
-            <div className={styles.header}>
-                <div className={styles["header-info"]}>
-                    <img src={back} alt="뒤로가기" className={styles["back-icon"]} />
-                    <p className={styles["header-name"]}>복지 서비스 예약하기</p>
-                    <img src={home} alt="홈 가기" className={styles["home-icon"]} />
-                </div>
-            </div>
+            <Header />
 
             <div className={styles["main-container"]}>
                 <div className={styles["infomation-container"]}>
@@ -21,15 +34,33 @@ function WelfareInputBirth() {
                 </div>
 
                 <div className={styles["input-container"]}>
-                    <input className={styles["input-date"]} type="number" placeholder="년" />
+                    <input
+                        className={styles["input-date"]}
+                        type="number"
+                        placeholder={yearPlaceholder}
+                        onFocus={() => handleFocus(setYearPlaceholder)}
+                        onBlur={(e) => handleBlur(e.target.value, setYearPlaceholder, '년')}
+                    />
                     <span className={styles["input-divide"]}>/</span>
-                    <input className={styles["input-date"]} type="number" placeholder="월" />
+                    <input
+                        className={styles["input-date"]}
+                        type="number"
+                        placeholder={monthPlaceholder}
+                        onFocus={() => handleFocus(setMonthPlaceholder)}
+                        onBlur={(e) => handleBlur(e.target.value, setMonthPlaceholder, '월')}
+                    />
                     <span className={styles["input-divide"]}>/</span>
-                    <input className={styles["input-date"]} type="number" placeholder="일" />
+                    <input
+                        className={styles["input-date"]}
+                        type="number"
+                        placeholder={dayPlaceholder}
+                        onFocus={() => handleFocus(setDayPlaceholder)}
+                        onBlur={(e) => handleBlur(e.target.value, setDayPlaceholder, '일')}
+                    />
                 </div>
 
                 <div className={`${styles["main-section"]} ${styles["go-input-height"]}`}>
-                    <p className={`${styles["main-text"]} ${styles["go-input-height-text"]}`}>다음</p>
+                    <p className={`${styles["main-text"]} ${styles["go-input-height-text"]}`} onClick={goInputHeight}>다음</p>
                 </div>
             </div>
         </div>
