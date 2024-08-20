@@ -15,7 +15,7 @@ import WelfareNursingModal from 'welfare/component/WelfareNursingModal';
 import WelfareHouseworkModal from 'welfare/component/WelfareHouseworkModal';
 import WelfareHanwoolModal from 'welfare/component/WelfareHanwoolModal';
 import WelfareSetPW from 'welfare/component/WelfareSetPW';
-import WelfareInputTotal from 'welfare/component/welfareInputTotal';
+import WelfareInputTotal from 'welfare/component/WelfareInputTotal';
 
 import Agreement from "cardCreate/application/Agreement";
 import CardApp from "cardCreate/application/CardApp";
