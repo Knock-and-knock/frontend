@@ -27,13 +27,13 @@ function Header() {
         return "복지 서비스 예약하기";
       case "/welfareList":
         return "복지 서비스 예약하기";
-      case "/welfareMain":
+      case "/welfaremain":
         return "복지 서비스";
       case "/welfareReservedList":
         return "복지 서비스 예약내역";
       case "/welfareSetPW":
         return "간편 결제 등록";
-      case "/cardCreate":
+      case "/cardcreate":
         return "카드신청";
       case "/cardapp/defaultinfo":
         return "카드신청";

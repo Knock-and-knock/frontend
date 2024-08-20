@@ -57,7 +57,7 @@ function App(props) {
         <Route path="/welfareCheckSpec" element={<WelfareCheckSpec />} />
 
         <Route path="/welfareList" element={<WelfareList />} />
-        <Route path="/welfareMain" element={<WelfareMain />} />
+        <Route path="/welfaremain" element={<WelfareMain />} />
         <Route path="/welfarePayComplete" element={<WelfarePayComplete />} />
         <Route
           path="/welfareReserveCancelModal"

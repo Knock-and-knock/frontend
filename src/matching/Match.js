@@ -3,7 +3,7 @@ import SkipBtn from "matching/button/SkipBtn";
 import Header from "matching/header/Header";
 import "matching/header/Header.css";
 import "matching/Match.css";
-import { useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import BackBtn from "./button/BackBtn";
 import SubmitBtn from "./button/SubmitBtn";
@@ -12,9 +12,22 @@ import FYINotice from "./notice/FYINotice";
 import TitleInput from "./notice/TitleInput";
 import TitleNotice from "./notice/TitleNotice";
 
+// 컨텍스트 생성
+const InfoContext = createContext();
+
 function Match(props) {
   const [info, setInfo] = useState(1);
   const [isInfo, setIsInfo] = useState(false);
+  const [userInfo, setUserInfo] = useState({
+    name: "",
+    phone: "",
+    mname: "",
+    yname: "",
+  });
+  useEffect(()=>{
+    console.log(userInfo);
+  })
+
   const navigate = useNavigate();
 
   const handleNextBtn = () => {
@@ -38,28 +51,32 @@ function Match(props) {
   };
 
   return (
-    <div className="match-container">
-      <Header />
-      {info === 1 ? <FYINotice /> : <TitleNotice />}
-      {info === 1 ? (
-        <FYIInput handleIsInfoChange={handleIsInfoChange} />
-      ) : (
-        <TitleInput handleIsInfoChange={handleIsInfoChange} />
-      )}
-      <div className="btnContainer">
+    <InfoContext.Provider value={{ userInfo, setUserInfo }}>
+      <div className="match-container">
+        <Header />
+        {info === 1 ? <FYINotice /> : <TitleNotice />}
         {info === 1 ? (
-          <SkipBtn handleBackPageBtn={handleBackPageBtn} />
+          <FYIInput handleIsInfoChange={handleIsInfoChange} />
         ) : (
-          <BackBtn handleBackBtn={handleBackBtn} />
+          <TitleInput handleIsInfoChange={handleIsInfoChange} />
         )}
-        {info === 1 ? (
-          <NextBtn handleNextBtn={handleNextBtn} isDisabled={!isInfo} />
-        ) : (
-          <SubmitBtn handleSubmitBtn={handleSubmitBtn} isDisabled={!isInfo} />
-        )}
+        <div className="btnContainer">
+          {info === 1 ? (
+            <SkipBtn handleBackPageBtn={handleBackPageBtn} />
+          ) : (
+            <BackBtn handleBackBtn={handleBackBtn} />
+          )}
+          {info === 1 ? (
+            <NextBtn handleNextBtn={handleNextBtn} isDisabled={!isInfo} />
+          ) : (
+            <SubmitBtn handleSubmitBtn={handleSubmitBtn} isDisabled={!isInfo} />
+          )}
+        </div>
       </div>
-    </div>
+    </InfoContext.Provider>
   );
 }
 
 export default Match;
+export { InfoContext };
+
