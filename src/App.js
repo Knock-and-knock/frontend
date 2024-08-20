@@ -28,6 +28,7 @@ import MainB from 'main/MainB';
 import Match from 'matching/Match';
 import Matching from 'matching/notice/Matching';
 import Register from 'signUp/component/Register';
+
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import SignUpSuccess from 'signUp/component/SignUpSuccess';
 import InfoInput from 'signUp/component/InfoInput';
@@ -37,6 +38,10 @@ import QuickLoginSetup from 'signUp/component/QuickLoginSetup';
 import PinSetup from 'signUp/component/PinSetup';
 import PinCheck from 'signUp/component/PinCheck';
 import SignUpMain from 'signUp/SignUpMain';
+
+import Modal from 'react-modal';
+
+Modal.setAppElement('#root');
 
 function App(props) {
   return (
@@ -70,20 +75,20 @@ function App(props) {
           <Route path="/matching" element={<Matching />} />
           <Route path="/voicechat" element={<VoiceChat />} />
           <Route path="/cardcreate" element={<CardCreate/>} />
-          <Route path="/loginBio" element={<LoginBio />} />
-          <Route path="/loginId" element={<LoginId />} />
-          <Route path="/loginPw" element={<LoginPw />} />
+          <Route path="/loginbio" element={<LoginBio />} />
+          <Route path="/loginid" element={<LoginId />} />
+          <Route path="/loginpw" element={<LoginPw />} />
 
 
-          <Route path="/signUp/*" element={<SignUpMain/>} >
+          <Route path="/signup/*" element={<SignUpMain/>} >
             <Route path="register" element={<Register/>} />
-            <Route path="infoInput" element={<InfoInput/>} />
-            <Route path="verifyCode" element={<VerifyCode/>} />
-            <Route path="roleCheck" element={<RoleCheck/>} />
-            <Route path="quickLoginSetup" element={<QuickLoginSetup/>} />  
-            <Route path="pinSetup" element={<PinSetup/>} /> 
-            <Route path="pinCheck" element={<PinCheck/>} />   
-            <Route path="signUpSuccess" element={<SignUpSuccess/>} />
+            <Route path="infoinput" element={<InfoInput/>} />
+            <Route path="verifycode" element={<VerifyCode/>} />
+            <Route path="rolecheck" element={<RoleCheck/>} />
+            <Route path="quickloginsetup" element={<QuickLoginSetup/>} />  
+            <Route path="pinsetup" element={<PinSetup/>} /> 
+            <Route path="pincheck" element={<PinCheck/>} />   
+            <Route path="signupsuccess" element={<SignUpSuccess/>} />
           </Route>
 
 
