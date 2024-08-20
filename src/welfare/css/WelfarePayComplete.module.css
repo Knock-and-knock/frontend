@@ -94,7 +94,7 @@ dotted-hr {
   border-radius: 15px;
   text-align: center;
   margin: 0 auto;
-  margin-top: 70%;
+  margin-top: 65%;
 }
 
 .go-main {
@@ -105,8 +105,7 @@ dotted-hr {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 20px;
-  margin-bottom: 5%;
+  height: 40px;
 }
 
 .main-text {

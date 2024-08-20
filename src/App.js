@@ -52,27 +52,29 @@ function App(props) {
   return (
     <BrowserRouter>
         <Routes>
-          <Route path="/dolbomMain" element={<DolbomMain />} />
-          <Route path="/welfareCheckPW" element={<WelfareCheckPW />} />
-          <Route path="/welfareCheckSpec" element={<WelfareCheckSpec />} />
+          <Route path="/dolbom-main" element={<DolbomMain />} />
+          <Route path="/welfare-check-pw" element={<WelfareCheckPW />} />
+          <Route path="/welfare-check-spec" element={<WelfareCheckSpec />} />
 
-          <Route path="/welfareList" element={<WelfareList />} />
-          <Route path="/welfareMain" element={<WelfareMain />} />
-          <Route path="/welfarePayComplete" element={<WelfarePayComplete />} />
-          <Route path="/welfareReserveCancelModal" element={<WelfareReserveCancelModal />} />
-          <Route path="/welfareReservedList" element={<WelfareReservedList />} />
-          <Route path="/welfareNursingModal" element={<WelfareNursingModal />} />
-          <Route path="/welfareHouseworkModal" element={<WelfareHouseworkModal />} />
-          <Route path="/welfareHanwoolModal" element={<WelfareHanwoolModal />} />
-          <Route path="/welfareSetPW" element={<WelfareSetPW />} />
+          <Route path="/welfare-list" element={<WelfareList />} />
+          <Route path="/welfare-main" element={<WelfareMain />} />
+          <Route path="/welfare-paycomplete" element={<WelfarePayComplete />} />
+          <Route path="/welfare-reserve-cancelmodal" element={<WelfareReserveCancelModal />} />
+          <Route path="/welfare-reserved-list" element={<WelfareReservedList />} />
+          <Route path="/welfare-nursing-modal" element={<WelfareNursingModal />} />
+          <Route path="/welfare-housework-modal" element={<WelfareHouseworkModal />} />
+          <Route path="/welfare-hanwool-modal" element={<WelfareHanwoolModal />} />
+          <Route path="/welfare-set-pw" element={<WelfareSetPW />} />
           
-          <Route path="/welfareInputTotal/*" element={<WelfareInputTotal />} >
-            <Route path="welfareInputAddress" element={<WelfareInputAddress />} />
-            <Route path="welfareInputBirth" element={<WelfareInputBirth />} />
-            <Route path="welfareInputDisease" element={<WelfareInputDisease />} />
-            <Route path="welfareInputGender" element={<WelfareInputGender />} />
-            <Route path="welfareInputHeight" element={<WelfareInputHeight />} />
-          </Route>
+          
+          {/* <Route path="/welfareInputTotal/*" element={<WelfareInputTotal />} >
+          </Route> */}
+            <Route path="welfare-input-address" element={<WelfareInputAddress />} />
+            <Route path="welfare-input-birth" element={<WelfareInputBirth />} />
+            <Route path="welfare-input-disease" element={<WelfareInputDisease />} />
+            <Route path="welfare-input-gender" element={<WelfareInputGender />} />
+            <Route path="welfare-input-height" element={<WelfareInputHeight />} />
+          
 
           <Route path="/main" element={<MainA />} />
           <Route path="/nokmain" element={<MainB />} />

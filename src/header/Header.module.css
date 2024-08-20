@@ -1,6 +1,15 @@
 .header-container {
   background-color: white;
   width: 360px;
+  height: 25px;
+  margin: 0 auto;
+  padding-top: 70px;
+}
+
+.blue-header-container {
+  background-color: #f8fbff;
+  width: 360px;
+  height: 25px;
   margin: 0 auto;
   padding-top: 70px;
 }
@@ -8,6 +17,17 @@
 .header-info {
   width: 100%;
   background-color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.blue-header-info {
+  width: 100%;
+  background-color: #f8fbff;
   display: flex;
   justify-content: space-between;
   align-items: center;

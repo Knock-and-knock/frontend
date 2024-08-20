@@ -10,39 +10,6 @@
   flex-direction: column;
 }
 
-.header {
-  padding: 20px;
-  align-items: center;
-  background-color: white;
-}
-
-.header-info {
-  width: 100%;
-  align-items: center;
-  background-color: white;
-  display: flex;
-  justify-content: space-between;
-}
-
-.back-icon {
-  margin-top: 0%;
-  width: 8%;
-  height: 8%;
-}
-
-.home-icon {
-  margin-top: 0%;
-  width: 10%;
-  height: 10%;
-}
-
-.header-name {
-  text-align: center;
-  font-size: 22px;
-  font-weight: bold;
-  color: #2c2c2c;
-}
-
 .main-container {
   flex: 1;
   width: 100%;
@@ -102,16 +69,6 @@
   margin-left: 10px;
 }
 
-.main-section {
-  width: 80%;
-  padding: 20px;
-  margin-left: 15px;
-  margin-right: 15px;
-  border: 1px solid #ccc;
-  border-radius: 15px;
-  text-align: center;
-}
-
 .disease-list-container {
   margin-top: -70%;
   margin-left: 15px;
@@ -128,6 +85,7 @@
   margin-top: -10px;
 }
 
+/* 기본 disease-list-button 스타일 */
 .disease-list-button {
   border: none;
   border-radius: 5px;
@@ -140,6 +98,13 @@
   font-size: 16px;
   color: #686868;
 }
+
+/* 선택된 상태의 disease-list-button 스타일 */
+.selected-disease {
+  background-color: #FF5959;
+  color: white; /* 선택되었을 때 글자색도 변경 */
+}
+
 
 .info-guitar {
   font-size: 18px;
@@ -160,7 +125,17 @@
   border-bottom: 1px solid #80BAFF;
 }
 
-.go-input-spec {
+/* .main-section {
+  width: 80%;
+  padding: 20px;
+  margin-left: 15px;
+  margin-right: 15px;
+  border: 1px solid #ccc;
+  border-radius: 15px;
+  text-align: center;
+}
+
+.go-check-spec {
   border-width: 3px;
   border-color: #80BAFF;
   background-color: #80BAFF;
@@ -170,6 +145,24 @@
   justify-content: center;
   height: 20px;
   margin-bottom: 5%;
+} */
+
+.go-check-spec {
+  border-width: 3px;
+  border-color: #80BAFF;
+  background-color: #80BAFF;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 20px;
+  margin-bottom: 5%;
+  width: 80%;
+  padding: 20px;
+  margin-left: 15px;
+  margin-right: 15px;
+  border-radius: 15px;
+  text-align: center;
 }
 
 .main-text {
@@ -179,7 +172,7 @@
   margin: 10px 0;
 }
 
-.go-input-spec-text {
+.go-check-spec-text {
   color: white;
   font-size: 18px;
 }
