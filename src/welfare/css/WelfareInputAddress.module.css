@@ -97,12 +97,12 @@
 
 .input-address:focus {
   outline: none;
-  border-color: #80BAFF;
+  border-bottom: 1px solid #80BAFF;
 }
 
 .input-address-detail:focus {
   outline: none;
-  border-color: #80BAFF;
+  border-bottom: 1px solid #80BAFF;
 }
 
 .main-section {

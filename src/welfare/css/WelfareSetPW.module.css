@@ -1,10 +1,9 @@
 .container {
   max-width: 390px;
   margin: 0 auto;
-  
   font-family: Arial, sans-serif;
   background-color: white;
-  min-height: 100vh; /* 전체 높이로 채우기 */
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
@@ -15,7 +14,6 @@
   background-color: white;
 }
 
-
 .header-info {
   width: 100%;
   align-items: center;
@@ -24,14 +22,12 @@
   justify-content: space-between;
 }
 
-.back-icon{
-  margin-top: 0%;
+.back-icon {
   width: 8%;
   height: 8%;
 }
 
-.home-icon{
-  margin-top: 0%;
+.home-icon {
   width: 10%;
   height: 10%;
 }
@@ -47,36 +43,59 @@
   flex: 1;
   width: 100%;
   height: 100%;
-  background-color: #F8FBFF;
   display: flex;
-  justify-content: center;
-  align-items: center;
   flex-direction: column;
+  justify-content: space-between;
 }
 
-#info-container {
-  margin-bottom: 6%;
-}
-
-.user-name {
-  color: #007bff;
-  font-size: 18px;
-}
-
-.for {
-  color: #686868;
-  font-size: 18px;
+.pay-container {
+  margin-left: 15px;
+  margin-right: 15px;
+  margin-top: 10%;
+  text-align: center;
 }
 
 .infomation {
-  margin-top: -5%;
   font-weight: bold;
   font-size: 22px;
+  margin-top: -15px;
+  color: #2c2c2c;
 }
 
-.img-welfare {
-  margin-top: 10%;
-  margin-bottom: 25%;
+.password-container {
+  margin-bottom: 100%;
+  margin-left: 15px;
+  margin-right: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.password-section {
+  display: flex;
+  width: 70%;
+  justify-content: space-between;
+}
+
+.graycircle {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: #d9d9d9;
+}
+
+.bluecircle {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: #80BAFF;
+}
+
+.hidden-input {
+  opacity: 0;
+  position: absolute;
+  z-index: -1;
 }
 
 .main-section {
@@ -87,41 +106,30 @@
   border: 1px solid #ccc;
   border-radius: 15px;
   text-align: center;
-  margin-bottom: 20px;
 }
 
-#detailed-reserve {
-  border-width: 3px;
-  border-color: #80BAFF;
-  box-shadow: 1px 2px 4px #888;
-}
-
-#go-reserve {
+.go-pay {
   border-width: 3px;
   border-color: #80BAFF;
   background-color: #80BAFF;
-  box-shadow: 1px 2px 4px #888;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 20px;
+  margin-bottom: 5%;
 }
 
 .main-text {
   font-size: 18px;
+  font-weight: bold;
   color: #888;
   margin: 10px 0;
 }
 
-#detailed-reserve-text {
-  color: #80BAFF;
-}
-
-#go-reserve-text {
+.go-pay-text {
   color: white;
-}
-
-.main-link {
-  color: #007bff;
-  text-decoration: none;
-  font-weight: bold;
-  cursor: pointer;
+  font-size: 18px;
 }
 
 /* 반응형 디자인 */

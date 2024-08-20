@@ -1,23 +1,74 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from 'welfare/css/DolbomMain.module.css';
-import housework1 from "image/housework.png";
-import nursing1 from "image/nursing.png";
-import hanwool1 from "image/hanwool.png";
+import housework1 from "image/housework1.png";
+import nursing1 from "image/nursing1.png";
+import hanwool1 from "image/hanwool1.png";
+import housework2 from "image/housework2.png";
+import nursing2 from "image/nursing2.png";
+import hanwool2 from "image/hanwool2.png";
 import dolbomi from "image/dolbomi.png";
-import Header from 'welfare/component/Header.js';
+import Header from 'header/Header.js';
+import Modal from "react-modal";
+import WelfareNursingModal from 'welfare/component/WelfareNursingModal';
+import WelfareHouseworkModal from 'welfare/component/WelfareHouseworkModal';
+import WelfareHanwoolModal from 'welfare/component/WelfareHanwoolModal';
+
+Modal.setAppElement('#root');
 
 function DolbomMain() {
   const [selectedId, setSelectedId] = useState('nursing');
+  const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    if (isOpen) {
+      // 모달이 열렸을 때 body의 스크롤을 막음
+      document.body.style.overflow = 'hidden';
+    } else {
+      // 모달이 닫혔을 때 body의 스크롤을 허용
+      document.body.style.overflow = 'auto';
+    }
+
+    // 컴포넌트가 언마운트 될 때 스크롤을 다시 허용
+    return () => {
+      document.body.style.overflow = 'auto';
+    };
+  }, [isOpen]);
+
+  const openModal = () => {
+    setIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsOpen(false);
+  };
+
+  const ReserveStyles = {
+    overlay: {
+      backgroundColor: "rgba(0, 0, 0, 0.5)"
+    },
+    content: {
+      height: "300px",
+      margin: "auto",
+      borderRadius: "15px",
+      padding: "20px",
+    },
+  };
 
   const handleClick = (id) => {
     setSelectedId(id);
-  };
+  };  
 
-  const getStyle = (id) => {
-    return {
-      backgroundColor: selectedId === id ? '#80BAFF' : '',
-      color: selectedId === id ? 'white' : ''
-    };
+  const renderModalContent = () => {
+    switch (selectedId) {
+      case 'nursing':
+        return <WelfareNursingModal closeModal={closeModal} />;
+      case 'housework':
+        return <WelfareHouseworkModal closeModal={closeModal} />;
+      case 'hanwool':
+        return <WelfareHanwoolModal closeModal={closeModal} />;
+      default:
+        return null;
+    }
   };
 
   const renderContent = () => {
@@ -25,22 +76,11 @@ function DolbomMain() {
       case 'nursing':
         return (
           <div className={styles["info-container"]}>
-            <img src={nursing1} alt='가정간병' className={styles['img-info']} />
+            <img src={nursing1} alt='가정간병1' className={styles['img-info']} />
             <img src={dolbomi} alt='똑돌보미' className={styles['img-info']} />
-            <p className={styles['info-title']}>가정 간병 돌봄 비용</p>
-            <div className={styles['info-price-container']}>
-              <span className={styles['info-option']}>3시간 (09:00 ~ 12:00)</span>
-              <span className={styles['info-price']}>75,000 원</span>
-            </div>
-            <div className={styles['info-price-container']}>
-              <span className={styles['info-option']}>6시간 (09:00 ~ 15:00)</span>
-              <span className={styles['info-price']}>150,000 원</span>
-            </div>
-            <div className={styles['info-price-container']}>
-              <span className={styles['info-option']}>9시간 (09:00 ~ 18:00)</span>
-              <span className={styles['info-price']}>225,000 원</span>
-            </div>
-            <div className={`${styles["main-section"]} ${styles["go-reserve-nursing"]}`}>
+            <img src={nursing2} alt='가정간병2' className={styles['img-info']} />
+            
+            <div className={`${styles["button-section"]} ${styles["go-reserve-nursing"]}`} onClick={openModal}>
               <p className={`${styles["main-text"]} ${styles["go-reserve-nursing-text"]}`}>신청하기</p>
             </div>
           </div>
@@ -48,40 +88,24 @@ function DolbomMain() {
       case 'housework':
         return (
           <div className={styles["info-container"]}>
-            <img src={housework1} alt='일상가사' className={styles['img-info']} />
+            <img src={housework1} alt='일상가사1' className={styles['img-info']} />
             <img src={dolbomi} alt='똑돌보미' className={styles['img-info']} />
-            <p className={styles['info-title']}>일상 가사 돌봄 비용</p>
-            <div className={styles['info-price-container']}>
-              <span className={styles['info-option']}>3시간 (09:00 ~ 12:00)</span>
-              <span className={styles['info-price']}>75,000 원</span>
-            </div>
-            <div className={styles['info-price-container']}>
-              <span className={styles['info-option']}>6시간 (09:00 ~ 15:00)</span>
-              <span className={styles['info-price']}>150,000 원</span>
-            </div>
-            <div className={styles['info-price-container']}>
-              <span className={styles['info-option']}>9시간 (09:00 ~ 18:00)</span>
-              <span className={styles['info-price']}>225,000 원</span>
-            </div>
-            <div className={styles["go-reserve-nursing"]}>
-              <p className={styles["go-reserve-nursing-text"]}>신청하기</p>
+            <img src={housework2} alt='일상가사2' className={styles['img-info']} />
+
+            <div className={`${styles["button-section"]} ${styles["go-reserve-nursing"]}`} onClick={openModal}>
+              <p className={`${styles["main-text"]} ${styles["go-reserve-nursing-text"]}`}>신청하기</p>
             </div>
           </div>
         );
       case 'hanwool':
         return (
           <div className={styles["info-container"]}>
-            <img src={hanwool1} alt='한울돌봄' className={styles['img-info']} />
+            <img src={hanwool1} alt='한울돌봄1' className={styles['img-info']} />
             <img src={dolbomi} alt='똑돌보미' className={styles['img-info']} />
-            <p className={styles['info-title']}>한울 돌봄 비용</p>
-            <p>※ 한울 돌봄은 이용기간 1달을 기준으로 하며</p>
-            <p>※ 최대 12개월까지 신청 가능합니다.</p>
-            <div className={styles['info-price-container']}>
-              <span className={styles['info-option']}>9시간 (09:00 ~ 18:00)</span>
-              <span className={styles['info-price']}>1개월 (2,000,000 원)</span>
-            </div>
-            <div className={styles["go-reserve-nursing"]}>
-              <p className={styles["go-reserve-nursing-text"]}>신청하기</p>
+            <img src={hanwool2} alt='한울돌봄2' className={styles['img-info']} />
+
+            <div className={`${styles["button-section"]} ${styles["go-reserve-nursing"]}`} onClick={openModal}>
+              <p className={`${styles["main-text"]} ${styles["go-reserve-nursing-text"]}`}>신청하기</p>
             </div>
           </div>
         );
@@ -95,35 +119,60 @@ function DolbomMain() {
       <Header />
       <div className={styles["main-container"]}>
         <div className={styles['main-section-container']}>
-          <div 
-            className={`${styles["main-section"]} ${styles["hanwool-list"]}`} 
-            id="nursing" 
-            style={getStyle('nursing')}
-            onClick={() => handleClick('nursing')}
+        <div 
+          className={`${styles["main-section"]} ${styles["hanwool-list"]}`} 
+          id="nursing" 
+          style={{ backgroundColor: selectedId === 'nursing' ? '#80BAFF' : '' }}
+          onClick={() => handleClick('nursing')}
+        >
+          {/* 글자 색상은 p 태그에만 적용 */}
+          <p 
+            className={`${styles["main-text"]} ${styles["nursing-list-text"]}`} 
+            style={{ color: selectedId === 'nursing' ? 'white' : '#686868' }}
+            id='nursing'
           >
-            <p className={`${styles["main-text"]} ${styles["hanwool-list-text"]}`}>가정 간병</p>
-          </div>
-          <div 
-            className={`${styles["main-section"]} ${styles["hanwool-list"]}`} 
-            id="housework" 
-            style={getStyle('housework')}
-            onClick={() => handleClick('housework')}
+            가정 간병
+          </p>
+        </div>
+
+        <div 
+          className={`${styles["main-section"]} ${styles["hanwool-list"]}`} 
+          id="housework" 
+          style={{ backgroundColor: selectedId === 'housework' ? '#80BAFF' : '' }}
+          onClick={() => handleClick('housework')}
+        >
+          <p 
+            className={`${styles["main-text"]} ${styles["housework-list-text"]}`} 
+            style={{ color: selectedId === 'housework' ? 'white' : '#686868' }}
+            id='housework'
           >
-            <p className={`${styles["main-text"]} ${styles["hanwool-list-text"]}`}>일상 가사</p>
-          </div>
-          <div 
-            className={`${styles["main-section"]} ${styles["hanwool-list"]}`} 
-            id="hanwool" 
-            style={getStyle('hanwool')}
-            onClick={() => handleClick('hanwool')}
+            일상 가사
+          </p>
+        </div>
+
+        <div 
+          className={`${styles["main-section"]} ${styles["hanwool-list"]}`} 
+          id="hanwool" 
+          style={{ backgroundColor: selectedId === 'hanwool' ? '#80BAFF' : '' }}
+          onClick={() => handleClick('hanwool')}
+        >
+          <p 
+            className={`${styles["main-text"]} ${styles["hanwool-list-text"]}`} 
+            style={{ color: selectedId === 'hanwool' ? 'white' : '#686868' }}
+            id='hanwool'
           >
-            <p className={`${styles["main-text"]} ${styles["hanwool-list-text"]}`}>한울 돌봄</p>
-          </div>
+            한울 돌봄
+          </p>
+        </div>
         </div>
         <div className={styles["content-display"]}>
           {renderContent()}
         </div>
       </div>
+      
+      <Modal isOpen={isOpen} onRequestClose={closeModal} style={ReserveStyles}>
+        {renderModalContent()}
+      </Modal>
     </div>
   );
 }

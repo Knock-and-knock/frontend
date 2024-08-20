@@ -6,45 +6,15 @@
   min-height: 100vh; /* 전체 높이로 채우기 */
   display: flex;
   flex-direction: column;
-}
-
-.header {
-  padding: 20px;
+  justify-content: center;
   align-items: center;
-  background-color: white;
-}
-
-.header-info {
-  width: 100%;
-  align-items: center;
-  background-color: white;
-  display: flex;
-  justify-content: space-between;
-}
-
-.back-icon {
-  margin-top: 0%;
-  width: 8%;
-  height: 8%;
-}
-
-.home-icon {
-  margin-top: 0%;
-  width: 10%;
-  height: 10%;
-}
-
-.header-name {
-  text-align: center;
-  font-size: 22px;
-  font-weight: bold;
-  color: #2c2c2c;
 }
 
 .main-container {
   flex: 1;
   width: 100%;
   height: 100%;
+   margin-top: 10px;
 }
 
 .main-section-container {
@@ -66,9 +36,19 @@
   height: 70px;
 }
 
+.button-section {
+  width: 80%;
+  border: 1px solid #ccc;
+  border-radius: 15px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70px;
+}
+
 .main-text {
   font-size: 18px;
-  color: #888;
   margin: 10px 0;
 }
 
@@ -79,65 +59,37 @@
   margin-right: 2px;
 }
 
+.nursing-list-text {
+  color: #686868;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.housework-list-text {
+  color: #686868;
+  font-size: 18px;
+  font-weight: bold;
+}
+
 .hanwool-list-text {
   color: #686868;
   font-size: 18px;
   font-weight: bold;
 }
 
+
 .info-container {
   width: 92%;
+  
   margin-left: 15px;
   margin-right: 15px;
+  margin: 0 auto;
 }
 
 .img-info {
   width: 100%;
 }
 
-.info-price-container {
-  width: 100%;
-  height: 70px;
-  border: 1px solid #888;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.info-title {
-  font-size: 20px;
-  font-weight: bold;
-  color: #2c2c2c;
-  margin-bottom: 5px;
-}
-
-.info-option {
-  width: 50%;
-  height: 100%;
-  font-size: 18px;
-  border-right: 1px solid #888;
-  background-color: #FF961B;
-  color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-weight: bold;
-}
-
-.info-price {
-  width: 50%;
-  height: 100%;
-  font-size: 18px;
-  border-left: 1px solid #888;
-  background-color: white;
-  color: #FF961B;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-weight: bold;
-}
-
-/* 기존의 #go-reserve-nursing을 .go-reserve-nursing으로 변경 */
 .go-reserve-nursing {
   width: 100%;
   height: 60px;
@@ -151,7 +103,6 @@
   justify-content: center;
 }
 
-/* 기존의 #go-reserve-nursing-text을 .go-reserve-nursing-text로 변경 */
 .go-reserve-nursing-text {
   color: white;
   font-size: 18px;
