@@ -3,7 +3,7 @@ import styles from 'welfare/css/WelfareReservedList.module.css';
 import Modal from "react-modal";
 import WelfareReserveCancelModal from 'welfare/component/WelfareReserveCancelModal';
 import WelfareReservedItem from 'welfare/component/WelfareReservedItem';
-import Header from 'header/Header.js';
+import Header from 'header/BlueHeader.js';
 
 function WelfareReservedList() {
   const [isOpen, setIsOpen] = useState(false);

@@ -7,7 +7,7 @@ function WelfareCheckSpec() {
     const navigate = useNavigate();
 
     const goSetPW = () => {
-        navigate('/welfareSetPW');
+        navigate('/welfare-set-pw');
     }
 
     return (
@@ -42,8 +42,8 @@ function WelfareCheckSpec() {
                     <input className={`${styles["spec-check"]} ${styles.disease}`} type="text" value="감기" disabled />
                 </div>
 
-                <div className={`${styles["main-section"]} ${styles["go-password"]}`}>
-                    <p className={`${styles["main-text"]} ${styles["go-password-text"]}`} onClick={goSetPW}>다음</p>
+                <div className={`${styles["main-section"]} ${styles["go-password"]}`} onClick={goSetPW}>
+                    <p className={`${styles["main-text"]} ${styles["go-password-text"]}`}>다음</p>
                 </div>
             </div>
         </div>

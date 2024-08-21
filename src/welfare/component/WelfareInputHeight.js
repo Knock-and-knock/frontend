@@ -1,14 +1,33 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from 'welfare/css/WelfareInputHeight.module.css'; // CSS 모듈 import
 import { useNavigate } from 'react-router-dom';
 import Header from 'header/Header.js';
 
 function WelfareInputHeight() {
+    const [height, setHeight] = useState('');
+    const [weight, setWeight] = useState('');
     const navigate = useNavigate();
 
     const goInputGender = () => {
-        navigate('/welfareInputGender');
+        if (height && weight) {
+            navigate('/welfare-input/gender');
+        }
     }
+
+    // height와 weight의 상태를 업데이트하고 3자리로 제한하는 함수
+    const handleHeightChange = (e) => {
+        const value = e.target.value;
+        if (value.length <= 3) {
+            setHeight(value);
+        }
+    };
+
+    const handleWeightChange = (e) => {
+        const value = e.target.value;
+        if (value.length <= 3) {
+            setWeight(value);
+        }
+    };
 
     return (
         <div className={styles.container}>
@@ -21,14 +40,32 @@ function WelfareInputHeight() {
                 </div>
 
                 <div className={styles["input-container"]}>
-                    <input className={styles["input-height"]} type="number" placeholder="키" />
+                    <input
+                        className={styles["input-height"]}
+                        type="number"
+                        placeholder="키"
+                        value={height}
+                        onChange={handleHeightChange}
+                    />
                     <span className={styles.cm}>cm</span>
-                    <input className={styles["input-weight"]} type="number" placeholder="몸무게" />
+                    <input
+                        className={styles["input-weight"]}
+                        type="number"
+                        placeholder="몸무게"
+                        value={weight}
+                        onChange={handleWeightChange}
+                    />
                     <span className={styles.kg}>kg</span>
                 </div>
 
-                <div className={`${styles["main-section"]} ${styles["go-input-height"]}`}>
-                    <p className={`${styles["main-text"]} ${styles["go-input-height-text"]}`} onClick={goInputGender}>다음</p>
+                <div
+                    className={`${styles["main-section"]} ${styles["go-input-gender"]}`}
+                    onClick={goInputGender}
+                    style={{
+                        backgroundColor: height && weight ? '#80BAFF' : 'rgba(128,186,255,0.5)',
+                    }}
+                >
+                    <p className={`${styles["main-text"]} ${styles["go-input-gender-text"]}`}>다음</p>
                 </div>
             </div>
         </div>

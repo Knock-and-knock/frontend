@@ -42,8 +42,8 @@ function Header() {
 
     return (
         <header>
-            <div className={styles['header-container']}>
-                <div className={styles["header-info"]}>
+            <div className={styles['blue-header-container']}>
+                <div className={styles["blue-header-info"]}>
                     <img 
                         src={back} 
                         alt="뒤로가기" 
