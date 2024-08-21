@@ -1,4 +1,4 @@
-import App from 'App';
+import App from 'App2';
 import 'index.css';
 import ReactDOM from 'react-dom/client';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';

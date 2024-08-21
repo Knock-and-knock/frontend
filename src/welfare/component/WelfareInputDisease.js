@@ -4,7 +4,7 @@ import check from "image/check.png";
 import checked from "image/checked.png";
 import { useNavigate } from 'react-router-dom';
 import Header from 'header/Header.js';
-import { useSpecHook } from 'welfare/component/WelfareInputTotal';
+import { useSpecHook } from 'welfare/component/welfareInputTotal';
 
 function WelfareInputDisease() {
   const [selectedId, setSelectedId] = useState(null);

@@ -3,7 +3,7 @@ import styles from 'welfare/css/WelfareInputAddress.module.css'; // CSS 모듈 i
 import glasses from "image/glasses.png";
 import { useNavigate } from 'react-router-dom';
 import Header from 'header/Header.js';
-import { useSpecHook } from 'welfare/component/WelfareInputTotal';
+import { useSpecHook } from 'welfare/component/welfareInputTotal';
 
 function WelfareInputAddress() {
     // const [address, setAddress] = useState('');
