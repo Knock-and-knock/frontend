@@ -16,15 +16,7 @@ function Header() {
                 return '결제하기';
             case '/welfare-check-spec':
                 return '복지 서비스 예약하기';
-            case '/welfare-input-address':
-                return '복지 서비스 예약하기';
-            case '/welfare-input-birth':
-                return '복지 서비스 예약하기';
-            case '/welfare-input-disease':
-                return '복지 서비스 예약하기';
-            case '/welfare-input-gender':
-                return '복지 서비스 예약하기';
-            case '/welfare-input-height':
+            case '/welfare-input/*':
                 return '복지 서비스 예약하기';
             case '/welfare-list':
                 return '복지 서비스 예약하기';

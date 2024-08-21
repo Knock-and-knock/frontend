@@ -2,11 +2,20 @@ import React, { useState, useEffect } from 'react';
 import styles from 'welfare/css/WelfareInputHeight.module.css'; // CSS 모듈 import
 import { useNavigate } from 'react-router-dom';
 import Header from 'header/Header.js';
+import { useSpecHook } from 'welfare/component/WelfareInputTotal';
 
 function WelfareInputHeight() {
     const [height, setHeight] = useState('');
     const [weight, setWeight] = useState('');
     const navigate = useNavigate();
+
+    const {userSpec, setUserSpec} = useSpecHook();
+
+    useEffect(()=> {
+        const newUserSpec = {...userSpec, height, weight};
+        setUserSpec(newUserSpec);
+        console.log("Updated userSpec:", newUserSpec); // 최신 상태의 userSpec 로그 출력
+    },[height, weight]);
 
     const goInputGender = () => {
         if (height && weight) {

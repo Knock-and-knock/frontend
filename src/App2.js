@@ -19,7 +19,7 @@ import WelfareSetPW from 'welfare/component/WelfareSetPW';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import Modal from 'react-modal'
-import WelfareInputTotal from 'welfare/component/welfareInputTotal';
+import WelfareInputTotal from 'welfare/component/WelfareInputTotal';
 
 Modal.setAppElement('#root');
 
@@ -29,7 +29,7 @@ function App(props) {
         <Routes>
           <Route path="/dolbom-main" element={<DolbomMain />} />
           <Route path="/welfare-check-pw" element={<WelfareCheckPW />} />
-          <Route path="/welfare-check-spec" element={<WelfareCheckSpec />} />
+          
 
           <Route path="/welfare-list" element={<WelfareList />} />
           <Route path="/welfare-main" element={<WelfareMain />} />
@@ -48,6 +48,7 @@ function App(props) {
             <Route path="disease" element={<WelfareInputDisease />} />
             <Route path="gender" element={<WelfareInputGender />} />
             <Route path="height" element={<WelfareInputHeight />} />
+            <Route path="check-spec" element={<WelfareCheckSpec />} />
           </Route>
 
         </Routes>

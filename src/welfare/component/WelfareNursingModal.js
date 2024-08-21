@@ -8,7 +8,7 @@ function WelfareNursingModal({ closeModal }) {
   const navigate = useNavigate();
 
   const goInputBirth = () => {
-      navigate('/welfare-input-birth');
+      navigate('/welfare-input/birth');
   }
 
   useEffect(() => {

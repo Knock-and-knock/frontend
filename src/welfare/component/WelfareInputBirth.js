@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from 'welfare/css/WelfareInputBirth.module.css';
 import { useNavigate } from 'react-router-dom';
 import Header from 'header/Header.js';
+import { useSpecHook } from 'welfare/component/WelfareInputTotal';
 
 function WelfareInputBirth() {
     const [year, setYear] = useState('');
@@ -12,27 +13,51 @@ function WelfareInputBirth() {
     const [dayPlaceholder, setDayPlaceholder] = useState('일');
     const navigate = useNavigate();
 
+    const {userSpec, setUserSpec} = useSpecHook();
+
+    useEffect(()=> {
+        if (year && month && day) {
+            const birthDate = new Date(year, month - 1, day);
+            const today = new Date();
+            let age = today.getFullYear() - birthDate.getFullYear();
+            const monthDifference = today.getMonth() - birthDate.getMonth();
+
+            if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthDate.getDate())) {
+                age--;
+            }
+
+            const newUserSpec = {...userSpec, year, month, day, age};
+            setUserSpec(newUserSpec);
+            console.log("Updated userSpec:", newUserSpec); // 최신 상태의 userSpec 로그 출력
+        }
+    }, [year, month, day]); 
+
     const handleYearChange = (e) => {
         const value = e.target.value;
         if (value.length <= 4) {
             setYear(value);
         }
     };
-    
+
     const handleMonthChange = (e) => {
-        const value = e.target.value;
-        if (value.length <= 2) {
-            setMonth(value);
+        let value = e.target.value;
+        if (value > 12) {
+            value = "";
+        } else if (value < 1) {
+            value = "";
         }
+        setMonth(value);
     };
-    
+
     const handleDayChange = (e) => {
-        const value = e.target.value;
-        if (value.length <= 2) {
-            setDay(value);
+        let value = e.target.value;
+        if (value > 31) {
+            value = "";
+        } else if (value < 1) {
+            value = "";
         }
+        setDay(value);
     };
-    
 
     const goInputHeight = () => {
         if (year && month && day) {
@@ -63,15 +88,15 @@ function WelfareInputBirth() {
                 </div>
 
                 <div className={styles["input-container"]}>
-                <input
-                    className={styles["input-date"]}
-                    type="number"
-                    placeholder={yearPlaceholder}
-                    value={year}
-                    onChange={handleYearChange}
-                    onFocus={() => handleFocus(setYearPlaceholder)}
-                    onBlur={(e) => handleBlur(e.target.value, setYearPlaceholder, '년')}
-                />
+                    <input
+                        className={styles["input-date"]}
+                        type="number"
+                        placeholder={yearPlaceholder}
+                        value={year}
+                        onChange={handleYearChange}
+                        onFocus={() => handleFocus(setYearPlaceholder)}
+                        onBlur={(e) => handleBlur(e.target.value, setYearPlaceholder, '년')}
+                    />
                     <span className={styles["input-divide"]}>/</span>
                     <input
                         className={styles["input-date"]}

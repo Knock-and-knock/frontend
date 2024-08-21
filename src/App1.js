@@ -17,7 +17,6 @@ import AddAddress from 'cardCreate/application/AddAddress';
 import SimplePW from 'cardCreate/application/SimplePW';
 import { createContext } from 'react';
 import Modal from "react-modal";
-import WelfareMain from "welfare/component/welfareMain";
 
 Modal.setAppElement("#root");
 export const CommonContext = createContext();
@@ -27,6 +26,9 @@ function App(props){
   return(
     <BrowserRouter>
       <Routes>
+        <Route path="/" element={<MainA />} /> 
+        {/* 첫화면 메인화면으로 가기!! */}
+
         <Route path="/main" element={<MainA />} />
         <Route path="/nokmain" element={<MainB />} />
         <Route path="/match" element={<Match />} />
@@ -38,7 +40,6 @@ function App(props){
         <Route path="/match" element={<Match />} />
         <Route path="/matching" element={<Matching />} />
         <Route path="/voicechat" element={<VoiceChat />} />
-        <Route path="/welfare" element={<WelfareMain />} />
         <Route path="/cardcreate" element={<CardCreate />} />
         <Route path="/cardapp/*" element={<CardApp />}>
           <Route path="defaultinfo" element={<DefaultInfo />} />

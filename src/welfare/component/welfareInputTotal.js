@@ -8,7 +8,7 @@ const WelfareSpec = createContext();
 export const useSpecHook = ()=> useContext(WelfareSpec);
 // 다른 파일에서도(자식 컴포넌트) 공통코드를 사용하기 위해 훅을 만듦
 // useContext(WelfareSpec)는 리액트가 제공하는 기능인 useContext를 이용해서 공유공간에서 정보를 가져오는 코드
-// useContext(WelfareSpec)를 useSpecHook 줄인 것임
+// useContext(WelfareSpec)를 useSpecHook로 줄인 것임
 
 function WelfareInputTotal(props) {
     const [userSpec, setUserSpec] = useState({});

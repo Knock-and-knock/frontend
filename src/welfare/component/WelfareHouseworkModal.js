@@ -9,7 +9,7 @@ function WelfareHouseworkModal({ closeModal }) {
   const navigate = useNavigate();
 
   const goInputBirth = () => {
-      navigate('/welfareInputBirth');
+      navigate('/welfare-input/birth');
   }
 
 
