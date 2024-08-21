@@ -71,7 +71,7 @@ function CreditInfo(props) {
           <br />
           <span>입력해 주세요</span>
         </div>
-        <div className="pageNumber">4/8</div>
+        <div className="pageNumber">4/7</div>
       </div>
       <div className="app-input-container">
         <div className="app-input">

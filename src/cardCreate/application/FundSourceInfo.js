@@ -13,7 +13,7 @@ function FundSourceInfo(props) {
   const [isButtonEnabled, setIsButtonEnabled] = useState(false);
 
   const handlePaging = () => {
-    navigate("/cardapp/cardapp5");
+    navigate("/cardapp/address");
   };
 
   //자금원천
@@ -67,7 +67,7 @@ function FundSourceInfo(props) {
           <br />
           <span>필수사항을 확인해 주세요</span>
         </div>
-        <div className="pageNumber">5/8</div>
+        <div className="pageNumber">5/7</div>
       </div>
       <div className="app-input-container">
         <div className="app-input">

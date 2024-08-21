@@ -45,6 +45,10 @@ function Header() {
         return "카드신청";
       case "/cardapp/fundsourceinfo":
         return "카드신청";
+      case "/cardapp/address":
+        return "카드신청";
+      case "/cardapp/simplepw":
+        return "카드신청";
       default:
         return null;
     }

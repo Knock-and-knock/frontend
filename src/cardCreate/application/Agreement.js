@@ -42,7 +42,7 @@ function Agreement(props) {
         <div className="title-text">
           <span>약관에 동의해 주세요</span>
         </div>
-        <div className="pageNumber">3/8</div>
+        <div className="pageNumber">3/7</div>
       </div>
       <div className="agreement-title-section">
         <div className="checkbox-container custom-checkbox">

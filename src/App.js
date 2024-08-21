@@ -41,6 +41,8 @@ import SignUpSuccess from "signUp/component/SignUpSuccess";
 import VerifyCode from "signUp/component/VerifyCode";
 import SignUpMain from "signUp/SignUpMain";
 
+import AddAddress from 'cardCreate/application/AddAddress';
+import SimplePW from 'cardCreate/application/SimplePW';
 import Modal from "react-modal";
 import WelfareInputTotal from 'welfare/component/welfareInputTotal';
 import WelfareMain from "welfare/component/welfareMain";
@@ -101,6 +103,8 @@ function App(props) {
           <Route path="agreement" element={<Agreement />} />
           <Route path="creditinfo" element={<CreditInfo />} />
           <Route path="fundsourceinfo" element={<FundSourceInfo />} />
+          <Route path="address" element={<AddAddress />} />
+          <Route path="simplepw" element={<SimplePW />} />
         </Route>
 
         <Route path="/loginbio" element={<LoginBio />} />
