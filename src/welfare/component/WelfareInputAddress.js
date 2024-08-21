@@ -3,11 +3,18 @@ import styles from 'welfare/css/WelfareInputAddress.module.css'; // CSS 모듈 i
 import glasses from "image/glasses.png";
 import { useNavigate } from 'react-router-dom';
 import Header from 'header/Header.js';
+import { useSpecHook } from 'welfare/component/WelfareInputTotal';
 
 function WelfareInputAddress() {
-    const [address, setAddress] = useState('');
-    const [detailAddress, setDetailAddress] = useState('');
+    // const [address, setAddress] = useState('');
+    // const [detailAddress, setDetailAddress] = useState('');
+    
     const navigate = useNavigate();
+
+    const {userSpec, setUserSpec, handlechange} = useSpecHook(); // 부모 요소에서 훅을 이용해 userSpec(공유공간), setUserSpec, handleChange 함수를 가져옴
+    // const {userSpec, setUserSpec, handlechange} = useContext(WelfareSpec) 이것과 같음
+
+    const {userAddress, userDetailAddress} = userSpec;
 
     useEffect(() => {
         // 스크립트가 로드되었는지 확인
@@ -25,7 +32,8 @@ function WelfareInputAddress() {
         if (window.daum && window.daum.Postcode) {
             new window.daum.Postcode({
                 oncomplete: function(data) {
-                    setAddress(data.address); // 주소 필드에 검색된 주소를 설정
+                    console.log(data);
+                    setUserSpec({...userSpec, userAddress:data.address}); // 주소 필드에 검색된 주소를 설정
                     document.getElementById('detail-address-input').focus(); // 상세 주소로 포커스 이동
                 }
             }).open();
@@ -34,20 +42,30 @@ function WelfareInputAddress() {
         }
     };
 
-    const handleDetailAddressChange = (event) => {
-        setDetailAddress(event.target.value);
-    };
+    const style1 = {backgroundColor: '#80BAFF',cursor: 'pointer'};
+    const style2 = {backgroundColor: 'rgba(128, 186, 255, 0.5)',cursor: 'not-allowed'};
+    const [style, setStyle] = useState(style1);
+    useEffect(()=> {
+        console.log(userAddress,userDetailAddress );
+        if(userAddress &&  userAddress.trim() !== '' && userDetailAddress && userDetailAddress.trim() !== ''){
+            
+            setStyle(style1);
+        }else{
+            setStyle(style2);
+        }
+    }, [userSpec]); 
 
     const isFormComplete = () => {
-        return address.trim() !== '' && detailAddress.trim() !== '';
+        
     };
 
     const goInputDisease = () => {
         if (isFormComplete()) {
-            navigate('/welfare-input-disease');
+            navigate('/welfare-input/disease');
         }
     };
 
+   
     return (
         <div className={styles.container}>
             <Header />
@@ -61,31 +79,31 @@ function WelfareInputAddress() {
                 <div className={styles["address-container"]}>
                     <div className={styles["address-section"]} onClick={openAddressSearch}>
                         <input 
+                            onChange={handlechange}
                             className={styles["input-address"]} 
                             type="text" 
+                            name='userAddress'
                             placeholder="도로명, 지번, 건물명 검색" 
-                            value={address}
+                            value={userAddress?userAddress:""} // userSpec에 userAddress라는 변수의 값이 없다면 UI에도 없게함
                             readOnly
                         />
                         <img src={glasses} alt="돋보기" className={styles["glasses-icon"]} />
                     </div>
                     <input 
                         id="detail-address-input"
+                        onChange={handlechange}
                         className={styles["input-address-detail"]} 
                         type="text" 
+                        name='userDetailAddress'
                         placeholder="상세 주소" 
-                        value={detailAddress}
-                        onChange={handleDetailAddressChange}
+                        value={userDetailAddress?userDetailAddress:""}
                     />
                 </div>
 
                 <div 
                     className={`${styles["main-section"]} ${styles["go-input-disease"]}`} 
                     onClick={goInputDisease}
-                    style={{
-                        backgroundColor: isFormComplete() ? '#80BAFF' : 'rgba(128, 186, 255, 0.5)',
-                        cursor: isFormComplete() ? 'pointer' : 'not-allowed',
-                    }}
+                    style={ style}
                 >
                     <p className={`${styles["main-text"]} ${styles["go-input-disease-text"]}`}>다음</p>
                 </div>

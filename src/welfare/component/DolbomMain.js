@@ -122,7 +122,7 @@ function DolbomMain() {
         <div 
           className={`${styles["main-section"]} ${styles["hanwool-list"]}`} 
           id="nursing" 
-          style={{ backgroundColor: selectedId === 'nursing' ? '#80BAFF' : '' }}
+          style={{ backgroundColor: selectedId === 'nursing' ? '#80BAFF' : '', border: selectedId === 'nursing' ? '3px solid #80BAFF' : ''  }}
           onClick={() => handleClick('nursing')}
         >
           {/* 글자 색상은 p 태그에만 적용 */}
@@ -138,7 +138,7 @@ function DolbomMain() {
         <div 
           className={`${styles["main-section"]} ${styles["hanwool-list"]}`} 
           id="housework" 
-          style={{ backgroundColor: selectedId === 'housework' ? '#80BAFF' : '' }}
+          style={{ backgroundColor: selectedId === 'housework' ? '#80BAFF' : '', border: selectedId === 'housework' ? '3px solid #80BAFF' : ''   }}
           onClick={() => handleClick('housework')}
         >
           <p 
@@ -153,7 +153,7 @@ function DolbomMain() {
         <div 
           className={`${styles["main-section"]} ${styles["hanwool-list"]}`} 
           id="hanwool" 
-          style={{ backgroundColor: selectedId === 'hanwool' ? '#80BAFF' : '' }}
+          style={{ backgroundColor: selectedId === 'hanwool' ? '#80BAFF' : '', border: selectedId === 'hanwool' ? '3px solid #80BAFF' : ''   }}
           onClick={() => handleClick('hanwool')}
         >
           <p 

@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 function ButtonGruop(props) {
   const navigate = useNavigate();
   const handleWelfareClick=()=>{
-    navigate("/welfare");
+    navigate("/welfare-main");
   }
   return (
     <div className="button-group">

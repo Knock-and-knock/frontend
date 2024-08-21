@@ -4,14 +4,18 @@ import male from 'image/male.png';
 import female from 'image/female.png';
 import { useNavigate } from 'react-router-dom';
 import Header from 'header/Header.js';
+import { useSpecHook } from 'welfare/component/WelfareInputTotal';
+
 
 function WelfareInputGender() {
     const [selectedGender, setSelectedGender] = useState(null);
     const navigate = useNavigate();
 
+    const {userSpec, setUserSpec, handlechange} = useSpecHook();
+
     const goInputAddress = () => {
         if (selectedGender) {
-            navigate('/welfare-input-address');
+            navigate('/welfare-input/address');
         }
     };
 

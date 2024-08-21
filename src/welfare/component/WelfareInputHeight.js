@@ -10,7 +10,7 @@ function WelfareInputHeight() {
 
     const goInputGender = () => {
         if (height && weight) {
-            navigate('/welfare-input-gender');
+            navigate('/welfare-input/gender');
         }
     }
 

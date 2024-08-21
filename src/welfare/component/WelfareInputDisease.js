@@ -1,15 +1,18 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from 'welfare/css/WelfareInputDisease.module.css';
 import check from "image/check.png";
 import checked from "image/checked.png";
 import { useNavigate } from 'react-router-dom';
 import Header from 'header/Header.js';
+import { useSpecHook } from 'welfare/component/WelfareInputTotal';
 
 function WelfareInputDisease() {
   const [selectedId, setSelectedId] = useState(null);
   const [selectedDiseases, setSelectedDiseases] = useState([]); // 배열로 변경
   const [otherDisease, setOtherDisease] = useState('');
   const navigate = useNavigate();
+
+  const {userSpec, setUserSpec, handlechange} = useSpecHook();
 
   // '다음' 버튼이 활성화되는 조건을 체크
   const isNextButtonEnabled = () => {
@@ -35,18 +38,26 @@ function WelfareInputDisease() {
   const handleDiseaseClick = (disease) => {
     if (selectedDiseases.includes(disease)) {
       // 이미 선택된 질환이면 배열에서 제거
+      
       setSelectedDiseases(selectedDiseases.filter(d => d !== disease));
     } else {
       // 선택되지 않은 질환이면 배열에 추가
       setSelectedDiseases([...selectedDiseases, disease]);
     }
     setOtherDisease(''); // 기타 질환을 초기화 (선택된 질환이 있는 경우)
+    setUserSpec({...userSpec, guitarDiseases:""});
   };
+
+  useEffect(()=> {
+    setUserSpec({...userSpec, selectedDiseases:selectedDiseases});
+  }, [ selectedDiseases]);
+
 
   // 기타 질환 입력 핸들러
   const handleOtherDiseaseChange = (event) => {
     setSelectedDiseases([]); // 기타 질환 입력 시, 기존 선택된 질환을 해제
     setOtherDisease(event.target.value);
+    setUserSpec({...userSpec, guitarDiseases:event.target.value});
   };
 
   // '다음' 버튼 클릭 핸들러

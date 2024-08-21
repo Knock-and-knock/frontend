@@ -67,14 +67,13 @@ function App(props) {
           <Route path="/welfare-set-pw" element={<WelfareSetPW />} />
           
           
-          {/* <Route path="/welfareInputTotal/*" element={<WelfareInputTotal />} >
-          </Route> */}
-            <Route path="welfare-input-address" element={<WelfareInputAddress />} />
-            <Route path="welfare-input-birth" element={<WelfareInputBirth />} />
-            <Route path="welfare-input-disease" element={<WelfareInputDisease />} />
-            <Route path="welfare-input-gender" element={<WelfareInputGender />} />
-            <Route path="welfare-input-height" element={<WelfareInputHeight />} />
-          
+          <Route path="/welfare-input/*" element={<WelfareInputTotal />} >
+            <Route path="address" element={<WelfareInputAddress />} />
+            <Route path="birth" element={<WelfareInputBirth />} />
+            <Route path="disease" element={<WelfareInputDisease />} />
+            <Route path="gender" element={<WelfareInputGender />} />
+            <Route path="height" element={<WelfareInputHeight />} />
+          </Route>
 
           <Route path="/main" element={<MainA />} />
           <Route path="/nokmain" element={<MainB />} />

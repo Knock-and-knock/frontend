@@ -36,7 +36,7 @@ function WelfareInputBirth() {
 
     const goInputHeight = () => {
         if (year && month && day) {
-            navigate('/welfare-input-height');
+            navigate('/welfare-input/height');
         }
     };
 
