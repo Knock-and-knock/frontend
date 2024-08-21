@@ -1,23 +1,24 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
+import { InfoContext } from "../Match";
 
-function TitleInput({handleIsInfoChange}) {
-  const [mnameValue, setMnameValue] = useState("");
-  const [ynameValue, setYnameValue] = useState("");
+function TitleInput({ handleIsInfoChange }) {
+  const { userInfo, setUserInfo } = useContext(InfoContext);
 
   const handleMname = (e) => {
     const value = e.target.value;
-    setMnameValue(value);
-    handleIsInfoChange(value.trim() !== "" && ynameValue.trim() !== "");
+    setUserInfo({ ...userInfo, mname: value });
+    handleIsInfoChange(value.trim() !== "" && userInfo.yname.trim() !== "");
   };
+
   const handleYname = (e) => {
     const value = e.target.value;
-    setYnameValue(value);
-    handleIsInfoChange(mnameValue.trim() !== "" && value.trim() !== "");
+    setUserInfo({ ...userInfo, yname: value });
+    handleIsInfoChange(userInfo.mname.trim() !== "" && value.trim() !== "");
   };
 
   useEffect(() => {
-    handleIsInfoChange(mnameValue.trim() !== "" && ynameValue.trim() !== "");
-  },[mnameValue, ynameValue,handleIsInfoChange]);
+    handleIsInfoChange(userInfo.mname.trim() !== "" && userInfo.yname.trim() !== "");
+  }, [userInfo.mname, userInfo.yname, handleIsInfoChange]);
 
   return (
     <div className="input-container">
@@ -25,7 +26,7 @@ function TitleInput({handleIsInfoChange}) {
         어르신께
         <input
           className="titleInput"
-          value={mnameValue}
+          value={userInfo.mname}
           onChange={handleMname}
         />
         라고 불리고 싶어요
@@ -34,7 +35,7 @@ function TitleInput({handleIsInfoChange}) {
         어르신을
         <input
           className="titleInput"
-          value={ynameValue}
+          value={userInfo.yname}
           onChange={handleYname}
         />
         라 부르고 싶어요

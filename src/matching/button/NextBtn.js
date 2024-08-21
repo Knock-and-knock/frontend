@@ -7,6 +7,9 @@ function NextBtn({ handleNextBtn, isDisabled }) {
       className="match-nextBtn"
       onClick={handleNextBtn}
       disabled={isDisabled}
+      style={{
+        backgroundColor: !isDisabled ? "#80BAFF" : "rgba(128,186,255,0.5)",
+      }}
     >
       다음
     </button>

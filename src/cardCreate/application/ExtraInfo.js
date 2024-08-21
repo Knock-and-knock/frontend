@@ -1,5 +1,5 @@
 import "cardCreate/application/CardApplication.css";
-import Header from "cardCreate/header/CardCreateHeader";
+import Header from "header/Header";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCardCreate } from "./CardApp";
@@ -14,11 +14,6 @@ function ExtraInfo(props) {
     navigate("/cardapp/agreement");
   };
 
-  // const [nameLast, setNameLast] = useState("");
-  // const [nameFirst, setNameFirst] = useState("");
-  // const [email, setEmail] = useState("");
-  // const [accountNumber, setAccountNumber] = useState("");
-  //const [selected, setSelected] = useState("은행명");
   const [isButtonEnabled, setIsButtonEnabled] = useState(false);
 
   //은행 select메뉴
@@ -55,7 +50,7 @@ function ExtraInfo(props) {
           <br />
           <span>입력해 주세요</span>
         </div>
-        <div className="pageNumber">2/8</div>
+        <div className="pageNumber">2/7</div>
       </div>
       <div className="app-input-container">
         <div className="app-input">
@@ -66,14 +61,14 @@ function ExtraInfo(props) {
               placeholder="영문 성"
               name="engFirstName"
               onChange={handlechange}
-              value={userInfo.engFirstName}
+              value={userInfo.engFirstName || ""}
             />
             <input
               className="secInput"
               placeholder="영문 이름"
               name="engLastName"
               onChange={handlechange}
-              value={userInfo.engLastName}
+              value={userInfo.engLastName || ""}
             />
           </div>
           <p className="caption-text">여권과 동일한 영문명을 입력해 주세요</p>
@@ -84,7 +79,7 @@ function ExtraInfo(props) {
             placeholder="이메일주소"
             name="email"
             onChange={handlechange}
-            value={userInfo.email}
+            value={userInfo.email || ""}
           />
           <p className="caption-text">
             카드발급 후 신청내용(계약서) 및 상품설명서,
@@ -99,7 +94,7 @@ function ExtraInfo(props) {
               className="bankSelectMenu"
               name="bank"
               onChange={handlechange}
-              value={userInfo.bank}
+              value={userInfo.bank || ""}
             >
               {selectList.map((item) => (
                 <option key={item.value} value={item.value}>
@@ -112,7 +107,7 @@ function ExtraInfo(props) {
               placeholder="계좌번호"
               name="account"
               onChange={handlechange}
-              value={userInfo.account}
+              value={userInfo.account || ""}
             />
           </div>
         </div>

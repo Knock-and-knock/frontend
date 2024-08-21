@@ -1,12 +1,15 @@
 import "cardCreate/application/CardApplication.css";
-import Header from "cardCreate/header/CardCreateHeader";
+import Header from "header/Header";
 import { useNavigate } from "react-router-dom";
 
 function DefaultInfo(props) {
+
   const navigate = useNavigate();
+
   const handlePaging=()=>{
     navigate("/cardapp/extrainfo");
   }
+  
   return (
     <div className="card-app-container">
       <Header />
@@ -16,7 +19,7 @@ function DefaultInfo(props) {
           <br />
           <span>확인해 주세요</span>
         </div>
-        <div className="pageNumber">1/8</div>
+        <div className="pageNumber">1/7</div>
       </div>
       <div className="app-input-container">
         <div className="app-input">
