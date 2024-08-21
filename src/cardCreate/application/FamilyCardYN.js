@@ -25,11 +25,11 @@ function FamilyCardYN(props) {
         <div className="family-app-rolecheck">
           <div className="familyCard">
             <img src={yes} alt="발급버튼" className="icon-yes" onClick={handleChange} />
-            <p>맞습니다</p>
+            <p>발급하고 싶습니다</p>
           </div>
           <div className="familyCard">
             <img src={no} alt="비발급버튼" className="icon-no" onClick={handleSuccess}/>
-            <p>아닙니다</p>
+            <p>발급하지 않습니다</p>
           </div>
         </div>
       </div>

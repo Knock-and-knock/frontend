@@ -5,7 +5,8 @@ import { useNavigate } from "react-router-dom";
 import { useFamilyCardCreate } from "./FamilyCardApp";
 
 function FamilyDefaultInfo(props) {
-  const { userInfo, setUserInfo } = useFamilyCardCreate();
+  const { subUserInfo, setSubUserInfo } = useFamilyCardCreate();
+  
 
   const formatPhoneNumber = (value) => {
     return value
@@ -16,9 +17,9 @@ function FamilyDefaultInfo(props) {
   const handlechange = (e) => {
     const { name, value } = e.target;
     if (name === "fphone") {
-      setUserInfo({ ...userInfo, [name]: formatPhoneNumber(value) });
+      setSubUserInfo({ ...subUserInfo, [name]: formatPhoneNumber(value) });
     } else {
-      setUserInfo({ ...userInfo, [name]: value });
+      setSubUserInfo({ ...subUserInfo, [name]: value });
     }
   };
 
@@ -27,7 +28,7 @@ function FamilyDefaultInfo(props) {
   const navigate = useNavigate();
 
   const handlePaging = () => {
-    navigate("/cardapp/extrainfo");
+    navigate("/familycard/fextrainfo");
   };
 
   // 빈칸 확인
@@ -35,13 +36,13 @@ function FamilyDefaultInfo(props) {
     const extraInfo = ["fname", "fphone"];
     const isFull = extraInfo.every(
       (field) =>
-        userInfo[field] &&
-        userInfo[field].trim() !== "" &&
-        userInfo[field] !== "default"
+        subUserInfo[field] &&
+      subUserInfo[field].trim() !== "" &&
+      subUserInfo[field] !== "default"
     );
 
     setIsButtonEnabled(isFull);
-  }, [userInfo]);
+  }, [subUserInfo]);
 
   return (
     <div className="card-app-container">
@@ -61,7 +62,7 @@ function FamilyDefaultInfo(props) {
             placeholder="이름"
             name="fname"
             onChange={handlechange}
-            value={userInfo.fname || ""}
+            value={subUserInfo.fname || ""}
           />
         </div>
         <div className="app-input">
@@ -72,7 +73,7 @@ function FamilyDefaultInfo(props) {
             name="fphone"
             onChange={handlechange}
             maxLength={13}
-            value={userInfo.fphone || ""}
+            value={subUserInfo.fphone || ""}
           />
         </div>
       </div>

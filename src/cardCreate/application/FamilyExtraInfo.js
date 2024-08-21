@@ -3,58 +3,49 @@ import Header from "header/Header";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCardCreate } from "./CardApp";
+import { useFamilyCardCreate } from "./FamilyCardApp";
 
 
 //여기 데이터받는 기능부터 하면돼
-
-
 function FamilyExtraInfo(props) {
-  const { userInfo, setUserInfo } = useCardCreate();
+
+  const { subUserInfo, setSubUserInfo } = useFamilyCardCreate();
   const handlechange = (e) => {
-    setUserInfo({ ...userInfo, [e.target.name]: e.target.value });
+    setSubUserInfo({ ...subUserInfo, [e.target.name]: e.target.value });
   };
   const navigate = useNavigate();
   const handlePaging = () => {
-    navigate("/cardapp/agreement");
+    navigate("/familycard/faddress");
   };
 
   const [isButtonEnabled, setIsButtonEnabled] = useState(false);
 
-  //은행 select메뉴
-  const selectList = [
-    { value: "default", name: "은행명" },
-    { value: "shinhan", name: "신한은행" },
-    { value: "woori", name: "우리은행" },
-  ];
   // 빈칸 확인
   useEffect(() => {
     const extraInfo = [
       "engFirstName",
       "engLastName",
-      "email",
-      "account",
-      "bank",
+      "relation",
     ];
     const isFull = extraInfo.every(
       (field) =>
-        userInfo[field] &&
-        userInfo[field].trim() !== "" &&
-        userInfo[field] !== "default"
+        subUserInfo[field] &&
+      subUserInfo[field].trim() !== ""
     );
 
     setIsButtonEnabled(isFull);
-  }, [userInfo]);
+  }, [subUserInfo]);
 
   return (
     <div className="card-app-container">
       <Header />
       <div className="app-title">
         <div className="title-text">
-          <span>추가정보를</span>
+          <span>가족의 추가 정보를</span>
           <br />
           <span>입력해 주세요</span>
         </div>
-        <div className="pageNumber">2/7</div>
+        <div className="pageNumber">2/4</div>
       </div>
       <div className="app-input-container">
         <div className="app-input">
@@ -65,55 +56,26 @@ function FamilyExtraInfo(props) {
               placeholder="영문 성"
               name="engFirstName"
               onChange={handlechange}
-              value={userInfo.engFirstName || ""}
+              value={subUserInfo.engFirstName || ""}
             />
             <input
               className="secInput"
               placeholder="영문 이름"
               name="engLastName"
               onChange={handlechange}
-              value={userInfo.engLastName || ""}
+              value={subUserInfo.engLastName || ""}
             />
           </div>
           <p className="caption-text">여권과 동일한 영문명을 입력해 주세요</p>
         </div>
         <div className="app-input">
-          <span>이메일</span>
+          <span>신청자와의 관계</span>
           <input
-            placeholder="이메일주소"
-            name="email"
+            placeholder="관계"
+            name="relation"
             onChange={handlechange}
-            value={userInfo.email || ""}
+            value={subUserInfo.relation || ""}
           />
-          <p className="caption-text">
-            카드발급 후 신청내용(계약서) 및 상품설명서,
-            <br />
-            신용카드 설명서, 약관을 이메일로 보내드립니다.
-          </p>
-        </div>
-        <div className="app-input">
-          <span>계좌</span>
-          <div className="double-input-container">
-            <select
-              className="bankSelectMenu"
-              name="bank"
-              onChange={handlechange}
-              value={userInfo.bank || ""}
-            >
-              {selectList.map((item) => (
-                <option key={item.value} value={item.value}>
-                  {item.name}
-                </option>
-              ))}
-            </select>
-            <input
-              className="secInput"
-              placeholder="계좌번호"
-              name="account"
-              onChange={handlechange}
-              value={userInfo.account || ""}
-            />
-          </div>
         </div>
       </div>
       <button

@@ -5,10 +5,10 @@ const FamilyCardContext = createContext();
 export const useFamilyCardCreate = () => useContext(FamilyCardContext);
 
 function FamilyCardApp(props) {
-  const [userInfo, setUserInfo] = useState({});
+  const [subUserInfo, setSubUserInfo] = useState({});
   //데이터전송로직
   const handleSendInfo = (e) => {
-    console.log(userInfo);
+    console.log(subUserInfo);
   };
   const navigate = useNavigate();
   useEffect(() => {
@@ -16,11 +16,11 @@ function FamilyCardApp(props) {
   }, []);
 
   useEffect(()=>{
-    console.log(userInfo)
-  }, [userInfo]);
+    console.log(subUserInfo)
+  }, [subUserInfo]);
   return (
     <div>
-      <FamilyCardContext.Provider value={{userInfo, setUserInfo, handleSendInfo}}>
+      <FamilyCardContext.Provider value={{subUserInfo, setSubUserInfo, handleSendInfo}}>
         <Outlet />
       </FamilyCardContext.Provider>
     </div>
