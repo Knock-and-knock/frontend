@@ -104,7 +104,7 @@ input::placeholder {
     padding: 20px;
 }
 .signup-role{
-    border: 1px solid #D9D9D9;
+    border: 2px solid #D9D9D9;
     border-radius: 15px;
     background-color: #FFFFFF;
     width: 45%;
@@ -115,6 +115,7 @@ input::placeholder {
     justify-content: center;
     margin-top: 60px;
     box-shadow: 0px 2px 5px #888;
+    cursor: pointer;
     
 }
 .signup-role p{

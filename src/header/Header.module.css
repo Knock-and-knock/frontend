@@ -1,6 +1,15 @@
 .header-container {
   background-color: white;
   width: 360px;
+  height: 25px;
+  margin: 0 auto;
+  padding-top: 70px;
+}
+
+.blue-header-container {
+  background-color: #f8fbff;
+  width: 360px;
+  height: 25px;
   margin: 0 auto;
   padding-top: 70px;
   height: 20px;
@@ -17,6 +26,17 @@
   left: 0;
 }
 
+.blue-header-info {
+  width: 100%;
+  background-color: #f8fbff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
 .back-icon {
   width: 20px;
   height: 20px;
@@ -24,8 +44,8 @@
 }
 
 .home-icon {
-  width: 32px;
-  height: 32px;
+  width: 26px;
+  height: 26px;
   margin-right: 15px;
 }
 

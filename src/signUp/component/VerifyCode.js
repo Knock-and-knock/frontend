@@ -7,7 +7,7 @@ import { useMember } from 'signUp/SignUpMain';
 function VerifyCode(props) {
     const [code, setCode] = useState("");
     const inputRef = useRef(null);
-    const {handlechange} =useMember();
+
 
     useEffect(() => {
         inputRef.current.focus();

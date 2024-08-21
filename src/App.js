@@ -20,8 +20,7 @@ import CreditInfo from "cardCreate/application/CreditInfo";
 import DefaultInfo from "cardCreate/application/DefaultInfo";
 import ExtraInfo from "cardCreate/application/ExtraInfo";
 import FundSourceInfo from "cardCreate/application/FundSourceInfo";
-import CardCreate from "cardCreate/CardCreate";
-import VoiceChat from "chat/VoiceChat";
+import CardCreate from "cardCreate/Caimport VoiceChat from ";
 import LoginBio from "login/LoginBio";
 import LoginId from "login/LoginId";
 import LoginPw from "login/LoginPw";
@@ -43,20 +42,24 @@ import SignUpMain from "signUp/SignUpMain";
 
 import AddAddress from 'cardCreate/application/AddAddress';
 import SimplePW from 'cardCreate/application/SimplePW';
+import VoiceChat from 'chat/VoiceChat';
+import { createContext } from 'react';
 import Modal from "react-modal";
-import WelfareInputTotal from 'welfare/component/welfareInputTotal';
+import WelfareInputTotal from 'welfare/component/WelfareInputTotal';
 import WelfareMain from "welfare/component/welfareMain";
 import WelfarePayComplete from "welfare/component/welfarePayComplete";
 
 Modal.setAppElement("#root");
+export const CommonContext = createContext();
 
-function App(props) {
-  return (
+
+function App(props){
+  return(
     <BrowserRouter>
       <Routes>
-        <Route path="/dolbomMain" element={<DolbomMain />} />
-        <Route path="/welfareCheckPW" element={<WelfareCheckPW />} />
-        <Route path="/welfareCheckSpec" element={<WelfareCheckSpec />} />
+      <Route path="/dolbom-main" element={<DolbomMain />} />
+          <Route path="/welfare-check-pw" element={<WelfareCheckPW />} />
+          <Route path="/welfare-check-spec" element={<WelfareCheckSpec />} />
 
         <Route path="/welfareList" element={<WelfareList />} />
         <Route path="/welfaremain" element={<WelfareMain />} />
@@ -106,8 +109,7 @@ function App(props) {
           <Route path="address" element={<AddAddress />} />
           <Route path="simplepw" element={<SimplePW />} />
         </Route>
-
-        <Route path="/loginbio" element={<LoginBio />} />
+          <Route path="/loginbio" element={<LoginBio />} />
         <Route path="/loginid" element={<LoginId />} />
         <Route path="/loginpw" element={<LoginPw />} />
 
@@ -123,7 +125,7 @@ function App(props) {
         </Route>
       </Routes>
     </BrowserRouter>
-  );
+    );
 }
 
 export default App;

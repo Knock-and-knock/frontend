@@ -1,7 +1,7 @@
+import styles from 'header/Header.module.css'; // CSS 모듈 import
 import back from "image/Back.png";
 import home from "image/gohome.png";
-import { useLocation, useNavigate } from "react-router-dom";
-import styles from "welfare/css/Header.module.css"; // CSS 모듈 import
+import { useLocation, useNavigate } from 'react-router-dom';
 
 function Header() {
   const navigate = useNavigate();

@@ -5,13 +5,13 @@ import education from "image/education.png";
 import job from "image/job.png";
 import bokjiro from "image/bokjiro.png";
 import { useNavigate } from 'react-router-dom';
-import Header from 'header/Header.js';
+import Header from 'header/BlueHeader';
 
 function WelfareList() {
     const navigate = useNavigate();
 
     const goDolbomMain = () => {
-        navigate('/dolbomMain');
+        navigate('/dolbom-main');
     }
 
 

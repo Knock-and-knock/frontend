@@ -1,7 +1,14 @@
 import React from 'react';
 import styles from 'welfare/css/WelfarePayComplete.module.css';
+import { useNavigate } from 'react-router-dom';
 
 function WelfarePayComplete() {
+  const navigate = useNavigate();
+
+  const goDetailReserved = () => {
+    navigate('/welfare-reserved-list');
+}
+
   return (
     <div className={styles.container}>
       <div className={styles.header}>
@@ -38,8 +45,8 @@ function WelfarePayComplete() {
           <span className={styles["pay-info-price"]}>60,000 원</span>
         </p>
       </div>
-      <div className={`${styles["main-section"]} ${styles["go-main"]}`}>
-        <p className={`${styles["main-text"]} ${styles["go-main-text"]}`}>메인으로 돌아가기</p>
+      <div className={`${styles["main-section"]} ${styles["go-main"]}`} onClick={goDetailReserved}>
+        <p className={`${styles["main-text"]} ${styles["go-main-text"]}`}>예약내역 보러가기</p>
       </div>
     </div>
   );

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import SignUpHeader from './header/SignUpHeader';
 import { Link } from 'react-router-dom';
 import { useMember } from '../SignUpMain';
+import { call } from 'login/service/ApiService';
 
 function InfoInput(props) {
     const {userInfo,handlechange} =useMember();
@@ -20,11 +21,44 @@ function InfoInput(props) {
     };
     const handlePhoneChange = (event) => {
         const { name, value } = event.target;
+
         if (name === 'userPhone') {
-            event.target.value = formatPhoneNumber(value);
-        }
-        handlechange(event); // 원래의 handleChange 함수 호출
+            const formattedValue = formatPhoneNumber(value);
+            event.target.value = formattedValue;
+
+            const cleanedValue = value.replace(/[^0-9]/g, '');
+            handlechange({
+                target: {
+                    name: name,
+                    value: cleanedValue
+                }
+            });
+                }else {
+                    handlechange(event);
+                }
     };
+
+    
+
+    const handleNextClick = () => {
+        if (isNextEnabled) {
+
+           
+                call('http://122.128.54.136:20000/api/v1/users/validation/phone',"POST",
+                    {phone:userInfo.userPhone}
+                ).then((response)=>{
+                    console.log(response);
+                    window.location.href = "/signup/verifycode";
+                }).catch((error)=>{
+                    console.error("전화번호 인증에 실패했습니다.", error);
+                    alert("전화번호 인증에 실패했습니다. 다시 시도해주세요");
+                });
+          
+            
+                
+        }
+    };
+
     return (
         <div>
             <SignUpHeader/>
@@ -36,8 +70,13 @@ function InfoInput(props) {
             </div>
             <div className="signUpBtn">
                 <Link to="../register" className="signup-backBtn">이전</Link>
-                <Link to="../verifycode" className={`signup-nextBtn ${isNextEnabled ? '' : 'disabled'}`}
-                      onClick={(e) => !isNextEnabled && e.preventDefault()}>다음</Link>
+                <button
+                    onClick={handleNextClick}
+                    className={`signup-nextBtn ${isNextEnabled ? '' : 'disabled'}`}
+                    disabled={!isNextEnabled}
+                >
+                다음
+                </button>
             </div>
         </div>
     );
