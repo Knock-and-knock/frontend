@@ -1,21 +1,21 @@
 import DolbomMain from 'welfare/component/DolbomMain';
 import WelfareCheckPW from 'welfare/component/WelfareCheckPW';
 import WelfareCheckSpec from 'welfare/component/WelfareCheckSpec';
+import WelfareHanwoolModal from 'welfare/component/WelfareHanwoolModal';
+import WelfareHouseworkModal from 'welfare/component/WelfareHouseworkModal';
 import WelfareInputAddress from 'welfare/component/WelfareInputAddress';
 import WelfareInputBirth from 'welfare/component/WelfareInputBirth';
 import WelfareInputDisease from 'welfare/component/WelfareInputDisease';
 import WelfareInputGender from 'welfare/component/WelfareInputGender';
 import WelfareInputHeight from 'welfare/component/WelfareInputHeight';
+import WelfareInputTotal from 'welfare/component/WelfareInputTotal';
 import WelfareList from 'welfare/component/WelfareList';
 import WelfareMain from 'welfare/component/WelfareMain';
+import WelfareNursingModal from 'welfare/component/WelfareNursingModal';
 import WelfarePayComplete from 'welfare/component/welfarePayComplete';
 import WelfareReserveCancelModal from 'welfare/component/WelfareReserveCancelModal';
 import WelfareReservedList from 'welfare/component/WelfareReservedList';
-import WelfareNursingModal from 'welfare/component/WelfareNursingModal';
-import WelfareHouseworkModal from 'welfare/component/WelfareHouseworkModal';
-import WelfareHanwoolModal from 'welfare/component/WelfareHanwoolModal';
 import WelfareSetPW from 'welfare/component/WelfareSetPW';
-import WelfareInputTotal from 'welfare/component/WelfareInputTotal';
 
 import Agreement from "cardCreate/application/Agreement";
 import CardApp from "cardCreate/application/CardApp";
@@ -35,20 +35,20 @@ import Matching from 'matching/notice/Matching';
 import Register from 'signUp/component/Register';
 
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import SignUpSuccess from 'signUp/component/SignUpSuccess';
 import InfoInput from 'signUp/component/InfoInput';
-import VerifyCode from 'signUp/component/VerifyCode';
-import RoleCheck from 'signUp/component/RoleCheck';
-import QuickLoginSetup from 'signUp/component/QuickLoginSetup';
-import PinSetup from 'signUp/component/PinSetup';
 import PinCheck from 'signUp/component/PinCheck';
+import PinSetup from 'signUp/component/PinSetup';
+import QuickLoginSetup from 'signUp/component/QuickLoginSetup';
+import RoleCheck from 'signUp/component/RoleCheck';
+import SignUpSuccess from 'signUp/component/SignUpSuccess';
+import VerifyCode from 'signUp/component/VerifyCode';
 import SignUpMain from 'signUp/SignUpMain';
 
-import Modal from 'react-modal';
-import SubstituteInput from 'mypage/component/SubstituteInput';
 import ModifyInfo from 'mypage/component/ModifyInfo';
-import { createContext, useContext, useState } from 'react';
+import SubstituteInput from 'mypage/component/SubstituteInput';
 import MyPage from 'mypage/MyPage';
+import { createContext, useState } from 'react';
+import Modal from 'react-modal';
 
 Modal.setAppElement('#root');
 export const CommonContext = createContext();
