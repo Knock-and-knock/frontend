@@ -15,7 +15,7 @@ import WelfareNursingModal from 'welfare/component/WelfareNursingModal';
 import WelfareHouseworkModal from 'welfare/component/WelfareHouseworkModal';
 import WelfareHanwoolModal from 'welfare/component/WelfareHanwoolModal';
 import WelfareSetPW from 'welfare/component/WelfareSetPW';
-import WelfareInputTotal from 'welfare/component/welfareInputTotal';
+import WelfareInputTotal from 'welfare/component/WelfareInputTotal';
 
 import Agreement from "cardCreate/application/Agreement";
 import CardApp from "cardCreate/application/CardApp";
@@ -45,11 +45,20 @@ import PinCheck from 'signUp/component/PinCheck';
 import SignUpMain from 'signUp/SignUpMain';
 
 import Modal from 'react-modal';
+import SubstituteInput from 'mypage/component/SubstituteInput';
+import ModifyInfo from 'mypage/component/ModifyInfo';
+import { createContext, useContext, useState } from 'react';
+import MyPage from 'mypage/MyPage';
 
 Modal.setAppElement('#root');
+export const CommonContext = createContext();
 
 function App(props) {
+   
+  const [loginUser, setLoginUser] = useState({});
+
   return (
+    <CommonContext.Provider value={{loginUser, setLoginUser}}>
     <BrowserRouter>
         <Routes>
           <Route path="/dolbomMain" element={<DolbomMain />} />
@@ -81,13 +90,13 @@ function App(props) {
           <Route path="/voicechat" element={<VoiceChat />} />
           <Route path="/cardcreate" element={<CardCreate/>} />
             
-            <Route path="/main" element={<MainA />} />
+        <Route path="/main" element={<MainA />} />
         <Route path="/nokmain" element={<MainB />} />
         <Route path="/match" element={<Match />} />
         <Route path="/matching" element={<Matching />} />
         <Route path="/voicechat" element={<VoiceChat />} />
         <Route path="/welfare" element={<WelfareMain />} />
-        <Route path="/loginBio" element={<LoginBio />} />
+
         <Route path="/cardcreate" element={<CardCreate />} />
         <Route path="/cardapp/*" element={<CardApp />}>
           <Route path="defaultinfo" element={<DefaultInfo />} />
@@ -100,6 +109,10 @@ function App(props) {
           <Route path="/loginbio" element={<LoginBio />} />
           <Route path="/loginid" element={<LoginId />} />
           <Route path="/loginpw" element={<LoginPw />} />
+          <Route path="/mypage" element={<MyPage />} />
+          <Route path="/subinput" element={<SubstituteInput />} />
+          <Route path="/modifyinfo" element={<ModifyInfo />} />
+
 
 
           <Route path="/signup/*" element={<SignUpMain/>} >
@@ -117,6 +130,7 @@ function App(props) {
 
         </Routes>
       </BrowserRouter>
+      </CommonContext.Provider>
   );
 }
 
