@@ -1,15 +1,15 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
+import { InfoContext } from "../Match";
 
 function FYIInput({ handleIsInfoChange }) {
-  const [nameValue, setNameValue] = useState("");
-  const [phoneValue, setPhoneValue] = useState("");
+  const { userInfo, setUserInfo } = useContext(InfoContext);
 
   const handleName = (e) => {
     const value = e.target.value;
-    setNameValue(value);
-    handleIsInfoChange(value.trim() !== "" && phoneValue.trim() !== "");
+    setUserInfo({ ...userInfo, name: value });
+    handleIsInfoChange(value.trim() !== "" && userInfo.phone.trim() !== "");
   };
-  //자동하이픈
+
   const phoneAutoHyphen = (value) => {
     return value
       .replace(/[^0-9]/g, "")
@@ -18,21 +18,21 @@ function FYIInput({ handleIsInfoChange }) {
 
   const handlePhone = (e) => {
     let value = e.target.value;
-    value=phoneAutoHyphen(value);
-    setPhoneValue(value);
-    handleIsInfoChange(nameValue.trim() !== "" && value.trim() !== "");
+    value = phoneAutoHyphen(value);
+    setUserInfo({ ...userInfo, phone: value });
+    handleIsInfoChange(userInfo.name.trim() !== "" && value.trim() !== "");
   };
 
   useEffect(() => {
-    handleIsInfoChange(nameValue.trim() !== "" && phoneValue.trim() !== "");
-  }, [nameValue, phoneValue, handleIsInfoChange]);
+    handleIsInfoChange(userInfo.name.trim() !== "" && userInfo.phone.trim() !== "");
+  }, [userInfo.name, userInfo.phone, handleIsInfoChange]);
 
   return (
     <div className="input-container">
-      <input value={nameValue} onChange={handleName} placeholder="이름" />
+      <input value={userInfo.name} onChange={handleName} placeholder="이름" />
       <input
         type="tel"
-        value={phoneValue}
+        value={userInfo.phone}
         maxLength="13"
         onChange={handlePhone}
         placeholder="전화번호"

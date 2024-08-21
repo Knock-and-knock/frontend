@@ -1,4 +1,4 @@
-import CardCreateHeader from 'cardCreate/header/CardCreateHeader';
+import Header from 'header/Header';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCardCreate } from './CardApp';
@@ -13,7 +13,7 @@ function FundSourceInfo(props) {
   const [isButtonEnabled, setIsButtonEnabled] = useState(false);
 
   const handlePaging = () => {
-    navigate("/cardapp/cardapp5");
+    navigate("/cardapp/address");
   };
 
   //자금원천
@@ -60,14 +60,14 @@ function FundSourceInfo(props) {
 
   return (
     <div className="card-app-container">
-      <CardCreateHeader />
+      <Header />
       <div className="app-title">
         <div className="title-text">
           <span>자금세탁 방지를 위한</span>
           <br />
           <span>필수사항을 확인해 주세요</span>
         </div>
-        <div className="pageNumber">5/8</div>
+        <div className="pageNumber">5/7</div>
       </div>
       <div className="app-input-container">
         <div className="app-input">
