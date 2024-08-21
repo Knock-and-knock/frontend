@@ -4,7 +4,7 @@ import male from 'image/male.png';
 import female from 'image/female.png';
 import { useNavigate } from 'react-router-dom';
 import Header from 'header/Header.js';
-import { useSpecHook } from 'welfare/component/WelfareInputTotal';
+import { useSpecHook } from 'welfare/component/welfareInputTotal';
 
 
 function WelfareInputGender() {
