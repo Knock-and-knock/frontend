@@ -1,10 +1,10 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 
-const CardCreateContext = createContext();
-export const useCardCreate = () => useContext(CardCreateContext);
+const FamilyCardContext = createContext();
+export const useFamilyCardCreate = () => useContext(FamilyCardContext);
 
-function CardApp(props) {
+function FamilyCardApp(props) {
   const [userInfo, setUserInfo] = useState({});
   //데이터전송로직
   const handleSendInfo = (e) => {
@@ -12,7 +12,7 @@ function CardApp(props) {
   };
   const navigate = useNavigate();
   useEffect(() => {
-    navigate("/cardapp/defaultinfo");
+    navigate("/familycard/familycardyn");
   }, []);
 
   useEffect(()=>{
@@ -20,11 +20,11 @@ function CardApp(props) {
   }, [userInfo]);
   return (
     <div>
-      <CardCreateContext.Provider value={{userInfo, setUserInfo, handleSendInfo}}>
+      <FamilyCardContext.Provider value={{userInfo, setUserInfo, handleSendInfo}}>
         <Outlet />
-      </CardCreateContext.Provider>
+      </FamilyCardContext.Provider>
     </div>
   );
 }
 
-export default CardApp;
+export default FamilyCardApp;

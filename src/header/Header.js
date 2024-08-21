@@ -49,6 +49,16 @@ function Header() {
         return "카드신청";
       case "/cardapp/simplepw":
         return "카드신청";
+        case "/familycard/familycardyn":
+        return "가족카드 신청";
+        case "/familycard/fdefaultinfo":
+        return "가족카드 신청";
+        case "/familycard/fextrainfo":
+        return "가족카드 신청";
+        case "/familycard/faddress":
+        return "가족카드 신청";
+        case "/familycard/fsimplepw":
+        return "가족카드 신청";
       default:
         return null;
     }

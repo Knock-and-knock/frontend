@@ -6,7 +6,7 @@ import { useCardCreate } from "./CardApp";
 
 function SimplePW(props) {
   const navigate = useNavigate();
-  const { userInfo, setUserInfo } = useCardCreate();
+  const { userInfo, setUserInfo,handleSendInfo } = useCardCreate();
   const [simplePw, setSimplePw] = useState(["", "", "", ""]);
   const [isButtonEnabled, setIsButtonEnabled] = useState(false);
 
@@ -54,7 +54,8 @@ function SimplePW(props) {
   };
 
   const handlePaging = () => {
-    navigate("/");
+    handleSendInfo()
+    navigate("/familycard");
   };
 
   return (
@@ -74,7 +75,7 @@ function SimplePW(props) {
             <input
               key={index}
               className="password"
-              type="password" // 비밀번호 입력으로 처리
+              type="password"
               maxLength={1}
               value={value}
               ref={inputRefs[index]}

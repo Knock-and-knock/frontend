@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 function CardSectionA(props) {
   const navigate = useNavigate();
   const handleCardCreate = () => {
-    navigate("/cardCreate");
+    navigate("/cardcreate");
   };
   return (
     <div className="card-sectionA">

@@ -13,18 +13,20 @@ import Matching from "matching/notice/Matching";
 
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-import AddAddress from 'cardCreate/application/AddAddress';
-import SimplePW from 'cardCreate/application/SimplePW';
-import { createContext } from 'react';
+import AddAddress from "cardCreate/application/AddAddress";
+import CardAppSuccess from "cardCreate/application/CardAppSuccess";
+import FamilyCardApp from "cardCreate/application/FamilyCardApp";
+import FamilyCardYN from "cardCreate/application/FamilyCardYN";
+import FamilyDefaultInfo from "cardCreate/application/FamilyDefaultInfo";
+import SimplePW from "cardCreate/application/SimplePW";
+import { createContext } from "react";
 import Modal from "react-modal";
-import WelfareMain from "welfare/component/welfareMain";
 
 Modal.setAppElement("#root");
 export const CommonContext = createContext();
 
-
-function App(props){
-  return(
+function App(props) {
+  return (
     <BrowserRouter>
       <Routes>
         <Route path="/main" element={<MainA />} />
@@ -38,7 +40,6 @@ function App(props){
         <Route path="/match" element={<Match />} />
         <Route path="/matching" element={<Matching />} />
         <Route path="/voicechat" element={<VoiceChat />} />
-        <Route path="/welfare" element={<WelfareMain />} />
         <Route path="/cardcreate" element={<CardCreate />} />
         <Route path="/cardapp/*" element={<CardApp />}>
           <Route path="defaultinfo" element={<DefaultInfo />} />
@@ -49,10 +50,14 @@ function App(props){
           <Route path="address" element={<AddAddress />} />
           <Route path="simplepw" element={<SimplePW />} />
         </Route>
-          
+        <Route path="/familycard/*" element={<FamilyCardApp />}>
+          <Route path="familycardyn" element={<FamilyCardYN />} />
+          <Route path="fdefaultinfo" element={<FamilyDefaultInfo />} />
+          <Route path="cardsuccess" element={<CardAppSuccess />} />
+        </Route>
       </Routes>
     </BrowserRouter>
-    );
+  );
 }
 
 export default App;

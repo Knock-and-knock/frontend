@@ -1,10 +1,10 @@
+import { CommonContext } from 'App3';
 import Header from 'header/Header';
-import React, { useContext } from 'react';
+import "mypage/MyPage.css";
+import { useContext } from 'react';
+import DisconnectionModal from './component/modal/DisconnectionModal';
 import MyBasicInfo from './component/MyBasicInfo';
 import MyExtraInfo from './component/MyExtraInfo';
-import "mypage/MyPage.css"
-import DisconnectionModal from './component/modal/DisconnectionModal';
-import { CommonContext } from 'App2';
 
 function MyPage(props) {
     const{loginUser} = useContext(CommonContext);
