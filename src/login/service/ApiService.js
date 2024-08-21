@@ -1,3 +1,4 @@
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 const ACCESS_TOKEN = "ACCESS_TOKEN";
 
@@ -46,12 +47,14 @@ export function call(api, method, request) {
 }
 
 export function signin(userDTO) {
+  
   console.log(userDTO);
-  return call("http://192.168.0.11:9090/api/v1/auth/login", "POST", userDTO).then(
+  return call("http://122.128.54.136:20000/api/v1/auth/login", "POST", userDTO).then(
     (response) => {
       console.log(response);
       if (response.accessToken) {
         // 로컬 스토리지에 토큰 저장
+        localStorage.setItem("loginUser", response.userType);
         localStorage.setItem(ACCESS_TOKEN, response.accessToken);
         // token이 존재하는 경우 Todo 화면으로 리디렉트
         if(response.userType === "PROTECTOR"){

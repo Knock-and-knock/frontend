@@ -1,4 +1,5 @@
 import { useLocation } from 'react-router-dom';
+import "login/component/header/LoginHeader.css";
 
 function LoginHeader(props) {
     const location = useLocation();
@@ -21,13 +22,10 @@ function LoginHeader(props) {
 
     return (
         <header>
-            <div className='header-wrap'>
-            <div className="header">
-                <div className="header-info">
-                    <p className="header-name">{getTitle(location.pathname)}</p>
-                    </div>
-                </div>
+            <div className="login-header-container">
+                <p className="login-header-name">{getTitle(location.pathname)}</p>
             </div>
+           
         </header>
     );
 }
