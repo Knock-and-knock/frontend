@@ -3,6 +3,9 @@ import LoginBtn from './component/button/LoginBtn';
 import LoginHeader from './component/header/LoginHeader';
 import "./Login.css";
 import { signin } from './service/ApiService';
+import { useContext } from 'react';
+import { CommonContext } from 'App3';
+
 function LoginId(props) {
     // const {loginUser, setLoginUser} = useContext(CommonContext);
     const navigate =useNavigate();

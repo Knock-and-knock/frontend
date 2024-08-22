@@ -1,14 +1,38 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styles from 'welfare/css/WelfareCheckSpec.module.css'; // CSS 모듈 import
 import { useNavigate } from 'react-router-dom';
 import Header from 'header/Header.js';
+import { useSpecHook } from 'welfare/component/WelfareInputTotal';
 
 function WelfareCheckSpec() {
     const navigate = useNavigate();
 
+    const { userSpec } = useSpecHook();
+
+    useEffect(()=> {
+        console.log("Updated userSpec:", userSpec); // 최신 상태의 userSpec 로그 출력
+    },[]);
+
     const goSetPW = () => {
         navigate('/welfare-set-pw');
     }
+
+    const formatDate = (date) => {
+        if (!date) return '';
+        const d = new Date(date);
+        const year = d.getFullYear();
+        const month = String(d.getMonth() + 1).padStart(2, '0'); // 월은 0부터 시작하므로 1을 더해줍니다.
+        const day = String(d.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`;
+    };
+
+    const formatGender = (gender) => {
+        if (gender === 1) {
+            return "남성";
+        } else {
+            return "여성";
+        }
+    };
 
     return (
         <div className={styles.container}>
@@ -22,24 +46,28 @@ function WelfareCheckSpec() {
 
                 <div className={styles["spec-container"]}>
                     <p className={styles["spec-info"]}>이름</p>
-                    <input className={styles["spec-check"]} type="text" value="gdgd" disabled />
-                    <p className={styles["spec-info"]}>나이</p>
-                    <input className={styles["spec-check"]} type="number" value="1234" disabled />
+                    <input className={styles["spec-check"]} type="text" placeholder="이름" value="gd" disabled />
+
+                    <p className={styles["spec-info"]}>생년월일</p>
+                    <input className={styles["spec-check"]} type="Date" placeholder="생년월일" value={formatDate(userSpec.userBirth) || ''} disabled />
+
                     <p className={styles["spec-info"]}>성별</p>
-                    <input className={styles["spec-check"]} type="text" value="남성" disabled />
+                    <input className={styles["spec-check"]} type="text" placeholder="성별" value={formatGender(userSpec.userGender) || ''} disabled />
+
                     <p className={styles["spec-info"]}>주소</p>
-                    <input className={styles["spec-check"]} type="text" value="경기도 의왕시" disabled />
+                    <input className={styles["spec-check"]} type="text" placeholder="주소" value={userSpec.userAddress || ''} disabled />
+
                     <p className={styles["spec-info"]}>연락처</p>
-                    <input className={styles["spec-check"]} type="text" value="010-2235-1234" disabled />
+                    <input className={styles["spec-check"]} type="text" placeholder="연락처" value="gdgd" disabled />
 
                     <p className={styles["spec-info"]}>신체</p>
-                    <input className={styles["spec-check-hw"]} type="number" placeholder="175" disabled />
+                    <input className={styles["spec-check-hw"]} type="number" placeholder="키" value={userSpec.userHeight || ''} disabled />
                     <span className={styles.hw}>cm</span>
-                    <input className={styles["spec-check-hw"]} type="number" placeholder="180" disabled />
+                    <input className={styles["spec-check-hw"]} type="number" placeholder="몸무게" value={userSpec.userWeight || ''} disabled />
                     <span className={styles.hw}>kg</span>
 
                     <p className={styles["spec-info"]}>질병</p>
-                    <input className={`${styles["spec-check"]} ${styles.disease}`} type="text" value="감기" disabled />
+                    <input className={`${styles["spec-check"]} ${styles.disease}`} type="text" placeholder="질병" value={userSpec.userDisease || ''} disabled />
                 </div>
 
                 <div className={`${styles["main-section"]} ${styles["go-password"]}`} onClick={goSetPW}>

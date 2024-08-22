@@ -1,40 +1,79 @@
 import React, { useState, useEffect } from 'react';
 import styles from 'welfare/css/WelfareReserveModal.module.css';
 import { useNavigate } from 'react-router-dom';
+import { useSpecHook } from 'welfare/component/WelfareInputTotal';
 
 function WelfareHouseworkModal({ closeModal }) { 
   const [today, setToday] = useState('');
-  const [selectedTime, setSelectedTime] = useState('option1'); // 기본 값은 3시간
-  const [price, setPrice] = useState(75000); // 기본 요금은 3시간 요금
+  const [welfarebookStartdate, setWelfarebookStartdate] = useState('');
+  const [welfarebookEnddate, setWelfarebookEnddate] = useState('');
+  const [welfarebookUsetime, setWelfarebookUsetime] = useState(1);
+  const [totalDays, setTotalDays] = useState(1); // 날짜 차이를 계산할 상태
   const navigate = useNavigate();
 
-  const goInputBirth = () => {
-      navigate('/welfareInputBirth');
-  }
+  const { userSpec, setUserSpec } = useSpecHook();
 
+  if (userSpec === undefined) setUserSpec({});
+
+  const goInputBirth = () => {
+      navigate('/welfare-input/birth');
+  }
 
   useEffect(() => {
     const currentDate = new Date();
     const formattedDate = currentDate.toISOString().slice(0, 10);
     setToday(formattedDate);
+    setWelfarebookStartdate(formattedDate);
+    setWelfarebookEnddate(formattedDate); // 초기에는 종료 날짜를 시작 날짜와 동일하게 설정
+
+    const newUserSpec = { ...userSpec, welfarebookStartdate: formattedDate, welfarebookEnddate: formattedDate, welfarebookUsetime };
+    setUserSpec(newUserSpec);
+    console.log("Updated userSpec:", newUserSpec);
   }, []);
 
   const handleDateChange = (event) => {
-    setToday(event.target.value);
+    const newStartDate = event.target.value;
+    setWelfarebookStartdate(newStartDate);
+
+    // 만약 새로운 시작 날짜가 종료 날짜보다 이후라면 종료 날짜를 시작 날짜로 업데이트
+    if (newStartDate > welfarebookEnddate) {
+      setWelfarebookEnddate(newStartDate);
+      const updatedSpec = { ...userSpec, welfarebookStartdate: newStartDate, welfarebookEnddate: newStartDate };
+      setUserSpec(updatedSpec);
+      console.log("Updated userSpec:", updatedSpec);
+    } else {
+      calculateTotalDays(newStartDate, welfarebookEnddate);
+      const updatedSpec = { ...userSpec, welfarebookStartdate: newStartDate };
+      setUserSpec(updatedSpec);
+      console.log("Updated userSpec:", updatedSpec);
+    }
+  };
+
+  const handleEndDateChange = (event) => {
+    const newEndDate = event.target.value;
+    setWelfarebookEnddate(newEndDate);
+    calculateTotalDays(welfarebookStartdate, newEndDate); // 날짜 차이 계산
+
+    const updatedSpec = { ...userSpec, welfarebookEnddate: newEndDate };
+    setUserSpec(updatedSpec);
+    console.log("Updated userSpec:", updatedSpec);
   };
 
   const handleTimeChange = (event) => {
-    const selectedOption = event.target.value;
-    setSelectedTime(selectedOption);
+    const newDuration = parseInt(event.target.value, 10);
+    setWelfarebookUsetime(newDuration);
 
-    // 선택된 옵션에 따라 가격 설정
-    let newPrice = 75000;
-    if (selectedOption === 'option2') {
-      newPrice = 150000;
-    } else if (selectedOption === 'option3') {
-      newPrice = 225000;
-    }
-    setPrice(newPrice);
+    const updatedSpec = { ...userSpec, welfarebookUsetime: newDuration };
+    setUserSpec(updatedSpec);
+    console.log("Updated userSpec:", updatedSpec);
+  };
+
+  const calculateTotalDays = (start, end) => {
+    const welfarebookStartdate = new Date(start);
+    const welfarebookEnddate = new Date(end);
+    const diffTime = Math.abs(welfarebookEnddate - welfarebookStartdate);
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1; // 차이 계산 후 하루를 더함
+    setTotalDays(diffDays);
   };
 
   const formatPrice = (price) => {
@@ -44,35 +83,40 @@ function WelfareHouseworkModal({ closeModal }) {
   return (
     <div className={styles.container}>
         <div className={`${styles["modal-section"]} ${styles["modal-container"]}`}>
-          <p className={`${styles["modal-text"]} ${styles["reserve-modal-title"]}`}>일상가사 돌봄</p>
+          <p className={`${styles["modal-text"]} ${styles["reserve-modal-title"]}`}>일상 가사 돌봄</p>
           
           <hr />
           <div className={styles["reserve-info-container1"]}>
-            <span className={styles["reserve-info-text"]}>날짜</span>
+            <span className={styles["reserve-info-text"]}>시작 날짜</span>
             <input
-              className={styles["insert-date"]}
+              className={styles["insert-start-date"]}
               type="date"
-              value={today}
-              min={today}
+              value={welfarebookStartdate}
+              min={today} // 현재 날짜 이전 선택 불가
               onChange={handleDateChange}
+            />
+            <br />
+            <span className={styles["reserve-info-text"]}>종료 날짜</span>
+            <input
+              className={styles["end-date"]}
+              type="date"
+              value={welfarebookEnddate}
+              min={welfarebookStartdate}
+              onChange={handleEndDateChange} // 사용자가 직접 종료 날짜를 입력할 수 있도록 onChange 핸들러 추가
             />
           </div>
           <div className={styles["reserve-info-container2"]}>
             <span className={styles["reserve-info-text"]}>시간</span>
-            <select 
-              className={styles["insert-time"]} 
-              value={selectedTime} 
-              onChange={handleTimeChange}
-            >
-              <option value="option1">3시간 (09:00 ~ 12:00)</option>
-              <option value="option2">6시간 (09:00 ~ 15:00)</option>
-              <option value="option3">9시간 (09:00 ~ 18:00)</option>
+            <select className={styles["insert-time"]} type="dropbox" onChange={handleTimeChange}>
+              <option value="1">3시간 (09:00 ~ 12:00)</option>
+              <option value="2">6시간 (09:00 ~ 15:00)</option>
+              <option value="3">9시간 (09:00 ~ 18:00)</option>
             </select>
           </div>
           <hr />
           <div className={styles["reserve-info-container3"]}>
             <span className={styles["reserve-price-text"]}>요금</span>
-            <span className={styles.price}>{formatPrice(price)} 원</span>
+            <span className={styles.price}>{formatPrice(75000 * welfarebookUsetime * totalDays)} 원</span>
           </div>
 
           <span className={`${styles["main-text"]} ${styles["reserve-cancel"]}`} onClick={closeModal}>닫기</span>

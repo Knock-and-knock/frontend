@@ -1,18 +1,23 @@
-import App1 from "App1";
-import App2 from "App2";
-import App3 from "App3";
-import "index.css";
-import ReactDOM from "react-dom/client";
-import reportWebVitals from "./reportWebVitals";
-import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
+import App1 from './App1';
+import App2 from './App2';
+import App3 from './App3';
+import 'index.css';
+import ReactDOM from 'react-dom/client';
+import reportWebVitals from './reportWebVitals';
+import * as serviceWorkerRegistration from './serviceWorkerRegistration';
+import { BrowserRouter } from 'react-router-dom';
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <div>
-    <App1 />
-    <App2 />
-    <App3 />
-  </div>
+
+    <div>
+        <BrowserRouter>
+            <App1/>
+            <App2/>
+            <App3/>
+        </BrowserRouter>
+    </div>
+    
 );
 
 // If you want your app to work offline and load faster, you can change

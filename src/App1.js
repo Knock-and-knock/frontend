@@ -11,6 +11,8 @@ import MainB from "main/MainB";
 import Match from "matching/Match";
 import Matching from "matching/notice/Matching";
 
+ 
+
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import AddAddress from "cardCreate/application/AddAddress";
@@ -27,10 +29,15 @@ import Modal from "react-modal";
 Modal.setAppElement("#root");
 export const CommonContext = createContext();
 
+function App(props){
+  return(
+   
 function App(props) {
   return (
-    <BrowserRouter>
       <Routes>
+        <Route path="/" element={<MainA />} /> 
+        {/* 첫화면 메인화면으로 가기!! */}
+
         <Route path="/main" element={<MainA />} />
         <Route path="/nokmain" element={<MainB />} />
         <Route path="/match" element={<Match />} />
@@ -59,7 +66,8 @@ function App(props) {
           <Route path="cardsuccess" element={<CardAppSuccess />} />
         </Route>
       </Routes>
-    </BrowserRouter>
+    
+    );
   );
 }
 
