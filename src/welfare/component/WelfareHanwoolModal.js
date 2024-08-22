@@ -1,42 +1,62 @@
 import React, { useState, useEffect } from 'react';
 import styles from 'welfare/css/WelfareReserveModal.module.css';
 import { useNavigate } from 'react-router-dom';
+import { useSpecHook } from 'welfare/component/WelfareInputTotal';
 
 function WelfareHanwoolModal({ closeModal }) { 
   const [today, setToday] = useState('');
-  const [endDate, setEndDate] = useState('');
-  const [duration, setDuration] = useState(1);
+  const [welfarebookStartdate, setWelfarebookStartdate] = useState('');
+  const [welfarebookEnddate, setWelfarebookEnddate] = useState('');
+  const [welfarebookUsetime, setWelfarebookUsetime] = useState(1);
   const navigate = useNavigate();
+
+  const { userSpec, setUserSpec } = useSpecHook();
+
+  if (userSpec === undefined) setUserSpec({});
 
   const goInputBirth = () => {
       navigate('/welfare-input/birth');
   }
 
-
   useEffect(() => {
     const currentDate = new Date();
     const formattedDate = currentDate.toISOString().slice(0, 10);
     setToday(formattedDate);
-    calculateEndDate(formattedDate, duration); 
+    setWelfarebookStartdate(formattedDate);
+    const initialEndDate = calculateEndDate(formattedDate, welfarebookUsetime);
+    setWelfarebookEnddate(initialEndDate);
+
+    const newUserSpec = { ...userSpec, welfarebookStartdate: formattedDate, welfarebookEnddate: initialEndDate, welfarebookUsetime };
+    setUserSpec(newUserSpec);
+    console.log("Updated userSpec:", newUserSpec);
   }, []);
 
   const handleDateChange = (event) => {
     const newStartDate = event.target.value;
-    setToday(newStartDate);
-    calculateEndDate(newStartDate, duration);
+    setWelfarebookStartdate(newStartDate);
+    const newEndDate = calculateEndDate(newStartDate, welfarebookUsetime);
+    setWelfarebookEnddate(newEndDate);
+
+    const updatedSpec = { ...userSpec, welfarebookStartdate: newStartDate, welfarebookEnddate: newEndDate };
+    setUserSpec(updatedSpec);
+    console.log("Updated userSpec:", updatedSpec);
   };
 
   const handleTimeChange = (event) => {
-    const newDuration = parseInt(event.target.value.replace('option', ''), 10);
-    setDuration(newDuration);
-    calculateEndDate(today, newDuration);
+    const newDuration = parseInt(event.target.value, 10);
+    setWelfarebookUsetime(newDuration);
+    const newEndDate = calculateEndDate(welfarebookStartdate, newDuration);
+    setWelfarebookEnddate(newEndDate);
+
+    const updatedSpec = { ...userSpec, welfarebookUsetime: newDuration, welfarebookEnddate: newEndDate };
+    setUserSpec(updatedSpec);
+    console.log("Updated userSpec:", updatedSpec);
   };
 
-  const calculateEndDate = (startDate, duration) => {
-    const start = new Date(startDate);
-    start.setMonth(start.getMonth() + duration); 
-    const formattedEndDate = start.toISOString().slice(0, 10);
-    setEndDate(formattedEndDate);
+  const calculateEndDate = (welfarebookStartdate, welfarebookUsetime) => {
+    const start = new Date(welfarebookStartdate);
+    start.setMonth(start.getMonth() + welfarebookUsetime); 
+    return start.toISOString().slice(0, 10);
   };
 
   const formatPrice = (price) => {
@@ -54,7 +74,7 @@ function WelfareHanwoolModal({ closeModal }) {
             <input
               className={styles["insert-start-date"]}
               type="date"
-              value={today}
+              value={welfarebookStartdate}
               min={today} // 현재 날짜 이전 선택 불가
               onChange={handleDateChange}
             />
@@ -63,25 +83,25 @@ function WelfareHanwoolModal({ closeModal }) {
             <input
               className={styles["end-date"]}
               type="date"
-              value={endDate}
+              value={welfarebookEnddate}
               disabled
             />
           </div>
           <div className={styles["reserve-info-container2"]}>
             <span className={styles["reserve-info-text"]}>기간</span>
             <select className={styles["insert-time"]} type="dropbox" onChange={handleTimeChange}>
-              <option value="option1">1개월</option>
-              <option value="option2">2개월</option>
-              <option value="option3">3개월</option>
-              <option value="option4">4개월</option>
-              <option value="option5">5개월</option>
-              <option value="option6">6개월</option>
+              <option value="1">1개월</option>
+              <option value="2">2개월</option>
+              <option value="3">3개월</option>
+              <option value="4">4개월</option>
+              <option value="5">5개월</option>
+              <option value="6">6개월</option>
             </select>
           </div>
           <hr />
           <div className={styles["reserve-info-container3"]}>
             <span className={styles["reserve-price-text"]}>요금</span>
-            <span className={styles.price}>{formatPrice(2000000 * duration)} 원</span>
+            <span className={styles.price}>{formatPrice(2000000 * welfarebookUsetime)} 원</span>
           </div>
 
           <span className={`${styles["main-text"]} ${styles["reserve-cancel"]}`} onClick={closeModal}>닫기</span>

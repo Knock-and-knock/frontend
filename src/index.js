@@ -5,13 +5,16 @@ import 'index.css';
 import ReactDOM from 'react-dom/client';
 import reportWebVitals from './reportWebVitals';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
+import { BrowserRouter } from 'react-router-dom';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <div>
-        <App1/>
-        <App2/>
-        <App3/>
+        <BrowserRouter>
+            <App1/>
+            <App2/>
+            <App3/>
+        </BrowserRouter>
     </div>
     
 );

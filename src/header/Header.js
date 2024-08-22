@@ -23,6 +23,8 @@ function Header() {
         return "복지 서비스 예약내역";
       case "/welfare-set-pw":
         return "간편 결제 등록";
+      case "/consume-report":
+        return "소비리포트";
       case "/cardcreate":
       case "/cardapp/defaultinfo":
       case "/cardapp/extrainfo":

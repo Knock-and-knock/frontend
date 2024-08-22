@@ -11,7 +11,7 @@ function WelfareList() {
     const navigate = useNavigate();
 
     const goDolbomMain = () => {
-        navigate('/dolbom-main');
+        navigate('/welfare-input/dolbom-main');
     }
 
 

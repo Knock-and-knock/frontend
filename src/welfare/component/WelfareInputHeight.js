@@ -5,25 +5,25 @@ import Header from 'header/Header.js';
 import { useSpecHook } from 'welfare/component/WelfareInputTotal';
 
 function WelfareInputHeight() {
-    const [height, setHeight] = useState('');
-    const [weight, setWeight] = useState('');
+    const [userHeight, setHeight] = useState('');
+    const [userWeight, setWeight] = useState('');
     const navigate = useNavigate();
 
     const {userSpec, setUserSpec} = useSpecHook();
 
     useEffect(()=> {
-        const newUserSpec = {...userSpec, height, weight};
+        const newUserSpec = {...userSpec, userHeight, userWeight};
         setUserSpec(newUserSpec);
         console.log("Updated userSpec:", newUserSpec); // 최신 상태의 userSpec 로그 출력
-    },[height, weight]);
+    },[userHeight, userWeight]);
 
     const goInputGender = () => {
-        if (height && weight) {
+        if (userHeight && userWeight) {
             navigate('/welfare-input/gender');
         }
     }
 
-    // height와 weight의 상태를 업데이트하고 3자리로 제한하는 함수
+    // userHeight와 userWeight의 상태를 업데이트하고 3자리로 제한하는 함수
     const handleHeightChange = (e) => {
         const value = e.target.value;
         if (value.length <= 3) {
@@ -53,7 +53,7 @@ function WelfareInputHeight() {
                         className={styles["input-height"]}
                         type="number"
                         placeholder="키"
-                        value={height}
+                        value={userHeight}
                         onChange={handleHeightChange}
                     />
                     <span className={styles.cm}>cm</span>
@@ -61,7 +61,7 @@ function WelfareInputHeight() {
                         className={styles["input-weight"]}
                         type="number"
                         placeholder="몸무게"
-                        value={weight}
+                        value={userWeight}
                         onChange={handleWeightChange}
                     />
                     <span className={styles.kg}>kg</span>
@@ -71,7 +71,7 @@ function WelfareInputHeight() {
                     className={`${styles["main-section"]} ${styles["go-input-gender"]}`}
                     onClick={goInputGender}
                     style={{
-                        backgroundColor: height && weight ? '#80BAFF' : 'rgba(128,186,255,0.5)',
+                        backgroundColor: userHeight && userWeight ? '#80BAFF' : 'rgba(128,186,255,0.5)',
                     }}
                 >
                     <p className={`${styles["main-text"]} ${styles["go-input-gender-text"]}`}>다음</p>

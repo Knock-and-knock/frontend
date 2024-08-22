@@ -54,6 +54,8 @@ function WelfareInputAddress() {
 
     const goInputDisease = () => {
         if (isFormComplete()) {
+            const fullAddress = `${userAddress} ${userDetailAddress}`.trim();
+            setUserSpec({ ...userSpec, userAddress: fullAddress }); // 합쳐진 주소를 저장
             navigate('/welfare-input/disease');
         }
     };

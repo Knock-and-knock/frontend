@@ -8,7 +8,7 @@ import { useSpecHook } from 'welfare/component/WelfareInputTotal';
 
 function WelfareInputDisease() {
   const [selectedId, setSelectedId] = useState(null);
-  const [selectedDiseases, setSelectedDiseases] = useState([]); // 배열로 변경
+  const [selectedDiseases, setSelectedDiseases] = useState([]); // 배열로 유지
   const [otherDisease, setOtherDisease] = useState('');
   const navigate = useNavigate();
 
@@ -31,7 +31,7 @@ function WelfareInputDisease() {
     if (id === 'no-disease') {
       setSelectedDiseases([]);
       setOtherDisease('');
-      setUserSpec({...userSpec, selectedDiseases: [], otherDisease: ''});
+      setUserSpec({...userSpec, userDisease: '기저질환이 없습니다.'});
     }
   };
 
@@ -45,25 +45,26 @@ function WelfareInputDisease() {
       // 선택되지 않은 질환이면 배열에 추가
       updatedDiseases = [...selectedDiseases, disease];
     }
-  
+
     setSelectedDiseases(updatedDiseases);
     setOtherDisease(''); // 기타 질환을 초기화 (선택된 질환이 있는 경우)
-    setUserSpec({...userSpec, selectedDiseases: updatedDiseases, otherDisease: ''});
-  
-    // 이 시점에서 로그를 찍어도 상태는 아직 업데이트되지 않았을 수 있음
-    console.log("Diseases selected:", updatedDiseases);
+
+    // 기저질환과 기타질환을 문자열로 합쳐 userDisease로 설정
+    const combinedDiseases = [...updatedDiseases, otherDisease].filter(Boolean).join(', ');
+    setUserSpec({...userSpec, userDisease: combinedDiseases});
   };
-  
 
   useEffect(()=> {
-    setUserSpec({...userSpec, selectedDiseases, otherDisease});
+    const combinedDiseases = [...selectedDiseases, otherDisease].filter(Boolean).join(', ');
+    setUserSpec({...userSpec, userDisease: combinedDiseases});
     console.log("Updated userSpec:", userSpec);
   }, [selectedDiseases, otherDisease]);
 
   // 기타 질환 입력 핸들러
   const handleOtherDiseaseChange = (event) => {
     setOtherDisease(event.target.value);
-    setUserSpec({...userSpec, selectedDiseases: [], otherDisease: event.target.value});
+    const combinedDiseases = [...selectedDiseases, event.target.value].filter(Boolean).join(', ');
+    setUserSpec({...userSpec, userDisease: combinedDiseases});
   };
 
   // '다음' 버튼 클릭 핸들러

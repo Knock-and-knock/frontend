@@ -14,7 +14,8 @@ function WelfareInputGender() {
 
     const goInputAddress = () => {
         if (selectedGender) {
-            setUserSpec({ ...userSpec, gender: selectedGender });  // 선택된 성별을 userSpec에 저장
+            const userGender = selectedGender === '남성' ? 1 : 2; // 성별을 int로 변환
+            setUserSpec({ ...userSpec, userGender });  // 변환된 성별을 userSpec에 저장
             navigate('/welfare-input/address');
         }
     };
@@ -40,14 +41,14 @@ function WelfareInputGender() {
 
                 <div className={styles["gender-container"]}>
                     <div
-                        className={`${styles["gender-section"]} ${selectedGender === 'male' ? styles["selected-gender-section"] : ''}`}
+                        className={`${styles["gender-section"]} ${selectedGender === '남성' ? styles["selected-gender-section"] : ''}`}
                         onClick={() => handleGenderClick('남성')}
                     >
                         <img src={male} alt="남성" className={styles["image-gender"]} />
                         <p className={styles["gender-text"]}>남성</p>
                     </div>
                     <div
-                        className={`${styles["gender-section"]} ${selectedGender === 'female' ? styles["selected-gender-section"] : ''}`}
+                        className={`${styles["gender-section"]} ${selectedGender === '여성' ? styles["selected-gender-section"] : ''}`}
                         onClick={() => handleGenderClick('여성')}
                     >
                         <img src={female} alt="여성" className={styles["image-gender"]} />

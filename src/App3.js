@@ -24,7 +24,7 @@ function App(props) {
   const [loginUser, setLoginUser] = useState({});
   return (
     <CommonContext.Provider value={{loginUser, setLoginUser}}>
-    <BrowserRouter>
+
         <Routes>
           <Route path="/loginbio" element={<LoginBio />} />
           <Route path="/loginid" element={<LoginId />} />
@@ -44,7 +44,7 @@ function App(props) {
             <Route path="signupsuccess" element={<SignUpSuccess/>} />
           </Route>
         </Routes>
-      </BrowserRouter>
+
       </CommonContext.Provider>
   );
 }

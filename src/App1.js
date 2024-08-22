@@ -11,6 +11,8 @@ import MainB from "main/MainB";
 import Match from "matching/Match";
 import Matching from "matching/notice/Matching";
 
+ 
+
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import AddAddress from 'cardCreate/application/AddAddress';
@@ -24,7 +26,7 @@ export const CommonContext = createContext();
 
 function App(props){
   return(
-    <BrowserRouter>
+   
       <Routes>
         <Route path="/" element={<MainA />} /> 
         {/* 첫화면 메인화면으로 가기!! */}
@@ -52,7 +54,7 @@ function App(props){
         </Route>
           
       </Routes>
-    </BrowserRouter>
+    
     );
 }
 
