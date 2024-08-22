@@ -1,6 +1,6 @@
 import React from 'react';
 
-function MyBasicInfo(props) {
+function MyBasicInfo({userInfo}) {
     return (
         <div className='info-container'>
             <div className='info-title'>
@@ -8,11 +8,11 @@ function MyBasicInfo(props) {
             </div>
             <div className='info-content'>
                 <p>아이디</p>
-                <p>aaa</p>
+                <p>{userInfo.userId}</p>
             </div>
             <div className='info-content'>
                 <p>전화번호</p>
-                <p>aaa</p>
+                <p>{userInfo.userPhone}</p>
             </div>
         </div>
     );

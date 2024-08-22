@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Modal from 'react-modal';
 import "mypage/component/modal/DisconnectionModal.css"
+import { call } from 'login/service/ApiService';
 
 function DisconnectionModal(props) {
     
@@ -26,6 +27,9 @@ function DisconnectionModal(props) {
             padding: "20px",
           },
     };
+    const handleSubmit = ()=>{
+        call(`http://192.168.0.11:9090/api/v1/match/{matchNo}`).then().catch();
+    };
     return (
         <div>
             <button className='disconnectBtn' onClick={handleOpenModal} >현재 상대와 매칭 종료</button>
@@ -34,7 +38,7 @@ function DisconnectionModal(props) {
                 <p className='dcModal-content'>정말로 매칭을&nbsp;<span>종료</span>하시겠습니까?</p>
                 <div className='dcModal-btn'>
                     <button onClick={closeModal} className='dcModal-cancelBtn'>닫기</button>
-                    <button className='dcModal-agreeBtn'>예</button>
+                    <button className='dcModal-agreeBtn' onClick={handleSubmit}>예</button>
                 </div>
                 
             </Modal>

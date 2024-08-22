@@ -1,13 +1,19 @@
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import LoginBtn from './component/button/LoginBtn';
 import LoginHeader from './component/header/LoginHeader';
 import "./Login.css";
-import { signin } from './service/ApiService';
-import { useContext } from 'react';
-import { CommonContext } from 'App3';
+import { call } from './service/ApiService';
 
 function LoginId(props) {
-    // const {loginUser, setLoginUser} = useContext(CommonContext);
+    const ACCESS_TOKEN = "ACCESS_TOKEN";
+    const [userId, setUserId] = useState('');
+    const [userPassword, setUserPassword] = useState('');
+    const[idErrorMessage, setIdErrorMessage] = useState('');
+    const[pwErrorMessage, setPwErrorMessage] = useState('');
+    const [isUserIdError, setIsUserIdError] = useState(false);
+    const [isUserPwError, setIsUserPwError] = useState(false);
+
     const navigate =useNavigate();
     const handleGoSignUp = () =>{
         navigate("/signup/register")
@@ -18,16 +24,54 @@ function LoginId(props) {
         const userId = data.get("userId");
         const userPassword = data.get("userPassword");
         console.log({ userId: userId, userPassword: userPassword });
-        signin({ userId: userId, userPassword: userPassword, loginType: "NORMAL"});
-        
+        setIdErrorMessage('');
+        setPwErrorMessage('');
+        setIsUserIdError(false);
+        setIsUserPwError(false);
+
+        call("http://192.168.0.27:9090/api/v1/auth/login/normal", "POST", { userId: userId, userPassword: userPassword }).then((response)=>{
+            if (response.accessToken) {
+              // 로컬 스토리지에 토큰 저장
+              localStorage.setItem("loginUser", response.userType);
+              localStorage.setItem("userNo", response.userNo);
+              localStorage.setItem(ACCESS_TOKEN, response.accessToken);
+
+              // token이 존재하는 경우 Todo 화면으로 리디렉트
+              if (response.userType === "PROTECTOR") {
+                navigate('/nokmain');
+              } else {
+                navigate('/main');
+              }
+          } 
+          }).catch(
+            (error)=>{
+                
+                if(error.message==='아이디가 존재하지 않습니다.'){
+                    setIdErrorMessage(error.message);
+                    setIsUserIdError(true);
+                    
+                }else if('비밀번호가 일치하지 않습니다.'){
+                    setPwErrorMessage(error.message);
+                    setIsUserPwError(true);
+                }else{
+                    alert("로그인 실패");
+                }
+              
+         });
+
       };
+
+    const isButtonDisabled = !userId || !userPassword;
+
     return (
         <div>
             <LoginHeader/>
             <form noValidate onSubmit={handleSubmit}>
                 <div className="login-container">
-                    <input className="login-input" type="text" name='userId' placeholder="아이디"/>
-                    <input className="login-input" type="password" name='userPassword' placeholder="비밀번호"/>
+                    <input className={`login-input ${isUserIdError?'login-input-error':''}`} type="text"  value={userId} name='userId' placeholder="아이디" onChange={(e) => setUserId(e.target.value)}/>
+                    <div className='check-input'>{idErrorMessage}</div>
+                    <input className={`login-input ${isUserPwError?'login-input-error':''}`} type="password" value={userPassword} name='userPassword' placeholder="비밀번호" onChange={(e) => setUserPassword(e.target.value)}/>
+                    <div className='check-input'>{pwErrorMessage}</div>
                
                     <div className="login-options">
                         <p className='border-separator'>아이디 찾기</p>
@@ -35,7 +79,7 @@ function LoginId(props) {
                         <p onClick={handleGoSignUp}>회원가입</p>
                     </div>
                 </div>
-                <LoginBtn/>
+                <LoginBtn isButtonDisabled={isButtonDisabled}/>
             </form>
         </div>
     );

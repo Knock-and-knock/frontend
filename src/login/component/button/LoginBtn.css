@@ -16,3 +16,6 @@
     height: 55px;
     box-sizing: border-box;
 }
+.disabled{
+    opacity: 0.5;
+}
