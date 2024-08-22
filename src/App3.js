@@ -19,14 +19,14 @@ import SignUpSuccess from 'signUp/component/SignUpSuccess';
 import VerifyCode from 'signUp/component/VerifyCode';
 import SignUpMain from 'signUp/SignUpMain';
 Modal.setAppElement('#root');
+
 export const CommonContext = createContext();
 function App(props) {
-   
   const [loginUser, setLoginUser] = useState({});
   
   return (
+    
     <CommonContext.Provider value={{loginUser, setLoginUser}}>
-    <BrowserRouter>
         <Routes>
           <Route path="/loginbio" element={<LoginBio />} />
           <Route path="/loginid" element={<LoginId />} />
@@ -45,9 +45,11 @@ function App(props) {
             <Route path="pinsetup" element={<PinSetup/>} /> 
             <Route path="pincheck" element={<PinCheck/>} />   
             <Route path="signupsuccess" element={<SignUpSuccess/>} />
+
           </Route>
         </Routes>
-      </BrowserRouter>
+
+
       </CommonContext.Provider>
   );
 }

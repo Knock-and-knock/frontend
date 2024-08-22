@@ -24,11 +24,11 @@ function DefaultInfo(props) {
       <div className="app-input-container">
         <div className="app-input">
           <span>이름</span>
-          <input placeholder="이름" />
+          <input placeholder="홍길동" name="name" readOnly/>
         </div>
         <div className="app-input">
           <span>연락처</span>
-          <input placeholder="전화번호" />
+          <input placeholder="010-8964-9902" name="phoneNum"readOnly/>
         </div>
       </div>
       <button className="appBtn" onClick={handlePaging}>다음</button>

@@ -8,6 +8,18 @@
   align-items: center;
 }
 
+input[type="date"]::-webkit-clear-button {
+  display: none;
+}
+
+input[type="date"]::-webkit-inner-spin-button {
+  display: none;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  position: relative;
+}
+
 hr {
   border: 1px solid #d9d9d9;
 }

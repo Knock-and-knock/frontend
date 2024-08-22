@@ -62,6 +62,7 @@ function LoginId(props) {
       };
 
     const isButtonDisabled = !userId || !userPassword;
+
     return (
         <div>
             <LoginHeader/>
@@ -83,5 +84,4 @@ function LoginId(props) {
         </div>
     );
 }
-
 export default LoginId;

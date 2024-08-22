@@ -4,23 +4,29 @@ import male from 'image/male.png';
 import female from 'image/female.png';
 import { useNavigate } from 'react-router-dom';
 import Header from 'header/Header.js';
-import { useSpecHook } from 'welfare/component/welfareInputTotal';
-
+import { useSpecHook } from 'welfare/component/WelfareInputTotal';
 
 function WelfareInputGender() {
     const [selectedGender, setSelectedGender] = useState(null);
     const navigate = useNavigate();
 
-    const {userSpec, setUserSpec, handlechange} = useSpecHook();
+    const { userSpec, setUserSpec } = useSpecHook();
 
     const goInputAddress = () => {
         if (selectedGender) {
+            const userGender = selectedGender === '남성' ? 1 : 2; // 성별을 int로 변환
+            setUserSpec({ ...userSpec, userGender });  // 변환된 성별을 userSpec에 저장
             navigate('/welfare-input/address');
         }
     };
 
+    // 성별 버튼 클릭 시
     const handleGenderClick = (gender) => {
-        setSelectedGender(gender);
+        if (selectedGender === gender) {
+            setSelectedGender(null);  // 이미 선택된 성별을 다시 클릭하면 선택 해제
+        } else {
+            setSelectedGender(gender);  // 성별 선택 시
+        }
     };
 
     return (
@@ -35,15 +41,15 @@ function WelfareInputGender() {
 
                 <div className={styles["gender-container"]}>
                     <div
-                        className={`${styles["gender-section"]} ${selectedGender === 'male' ? styles["selected-gender-section"] : ''}`}
-                        onClick={() => handleGenderClick('male')}
+                        className={`${styles["gender-section"]} ${selectedGender === '남성' ? styles["selected-gender-section"] : ''}`}
+                        onClick={() => handleGenderClick('남성')}
                     >
                         <img src={male} alt="남성" className={styles["image-gender"]} />
                         <p className={styles["gender-text"]}>남성</p>
                     </div>
                     <div
-                        className={`${styles["gender-section"]} ${selectedGender === 'female' ? styles["selected-gender-section"] : ''}`}
-                        onClick={() => handleGenderClick('female')}
+                        className={`${styles["gender-section"]} ${selectedGender === '여성' ? styles["selected-gender-section"] : ''}`}
+                        onClick={() => handleGenderClick('여성')}
                     >
                         <img src={female} alt="여성" className={styles["image-gender"]} />
                         <p className={styles["gender-text"]}>여성</p>

@@ -1,3 +1,4 @@
+import { CommonContext } from 'App3';
 import Header from 'header/Header';
 import React, { useContext, useEffect, useState } from 'react';
 import MyBasicInfo from './component/MyBasicInfo';
@@ -6,6 +7,8 @@ import "mypage/MyPage.css"
 import DisconnectionModal from './component/modal/DisconnectionModal';
 import { CommonContext } from 'App3';
 import { call } from 'login/service/ApiService';
+
+
 
 function MyPage(props) {
 

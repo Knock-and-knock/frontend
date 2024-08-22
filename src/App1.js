@@ -11,21 +11,33 @@ import MainB from "main/MainB";
 import Match from "matching/Match";
 import Matching from "matching/notice/Matching";
 
+ 
+
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-import AddAddress from 'cardCreate/application/AddAddress';
-import SimplePW from 'cardCreate/application/SimplePW';
-import { createContext } from 'react';
+import AddAddress from "cardCreate/application/AddAddress";
+import CardAppSuccess from "cardCreate/application/CardAppSuccess";
+import FamilyAddAddress from "cardCreate/application/FamilyAddAddress";
+import FamilyCardYN from "cardCreate/application/FamilyCardYN";
+import FamilyDefaultInfo from "cardCreate/application/FamilyDefaultInfo";
+import FamilyExtraInfo from "cardCreate/application/FamilyExtraInfo";
+import FamilySimplePW from "cardCreate/application/FamilySimplePW";
+import SimplePW from "cardCreate/application/SimplePW";
+import { createContext } from "react";
 import Modal from "react-modal";
 
 Modal.setAppElement("#root");
 export const CommonContext = createContext();
 
-
 function App(props){
   return(
-    <BrowserRouter>
+   
+function App(props) {
+  return (
       <Routes>
+        <Route path="/" element={<MainA />} /> 
+        {/* 첫화면 메인화면으로 가기!! */}
+
         <Route path="/main" element={<MainA />} />
         <Route path="/nokmain" element={<MainB />} />
         <Route path="/match" element={<Match />} />
@@ -47,11 +59,17 @@ function App(props){
           <Route path="fundsourceinfo" element={<FundSourceInfo />} />
           <Route path="address" element={<AddAddress />} />
           <Route path="simplepw" element={<SimplePW />} />
+          <Route path="familycardyn" element={<FamilyCardYN />} />
+          <Route path="fdefaultinfo" element={<FamilyDefaultInfo />} />
+          <Route path="fextrainfo" element={<FamilyExtraInfo />} />
+          <Route path="faddress" element={<FamilyAddAddress />} />
+          <Route path="fsimplepw" element={<FamilySimplePW />} />
+          <Route path="cardsuccess" element={<CardAppSuccess />} />
         </Route>
-          
       </Routes>
-    </BrowserRouter>
+    
     );
+  );
 }
 
 export default App;

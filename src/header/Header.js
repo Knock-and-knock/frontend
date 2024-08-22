@@ -9,46 +9,32 @@ function Header() {
 
   const getTitle = (pathname) => {
     switch (pathname) {
-      case "/dolbomMain":
+      case "/dolbom-main":
         return "복지 서비스 예약하기";
-      case "/welfareCheckPW":
+      case "/welfare-check-pw":
         return "결제하기";
-      case "/welfareCheckSpec":
+      case "/welfare-check-spec":
         return "복지 서비스 예약하기";
-      case "/welfareInputAddress":
+      case "/welfare-list":
         return "복지 서비스 예약하기";
-      case "/welfareInputBirth":
-        return "복지 서비스 예약하기";
-      case "/welfareInputDisease":
-        return "복지 서비스 예약하기";
-      case "/welfareInputGender":
-        return "복지 서비스 예약하기";
-      case "/welfareInputHeight":
-        return "복지 서비스 예약하기";
-      case "/welfareList":
-        return "복지 서비스 예약하기";
-      case "/welfaremain":
+      case "/welfare-main":
         return "복지 서비스";
-      case "/welfareReservedList":
+      case "/welfare-reserved-list":
         return "복지 서비스 예약내역";
-      case "/welfareSetPW":
+      case "/welfare-set-pw":
         return "간편 결제 등록";
+      case "/consume-report":
+        return "소비리포트";
       case "/cardcreate":
-        return "카드신청";
       case "/cardapp/defaultinfo":
-        return "카드신청";
       case "/cardapp/extrainfo":
-        return "카드신청";
       case "/cardapp/agreement":
-        return "카드신청";
       case "/cardapp/creditinfo":
-        return "카드신청";
       case "/cardapp/fundsourceinfo":
-        return "카드신청";
       case "/cardapp/address":
-        return "카드신청";
       case "/cardapp/simplepw":
         return "카드신청";
+
       case "/mypage":
         return "마이페이지";
       case "/modifyinfo":
@@ -57,7 +43,23 @@ function Header() {
         return "마이페이지";
       case "/consumption":
           return "소비내역 조회";
+
+        case "/cardapp/familycardyn":
+        return "가족카드 신청";
+        case "/cardapp/fdefaultinfo":
+        return "가족카드 신청";
+        case "/cardapp/fextrainfo":
+        return "가족카드 신청";
+        case "/cardapp/faddress":
+        return "가족카드 신청";
+        case "/cardapp/fsimplepw":
+        return "가족카드 신청";
+
       default:
+        // 와일드카드 경로 처리
+        if (pathname.startsWith('/welfare-input/')) {
+          return '복지 서비스 예약하기';
+        }
         return null;
     }
   };

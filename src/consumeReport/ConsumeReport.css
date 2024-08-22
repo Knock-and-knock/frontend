@@ -1,0 +1,55 @@
+.consume-report-container {
+  padding: 0px 20px 20px 20px;
+}
+
+.consume-report-date-container{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+}
+
+.consume-report-date-container select{
+  border: none;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.displayed-date{
+  font-size: 16px;
+  color: #2C2C2C;
+  margin-top: 5px;
+}
+
+.consume-report-price-container {
+  margin-top: -5px;
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid;
+}
+
+.report-search-filter {
+  height: 100%;
+  border: 1px solid blue;
+}
+
+.total-price555 {
+  border: 1px solid red;
+
+}
+
+/* 반응형 디자인 */
+@media (min-width: 768px) {
+    .consume-report-container {
+      max-width: 768px;
+      padding: 40px;
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    .consume-report-container {
+      max-width: 1024px;
+      padding: 60px;
+    }
+  }
+  

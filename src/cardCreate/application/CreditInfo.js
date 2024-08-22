@@ -48,9 +48,9 @@ function CreditInfo(props) {
   // 빈칸 확인
   useEffect(() => {
     const creditInfo = [
-      "annualIncome",
-      "creditScore",
-      "payDay",
+      "cardIssueIncome",
+      "cardIssueCredit",
+      "cardIssueAmountDate",
     ];
     const isFull = creditInfo.every(
       (field) =>
@@ -79,9 +79,9 @@ function CreditInfo(props) {
           <div className="double-input-container">
             <select
               className="fullSelectMenu"
-              name="annualIncome"
+              name="cardIssueIncome"
               onChange={handlechange}
-              value={userInfo.annualIncome}
+              value={userInfo.cardIssueIncome}
             >
               {eSelectList.map((item) => (
                 <option key={item.value} value={item.value}>
@@ -96,9 +96,9 @@ function CreditInfo(props) {
           <div className="double-input-container">
             <select
               className="fullSelectMenu"
-              name="creditScore"
+              name="cardIssueCredit"
               onChange={handlechange}
-              value={userInfo.creditScore}
+              value={userInfo.cardIssueCredit}
             >
               {scoreSelectList.map((item) => (
                 <option key={item.value} value={item.value}>
@@ -113,9 +113,9 @@ function CreditInfo(props) {
           <div className="double-input-container">
             <select
               className="fullSelectMenu"
-              name="payDay"
+              name="cardIssueAmountDate"
               onChange={handlechange}
-              value={userInfo.payDay}
+              value={userInfo.cardIssueAmountDate}
             >
               {paySelectList.map((item) => (
                 <option key={item.value} value={item.value}>
