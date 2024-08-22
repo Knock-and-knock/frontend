@@ -29,9 +29,7 @@ import Modal from "react-modal";
 Modal.setAppElement("#root");
 export const CommonContext = createContext();
 
-function App(props){
-  return(
-   
+
 function App(props) {
   return (
       <Routes>
@@ -69,7 +67,7 @@ function App(props) {
       </Routes>
     
     );
-  );
+
 }
 
 export default App;
