@@ -1,9 +1,14 @@
 import Header from 'header/Header';
-import React from 'react';
-import "mypage/component/ModifyInfo.css"
+import "mypage/component/ModifyInfo.css";
 import InfoInput from './InfoInput';
+import { useLocation } from 'react-router-dom';
 
 function ModifyInfo(props) {
+    const userType = localStorage.getItem("userType");
+    const location = useLocation();
+    const userInfo = location.state;
+
+    const buttonStyle = userType === "PROTEGE" ? { backgroundColor: '#FF961B'} : {};
     return (
         <div className='modiInfo-container'>
             <Header/> 
@@ -15,7 +20,7 @@ function ModifyInfo(props) {
                 </div>
             </div>
             <InfoInput/>
-            <button className='modiInfo-saveBtn'>저장</button>
+            <button className='modiInfo-saveBtn' style={buttonStyle}>저장</button>
         </div>
     );
 }

@@ -49,6 +49,14 @@ function Header() {
         return "카드신청";
       case "/cardapp/simplepw":
         return "카드신청";
+      case "/mypage":
+        return "마이페이지";
+      case "/modifyinfo":
+        return "마이페이지";
+      case "/subinput":
+        return "마이페이지";
+      case "/consumption":
+          return "소비내역 조회";
       default:
         return null;
     }

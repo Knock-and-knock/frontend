@@ -15,12 +15,14 @@ export function call(api, method, request) {
     headers: headers,
     url: api,
     method: method,
+    // credentials: 'include',
   };
   //조회는 요청 data가 없음, 입력과 수정시에는 보내는 data있음
   if (request) {
     // GET method
     options.body = JSON.stringify(request);
   }
+
   //비동기통신: axios, ajax, fetch, promise...
   return fetch(options.url, options)
     .then((response) =>
@@ -34,9 +36,6 @@ export function call(api, method, request) {
       })
     )
     .catch((error) => {
-
-
-        
       // 추가된 부분
       console.log(error.status);
       if (error.status === undefined || error.status === 403) {
@@ -46,31 +45,33 @@ export function call(api, method, request) {
     });
 }
 
-export function signin(userDTO) {
-  
-  console.log(userDTO);
-  return call("http://122.128.54.136:20000/api/v1/auth/login", "POST", userDTO).then(
-    (response) => {
-      console.log(response);
-      if (response.accessToken) {
-        // 로컬 스토리지에 토큰 저장
-        localStorage.setItem("loginUser", response.userType);
-        localStorage.setItem(ACCESS_TOKEN, response.accessToken);
-        // token이 존재하는 경우 Todo 화면으로 리디렉트
-        if(response.userType === "PROTECTOR"){
-          window.location.href = "/nokmain";
-        }else{
-          window.location.href = "/main";
-        }
+// export function signin(userDTO) {
+
+//     call("http://192.168.0.27:9090/api/v1/auth/login/normal", "POST", userDTO).then((response)=>{
+//       if (response.accessToken) {
+//         // 로컬 스토리지에 토큰 저장
+//         localStorage.setItem("loginUser", response.userType);
+//         localStorage.setItem("userNo", response.userNo);
+//         localStorage.setItem(ACCESS_TOKEN, response.accessToken);
         
-      }
-    }
-  );
-}
+//         // token이 존재하는 경우 Todo 화면으로 리디렉트
+//         if (response.userType === "PROTECTOR") {
+//             window.location.href = "/nokmain";
+//         } else {
+//             window.location.href = "/main";
+//         }
+//     } else {
+//         throw new Error(response.message || '로그인 실패');
+//     }
+//     }).catch(
+//       (error)=>{
+//         console.error('로그인 오류:', error);
+//         throw error; // 에러를 호출자에게 던짐
+//    });
+  
+// }
+
 export function signout() {
   localStorage.setItem(ACCESS_TOKEN, null);
   window.location.href = "/loginId";
 }
-// export function signup(userDTO) {
-//   return call("http://localhost:9999/auth/signup", "POST", userDTO);
-// }

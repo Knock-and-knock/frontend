@@ -17,7 +17,6 @@ import AddAddress from 'cardCreate/application/AddAddress';
 import SimplePW from 'cardCreate/application/SimplePW';
 import { createContext } from 'react';
 import Modal from "react-modal";
-import WelfareMain from "welfare/component/welfareMain";
 
 Modal.setAppElement("#root");
 export const CommonContext = createContext();
@@ -38,7 +37,7 @@ function App(props){
         <Route path="/match" element={<Match />} />
         <Route path="/matching" element={<Matching />} />
         <Route path="/voicechat" element={<VoiceChat />} />
-        <Route path="/welfare" element={<WelfareMain />} />
+
         <Route path="/cardcreate" element={<CardCreate />} />
         <Route path="/cardapp/*" element={<CardApp />}>
           <Route path="defaultinfo" element={<DefaultInfo />} />

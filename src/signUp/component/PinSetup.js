@@ -1,13 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react';
 import SignUpHeader from './header/SignUpHeader';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useMember } from 'signUp/SignUpMain';
 
 function PinSetup(props) {
     const [pin,setPin] =useState("");
     const inputRef = useRef(null);
     const {handlechange} =useMember();
-    
+    const navi = useNavigate();
+
     useEffect(() => {
         inputRef.current.focus();
     }, []);
@@ -17,12 +18,21 @@ function PinSetup(props) {
         setPin(value);
         handlechange(e);
     };
+    const handleNextClick=()=>{
+        navi("/signup/pincheck");
+    }
+    const handleCircleWrapClick = () => {
+        if (inputRef.current) {
+            inputRef.current.focus();
+        }
+    };
+    const buttonClass = pin.length === 6 ? "signup-nextBtn" : "signup-nextBtn disabled";
     const circles = Array(6).fill(null); 
     return (
         <div>
            <SignUpHeader/>
            <div className="signup-container">
-                <div className="circle-wrap" >
+                <div className="circle-wrap" onClick={handleCircleWrapClick}>
                     {circles.map((_, index) => (
                         <div key={index}  className={`small-circle ${pin.length > index ? 'filled' : ''}`}></div>
                     ))}
@@ -43,7 +53,7 @@ function PinSetup(props) {
             </div>
             <div className="signUpBtn">
                 <Link to="../quickloginsetup" className="signup-backBtn">이전</Link>
-                <Link to="../pincheck" className="signup-nextBtn">다음</Link>
+                <button className={buttonClass} onClick={handleNextClick}> 다음</button>
             </div>
         </div>
     );

@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import SignUpHeader from './header/SignUpHeader';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import check from 'image/icon/small-check.svg';
 import { useMember } from 'signUp/SignUpMain';
 import { call } from 'login/service/ApiService';
@@ -8,10 +8,28 @@ import { call } from 'login/service/ApiService';
 function QuickLoginSetup(props) {
     const [isPinChecked, setIsPinChecked] = useState(false);
     const [isBioChecked, setIsBioChecked] = useState(false);
-    const {userInfo} =useMember();
+    const {userInfo, setUserInfo} =useMember();
+    const navi = useNavigate();
+    
+    useEffect(()=>{
+        if (userInfo.userSimplePassword) {
+                setIsPinChecked(true);
+            } else {
+                setIsPinChecked(false);
+            }
+        }, [userInfo.userSimplePassword]);
 
     const handlePinCircleClick = () => {
-        setIsPinChecked(!isPinChecked);
+        if (isPinChecked) {
+            setUserInfo(prevState => ({
+                ...prevState,
+                userSimplePassword: ''
+            }));
+        }else{
+            setIsPinChecked(!isPinChecked);
+            navi("/signup/pinsetup");
+        }
+        
     };
     const handleBioCircleClick = () => {
         setIsBioChecked(!isBioChecked);
@@ -22,7 +40,7 @@ function QuickLoginSetup(props) {
             window.location.href = "/signup/signupsuccess";
         }).catch((error)=>{
             alert("회원가입에 실패했습니다. 다시 시도해주세요");
-            window.location.href = "/loginid";
+            window.location.href = "/signup/register";
         });
     }
     return (
@@ -72,9 +90,8 @@ function QuickLoginSetup(props) {
                 
                 </div>
             <div className="signUpBtn">
-
-                <button className="signup-backBtn" onClick={handleSumit}>건너뛰기</button>
-                <Link to="../pinsetup" className="signup-nextBtn">설정</Link>
+                <Link to="../rolecheck" className="signup-backBtn">이전</Link>
+                <button className="signup-nextBtn" onClick={handleSumit}>저장</button>
             </div>
         </div>
     );

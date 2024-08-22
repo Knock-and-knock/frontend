@@ -22,6 +22,11 @@ input::placeholder {
     border-bottom: 2px solid #80BAFF;
   }
 
+.signup-input-error{
+    outline: none;
+    border-bottom: 2px solid #FF5959;
+}
+
   /* button */
 .signUpBtn{
     width: 100%;
@@ -124,10 +129,12 @@ input::placeholder {
     margin: 15px 0px 0px;
 }
 
-.selected-role {
+.selected-role-blue {
     border: 2px solid #80BAFF; 
 }
-
+.selected-role-red {
+    border: 2px solid #FF5959; 
+}
 /* QuickLoginSetup */
 .signup-quickLogin{
     border-bottom: 1px solid #E1E6EC;
@@ -170,7 +177,12 @@ input::placeholder {
     left: 50%;
     transform: translate(-50%, -50%);   
 }
-  
+.error-message{
+    color: #FF5959;
+    font-size: 16px;
+    height: 20px;
+    font-weight: bold;
+}
 /* SignUpSuccess */
 .success-container{
     margin: 200px 0px;

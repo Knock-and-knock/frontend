@@ -1,14 +1,14 @@
-import { CommonContext } from "App2";
+import { CommonContext } from "App3";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
-function MyExtraInfo(props) {
+function MyExtraInfo({userInfo}) {
     const navi = useNavigate();
     const handelSubstituteClick=()=>{
         navi("/subinput");
     };
     const handleModifyClick=()=>{
-        navi("/modifyinfo");
+        navi("/modifyinfo",{state:{userInfo}});
     }
     const {loginUser} = useContext(CommonContext);
     const getSubstituteBtn = (userType)=>{
@@ -27,31 +27,31 @@ function MyExtraInfo(props) {
             </div>
             <div className='info-content'>
                 <p>생년월일</p>
-                <p>aaa</p>
+                <p>{userInfo.userBitrh}</p>
             </div>
             <div className='info-content'>
                 <p>성별</p>
-                <p>aaa</p>
+                <p>{userInfo.userGender}</p>
             </div>
             <div className='info-content'>
                 <p>키</p>
-                <p>aaa</p>
+                <p>{userInfo.userHeigt}</p>
             </div>
             <div className='info-content'>
                 <p>몸무게</p>
-                <p>aaa</p>
+                <p>{userInfo.userweight}</p>
             </div>
             <div className='info-content'>
                 <p>질병</p>
-                <p>aaa</p>
+                <p>{userInfo.userDisease}</p>
             </div>
             <div className='info-content'>
                 <p>주소</p>
-                <p>aaa</p>
+                <p>{userInfo.userAddress}</p>
             </div>
             <div className='info-content'>
                 <p>이메일</p>
-                <p>aaa</p>
+                <p>{userInfo.userEmail}</p>
             </div>
             {getSubstituteBtn(loginUser)}
         </div>

@@ -1,4 +1,5 @@
 
+import Consumption from 'consume/Consumption';
 import LoginBio from 'login/LoginBio';
 import LoginId from 'login/LoginId';
 import LoginPw from 'login/LoginPw';
@@ -22,6 +23,7 @@ export const CommonContext = createContext();
 function App(props) {
    
   const [loginUser, setLoginUser] = useState({});
+  
   return (
     <CommonContext.Provider value={{loginUser, setLoginUser}}>
     <BrowserRouter>
@@ -32,6 +34,7 @@ function App(props) {
           <Route path="/mypage" element={<MyPage />} />
           <Route path="/subinput" element={<SubstituteInput />} />
           <Route path="/modifyinfo" element={<ModifyInfo />} />
+          <Route path="/consumption" element={<Consumption />} />
           
           <Route path="/signup/*" element={<SignUpMain/>} >
             <Route path="register" element={<Register/>} />
