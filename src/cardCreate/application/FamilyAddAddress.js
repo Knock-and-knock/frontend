@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import AddressSearchComponent from "./AddressSearchComponent";
 import { useCardCreate } from "./CardApp";
 
-function AddAddress() {
+function FamilyAddAddress() {
   const { userInfo, setUserInfo } = useCardCreate();
   const navigate = useNavigate();
   const [isButtonEnabled, setIsButtonEnabled] = useState(false);
@@ -13,7 +13,7 @@ function AddAddress() {
   const [detailAddress, setDetailAddress] = useState(""); // 상세주소를 저장할 상태
 
   const handlePaging = () => {
-    navigate("/cardapp/simplepw");
+    navigate("/cardapp/fsimplepw");
   };
 
   // 다음 주소검색 api
@@ -62,11 +62,11 @@ function AddAddress() {
       <Header />
       <div className="app-title">
         <div className="title-text">
-          <span>집주소를</span>
+          <span>가족의 집주소를</span>
           <br />
           <span>입력해주세요</span>
         </div>
-        <div className="pageNumber">6/7</div>
+        <div className="pageNumber">3/4</div>
       </div>
       <div className="app-input-container">
         <div className="app-input">
@@ -109,4 +109,4 @@ function AddAddress() {
   );
 }
 
-export default AddAddress;
+export default FamilyAddAddress;

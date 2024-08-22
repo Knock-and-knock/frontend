@@ -1,11 +1,10 @@
 import "cardCreate/application/CardApplication.css";
 import Header from "header/Header";
 import { useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { useCardCreate } from "./CardApp";
 
-function SimplePW(props) {
-  const { userInfo, setUserInfo, handleSendInfo } = useCardCreate();
+function FamilySimplePW(props) {
+  const { userInfo, setUserInfo, handlefSendInfo } = useCardCreate();
   const [simplePw, setSimplePw] = useState(["", "", "", ""]);
   const [isButtonEnabled, setIsButtonEnabled] = useState(false);
 
@@ -51,10 +50,9 @@ function SimplePW(props) {
       inputRefs[0].current.focus(); // 첫번째 input으로 포커스 이동
     }
   };
-  const navigate = useNavigate();
+
   const handlePaging = () => {
-    handleSendInfo();
-    navigate("/cardapp/familycardyn");
+    handlefSendInfo()
   };
 
   return (
@@ -66,7 +64,7 @@ function SimplePW(props) {
           <br />
           <span>숫자 4자리를 입력하세요</span>
         </div>
-        <div className="pageNumber">7/7</div>
+        <div className="pageNumber">4/4</div>
       </div>
       <div className="password-container">
         <div className="pw-input">
@@ -100,4 +98,4 @@ function SimplePW(props) {
   );
 }
 
-export default SimplePW;
+export default FamilySimplePW;

@@ -3,11 +3,8 @@ import LoginBtn from './component/button/LoginBtn';
 import LoginHeader from './component/header/LoginHeader';
 import "./Login.css";
 import { signin } from './service/ApiService';
-import { useContext } from 'react';
-import { CommonContext } from 'App2';
-
 function LoginId(props) {
-    const {loginUser, setLoginUser} = useContext(CommonContext);
+    // const {loginUser, setLoginUser} = useContext(CommonContext);
     const navigate =useNavigate();
     const handleGoSignUp = () =>{
         navigate("/signup/register")
@@ -19,11 +16,8 @@ function LoginId(props) {
         const userPassword = data.get("userPassword");
         console.log({ userId: userId, userPassword: userPassword });
         signin({ userId: userId, userPassword: userPassword, loginType: "NORMAL"});
-        const loginUserType = localStorage.getItem("loginUser");
-        setLoginUser(loginUserType);
-
+        
       };
-
     return (
         <div>
             <LoginHeader/>
@@ -43,5 +37,4 @@ function LoginId(props) {
         </div>
     );
 }
-
 export default LoginId;
