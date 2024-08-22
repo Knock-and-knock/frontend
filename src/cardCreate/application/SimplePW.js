@@ -1,6 +1,7 @@
 import "cardCreate/application/CardApplication.css";
 import Header from "header/Header";
 import { useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useCardCreate } from "./CardApp";
 
 function SimplePW(props) {
@@ -50,9 +51,10 @@ function SimplePW(props) {
       inputRefs[0].current.focus(); // 첫번째 input으로 포커스 이동
     }
   };
-
+  const navigate = useNavigate();
   const handlePaging = () => {
-    handleSendInfo()
+    handleSendInfo();
+    navigate("/cardapp/familycardyn");
   };
 
   return (

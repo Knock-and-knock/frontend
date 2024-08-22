@@ -2,7 +2,7 @@ import "cardCreate/application/CardApplication.css";
 import Header from "header/Header";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useFamilyCardCreate } from "./FamilyCardApp";
+import { useFamilyCardCreate } from "./CardApp";
 
 function FamilyDefaultInfo(props) {
   const { subUserInfo, setSubUserInfo } = useFamilyCardCreate();
@@ -28,7 +28,7 @@ function FamilyDefaultInfo(props) {
   const navigate = useNavigate();
 
   const handlePaging = () => {
-    navigate("/familycard/fextrainfo");
+    navigate("/cardapp/fextrainfo");
   };
 
   // 빈칸 확인

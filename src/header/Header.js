@@ -49,15 +49,15 @@ function Header() {
         return "카드신청";
       case "/cardapp/simplepw":
         return "카드신청";
-        case "/familycard/familycardyn":
+        case "/cardapp/familycardyn":
         return "가족카드 신청";
-        case "/familycard/fdefaultinfo":
+        case "/cardapp/fdefaultinfo":
         return "가족카드 신청";
-        case "/familycard/fextrainfo":
+        case "/cardapp/fextrainfo":
         return "가족카드 신청";
-        case "/familycard/faddress":
+        case "/cardapp/faddress":
         return "가족카드 신청";
-        case "/familycard/fsimplepw":
+        case "/cardapp/fsimplepw":
         return "가족카드 신청";
       default:
         return null;

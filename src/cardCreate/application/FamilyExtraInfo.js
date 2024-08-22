@@ -2,10 +2,8 @@ import "cardCreate/application/CardApplication.css";
 import Header from "header/Header";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useFamilyCardCreate } from "./FamilyCardApp";
+import { useFamilyCardCreate } from "./CardApp";
 
-
-//여기 데이터받는 기능부터 하면돼
 function FamilyExtraInfo(props) {
 
   const { subUserInfo, setSubUserInfo } = useFamilyCardCreate();
@@ -14,7 +12,7 @@ function FamilyExtraInfo(props) {
   };
   const navigate = useNavigate();
   const handlePaging = () => {
-    navigate("/familycard/faddress");
+    navigate("/cardapp/faddress");
   };
 
   const [isButtonEnabled, setIsButtonEnabled] = useState(false);
@@ -22,8 +20,8 @@ function FamilyExtraInfo(props) {
   // 빈칸 확인
   useEffect(() => {
     const extraInfo = [
-      "engFirstName",
-      "engLastName",
+      "cardIssueFirstEname",
+      "cardIssueLastEname",
       "relation",
     ];
     const isFull = extraInfo.every(
@@ -53,16 +51,16 @@ function FamilyExtraInfo(props) {
             <input
               className="firstInput"
               placeholder="영문 성"
-              name="engFirstName"
+              name="cardIssueFirstEname"
               onChange={handlechange}
-              value={subUserInfo.engFirstName || ""}
+              value={subUserInfo.cardIssueFirstEname || ""}
             />
             <input
               className="secInput"
               placeholder="영문 이름"
-              name="engLastName"
+              name="cardIssueLastEname"
               onChange={handlechange}
-              value={subUserInfo.engLastName || ""}
+              value={subUserInfo.cardIssueLastEname || ""}
             />
           </div>
           <p className="caption-text">여권과 동일한 영문명을 입력해 주세요</p>

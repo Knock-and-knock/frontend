@@ -15,15 +15,14 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import AddAddress from "cardCreate/application/AddAddress";
 import CardAppSuccess from "cardCreate/application/CardAppSuccess";
-import FamilyCardApp from "cardCreate/application/FamilyCardApp";
+import FamilyAddAddress from "cardCreate/application/FamilyAddAddress";
 import FamilyCardYN from "cardCreate/application/FamilyCardYN";
 import FamilyDefaultInfo from "cardCreate/application/FamilyDefaultInfo";
+import FamilyExtraInfo from "cardCreate/application/FamilyExtraInfo";
+import FamilySimplePW from "cardCreate/application/FamilySimplePW";
 import SimplePW from "cardCreate/application/SimplePW";
 import { createContext } from "react";
 import Modal from "react-modal";
-import FamilyExtraInfo from "cardCreate/application/FamilyExtraInfo";
-import FamilyAddAddress from "cardCreate/application/FamilyAddAddress";
-import FamilySimplePW from "cardCreate/application/FamilySimplePW";
 
 Modal.setAppElement("#root");
 export const CommonContext = createContext();
@@ -52,8 +51,6 @@ function App(props) {
           <Route path="fundsourceinfo" element={<FundSourceInfo />} />
           <Route path="address" element={<AddAddress />} />
           <Route path="simplepw" element={<SimplePW />} />
-        </Route>
-        <Route path="/familycard/*" element={<FamilyCardApp />}>
           <Route path="familycardyn" element={<FamilyCardYN />} />
           <Route path="fdefaultinfo" element={<FamilyDefaultInfo />} />
           <Route path="fextrainfo" element={<FamilyExtraInfo />} />

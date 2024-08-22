@@ -1,12 +1,10 @@
 import "cardCreate/application/CardApplication.css";
 import Header from "header/Header";
 import { useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useFamilyCardCreate } from "./FamilyCardApp";
+import { useFamilyCardCreate } from "./CardApp";
 
 function FamilySimplePW(props) {
-  const navigate = useNavigate();
-  const { subUserInfo, setSubUserInfo,handleSendInfo } = useFamilyCardCreate();
+  const { subUserInfo, setSubUserInfo,handlefSendInfo } = useFamilyCardCreate();
   const [simplePw, setSimplePw] = useState(["", "", "", ""]);
   const [isButtonEnabled, setIsButtonEnabled] = useState(false);
 
@@ -54,8 +52,7 @@ function FamilySimplePW(props) {
   };
 
   const handlePaging = () => {
-    handleSendInfo()
-    navigate("/familycard/cardsuccess");
+    handlefSendInfo()
   };
 
   return (

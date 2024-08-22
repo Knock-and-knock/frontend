@@ -3,7 +3,7 @@ import Header from "header/Header";
 import no from "image/no.png";
 import yes from "image/yes.png";
 import { useNavigate } from "react-router-dom";
-import { useFamilyCardCreate } from "./FamilyCardApp";
+import { useFamilyCardCreate } from "./CardApp";
 
 function FamilyCardYN(props) {
   const { subUserInfo, setSubUserInfo } = useFamilyCardCreate();
@@ -14,7 +14,7 @@ function FamilyCardYN(props) {
       ...subUserInfo,
       cardIssueIsFamily: true
     });
-    navigate("/familycard/fdefaultinfo");
+    navigate("/cardapp/fdefaultinfo");
   };
 
   const handleSuccess = () => {
@@ -22,7 +22,7 @@ function FamilyCardYN(props) {
       ...subUserInfo,
       cardIssueIsFamily: false
     });
-    navigate("/familycard/cardsuccess");
+    navigate("/cardapp/cardsuccess");
   };
 
   return (
