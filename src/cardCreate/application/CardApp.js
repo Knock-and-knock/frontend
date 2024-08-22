@@ -5,12 +5,9 @@ import { Outlet, useNavigate } from "react-router-dom";
 const CardCreateContext = createContext();
 export const useCardCreate = () => useContext(CardCreateContext);
 
-const FamilyCardContext = createContext();
-export const useFamilyCardCreate = () => useContext(FamilyCardContext);
 
 function CardApp(props) {
   const [userInfo, setUserInfo] = useState({});
-  const [subUserInfo, setSubUserInfo] = useState({});
   //데이터전송로직
   const handleSendInfo = (e) => {
     call("http://122.128.54.136:20000/api/v1/card", "POST", userInfo)
@@ -26,7 +23,7 @@ function CardApp(props) {
   };
 
   const handlefSendInfo = (e) => {
-    call("http://122.128.54.136:20000/api/v1/card", "POST", subUserInfo)
+    call("http://122.128.54.136:20000/api/v1/card", "POST", userInfo)
       .then((response) => {
         console.log(response);
         navigate("/cardapp/cardsuccess");
@@ -45,18 +42,13 @@ function CardApp(props) {
 
   useEffect(() => {
     console.log(userInfo);
-    console.log(subUserInfo);
-  }, [userInfo, subUserInfo]);
+  }, [userInfo]);
   return (
     <div>
       <CardCreateContext.Provider
-        value={{ userInfo, setUserInfo, handleSendInfo }}
+        value={{ userInfo, setUserInfo, handleSendInfo, handlefSendInfo }}
       >
-        <FamilyCardContext.Provider
-          value={{ subUserInfo, setSubUserInfo, handlefSendInfo }}
-        >
           <Outlet />
-        </FamilyCardContext.Provider>
       </CardCreateContext.Provider>
     </div>
   );

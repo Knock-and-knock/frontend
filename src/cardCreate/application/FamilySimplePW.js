@@ -1,10 +1,10 @@
 import "cardCreate/application/CardApplication.css";
 import Header from "header/Header";
 import { useRef, useState } from "react";
-import { useFamilyCardCreate } from "./CardApp";
+import { useCardCreate } from "./CardApp";
 
 function FamilySimplePW(props) {
-  const { subUserInfo, setSubUserInfo,handlefSendInfo } = useFamilyCardCreate();
+  const { userInfo, setUserInfo, handlefSendInfo } = useCardCreate();
   const [simplePw, setSimplePw] = useState(["", "", "", ""]);
   const [isButtonEnabled, setIsButtonEnabled] = useState(false);
 
@@ -33,7 +33,7 @@ function FamilySimplePW(props) {
 
       // 비밀번호를 하나의 문자열로 만들어 userInfo에 저장
       const simplePwString = newSimplePw.join("");
-      setSubUserInfo({ ...subUserInfo, cardIssuePassword: simplePwString });
+      setUserInfo({ ...userInfo, cardIssuePassword: simplePwString });
 
       // 모든 필드가 채워지면 버튼 활성화
       if (simplePwString.length === 4) {

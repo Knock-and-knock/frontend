@@ -2,13 +2,13 @@ import "cardCreate/application/CardApplication.css";
 import Header from "header/Header";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useFamilyCardCreate } from "./CardApp";
+import { useCardCreate } from "./CardApp";
 
 function FamilyExtraInfo(props) {
 
-  const { subUserInfo, setSubUserInfo } = useFamilyCardCreate();
+  const { userInfo, setUserInfo } = useCardCreate();
   const handlechange = (e) => {
-    setSubUserInfo({ ...subUserInfo, [e.target.name]: e.target.value });
+    setUserInfo({ ...userInfo, [e.target.name]: e.target.value });
   };
   const navigate = useNavigate();
   const handlePaging = () => {
@@ -26,12 +26,12 @@ function FamilyExtraInfo(props) {
     ];
     const isFull = extraInfo.every(
       (field) =>
-        subUserInfo[field] &&
-      subUserInfo[field].trim() !== ""
+        userInfo[field] &&
+      userInfo[field].trim() !== ""
     );
 
     setIsButtonEnabled(isFull);
-  }, [subUserInfo]);
+  }, [userInfo]);
 
   return (
     <div className="card-app-container">
@@ -53,14 +53,14 @@ function FamilyExtraInfo(props) {
               placeholder="영문 성"
               name="cardIssueFirstEname"
               onChange={handlechange}
-              value={subUserInfo.cardIssueFirstEname || ""}
+              value={userInfo.cardIssueFirstEname || ""}
             />
             <input
               className="secInput"
               placeholder="영문 이름"
               name="cardIssueLastEname"
               onChange={handlechange}
-              value={subUserInfo.cardIssueLastEname || ""}
+              value={userInfo.cardIssueLastEname || ""}
             />
           </div>
           <p className="caption-text">여권과 동일한 영문명을 입력해 주세요</p>
@@ -71,7 +71,7 @@ function FamilyExtraInfo(props) {
             placeholder="관계"
             name="relation"
             onChange={handlechange}
-            value={subUserInfo.relation || ""}
+            value={userInfo.relation || ""}
           />
         </div>
       </div>

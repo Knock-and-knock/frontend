@@ -3,11 +3,10 @@ import Header from "header/Header.js";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AddressSearchComponent from "./AddressSearchComponent";
-import { useFamilyCardCreate } from "./CardApp";
+import { useCardCreate } from "./CardApp";
 
 function FamilyAddAddress() {
-
-  const { subUserInfo, setSubUserInfo } = useFamilyCardCreate();
+  const { userInfo, setUserInfo } = useCardCreate();
   const navigate = useNavigate();
   const [isButtonEnabled, setIsButtonEnabled] = useState(false);
   const [address, setAddress] = useState(""); // 도로명 주소를 저장할 상태
@@ -40,7 +39,7 @@ function FamilyAddAddress() {
     setIsPostcodeOpen(false); // 주소 검색 후 창 닫기
 
     // cardIssueAddress를 업데이트
-    setSubUserInfo({ ...subUserInfo, cardIssueAddress: `${fullAddress} ${detailAddress}`.trim() });
+    setUserInfo({ ...userInfo, cardIssueAddress: `${fullAddress} ${detailAddress}`.trim() });
   };
 
   // 상세주소 변경 시 처리
@@ -49,7 +48,7 @@ function FamilyAddAddress() {
     setDetailAddress(value);
 
     // cardIssueAddress를 업데이트
-    setSubUserInfo({ ...subUserInfo, cardIssueAddress: `${address} ${value}`.trim() });
+    setUserInfo({ ...userInfo, cardIssueAddress: `${address} ${value}`.trim() });
   };
 
   // 빈칸 확인

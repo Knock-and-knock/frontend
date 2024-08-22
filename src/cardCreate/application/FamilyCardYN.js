@@ -3,23 +3,23 @@ import Header from "header/Header";
 import no from "image/no.png";
 import yes from "image/yes.png";
 import { useNavigate } from "react-router-dom";
-import { useFamilyCardCreate } from "./CardApp";
+import { useCardCreate } from "./CardApp";
 
 function FamilyCardYN(props) {
-  const { subUserInfo, setSubUserInfo } = useFamilyCardCreate();
+  const { userInfo, setUserInfo } = useCardCreate();
   const navigate = useNavigate();
 
   const handleChange = () => {
-    setSubUserInfo({
-      ...subUserInfo,
+    setUserInfo({
+      ...userInfo,
       cardIssueIsFamily: true
     });
     navigate("/cardapp/fdefaultinfo");
   };
 
   const handleSuccess = () => {
-    setSubUserInfo({
-      ...subUserInfo,
+    setUserInfo({
+      ...userInfo,
       cardIssueIsFamily: false
     });
     navigate("/cardapp/cardsuccess");

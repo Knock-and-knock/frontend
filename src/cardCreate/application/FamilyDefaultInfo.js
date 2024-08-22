@@ -2,10 +2,10 @@ import "cardCreate/application/CardApplication.css";
 import Header from "header/Header";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useFamilyCardCreate } from "./CardApp";
+import { useCardCreate } from "./CardApp";
 
 function FamilyDefaultInfo(props) {
-  const { subUserInfo, setSubUserInfo } = useFamilyCardCreate();
+  const { userInfo, setUserInfo } = useCardCreate();
   
 
   const formatPhoneNumber = (value) => {
@@ -17,9 +17,9 @@ function FamilyDefaultInfo(props) {
   const handlechange = (e) => {
     const { name, value } = e.target;
     if (name === "fphone") {
-      setSubUserInfo({ ...subUserInfo, [name]: formatPhoneNumber(value) });
+      setUserInfo({ ...userInfo, [name]: formatPhoneNumber(value) });
     } else {
-      setSubUserInfo({ ...subUserInfo, [name]: value });
+      setUserInfo({ ...userInfo, [name]: value });
     }
   };
 
@@ -36,13 +36,13 @@ function FamilyDefaultInfo(props) {
     const extraInfo = ["fname", "fphone"];
     const isFull = extraInfo.every(
       (field) =>
-        subUserInfo[field] &&
-      subUserInfo[field].trim() !== "" &&
-      subUserInfo[field] !== "default"
+        userInfo[field] &&
+      userInfo[field].trim() !== "" &&
+      userInfo[field] !== "default"
     );
 
     setIsButtonEnabled(isFull);
-  }, [subUserInfo]);
+  }, [userInfo]);
 
   return (
     <div className="card-app-container">
@@ -62,7 +62,7 @@ function FamilyDefaultInfo(props) {
             placeholder="이름"
             name="fname"
             onChange={handlechange}
-            value={subUserInfo.fname || ""}
+            value={userInfo.fname || ""}
           />
         </div>
         <div className="app-input">
@@ -73,7 +73,7 @@ function FamilyDefaultInfo(props) {
             name="fphone"
             onChange={handlechange}
             maxLength={13}
-            value={subUserInfo.fphone || ""}
+            value={userInfo.fphone || ""}
           />
         </div>
       </div>
