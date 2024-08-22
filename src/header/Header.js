@@ -34,6 +34,16 @@ function Header() {
       case "/cardapp/address":
       case "/cardapp/simplepw":
         return "카드신청";
+        case "/cardapp/familycardyn":
+        return "가족카드 신청";
+        case "/cardapp/fdefaultinfo":
+        return "가족카드 신청";
+        case "/cardapp/fextrainfo":
+        return "가족카드 신청";
+        case "/cardapp/faddress":
+        return "가족카드 신청";
+        case "/cardapp/fsimplepw":
+        return "가족카드 신청";
       default:
         // 와일드카드 경로 처리
         if (pathname.startsWith('/welfare-input/')) {

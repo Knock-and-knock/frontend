@@ -1,7 +1,4 @@
-import { useContext } from "react";
-import { useNavigate } from "react-router-dom";
 const ACCESS_TOKEN = "ACCESS_TOKEN";
-
 export function call(api, method, request) {
   let headers = new Headers({
     "Content-Type": "application/json",
@@ -15,6 +12,7 @@ export function call(api, method, request) {
     headers: headers,
     url: api,
     method: method,
+    // credentials: 'include',
   };
   //조회는 요청 data가 없음, 입력과 수정시에는 보내는 data있음
   if (request) {
@@ -34,9 +32,6 @@ export function call(api, method, request) {
       })
     )
     .catch((error) => {
-
-
-        
       // 추가된 부분
       console.log(error.status);
       if (error.status === undefined || error.status === 403) {
@@ -45,16 +40,16 @@ export function call(api, method, request) {
       return Promise.reject(error);
     });
 }
-
 export function signin(userDTO) {
   
   console.log(userDTO);
-  return call("http://122.128.54.136:20000/api/v1/auth/login", "POST", userDTO).then(
+  return call("http://122.128.54.136:20000/api/v1/auth/login/normal", "POST", userDTO).then(
     (response) => {
       console.log(response);
       if (response.accessToken) {
         // 로컬 스토리지에 토큰 저장
         localStorage.setItem("loginUser", response.userType);
+        localStorage.setItem("userNo", response.userNo);
         localStorage.setItem(ACCESS_TOKEN, response.accessToken);
         // token이 존재하는 경우 Todo 화면으로 리디렉트
         if(response.userType === "PROTECTOR"){
@@ -71,6 +66,3 @@ export function signout() {
   localStorage.setItem(ACCESS_TOKEN, null);
   window.location.href = "/loginId";
 }
-// export function signup(userDTO) {
-//   return call("http://localhost:9999/auth/signup", "POST", userDTO);
-// }
