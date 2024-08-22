@@ -25,11 +25,11 @@ function ExtraInfo(props) {
   // 빈칸 확인
   useEffect(() => {
     const extraInfo = [
-      "engFirstName",
-      "engLastName",
-      "email",
-      "account",
-      "bank",
+      "cardIssueFirstEname",
+      "cardIssueLastEname",
+      "cardIssueEmail",
+      "cardIssueAccount",
+      "cardIssueBank",
     ];
     const isFull = extraInfo.every(
       (field) =>
@@ -59,16 +59,16 @@ function ExtraInfo(props) {
             <input
               className="firstInput"
               placeholder="영문 성"
-              name="engFirstName"
+              name="cardIssueFirstEname"
               onChange={handlechange}
-              value={userInfo.engFirstName || ""}
+              value={userInfo.cardIssueFirstEname || ""}
             />
             <input
               className="secInput"
               placeholder="영문 이름"
-              name="engLastName"
+              name="cardIssueLastEname"
               onChange={handlechange}
-              value={userInfo.engLastName || ""}
+              value={userInfo.cardIssueLastEname || ""}
             />
           </div>
           <p className="caption-text">여권과 동일한 영문명을 입력해 주세요</p>
@@ -77,9 +77,9 @@ function ExtraInfo(props) {
           <span>이메일</span>
           <input
             placeholder="이메일주소"
-            name="email"
+            name="cardIssueEmail"
             onChange={handlechange}
-            value={userInfo.email || ""}
+            value={userInfo.cardIssueEmail || ""}
           />
           <p className="caption-text">
             카드발급 후 신청내용(계약서) 및 상품설명서,
@@ -92,9 +92,9 @@ function ExtraInfo(props) {
           <div className="double-input-container">
             <select
               className="bankSelectMenu"
-              name="bank"
+              name="cardIssueBank"
               onChange={handlechange}
-              value={userInfo.bank || ""}
+              value={userInfo.cardIssueBank || ""}
             >
               {selectList.map((item) => (
                 <option key={item.value} value={item.value}>
@@ -105,9 +105,9 @@ function ExtraInfo(props) {
             <input
               className="secInput"
               placeholder="계좌번호"
-              name="account"
+              name="cardIssueAccount"
               onChange={handlechange}
-              value={userInfo.account || ""}
+              value={userInfo.cardIssueAccount || ""}
             />
           </div>
         </div>

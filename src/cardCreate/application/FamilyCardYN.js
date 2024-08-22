@@ -3,15 +3,27 @@ import Header from "header/Header";
 import no from "image/no.png";
 import yes from "image/yes.png";
 import { useNavigate } from "react-router-dom";
+import { useFamilyCardCreate } from "./FamilyCardApp";
 
 function FamilyCardYN(props) {
-  const navigate=useNavigate();
-  const handleChange=()=>{
+  const { subUserInfo, setSubUserInfo } = useFamilyCardCreate();
+  const navigate = useNavigate();
+
+  const handleChange = () => {
+    setSubUserInfo({
+      ...subUserInfo,
+      cardIssueIsFamily: true
+    });
     navigate("/familycard/fdefaultinfo");
-  }
-  const handleSuccess=()=>{
-    navigate("/familycard/cardsuccess")
-  }
+  };
+
+  const handleSuccess = () => {
+    setSubUserInfo({
+      ...subUserInfo,
+      cardIssueIsFamily: false
+    });
+    navigate("/familycard/cardsuccess");
+  };
 
   return (
     <div className="card-app-container">
@@ -28,7 +40,7 @@ function FamilyCardYN(props) {
             <p>발급하고 싶습니다</p>
           </div>
           <div className="familyCard">
-            <img src={no} alt="비발급버튼" className="icon-no" onClick={handleSuccess}/>
+            <img src={no} alt="비발급버튼" className="icon-no" onClick={handleSuccess} />
             <p>발급하지 않습니다</p>
           </div>
         </div>

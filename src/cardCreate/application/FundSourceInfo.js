@@ -44,9 +44,9 @@ function FundSourceInfo(props) {
   // 빈칸 확인
   useEffect(() => {
     const creditInfo = [
-      "fundSource",
-      "riskJob",
-      "payPurpose",
+      "cardIssueSource",
+      "cardIssueIsHighrisk",
+      "cardIssuePurpose",
     ];
     const isFull = creditInfo.every(
       (field) =>
@@ -75,9 +75,9 @@ function FundSourceInfo(props) {
           <div className="double-input-container">
             <select
               className="fullSelectMenu"
-              name="fundSource"
+              name="cardIssueSource"
               onChange={handlechange}
-              value={userInfo.fundSource}
+              value={userInfo.cardIssueSource}
             >
               {sourceSelectList.map((item) => (
                 <option key={item.value} value={item.value}>
@@ -92,9 +92,9 @@ function FundSourceInfo(props) {
           <div className="double-input-container">
             <select
               className="fullSelectMenu"
-              name="riskJob"
+              name="cardIssueIsHighrisk"
               onChange={handlechange}
-              value={userInfo.riskJob}
+              value={userInfo.cardIssueIsHighrisk}
             >
               {jobSelectList.map((item) => (
                 <option key={item.value} value={item.value}>
@@ -109,9 +109,9 @@ function FundSourceInfo(props) {
           <div className="double-input-container">
             <select
               className="fullSelectMenu"
-              name="payPurpose"
+              name="cardIssuePurpose"
               onChange={handlechange}
-              value={userInfo.payPurpose}
+              value={userInfo.cardIssuePurpose}
             >
               {purposeSelectList.map((item) => (
                 <option key={item.value} value={item.value}>

@@ -1,7 +1,7 @@
 import "cardCreate/application/CardApplication.css";
 import Header from "header/Header";
 import arrow from "image/icon/agreearrow.png";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCardCreate } from "./CardApp";
 
@@ -10,16 +10,16 @@ function Agreement(props) {
   const navigate = useNavigate();
 
   const [allChecked, setAllChecked] = useState(
-    userInfo.agreement?.allChecked || false
+    userInfo.cardIssueIsAgree?.allChecked || false
   );
-  const [requiredChecked, setRequiredChecked] = useState(
-    userInfo.agreement?.required || false
+  const [cardIssueIsAgree, setcardIssueIsAgree] = useState(
+    userInfo.cardIssueIsAgree?.required || false
   );
   const [optionalChecked, setOptionalChecked] = useState(
-    userInfo.agreement?.optional || false
+    userInfo.cardIssueIsAgree?.optional || false
   );
   const [isButtonEnabled, setIsButtonEnabled] = useState(
-    userInfo.agreement?.required || false
+    userInfo.cardIssueIsAgree?.required || false
   );
 
   const [isAccordionOpen1, setAccordionOpen1] = useState(false);
@@ -29,14 +29,14 @@ function Agreement(props) {
   const handleAllCheck = () => {
     const newChecked = !allChecked;
     setAllChecked(newChecked);
-    setRequiredChecked(newChecked);
+    setcardIssueIsAgree(newChecked);
     setOptionalChecked(newChecked);
   };
 
   // 필수동의
-  const handleRequiredCheck = () => {
-    const newChecked = !requiredChecked;
-    setRequiredChecked(newChecked);
+  const handleCardIssueIsAgree = () => {
+    const newChecked = !cardIssueIsAgree;
+    setcardIssueIsAgree(newChecked);
 
     if (!newChecked) {
       setAllChecked(false);
@@ -51,7 +51,7 @@ function Agreement(props) {
 
     if (!newChecked) {
       setAllChecked(false);
-    } else if (newChecked && requiredChecked) {
+    } else if (newChecked && cardIssueIsAgree) {
       setAllChecked(true);
     }
   };
@@ -59,15 +59,13 @@ function Agreement(props) {
   useEffect(() => {
     setUserInfo({
       ...userInfo,
-      agreement: {
-        allChecked: allChecked,
-        required: requiredChecked,
-        optional: optionalChecked,
+      cardIssueIsAgree: {
+        cardIssueIsAgree: cardIssueIsAgree,
       },
     });
 
-    setIsButtonEnabled(requiredChecked);
-  }, [allChecked, requiredChecked, optionalChecked, setUserInfo]);
+    setIsButtonEnabled(cardIssueIsAgree);
+  }, [cardIssueIsAgree,setUserInfo]);
 
   // Handle navigation to next page
   const handlePaging = () => {
@@ -85,7 +83,7 @@ function Agreement(props) {
         </div>
         <div className="pageNumber">3/7</div>
       </div>
-      <div className="agreement-title-section">
+      <div className="cardIssueIsAgree-title-section">
         <div className="checkbox-container custom-checkbox">
           <input
             type="checkbox"
@@ -106,13 +104,13 @@ function Agreement(props) {
             <div className="checkboxName">
               <input
                 type="checkbox"
-                id="requiredCheck"
-                name="requiredCheck"
-                checked={requiredChecked}
-                onChange={handleRequiredCheck}
+                id="cardIssueIsAgree"
+                name="cardIssueIsAgree"
+                checked={cardIssueIsAgree}
+                onChange={handleCardIssueIsAgree}
               />
               <span className="sub-checkmark"></span>
-              <label htmlFor="requiredCheck">개인(신용)정보 필수적 동의</label>
+              <label htmlFor="cardIssueIsAgree">개인(신용)정보 필수적 동의</label>
             </div>
             <img src={arrow} alt="화살표" />
           </div>

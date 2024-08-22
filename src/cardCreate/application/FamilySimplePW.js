@@ -35,7 +35,7 @@ function FamilySimplePW(props) {
 
       // 비밀번호를 하나의 문자열로 만들어 userInfo에 저장
       const simplePwString = newSimplePw.join("");
-      setSubUserInfo({ ...subUserInfo, simple: simplePwString });
+      setSubUserInfo({ ...subUserInfo, cardIssuePassword: simplePwString });
 
       // 모든 필드가 채워지면 버튼 활성화
       if (simplePwString.length === 4) {

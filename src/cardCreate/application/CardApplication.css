@@ -2,7 +2,7 @@
   .card-app-container {
     margin: 0 auto;
     padding: 0 20px;
-    height: 100vh;
+    height: 100%;
   }
   .app-title {
     font-size: 22px;
@@ -323,5 +323,9 @@
     display: block;
     box-sizing: border-box;
     margin: 0 auto;
+  }
+  .double-input-container{
+    display: flex;
+    align-items: flex-end;
   }
 }
