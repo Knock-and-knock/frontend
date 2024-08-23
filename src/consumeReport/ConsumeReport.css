@@ -9,9 +9,15 @@
   flex-direction: column;
 }
 
+.consume-report-date-section{
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+
 .consume-report-date-container select{
   border: none;
-  font-size: 18px;
+  font-size: 22px;
   font-weight: bold;
 }
 
@@ -21,21 +27,42 @@
   margin-top: 5px;
 }
 
-.consume-report-price-container {
-  margin-top: -5px;
+.consume-report-price-section {
+  margin-top: 5px;
   display: flex;
   justify-content: space-between;
-  border: 1px solid;
+  font-size: 18px;
 }
 
 .report-search-filter {
-  height: 100%;
-  border: 1px solid blue;
+  width: 80px;
+  display: flex;
+  justify-content: space-between;
+  color: #686868;
 }
 
-.total-price555 {
-  border: 1px solid red;
+.report-search-filter-selected {
+  width: 120px;
+  display: flex;
+  justify-content: space-between;
+  color: #686868;
+  font-weight: bold;
+}
 
+.total-price {
+  font-weight: bold;
+}
+
+.go-mainred {
+  color: #FF5959;
+}
+
+.chart-container {
+  text-align: center;
+}
+
+.circle-chart-container {
+  margin-top: 25px;
 }
 
 /* 반응형 디자인 */
