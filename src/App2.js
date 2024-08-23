@@ -24,6 +24,7 @@ import Modal from 'react-modal';
 import WelfareInputTotal from 'welfare/component/WelfareInputTotal';
 
 
+
 Modal.setAppElement('#root');
 
 function App(props) {
