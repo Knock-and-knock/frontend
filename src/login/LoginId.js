@@ -29,7 +29,7 @@ function LoginId(props) {
         setIsUserIdError(false);
         setIsUserPwError(false);
 
-        call("http://192.168.0.27:9090/api/v1/auth/login/normal", "POST", { userId: userId, userPassword: userPassword }).then((response)=>{
+        call("/api/v1/auth/login/normal", "POST", { userId: userId, userPassword: userPassword }).then((response)=>{
             if (response.accessToken) {
               // 로컬 스토리지에 토큰 저장
               localStorage.setItem("loginUser", response.userType);

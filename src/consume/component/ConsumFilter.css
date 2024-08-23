@@ -1,0 +1,26 @@
+.filter-content{
+    display: flex;
+    justify-content: space-between;
+}
+.filter-price{
+    margin: 0px 0px;
+    font-size: 18px;
+    font-weight: bold;
+}
+.priceNum{
+    color: #FF5959;
+}
+.filter-type{
+    margin: 0px;
+    padding: 0px;
+}
+.filter-type li{
+    display: inline-block;
+    margin: 0px 5px;
+    font-size: 18px;
+    color: #686868;
+}
+.selected{
+    font-weight: bold;
+    color: #2C2C2C !important;
+}

@@ -3,7 +3,7 @@ import Modal from 'react-modal';
 import "mypage/component/modal/DisconnectionModal.css"
 import { call } from 'login/service/ApiService';
 
-function DisconnectionModal(props) {
+function DisconnectionModal({userInfo}) {
     
     const [isOpen, setIsOpen] = useState(false);
     const handleOpenModal = () => {
@@ -28,7 +28,12 @@ function DisconnectionModal(props) {
           },
     };
     const handleSubmit = ()=>{
-        call(`http://192.168.0.11:9090/api/v1/match/{matchNo}`).then().catch();
+        call(`/api/v1/match/${userInfo.matchNo}`,"DELETE",null).then((response)=>{
+            console.log(response);
+        }).catch((error)=>{
+            console.log(error);
+            alert(error.message);
+        });
     };
     return (
         <div>

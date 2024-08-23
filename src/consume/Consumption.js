@@ -1,16 +1,35 @@
 import Header from 'header/Header';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import ConsumList from './component/ConsumList';
 import "consume/Consumption.css";
 import ConsumFilter from './component/ConsumFilter';
+import ConsumDate from './component/ConsumDate';
+import ConsumDetailModal from './component/ConsumDetailModal';
 
 function Consumption(props) {
+    const [isOpen, setIsOpen] = useState(false);
+    const handleOpenModal = () => {
+        setIsOpen(true);
+    };
+    
+    const closeModal = () => {
+        setIsOpen(false);
+    }
+    useEffect(()=>{
+        document.body.classList.toggle("unscrollable",isOpen)
+    },[isOpen]);
+
+
     return (
         <div>
             <Header/>
-            <div className="consumList-container">
+            <div className="consumption-container">
+                <ConsumDate/>
                 <ConsumFilter/>
-                <ConsumList/>
+                <ConsumList handleOpenModal={handleOpenModal}/>
+                <ConsumList handleOpenModal={handleOpenModal}/>
+                <ConsumList handleOpenModal={handleOpenModal}/>
+                <ConsumDetailModal isOpen={isOpen} closeModal={closeModal}/>
             </div>
         </div>
     );

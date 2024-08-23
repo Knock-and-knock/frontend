@@ -1,4 +1,5 @@
 
+import AlarmList from 'alarm/AlarmList';
 import Consumption from 'consume/Consumption';
 import LoginBio from 'login/LoginBio';
 import LoginId from 'login/LoginId';
@@ -8,7 +9,7 @@ import SubstituteInput from 'mypage/component/SubstituteInput';
 import MyPage from 'mypage/MyPage';
 import { createContext, useState } from 'react';
 import Modal from 'react-modal';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import InfoInput from 'signUp/component/InfoInput';
 import PinCheck from 'signUp/component/PinCheck';
 import PinSetup from 'signUp/component/PinSetup';
@@ -35,6 +36,7 @@ function App(props) {
           <Route path="/subinput" element={<SubstituteInput />} />
           <Route path="/modifyinfo" element={<ModifyInfo />} />
           <Route path="/consumption" element={<Consumption />} />
+          <Route path="/alarm" element={<AlarmList />} />
           
           <Route path="/signup/*" element={<SignUpMain/>} >
             <Route path="register" element={<Register/>} />

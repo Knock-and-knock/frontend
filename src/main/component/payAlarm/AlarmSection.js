@@ -1,9 +1,9 @@
 import alarm from "image/payAlarm.png";
 import 'main/component/payAlarm/AlarmSection.css';
 
-function AlarmSection(props) {
+function AlarmSection({handlePayAlarmClick}) {
   return (
-    <div className="alarm-section">
+    <div className="alarm-section" onClick={handlePayAlarmClick}>
       <div className="alarm-button">
         <img src={alarm} alt="이상징후" className="icon" />
         <div className="alarm-main-text">

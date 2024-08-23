@@ -7,12 +7,15 @@ import { Link, Navigate, useNavigate } from "react-router-dom";
 function ButtonGruop(props) {
   const navigate = useNavigate();
   
+  const handlePayClick=()=>{
+    navigate("/consumption");
+  }
    const handleWelfareClick=()=>{
     navigate("/welfare-main");
   }
   return (
     <div className="button-group">
-      <PayBtn/>
+      <PayBtn handlePayClick={handlePayClick}/>
       <WelfareBtn handleWelfareClick={handleWelfareClick}/>
       
       <PayReportBtn/>

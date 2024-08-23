@@ -19,7 +19,7 @@ function Register(props) {
 
     const handleSubmit =(e)=>{
         !isNextEnabled && e.preventDefault();
-        call(`http://192.168.0.11:9090/api/v1/users/validation/${userInfo.userId}`,"GET",null).then(
+        call(`/api/v1/users/validation/${userInfo.userId}`,"GET",null).then(
             (response)=>{
                 if(response.result === true){
                     navi("/signup/infoinput");
