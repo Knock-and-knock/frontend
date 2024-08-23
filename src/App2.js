@@ -9,8 +9,6 @@ import WelfareInputDisease from 'welfare/component/WelfareInputDisease';
 import WelfareInputGender from 'welfare/component/WelfareInputGender';
 import WelfareInputHeight from 'welfare/component/WelfareInputHeight';
 import WelfareList from 'welfare/component/WelfareList';
-import WelfareMain from 'welfare/component/welfareMain';
-import WelfarePayComplete from 'welfare/component/welfarePayComplete';
 import WelfareNursingModal from 'welfare/component/WelfareNursingModal';
 import WelfareReserveCancelModal from 'welfare/component/WelfareReserveCancelModal';
 import WelfareReservedList from 'welfare/component/WelfareReservedList';
@@ -22,6 +20,8 @@ import { Route, Routes } from 'react-router-dom';
 
 import Modal from 'react-modal';
 import WelfareInputTotal from 'welfare/component/WelfareInputTotal';
+import WelfareMain from 'welfare/component/WelfareMain';
+import WelfarePayComplete from 'welfare/component/WelfarePayComplete';
 
 
 
