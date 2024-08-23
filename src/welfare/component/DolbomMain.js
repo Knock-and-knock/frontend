@@ -56,7 +56,7 @@ function DolbomMain() {
 
   const handleClick = (id) => {
     setSelectedId(id);
-  };  
+  };
 
   const renderModalContent = () => {
     switch (selectedId) {
