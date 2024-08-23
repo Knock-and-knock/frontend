@@ -1,4 +1,4 @@
-import chatbot from "image/chatimage.png";
+import chatbot from "image/chat-char.png";
 import 'main/component/chat/ChatSection.css';
 
 function ChatSection({handleVoiceChatClick}) {
