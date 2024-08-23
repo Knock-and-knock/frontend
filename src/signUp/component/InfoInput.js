@@ -46,7 +46,7 @@ function InfoInput(props) {
         if (isNextEnabled) {
 
            
-                call('http://192.168.0.11:9090/api/v1/users/validation/phone',"POST",
+                call('/api/v1/users/validation/phone',"POST",
                     {phone:userInfo.userPhone}
                 ).then((response)=>{
                     console.log(response);

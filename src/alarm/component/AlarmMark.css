@@ -1,0 +1,7 @@
+.alarmMark-container{
+    display: flex;
+    justify-content: space-between; 
+}
+.alarmMarkNum{
+    color: #80BAFF;
+}

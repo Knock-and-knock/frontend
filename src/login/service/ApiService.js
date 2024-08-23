@@ -10,7 +10,7 @@ export function call(api, method, request) {
   }
   let options = {
     headers: headers,
-    url: api,
+    url: "http://122.128.54.136:20000"+api,
     method: method,
     // credentials: 'include',
   };

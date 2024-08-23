@@ -14,25 +14,28 @@ function MyPage(props) {
     const{loginUser,setLoginUser} = useContext(CommonContext);
     const loginUserType = localStorage.getItem("loginUser");
     const [userInfo, setUserInfo] = useState('');
+    // const [matchingInfo, setMatchingInfo] = useState('');
 
     useEffect(()=>{
         setLoginUser(loginUserType);
     },[loginUserType,setLoginUser]);
 
     useEffect(()=>{
-        call('http://192.168.0.27:9090/api/v1/users','GET',null).then(
+        call('/api/v1/users','GET',null).then(
             (response)=>{
                 setUserInfo(response);
+                console.log(response);
             }
         ).catch((error)=>{
             console.log("정보조회 오류", error);
         });
+
     },[]);
 
     const getModal = (loginUser)=>{
         switch(loginUser){
             case 'PROTEGE':
-                return <DisconnectionModal/>;
+                return <DisconnectionModal userInfo={userInfo}/>;
             default: 
                 return "";
         }
@@ -41,7 +44,7 @@ function MyPage(props) {
     return (
         <div className='mypage-container'>
             <Header/>
-            <p className='mypage-name'>홍길동님</p>
+            <p className='mypage-name'>{userInfo.userName}</p>
             <MyBasicInfo userInfo={userInfo}/>
             <MyExtraInfo userInfo={userInfo}/>
             {getModal(loginUser)}

@@ -25,7 +25,7 @@ function VerifyCode(props) {
     };
 
     const handleNextClick = ()=>{
-        call(`http://192.168.0.11:9090/api/v1/users/validation/number`,"POST",{validationNum:userInfo.validation,phone:userInfo.userPhone})
+        call(`/api/v1/users/validation/number`,"POST",{validationNum:userInfo.validation,phone:userInfo.userPhone})
         .then((response)=>{
             if(response.result === true){
                 navi("/signup/rolecheck")

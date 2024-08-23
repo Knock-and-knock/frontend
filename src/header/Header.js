@@ -43,6 +43,8 @@ function Header() {
         return "마이페이지";
       case "/consumption":
           return "소비내역 조회";
+      case "/alarm":
+          return "이상 징후 알림 내역";
 
         case "/cardapp/familycardyn":
         return "가족카드 신청";

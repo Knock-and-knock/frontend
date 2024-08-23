@@ -1,12 +1,9 @@
 import Header from 'header/Header';
 import "mypage/component/ModifyInfo.css";
 import InfoInput from './InfoInput';
-import { useLocation } from 'react-router-dom';
 
 function ModifyInfo(props) {
     const userType = localStorage.getItem("userType");
-    const location = useLocation();
-    const userInfo = location.state;
 
     const buttonStyle = userType === "PROTEGE" ? { backgroundColor: '#FF961B'} : {};
     return (

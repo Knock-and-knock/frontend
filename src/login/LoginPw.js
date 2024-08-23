@@ -28,7 +28,7 @@ function LoginPw(props) {
         const data = new FormData(event.target);
         const userSimplePassword = data.get("userSimplePassword");
 
-        call('http://192.168.0.11:9090/api/v1/auth/login/simple',"POST",
+        call('/api/v1/auth/login/simple',"POST",
             { userNo: loginUserNo, userSimplePassword: userSimplePassword}
         ).then((response)=>{
             console.log(response);

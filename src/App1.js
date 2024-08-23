@@ -10,8 +10,8 @@ import MainA from "main/MainA";
 import MainB from "main/MainB";
 import Match from "matching/Match";
 import Matching from "matching/notice/Matching";
+import { Route, Routes } from "react-router-dom";
 
-import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import AddAddress from "cardCreate/application/AddAddress";
 import CardAppSuccess from "cardCreate/application/CardAppSuccess";
