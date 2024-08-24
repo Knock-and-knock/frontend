@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import styles from 'welfare/css/WelfareCheckPW.module.css'; // CSS 모듈 import
 import Header from 'header/Header.js';
 import { useNavigate } from 'react-router-dom';
@@ -14,6 +14,13 @@ function WelfareCheckPW() {
 
     const [password, setPassword] = useState("");
     const inputRef = useRef(null);
+
+    useEffect(() => {
+        // 페이지 로드 시 input에 자동 포커스 설정
+        if (inputRef.current) {
+            inputRef.current.focus();
+        }
+    }, []);
 
     const handleCircleClick = () => {
         inputRef.current.focus(); // 클릭 시 input에 포커스
@@ -48,6 +55,8 @@ function WelfareCheckPW() {
                             />
                         ))}
                     </div>
+                    <p className={styles['incorrect-message']}>비밀번호가 틀립니다.</p>
+                    {/* 비번 틀리면 css에서 나오게 하기!! */}
                 </div>
 
                 {/* 숨겨진 input 요소 */}

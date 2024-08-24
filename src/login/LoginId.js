@@ -28,7 +28,9 @@ function LoginId(props) {
         setPwErrorMessage('');
         setIsUserIdError(false);
         setIsUserPwError(false);
+
         localStorage.setItem(ACCESS_TOKEN, '');
+
         call("/api/v1/auth/login/normal", "POST", { userId: userId, userPassword: userPassword }).then((response)=>{
             if (response.accessToken) {
               // 로컬 스토리지에 토큰 저장

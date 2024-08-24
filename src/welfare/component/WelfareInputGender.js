@@ -41,15 +41,21 @@ function WelfareInputGender() {
 
                 <div className={styles["gender-container"]}>
                     <div
-                        className={`${styles["gender-section"]} ${selectedGender === '남성' ? styles["selected-gender-section"] : ''}`}
+                        className={`${styles["gender-section"]}`}
                         onClick={() => handleGenderClick('남성')}
+                        style={{
+                            border: selectedGender === '남성' ? '4px solid #80BAFF' : '4px solid transparent'
+                        }}
                     >
                         <img src={male} alt="남성" className={styles["image-gender"]} />
                         <p className={styles["gender-text"]}>남성</p>
                     </div>
                     <div
-                        className={`${styles["gender-section"]} ${selectedGender === '여성' ? styles["selected-gender-section"] : ''}`}
+                        className={`${styles["gender-section"]}`}
                         onClick={() => handleGenderClick('여성')}
+                        style={{
+                            border: selectedGender === '여성' ? '4px solid #FF5959' : '4px solid transparent'
+                        }}
                     >
                         <img src={female} alt="여성" className={styles["image-gender"]} />
                         <p className={styles["gender-text"]}>여성</p>
