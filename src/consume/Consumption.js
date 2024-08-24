@@ -24,11 +24,10 @@ function Consumption(props) {
         <div>
             <Header/>
             <div className="consumption-container">
-                <ConsumDate/>
+                {/* <ConsumDate/> */}
                 <ConsumFilter/>
                 <ConsumList handleOpenModal={handleOpenModal}/>
-                <ConsumList handleOpenModal={handleOpenModal}/>
-                <ConsumList handleOpenModal={handleOpenModal}/>
+                
                 <ConsumDetailModal isOpen={isOpen} closeModal={closeModal}/>
             </div>
         </div>
