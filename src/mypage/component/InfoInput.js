@@ -1,5 +1,5 @@
 import AddressSearchComponent from 'cardCreate/application/AddressSearchComponent';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import glasses from "image/glasses.png";
 
 function InfoInput({protegeInfo}) {
@@ -25,47 +25,45 @@ function InfoInput({protegeInfo}) {
       
     setAddress(fullAddress);
     setIsPostcodeOpen(false);
-};
+    };
     
-
-
     
     return (
         <div className='infoInput-container'>
             <div className='infoInput-box'>
                 <p>생년월일</p>
-                <input type='text' placeholder={protegeInfo.protegeBirth}/>
+                <input type='text' placeholder={protegeInfo?.protegeBirth || "생년월일"}/>
             </div>
             <div className='infoInput-box'>
                 <p>성별</p>
-                <input type='text'placeholder={protegeInfo.protegeGender}/>
+                <input type='text'placeholder={protegeInfo?.protegeGender || "성별"}/>
             </div>
             <div className='bodyInfo'>
                 <div className='bodyInfo-box'>
                     <p>키</p>
                     <div className='body-content'>
-                        <input type='number'placeholder={protegeInfo.protegeHeight}/>
+                        <input type='number'placeholder={protegeInfo?.protegeHeight || "키"}/>
                         <p>cm</p>
                     </div>
                 </div>
                 <div className='bodyInfo-box'>
                     <p>몸무게</p>
                     <div className='body-content'>
-                        <input type='number' placeholder={protegeInfo.protegeWeight}/>
+                        <input type='number' placeholder={protegeInfo?.protegeWeight || "몸무게"}/>
                         <p className='body-content'>kg</p>
                     </div>
                 </div>
             </div>
             <div className='infoInput-box'>
                 <p>질병</p>
-                <input type='text'placeholder={protegeInfo.protegeDisease}/>
+                <input type='text'placeholder={protegeInfo?.protegeDisease || "질병"}/>
             </div>
             <div className='infoInput-box'>
                 <p>주소</p>
                 <div onClick={() => setIsPostcodeOpen(true)}>
                     <input 
                         type='text' 
-                        placeholder={protegeInfo.protegeAddress}
+                        placeholder={protegeInfo?.protegeAddress || "도로명, 지번, 건물명 검색"}
                         value={address} 
                         onChange={(e) => setAddress(e.target.value)} 
                         className='addressInfo' readOnly
@@ -79,7 +77,7 @@ function InfoInput({protegeInfo}) {
                     onClose={() => setIsPostcodeOpen(false)}
                     />
                 )}
-                <input type='text' placeholder='347동 1002호'/>
+                <input type='text' placeholder={protegeInfo?.protegeDetailAddress || "상세주소"}/>
             </div>
             
         </div>
