@@ -1,9 +1,20 @@
 import React from 'react';
+import logo from "image/logo.svg";
+import "onboarding/OnboardingPage.css"
+import { useNavigate } from 'react-router-dom';
 
 function OnboardingPage(props) {
+    const navi =useNavigate();
+    const handleBtnClick =()=>{
+        navi("/loginid");
+    };
     return (
-        <div>
-            <p>시작</p>
+        <div className='onboarding-container'>
+            <img src={logo} alt='로고' className='onboarding-logo'/>
+            <div className='startBtn-wrap'>
+                <button className='startBtn' onClick={handleBtnClick}>시작</button>
+            </div>
+            
         </div>
     );
 }

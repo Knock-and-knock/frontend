@@ -44,13 +44,13 @@ function Match(props) {
   };
 
   const handleSubmitBtn = () => {
-    call("/api/v1/match","POST",userInfo).then((response)=>{
-      navigate("/matching", { state: { matchStatus: response.matchStatus } });
-    }
-    ).catch((error)=>{
-      alert("매칭요청 실패");
-    });
-    
+    // call("/api/v1/match","POST",userInfo).then((response)=>{
+    //   navigate("/matching", { state: { matchStatus: response.matchStatus } });
+    // }
+    // ).catch((error)=>{
+    //   alert("매칭요청 실패");
+    // });
+    navigate("/nokmain");
   };
 
   const handleIsInfoChange = (isFilled) => {

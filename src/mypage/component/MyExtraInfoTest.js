@@ -2,8 +2,9 @@ import { CommonContext } from "App3";
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import MyExtraInfoContent from "./MyExtraInfoContent";
+import info from "image/icon/info.png";
 
-function MyExtraInfo({userInfo}) {
+function MyExtraInfoTest({userInfo}) {
     
 
     const navi = useNavigate();
@@ -30,12 +31,12 @@ function MyExtraInfo({userInfo}) {
             <div className='info-title'>
                 {/* <p><span className="info-protegeName">{userInfo.protegeName === userInfo.userName?"나":`${userInfo.protegeName}님`}</span>의 부가정보</p> */}
                 <p><span className="info-protegeName">홍길동님</span>의 부가정보</p>
-                <p className='info-changeBtn' onClick={handleModifyClick} >변경</p>
             </div>
-            <MyExtraInfoContent userInfo={userInfo} />
-            {/* {getSubstituteBtn(loginUser)} */}
+            
+            <p className="info-container-text"><img src={info} alt="" className="card-info-icon" />등록된 정보가 없습니다.</p>
+            {getSubstituteBtn(loginUser)} 
         </div>
     );
 }
 
-export default MyExtraInfo;
+export default MyExtraInfoTest;
