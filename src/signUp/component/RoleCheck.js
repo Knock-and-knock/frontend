@@ -16,7 +16,7 @@ function RoleCheck(props) {
     };
     const handleDisagreeClick = () => {
         setRole('PROTEGE');
-        handlechange({ target: { value: 'PROTECTOR', name: 'userType' } });
+        handlechange({ target: { value: 'PROTEGE', name: 'userType' } });
 
     };
     const handleNextClick = () => {

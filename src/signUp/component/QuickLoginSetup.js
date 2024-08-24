@@ -35,7 +35,7 @@ function QuickLoginSetup(props) {
         setIsBioChecked(!isBioChecked);
     };
     const handleSumit = ()=>{
-        call('/api/v1/users',"POST",userInfo).then((response)=>{
+        call('/api/v1/users/signup',"POST",userInfo).then((response)=>{
             console.log(response);
             window.location.href = "/signup/signupsuccess";
         }).catch((error)=>{

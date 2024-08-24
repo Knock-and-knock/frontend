@@ -1,109 +1,98 @@
-import React, { useState, useEffect } from 'react';
-import styles from 'welfare/css/WelfareInputAddress.module.css'; // CSS 모듈 import
-import glasses from "image/glasses.png";
-import { useNavigate } from 'react-router-dom';
-import Header from 'header/Header.js';
-import { useSpecHook } from 'welfare/component/WelfareInputTotal';
+import "cardCreate/application/CardApplication.css";
+import Header from "header/Header.js";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import AddressSearchComponent from "cardCreate/application/AddressSearchComponent";
+import { useSpecHook } from "./WelfareInputTotal";
 
 function WelfareInputAddress() {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
+  const { userSpec, setUserSpec } = useSpecHook();
 
-    const { userSpec, setUserSpec, handlechange } = useSpecHook();
-    const { userAddress, userDetailAddress } = userSpec;
+  const [isButtonEnabled, setIsButtonEnabled] = useState(false);
+  const [address, setAddress] = useState(""); // 도로명 주소를 저장할 상태
+  const [detailAddress, setDetailAddress] = useState(""); // 상세주소를 저장할 상태
 
-    useEffect(() => {
-        if (!window.daum || !window.daum.Postcode) {
-            const script = document.createElement('script');
-            script.src = 'https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js';
-            script.async = true;
-            script.onload = () => console.log("Daum Postcode script loaded successfully");
-            script.onerror = () => alert("주소 검색 기능을 사용할 수 없습니다. 다시 시도해 주세요.");
-            document.head.appendChild(script);
-        }
-    }, []);
+  const handlePaging = () => {
+    if (isButtonEnabled) {
+      navigate("/welfare-input/disease");
+    }
+  };
 
-    const openAddressSearch = () => {
-        if (window.daum && window.daum.Postcode) {
-            new window.daum.Postcode({
-                oncomplete: function(data) {
-                    console.log(data);
-                    setUserSpec({ ...userSpec, userAddress: data.address });
-                    document.getElementById('detail-address-input').focus();
-                }
-            }).open();
-        } else {
-            alert("주소 검색 기능을 사용할 수 없습니다. 다시 시도해 주세요.");
-        }
-    };
+  // 다음 주소검색 api
+  const [isPostcodeOpen, setIsPostcodeOpen] = useState(false);
 
-    const style1 = { backgroundColor: '#80BAFF', cursor: 'pointer' };
-    const style2 = { backgroundColor: 'rgba(128, 186, 255, 0.5)', cursor: 'not-allowed' };
-    const [style, setStyle] = useState(style2); // 기본 스타일을 비활성화로 설정
+  const handleComplete = (data) => {
+    setAddress(data.address); // 선택된 주소를 address 상태에 저장
+    setIsPostcodeOpen(false); // 주소 검색 후 창 닫기
 
-    useEffect(() => {
-        if (isFormComplete()) {
-            setStyle(style1);
-        } else {
-            setStyle(style2);
-        }
-    }, [userAddress, userDetailAddress]);
+    // userSpec에 주소 업데이트
+    setUserSpec({ ...userSpec, address: data.address });
+  };
 
-    const isFormComplete = () => {
-        return userAddress && userAddress.trim() !== '' && userDetailAddress && userDetailAddress.trim() !== '';
-    };
+  // 상세주소 변경 시 처리
+  const handleDetailAddressChange = (e) => {
+    const value = e.target.value;
+    setDetailAddress(value);
 
-    const goInputDisease = () => {
-        if (isFormComplete()) {
-            const fullAddress = `${userAddress} ${userDetailAddress}`.trim();
-            setUserSpec({ ...userSpec, userAddress: fullAddress }); // 합쳐진 주소를 저장
-            navigate('/welfare-input/disease');
-        }
-    };
+    // userSpec에 상세주소 업데이트
+    setUserSpec({ ...userSpec, detailAddress: value });
+  };
 
-    return (
-        <div className={styles.container}>
-            <Header />
+  // 빈칸 확인
+  useEffect(() => {
+    const isFull = address.trim() !== "" && detailAddress.trim() !== "";
+    setIsButtonEnabled(isFull);
+  }, [address, detailAddress]);
 
-            <div className={styles["main-container"]}>
-                <div className={styles["infomation-container"]}>
-                    <p className={styles.infomation}>집주소를</p>
-                    <p className={styles.infomation}>입력해 주세요</p>
-                </div>
-
-                <div className={styles["address-container"]}>
-                    <div className={styles["address-section"]} onClick={openAddressSearch}>
-                        <input 
-                            onChange={handlechange}
-                            className={styles["input-address"]} 
-                            type="text" 
-                            name='userAddress'
-                            placeholder="도로명, 지번, 건물명 검색" 
-                            value={userAddress || ""} 
-                            readOnly
-                        />
-                        <img src={glasses} alt="돋보기" className={styles["glasses-icon"]} />
-                    </div>
-                    <input 
-                        id="detail-address-input"
-                        onChange={handlechange}
-                        className={styles["input-address-detail"]} 
-                        type="text" 
-                        name='userDetailAddress'
-                        placeholder="상세 주소" 
-                        value={userDetailAddress || ""}
-                    />
-                </div>
-
-                <div 
-                    className={`${styles["main-section"]} ${styles["go-input-disease"]}`} 
-                    onClick={goInputDisease}
-                    style={style}
-                >
-                    <p className={`${styles["main-text"]} ${styles["go-input-disease-text"]}`}>다음</p>
-                </div>
-            </div>
+  return (
+    <div className="card-app-container">
+      <Header />
+      <div className="app-title">
+        <div className="title-text">
+          <span>집주소를</span>
+          <br />
+          <span>입력해주세요</span>
         </div>
-    );
+      </div>
+      <div className="app-input-container">
+        <div className="app-input">
+          <input
+            placeholder="도로명, 지번, 건물명 검색"
+            value={address || ""}
+            onClick={() => setIsPostcodeOpen(true)}
+            readOnly
+          />
+        </div>
+        <div className="app-input">
+          <input
+            placeholder="상세주소"
+            value={detailAddress || ""}
+            onChange={handleDetailAddressChange}
+          />
+        </div>
+      </div>
+
+      <button
+        className="appBtn"
+        onClick={handlePaging}
+        disabled={!isButtonEnabled}
+        style={{
+          backgroundColor: isButtonEnabled
+            ? "#80BAFF"
+            : "rgba(128,186,255,0.5)",
+        }}
+      >
+        다음
+      </button>
+      {isPostcodeOpen && (
+        <AddressSearchComponent
+          onComplete={handleComplete}
+          onClose={() => setIsPostcodeOpen(false)}
+        />
+      )}
+    </div>
+  );
 }
 
 export default WelfareInputAddress;
