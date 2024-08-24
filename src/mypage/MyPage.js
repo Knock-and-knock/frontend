@@ -13,31 +13,28 @@ function MyPage(props) {
 
     const{loginUser,setLoginUser} = useContext(CommonContext);
     const loginUserType = localStorage.getItem("loginUser");
-    const [userInfo, setUserInfo] = useState('');
-    // const [matchingInfo, setMatchingInfo] = useState('');
+    const [userInfo, setUserInfo] = useState({});
+    const [error, setError] = useState(null);
 
-    useEffect(()=>{
+    useEffect(() => {
         setLoginUser(loginUserType);
-    },[loginUserType,setLoginUser]);
+    }, [loginUserType, setLoginUser]);
 
-    useEffect(()=>{
-        call('/api/v1/users','GET',null).then(
-            (response)=>{
-                setUserInfo(response);
-                console.log(response);
-            }
-        ).catch((error)=>{
-            console.log("정보조회 오류", error);
-        });
-
-    },[]);
-
+    useEffect(() => {
+        call('/api/v1/users', 'GET', null)
+            .then(response => setUserInfo(response))
+            .catch(error => {
+                console.log("정보 조회 오류", error);
+                setError("정보를 불러오는 데 문제가 발생했습니다.");
+            });
+    }, []);
+    
     const getModal = (loginUser)=>{
         switch(loginUser){
             case 'PROTEGE':
                 return <DisconnectionModal userInfo={userInfo}/>;
             default: 
-                return "";
+                return null;
         }
     };
     
@@ -52,7 +49,7 @@ function MyPage(props) {
                 <p className='logoutBtn'>로그아웃</p>
                 <p className='withdrawalBtn'>회원탈퇴</p>
             </div>
-            
+            {error && <p className='error-message'>{error}</p>}
         </div>
     );
 }

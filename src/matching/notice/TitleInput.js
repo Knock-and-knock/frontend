@@ -6,19 +6,19 @@ function TitleInput({ handleIsInfoChange }) {
 
   const handleMname = (e) => {
     const value = e.target.value;
-    setUserInfo({ ...userInfo, mname: value });
-    handleIsInfoChange(value.trim() !== "" && userInfo.yname.trim() !== "");
+    setUserInfo({ ...userInfo, matchProtectorName: value });
+    handleIsInfoChange(value.trim() !== "" && userInfo.matchProtegeName.trim() !== "");
   };
 
   const handleYname = (e) => {
     const value = e.target.value;
-    setUserInfo({ ...userInfo, yname: value });
-    handleIsInfoChange(userInfo.mname.trim() !== "" && value.trim() !== "");
+    setUserInfo({ ...userInfo, matchProtegeName: value });
+    handleIsInfoChange(userInfo.matchProtectorName.trim() !== "" && value.trim() !== "");
   };
 
   useEffect(() => {
-    handleIsInfoChange(userInfo.mname.trim() !== "" && userInfo.yname.trim() !== "");
-  }, [userInfo.mname, userInfo.yname, handleIsInfoChange]);
+    handleIsInfoChange(userInfo.matchProtectorName.trim() !== "" && userInfo.matchProtegeName.trim() !== "");
+  }, [userInfo.matchProtectorName, userInfo.matchProtegeName, handleIsInfoChange]);
 
   return (
     <div className="input-container">
@@ -26,7 +26,7 @@ function TitleInput({ handleIsInfoChange }) {
         어르신께
         <input
           className="titleInput"
-          value={userInfo.mname}
+          value={userInfo.matchProtectorName}
           onChange={handleMname}
         />
         라고 불리고 싶어요
@@ -35,7 +35,7 @@ function TitleInput({ handleIsInfoChange }) {
         어르신을
         <input
           className="titleInput"
-          value={userInfo.yname}
+          value={userInfo.matchProtegeName}
           onChange={handleYname}
         />
         라 부르고 싶어요

@@ -11,6 +11,7 @@ import FYIInput from "./notice/FYIInput";
 import FYINotice from "./notice/FYINotice";
 import TitleInput from "./notice/TitleInput";
 import TitleNotice from "./notice/TitleNotice";
+import { call } from "login/service/ApiService";
 
 // 컨텍스트 생성
 const InfoContext = createContext();
@@ -19,10 +20,10 @@ function Match(props) {
   const [info, setInfo] = useState(1);
   const [isInfo, setIsInfo] = useState(false);
   const [userInfo, setUserInfo] = useState({
-    name: "",
-    phone: "",
-    mname: "",
-    yname: "",
+    protegeName: "",
+    protegePhone: "",
+    matchProtectorName: "",
+    matchProtegeName: "",
   });
   useEffect(()=>{
     console.log(userInfo);
@@ -43,7 +44,13 @@ function Match(props) {
   };
 
   const handleSubmitBtn = () => {
-    navigate("/matching");
+    call("/api/v1/match","POST",userInfo).then((response)=>{
+      navigate("/matching", { state: { matchStatus: response.matchStatus } });
+    }
+    ).catch((error)=>{
+      alert("매칭요청 실패");
+    });
+    
   };
 
   const handleIsInfoChange = (isFilled) => {

@@ -1,8 +1,11 @@
 import Header from 'header/Header';
 import "mypage/component/ModifyInfo.css";
 import InfoInput from './InfoInput';
+import { useLocation } from 'react-router-dom';
 
-function ModifyInfo(props) {
+function ModifyInfo({props}) {
+    const location = useLocation(); // 현재 위치를 가져옵니다.
+    const { userInfo } = location.state || {};
     const userType = localStorage.getItem("userType");
 
     const buttonStyle = userType === "PROTEGE" ? { backgroundColor: '#FF961B'} : {};
@@ -16,7 +19,7 @@ function ModifyInfo(props) {
                     <span>입력해 주세요</span>
                 </div>
             </div>
-            <InfoInput/>
+            <InfoInput protegeInfo={userInfo}/>
             <button className='modiInfo-saveBtn' style={buttonStyle}>저장</button>
         </div>
     );

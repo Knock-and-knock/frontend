@@ -28,7 +28,9 @@ function LoginId(props) {
         setPwErrorMessage('');
         setIsUserIdError(false);
         setIsUserPwError(false);
-        localStorage.setItem(ACCESS_TOKEN, "");
+
+        localStorage.setItem(ACCESS_TOKEN, '');
+
         call("/api/v1/auth/login/normal", "POST", { userId: userId, userPassword: userPassword }).then((response)=>{
             if (response.accessToken) {
               // 로컬 스토리지에 토큰 저장
@@ -38,7 +40,20 @@ function LoginId(props) {
 
               // token이 존재하는 경우 Todo 화면으로 리디렉트
               if (response.userType === "PROTECTOR") {
-                navigate('/nokmain');
+                call("/api/v1/match","GET",null)
+                .then((response)=>{
+                    if(response.matchStatus==="ACCEPT"){
+                        navigate('/nokmain');
+                    }else{
+                        navigate('/match');
+                    }
+                }).catch((error)=>{
+                    if (error.response && error.response.status === 404) {
+                        navigate('/match');
+                    } else {
+                        alert("실패");
+                    }
+                });
               } else {
                 navigate('/main');
               }

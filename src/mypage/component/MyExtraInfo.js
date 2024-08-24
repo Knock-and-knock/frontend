@@ -3,7 +3,8 @@ import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function MyExtraInfo({userInfo}) {
-    const [geder, setGender] =useState('');
+    const [gender, setGender] = useState('');
+
     const navi = useNavigate();
     const handelSubstituteClick=()=>{
         navi("/subinput");
@@ -17,7 +18,7 @@ function MyExtraInfo({userInfo}) {
             case 'PROTECTOR':
                 return <button className='substituteBtn' onClick={handelSubstituteClick}>어르신 정보 대신 입력하기</button>;
             default:
-                return "";
+                return null;
         }
     };
     useEffect(()=>{
@@ -26,12 +27,14 @@ function MyExtraInfo({userInfo}) {
         }else if(userInfo.protegeGender===2){
             setGender('여');
         }
-    },[]);   
+    },[userInfo.protegeGender]);   
+
+  
     return (
         <div className='info-container'>
             <div className='info-title'>
-                <p><span >{userInfo.protegeName}</span>의 부가정보</p>
-                <p className='info-changeBtn' onClick={handleModifyClick}>변경</p>
+                <p><span className="info-protegeName">{userInfo.protegeName === userInfo.userName?"나":`${userInfo.protegeName}님`}</span>의 부가정보</p>
+                <p className='info-changeBtn' onClick={handleModifyClick} >변경</p>
             </div>
             <div className='info-content'>
                 <p>생년월일</p>
@@ -39,15 +42,15 @@ function MyExtraInfo({userInfo}) {
             </div>
             <div className='info-content'>
                 <p>성별</p>
-                <p>{geder}</p>
+                <p>{gender}</p>
             </div>
             <div className='info-content'>
                 <p>키</p>
-                <p>{userInfo.protegeHeigt}</p>
-            </div>
+                <p>{userInfo.protegeHeight} cm</p>
+            </div>  
             <div className='info-content'>
                 <p>몸무게</p>
-                <p>{userInfo.protegeweight}</p>
+                <p>{userInfo.protegeWeight} kg</p>
             </div>
             <div className='info-content'>
                 <p>질병</p>
@@ -56,10 +59,6 @@ function MyExtraInfo({userInfo}) {
             <div className='info-content'>
                 <p>주소</p>
                 <p>{userInfo.protegeAddress}</p>
-            </div>
-            <div className='info-content'>
-                <p>이메일</p>
-                <p>{userInfo.protegeEmail}</p>
             </div>
             {getSubstituteBtn(loginUser)}
         </div>

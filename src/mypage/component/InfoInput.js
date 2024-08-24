@@ -2,7 +2,7 @@ import AddressSearchComponent from 'cardCreate/application/AddressSearchComponen
 import { useState } from 'react';
 import glasses from "image/glasses.png";
 
-function InfoInput(props) {
+function InfoInput({protegeInfo}) {
     const [isPostcodeOpen, setIsPostcodeOpen] = useState(false);
     const [address, setAddress] = useState('');
 
@@ -34,41 +34,41 @@ function InfoInput(props) {
         <div className='infoInput-container'>
             <div className='infoInput-box'>
                 <p>생년월일</p>
-                <input type='text' placeholder='1950.01.01'/>
+                <input type='text' placeholder={protegeInfo.protegeBirth}/>
             </div>
             <div className='infoInput-box'>
                 <p>성별</p>
-                <input type='text'placeholder='남'/>
+                <input type='text'placeholder={protegeInfo.protegeGender}/>
             </div>
             <div className='bodyInfo'>
                 <div className='bodyInfo-box'>
                     <p>키</p>
                     <div className='body-content'>
-                        <input type='number'placeholder='175'/>
+                        <input type='number'placeholder={protegeInfo.protegeHeight}/>
                         <p>cm</p>
                     </div>
                 </div>
                 <div className='bodyInfo-box'>
                     <p>몸무게</p>
                     <div className='body-content'>
-                        <input type='number' placeholder='75'/>
+                        <input type='number' placeholder={protegeInfo.protegeWeight}/>
                         <p className='body-content'>kg</p>
                     </div>
                 </div>
             </div>
             <div className='infoInput-box'>
                 <p>질병</p>
-                <input type='text'placeholder='감기'/>
+                <input type='text'placeholder={protegeInfo.protegeDisease}/>
             </div>
             <div className='infoInput-box'>
                 <p>주소</p>
                 <div onClick={() => setIsPostcodeOpen(true)}>
                     <input 
                         type='text' 
-                        placeholder='경기도 과천시 별양로 66-11' 
+                        placeholder={protegeInfo.protegeAddress}
                         value={address} 
                         onChange={(e) => setAddress(e.target.value)} 
-                        className='addressInfo'
+                        className='addressInfo' readOnly
                     />
                     <img src={glasses} alt="돋보기" className="addressInfo-icon" />
                 </div>
@@ -80,10 +80,6 @@ function InfoInput(props) {
                     />
                 )}
                 <input type='text' placeholder='347동 1002호'/>
-            </div>
-            <div className='infoInput-box'>
-                <p>이메일</p>
-                <input type='email' placeholder='qwer1234@naver.com'/>
             </div>
             
         </div>

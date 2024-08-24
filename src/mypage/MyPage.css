@@ -1,6 +1,5 @@
 .mypage-container{
     padding: 20px;
-    border: 1px green solid;
 }
 .mypage-name{
     font-size: 20px;
@@ -35,6 +34,9 @@
     font-size: 18px;
     font-weight: bold;
     margin: 0px 0px;
+}
+.info-protegeName{
+    color: #80BAFF;
 }
 .info-changeBtn{
     color: #686868;
