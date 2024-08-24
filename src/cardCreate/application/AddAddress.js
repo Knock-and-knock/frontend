@@ -9,8 +9,6 @@ function AddAddress() {
   const { userInfo, setUserInfo } = useCardCreate();
   const navigate = useNavigate();
   const [isButtonEnabled, setIsButtonEnabled] = useState(false);
-  const [address, setAddress] = useState(""); // 도로명 주소를 저장할 상태
-  const [detailAddress, setDetailAddress] = useState(""); // 상세주소를 저장할 상태
 
   const handlePaging = () => {
     navigate("/cardapp/simplepw");
@@ -34,28 +32,29 @@ function AddAddress() {
       fullAddress += extraAddress !== "" ? ` (${extraAddress})` : "";
     }
 
-    // 도로명 주소를 상태에 저장
-    setAddress(fullAddress);
+    // 주소 업데이트 및 userInfo에 저장
+    setUserInfo({ ...userInfo, address: fullAddress /*district*/ });
     setIsPostcodeOpen(false); // 주소 검색 후 창 닫기
-
-    // cardIssueAddress를 업데이트
-    setUserInfo({ ...userInfo, cardIssueAddress: `${fullAddress} ${detailAddress}`.trim() });
   };
-
-  // 상세주소 변경 시 처리
-  const handleDetailAddressChange = (e) => {
-    const value = e.target.value;
-    setDetailAddress(value);
-
-    // cardIssueAddress를 업데이트
-    setUserInfo({ ...userInfo, cardIssueAddress: `${address} ${value}`.trim() });
-  };
-
   // 빈칸 확인
   useEffect(() => {
-    const isFull = address.trim() !== "" && detailAddress.trim() !== "";
+    const extraInfo = [
+      "address",
+      "detailAddress",
+    ];
+    const isFull = extraInfo.every(
+      (field) =>
+        userInfo[field] &&
+        userInfo[field].trim() !== ""
+    );
+
     setIsButtonEnabled(isFull);
-  }, [address, detailAddress]);
+  }, [userInfo]);
+
+  const handleDetailAddressChange = (e) => {
+    const value = e.target.value;
+    setUserInfo({ ...userInfo, detailAddress: value });
+  };
 
   return (
     <div className="card-app-container">
@@ -72,7 +71,7 @@ function AddAddress() {
         <div className="app-input">
           <input
             placeholder="도로명, 지번, 건물명 검색"
-            value={address || ""}
+            value={userInfo.address || ""}
             onClick={() => setIsPostcodeOpen(true)}
             readOnly
           />
@@ -80,7 +79,7 @@ function AddAddress() {
         <div className="app-input">
           <input
             placeholder="상세주소"
-            value={detailAddress || ""}
+            value={userInfo.detailAddress || ""}
             onChange={handleDetailAddressChange}
           />
         </div>
