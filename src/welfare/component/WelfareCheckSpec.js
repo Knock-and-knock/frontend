@@ -46,7 +46,7 @@ function WelfareCheckSpec() {
 
                 <div className={styles["spec-container"]}>
                     <p className={styles["spec-info"]}>이름</p>
-                    <input className={styles["spec-check"]} type="text" placeholder="이름" value="gd" disabled />
+                    <input className={styles["spec-check"]} type="text" placeholder="이름" value="홍길동" disabled />
 
                     <p className={styles["spec-info"]}>생년월일</p>
                     <input className={styles["spec-check"]} type="Date" placeholder="생년월일" value={formatDate(userSpec.userBirth) || ''} disabled />
@@ -58,7 +58,7 @@ function WelfareCheckSpec() {
                     <input className={styles["spec-check"]} type="text" placeholder="주소" value={userSpec.userAddress || ''} disabled />
 
                     <p className={styles["spec-info"]}>연락처</p>
-                    <input className={styles["spec-check"]} type="text" placeholder="연락처" value="gdgd" disabled />
+                    <input className={styles["spec-check"]} type="text" placeholder="연락처" value="010-4519-3851" disabled />
 
                     <p className={styles["spec-info"]}>신체</p>
                     <input className={styles["spec-check-hw"]} type="number" placeholder="키" value={userSpec.userHeight || ''} disabled />

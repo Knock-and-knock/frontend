@@ -46,26 +46,26 @@ function WelfareReservedList() {
   // 예약 데이터 배열
   const reservedItems = [
     {
-      title: "가정간병 돌봄",
-      paymentDate: "2024.08.07",
-      reserveDate: "2026년 12월 29일",
-      reserveTime: "오전 3시간 (09:00 ~ 12:00)",
-      price: "75,000"
+      title: "일상 가사 돌봄",
+      paymentDate: "2024.08.24",
+      reserveDate: "2024년 09월 01일",
+      reserveTime: "9시간 (09:00 ~ 18:00)",
+      price: "225,000"
     },
-    {
-      title: "일상가사 돌봄",
-      paymentDate: "2024.08.07",
-      reserveDate: "2026년 12월 29일",
-      reserveTime: "오전 3시간 (09:00 ~ 12:00)",
-      price: "75,000"
-    },
-    {
-      title: "한울 돌봄",
-      paymentDate: "2024.08.07",
-      reserveDate: "2026년 12월 29일",
-      reserveTime: "2개월",
-      price: "2,000,000"
-    }
+    // {
+    //   title: "일상가사 돌봄",
+    //   paymentDate: "2024.08.07",
+    //   reserveDate: "2026년 12월 29일",
+    //   reserveTime: "오전 3시간 (09:00 ~ 12:00)",
+    //   price: "75,000"
+    // },
+    // {
+    //   title: "한울 돌봄",
+    //   paymentDate: "2024.08.07",
+    //   reserveDate: "2026년 12월 29일",
+    //   reserveTime: "2개월",
+    //   price: "2,000,000"
+    // }
   ];
 
   return (
