@@ -10,21 +10,20 @@
 }
 
 .consume-report-date-section{
-  margin-top: 5px;
+  margin-top: 0px;
   margin-bottom: 5px;
 }
 
-
 .consume-report-date-container select{
   border: none;
-  font-size: 22px;
+  font-size: 20px;
   font-weight: bold;
 }
 
 .displayed-date{
   font-size: 16px;
   color: #2C2C2C;
-  margin-top: 5px;
+  margin-top: 0px;
 }
 
 .consume-report-price-section {

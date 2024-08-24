@@ -1,5 +1,5 @@
 import "chat/VoiceChat.css";
-import chatbot from "image/chatimage.png";
+import chatbot from "image/chat-char.png";
 import { call } from "login/service/ApiService";
 import { useState } from "react";
 
@@ -34,7 +34,7 @@ function VoiceChat(props) {
   };
 
   const handleChat = () => {
-    call("http://122.128.54.136:20000/api/v1/conversation", "POST", {
+    call("/api/v1/conversation", "POST", {
       input: userInfo,
       conversationRoomNo: roomNum,
     })
@@ -61,7 +61,7 @@ function VoiceChat(props) {
   };
 
   const handleChatRoom = () => {
-    call("http://122.128.54.136:20000/api/v1/conversation-room", "POST", userInfo)
+    call("/api/v1/conversation-room", "POST", userInfo)
       .then((response) => {
         console.log(response);
         setRoomNum(response.conversationRoomNo);
