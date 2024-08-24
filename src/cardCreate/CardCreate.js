@@ -1,6 +1,7 @@
 import "cardCreate/CardCreate.css";
 import Header from "header/Header";
 import card from "image/create-card-image.png";
+import kookmincard from "image/card.png";
 import cashback from "image/icon/cashback.png";
 import insurance from "image/icon/insurance.png";
 import medical from "image/icon/medical.png";
@@ -16,10 +17,11 @@ function CardCreate(props) {
     <div className="card-create-container">
       <Header />
       <div className="cardName">
-        <p>신한카드 Life Care</p>
+        <p>국민카드 Life Care</p>
       </div>
       <div className="create-card-image">
-        <img src={card} alt="카드이미지" className="cardImage" />
+        {/* <img src={card} alt="카드이미지" className="cardImage" /> */}
+        <img src={kookmincard} alt="카드이미지" className="cardImage" />
       </div>
       <div className="boon-group">
         <div className="medical">
