@@ -6,8 +6,8 @@ function FYIInput({ handleIsInfoChange }) {
 
   const handleName = (e) => {
     const value = e.target.value;
-    setUserInfo({ ...userInfo, name: value });
-    handleIsInfoChange(value.trim() !== "" && userInfo.phone.trim() !== "");
+    setUserInfo({ ...userInfo, protegeName: value });
+    handleIsInfoChange(value.trim() !== "" && userInfo.protegePhone.trim() !== "");
   };
 
   const phoneAutoHyphen = (value) => {
@@ -19,20 +19,20 @@ function FYIInput({ handleIsInfoChange }) {
   const handlePhone = (e) => {
     let value = e.target.value;
     value = phoneAutoHyphen(value);
-    setUserInfo({ ...userInfo, phone: value });
-    handleIsInfoChange(userInfo.name.trim() !== "" && value.trim() !== "");
+    setUserInfo({ ...userInfo, protegePhone: value });
+    handleIsInfoChange(userInfo.protegeName.trim() !== "" && value.trim() !== "");
   };
 
   useEffect(() => {
-    handleIsInfoChange(userInfo.name.trim() !== "" && userInfo.phone.trim() !== "");
-  }, [userInfo.name, userInfo.phone, handleIsInfoChange]);
+    handleIsInfoChange(userInfo.protegeName.trim() !== "" && userInfo.protegePhone.trim() !== "");
+  }, [userInfo.protegeName, userInfo.protegePhone, handleIsInfoChange]);
 
   return (
     <div className="input-container">
-      <input value={userInfo.name} onChange={handleName} placeholder="이름" />
+      <input value={userInfo.protegeName} onChange={handleName} placeholder="이름" />
       <input
         type="tel"
-        value={userInfo.phone}
+        value={userInfo.protegePhone}
         maxLength="13"
         onChange={handlePhone}
         placeholder="전화번호"

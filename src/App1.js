@@ -23,6 +23,7 @@ import FamilySimplePW from "cardCreate/application/FamilySimplePW";
 import SimplePW from "cardCreate/application/SimplePW";
 import { createContext } from "react";
 import Modal from "react-modal";
+import OnboardingPage from "onboarding/OnboardingPage";
 
 Modal.setAppElement("#root");
 export const CommonContext = createContext();
@@ -30,7 +31,7 @@ export const CommonContext = createContext();
 function App(props) {
   return (
       <Routes>
-        <Route path="/" element={<MainA />} /> 
+        <Route path="/" element={<OnboardingPage />} /> 
         {/* 첫화면 메인화면으로 가기!! */}
 
         <Route path="/main" element={<MainA />} />

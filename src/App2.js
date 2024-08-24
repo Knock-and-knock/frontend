@@ -22,8 +22,6 @@ import { Route, Routes } from 'react-router-dom';
 
 import Modal from 'react-modal';
 import WelfareInputTotal from 'welfare/component/WelfareInputTotal';
-import WelfareMain from 'welfare/component/WelfareMain';
-import WelfarePayComplete from 'welfare/component/WelfarePayComplete';
 
 
 

@@ -8,7 +8,6 @@ function LoginPw(props) {
     const [pw,setPw] =useState("");
     const inputRef = useRef(null);
     const loginUserNo = localStorage.getItem("userNo");
-    const accessToken = localStorage.getItem("ACCESS_TOKEN");
     const [errorMessage, setErrorMessage] = useState("");
     const navi = useNavigate();
     const isButtonDisabled = pw.length < 6;
@@ -22,33 +21,53 @@ function LoginPw(props) {
         const value = e.target.value.slice(0, 6);
         setPw(value);
     };
-    const circles = Array(6).fill(null); 
-    const handleSubmit = (event)=>{
-        event.preventDefault(); //default이벤트 취소
-        const data = new FormData(event.target);
-        const userSimplePassword = data.get("userSimplePassword");
+   
+    const handleMatchCheck = () => {
+        call("/api/v1/match", "GET", null)
+            .then((response) => {
+                if (response.matchStatus === "ACCEPT") {
+                    navi('/nokmain');
+                } else {
+                    navi('/match');
+                }
+            })
+            .catch((error) => {
+                if (error.response && error.response.status === 404) {
+                    navi('/match');
+                } else {
+                    alert("실패");
+                }
+            });
+    };
 
-        call('/api/v1/auth/login/simple',"POST",
-            { userNo: loginUserNo, userSimplePassword: userSimplePassword}
-        ).then((response)=>{
+    const handleSubmit = (event) => {
+        event.preventDefault(); // default 이벤트 취소
+        const userSimplePassword = pw;
+
+        call('/api/v1/auth/login/simple', "POST",
+            { userNo: loginUserNo, userSimplePassword: userSimplePassword }
+        ).then((response) => {
             console.log(response);
-            localStorage.setItem(accessToken, response.accessToken);
-            if(response.userType === "PROTECTOR"){
-                navi("/nokmain")
-            }else{
+            localStorage.setItem("ACCESS_TOKEN", response.accessToken);
+
+            if (response.userType === "PROTECTOR") {
+                handleMatchCheck();
+            } else {
                 navi("/main");
             }
-            
-        }).catch((error)=>{
+
+        }).catch((error) => {
             console.error("간편비밀번호로그인 실패", error);
-            setErrorMessage(error.message);
+            setErrorMessage("로그인에 실패했습니다. 다시 시도해주세요.");
         });
     };
+
     const handleCircleWrapClick = () => {
         if (inputRef.current) {
             inputRef.current.focus();
         }
     };
+    const circles = Array(6).fill(null); 
     return (
         <div>
             <LoginHeader/>
