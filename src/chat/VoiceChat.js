@@ -3,6 +3,8 @@ import VoiceHeader from "chat/VoiceHeader";
 import chatbot from "image/chat-char.png";
 import { call } from "login/service/ApiService";
 import { useState } from "react";
+import Loading from "./Loading";
+import SpeakLoading from "./SpeakLoading";
 
 function VoiceChat(props) {
   /*const [isOpen, setIsOpen] = useState(false);
@@ -31,6 +33,7 @@ function VoiceChat(props) {
   const [userInfo, setUserInfo] = useState("");
   const [roomNum, setRoomNum] = useState("");
   const [recognition, setRecognition] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
   const handleInputChange = (e) => {
     setUserInfo(e.target.value);
   };
@@ -130,13 +133,16 @@ function VoiceChat(props) {
   return (
     <div className="voicechat-section">
       <VoiceHeader />
+      <SpeakLoading/>
+      <Loading/>
       <img src={chatbot} alt="챗봇" className="chatbot" />
-      <div>
+      {/* <div>
         <button onClick={handleChat}>말ㅋ</button>
         <button onClick={startAutoRecord}>시작</button>
         <button onClick={endRecord}>종료</button>
       </div>
-      <input name="mal" onChange={handleInputChange} />
+      <input name="mal" onChange={handleInputChange} />  */}
+      <textarea className="textbox" readOnly/>
       <button className="chat-startBtn" onClick={handleChatRoom}>
         똑똑!
       </button>

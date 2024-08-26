@@ -1,9 +1,9 @@
 import DolbomMain from 'welfare/component/DolbomMain';
+import WelfareAddressModal from 'welfare/component/WelfareAddressModal';
 import WelfareCheckPW from 'welfare/component/WelfareCheckPW';
 import WelfareCheckSpec from 'welfare/component/WelfareCheckSpec';
 import WelfareHanwoolModal from 'welfare/component/WelfareHanwoolModal';
 import WelfareHouseworkModal from 'welfare/component/WelfareHouseworkModal';
-import WelfareAddressModal from 'welfare/component/WelfareAddressModal';
 import WelfareInputAddress from 'welfare/component/WelfareInputAddress';
 import WelfareInputBirth from 'welfare/component/WelfareInputBirth';
 import WelfareInputDisease from 'welfare/component/WelfareInputDisease';
@@ -11,7 +11,6 @@ import WelfareInputGender from 'welfare/component/WelfareInputGender';
 import WelfareInputHeight from 'welfare/component/WelfareInputHeight';
 import WelfareList from 'welfare/component/WelfareList';
 import WelfareMain from 'welfare/component/WelfareMain';
-import WelfarePayComplete from 'welfare/component/WelfarePayComplete';
 import WelfareNursingModal from 'welfare/component/WelfareNursingModal';
 import WelfareReserveCancelModal from 'welfare/component/WelfareReserveCancelModal';
 import WelfareReservedList from 'welfare/component/WelfareReservedList';
@@ -23,6 +22,7 @@ import { Route, Routes } from 'react-router-dom';
 
 import Modal from 'react-modal';
 import WelfareInputTotal from 'welfare/component/WelfareInputTotal';
+import WelfarePayComplete from 'welfare/component/welfarePayComplete';
 
 
 Modal.setAppElement('#root');
