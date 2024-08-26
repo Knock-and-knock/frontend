@@ -14,10 +14,30 @@ function LoginId(props) {
     const [isUserIdError, setIsUserIdError] = useState(false);
     const [isUserPwError, setIsUserPwError] = useState(false);
 
-    const navigate =useNavigate();
+    const navi =useNavigate();
+
     const handleGoSignUp = () =>{
-        navigate("/signup/register")
+        navi("/signup/register")
     }
+
+    const handleMatchCheck = () => {
+        call("/api/v1/match", "GET", null)
+            .then((response) => {
+                if (response.matchStatus === "ACCEPT") {
+                    navi('/nokmain');
+                } else {
+                    navi('/match');
+                }
+            })
+            .catch((error) => {
+                if (error.response && error.response.status === 404) {
+                    navi('/match');
+                } else {
+                    alert("실패");
+                }
+            });
+    };
+    
     const handleSubmit = (event) => {
         event.preventDefault(); //default이벤트 취소
         const data = new FormData(event.target);
@@ -30,6 +50,7 @@ function LoginId(props) {
         setIsUserPwError(false);
 
         localStorage.setItem(ACCESS_TOKEN, '');
+        
 
         call("/api/v1/auth/login/normal", "POST", { userId: userId, userPassword: userPassword }).then((response)=>{
             if (response.accessToken) {
@@ -40,23 +61,9 @@ function LoginId(props) {
 
               // token이 존재하는 경우 Todo 화면으로 리디렉트
               if (response.userType === "PROTECTOR") {
-                // call("/api/v1/match","GET",null)
-                // .then((response)=>{
-                //     if(response.matchStatus==="ACCEPT"){
-                //         navigate('/nokmain');
-                //     }else{
-                //         navigate('/match');
-                //     }
-                // }).catch((error)=>{
-                //     if (error.response && error.response.status === 404) {
-                //         navigate('/match');
-                //     } else {
-                //         alert("실패");
-                //     }
-                // });
-                navigate('/match');
+                handleMatchCheck();
               } else {
-                navigate('/main');
+                navi('/main');
               }
           } 
           }).catch(

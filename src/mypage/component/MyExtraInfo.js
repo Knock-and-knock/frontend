@@ -2,9 +2,10 @@ import { CommonContext } from "App3";
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import MyExtraInfoContent from "./MyExtraInfoContent";
+import info from "image/icon/info.png";
 
 function MyExtraInfo({userInfo}) {
-    
+    const [isExtraInfo, setIsExtraInfo] = useState(true);
 
     const navi = useNavigate();
     const handelSubstituteClick=()=>{
@@ -23,17 +24,25 @@ function MyExtraInfo({userInfo}) {
         }
     };
     
+    useEffect(()=>{
+        if(userInfo.protegeAddress === null 
+            && userInfo.protegeBirth === null 
+            && userInfo.protegeDisease === null
+            && userInfo.protegeGender === 0
+            && userInfo.protegeHeight === 0
+            && userInfo.protegeWeight === 0){
+            setIsExtraInfo(false);
+        };
+    },[userInfo]);
 
-  
     return (
         <div className='info-container'>
             <div className='info-title'>
-                {/* <p><span className="info-protegeName">{userInfo.protegeName === userInfo.userName?"나":`${userInfo.protegeName}님`}</span>의 부가정보</p> */}
-                <p><span className="info-protegeName">홍길동님</span>의 부가정보</p>
+                <p><span className="info-protegeName">{userInfo.protegeName === userInfo.userName?"나":`${userInfo.protegeName}님`}</span>의 부가정보</p>
                 <p className='info-changeBtn' onClick={handleModifyClick} >변경</p>
             </div>
-            <MyExtraInfoContent userInfo={userInfo} />
-            {/* {getSubstituteBtn(loginUser)} */}
+            {isExtraInfo?<MyExtraInfoContent userInfo={userInfo} />:<p className="info-none"><img src={info} alt="" className="card-info-icon" />등록된 정보가 없습니다.</p>}
+            {getSubstituteBtn(loginUser)}
         </div>
     );
 }
