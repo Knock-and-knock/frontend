@@ -6,10 +6,11 @@ import MyExtraInfo from './component/MyExtraInfo';
 import "mypage/MyPage.css"
 import DisconnectionModal from './component/modal/DisconnectionModal';
 import { call } from 'login/service/ApiService';
+import MyExtraInfoTest from './component/MyExtraInfoTest';
 
 
 
-function MyPage(props) {
+function MyPageTest(props) {
 
     const{loginUser,setLoginUser} = useContext(CommonContext);
     const loginUserType = localStorage.getItem("loginUser");
@@ -43,7 +44,7 @@ function MyPage(props) {
             <Header/>
             <p className='mypage-name'>{userInfo.userName}</p>
             <MyBasicInfo userInfo={userInfo}/>
-            <MyExtraInfo userInfo={userInfo}/>
+            <MyExtraInfoTest userInfo={userInfo}/>
             {getModal(loginUser)}
             <div className='mypage-bottom'>
                 <p className='logoutBtn'>로그아웃</p>
@@ -54,4 +55,4 @@ function MyPage(props) {
     );
 }
 
-export default MyPage;
+export default MyPageTest;

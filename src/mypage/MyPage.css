@@ -1,6 +1,5 @@
 .mypage-container{
     padding: 20px;
-    border: 1px green solid;
 }
 .mypage-name{
     font-size: 20px;
@@ -36,6 +35,9 @@
     font-weight: bold;
     margin: 0px 0px;
 }
+.info-protegeName{
+    color: #80BAFF;
+}
 .info-changeBtn{
     color: #686868;
     font-weight: normal !important;
@@ -54,6 +56,16 @@
     color: #686868;
     display: inline-block;
 }
+.info-content p:nth-child(3){
+    width: 70%;
+    font-size: 16px;
+    color: #686868;
+    display: inline-block;
+    margin-left: 92.4px;
+    margin-top: 0px;
+}
+
+
 .substituteBtn{
     width: 100%;
     height: 45px;
@@ -64,4 +76,14 @@
     font-weight: bold;
     color: white;
     margin-top: 20px;
+}
+
+
+.info-container-text{
+    color: #CCC7C0;
+    font-size: 18px;
+    margin: 150px 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

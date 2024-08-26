@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import styles from 'welfare/css/WelfareSetPW.module.css'; // CSS 모듈 import
 import Header from 'header/Header.js';
 import { useNavigate } from 'react-router-dom';
@@ -13,6 +13,13 @@ function WelfareSetPW() {
 
     const [password, setPassword] = useState("");
     const inputRef = useRef(null);
+
+    useEffect(() => {
+        // 페이지 로드 시 input에 자동 포커스 설정
+        if (inputRef.current) {
+            inputRef.current.focus();
+        }
+    }, []);
 
     const handleCircleClick = () => {
         inputRef.current.focus();  // 클릭 시 input에 포커스

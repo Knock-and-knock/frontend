@@ -19,16 +19,16 @@ function ConsumDetailModal({isOpen,closeModal}) {
             <Modal isOpen={isOpen} onRequestClose={closeModal} style={customStyles}>
                 <p className='csModal-title'>상세조회</p>
                 <div className='csModal-content csModal-line'>
-                    <p>GS25 편의점결제</p>
+                    <p>희동이의 가방나라</p>
                     <p>홍길동</p>
                 </div>
                 <div className='csModal-content'>
                     <p>거래일자</p>
-                    <p>2024.08.21 13:46</p>
+                    <p>2024.08.24 19:00</p>
                 </div>
                 <div className='csModal-content'>
                     <p>카테고리</p>
-                    <p>식비</p>
+                    <p>잡화</p>
                 </div>
                 <div className='csModal-content csModal-dashed'>
                     <p>카드종류</p>
@@ -36,7 +36,7 @@ function ConsumDetailModal({isOpen,closeModal}) {
                 </div>
                 <div className='csModal-content csModal-line'>
                     <p>이용금액</p>
-                    <p className='csModal-price'><span className='csModal-Num'>8,500</span>원</p>
+                    <p className='csModal-price'><span className='csModal-Num'>38,900</span>원</p>
                 </div>
                 <button className='csModalBtn' onClick={closeModal}>닫기</button>
             </Modal>

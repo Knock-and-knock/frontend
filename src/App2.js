@@ -3,6 +3,7 @@ import WelfareCheckPW from 'welfare/component/WelfareCheckPW';
 import WelfareCheckSpec from 'welfare/component/WelfareCheckSpec';
 import WelfareHanwoolModal from 'welfare/component/WelfareHanwoolModal';
 import WelfareHouseworkModal from 'welfare/component/WelfareHouseworkModal';
+import WelfareAddressModal from 'welfare/component/WelfareAddressModal';
 import WelfareInputAddress from 'welfare/component/WelfareInputAddress';
 import WelfareInputBirth from 'welfare/component/WelfareInputBirth';
 import WelfareInputDisease from 'welfare/component/WelfareInputDisease';
@@ -20,9 +21,6 @@ import { Route, Routes } from 'react-router-dom';
 
 import Modal from 'react-modal';
 import WelfareInputTotal from 'welfare/component/WelfareInputTotal';
-import WelfareMain from 'welfare/component/WelfareMain';
-import WelfarePayComplete from 'welfare/component/WelfarePayComplete';
-
 
 
 Modal.setAppElement('#root');
@@ -41,6 +39,8 @@ function App(props) {
       
       <Route path="/welfare-input/*" element={<WelfareInputTotal />}>
         <Route path="address" element={<WelfareInputAddress />} />
+        <Route path="address-modal" element={<WelfareAddressModal />} />
+
         <Route path="birth" element={<WelfareInputBirth />} />
         <Route path="disease" element={<WelfareInputDisease />} />
         <Route path="gender" element={<WelfareInputGender />} />

@@ -2,8 +2,8 @@ import "cardCreate/application/CardApplication.css";
 import Header from "header/Header.js";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import AddressSearchComponent from "./AddressSearchComponent";
-import { useCardCreate } from "./CardApp";
+import AddressSearchComponent from "cardCreate/application/AddressSearchComponent";
+import { useCardCreate } from "cardCreate/application/CardApp";
 
 function AddAddress() {
   const { userInfo, setUserInfo } = useCardCreate();

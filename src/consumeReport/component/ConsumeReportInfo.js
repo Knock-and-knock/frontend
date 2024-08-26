@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import 'consumeReport/ConsumeReport.css';
 import Chart from "react-apexcharts";
 
@@ -13,7 +13,7 @@ function ConsumeReportInfo() {
     };
 
     const donutData = {
-        series: [28900, 38900, 18900, 30900, 29900, 29900, 9900],
+        series: [28900, 38900, 18900, 30900, 29900, 29900, 44200, 9900],
         options: {
             chart: {
                 type: 'donut',
@@ -54,7 +54,7 @@ function ConsumeReportInfo() {
                     }
                 }
             },
-            labels: ["🍴식비", "👜잡화", "🚍교통", "🏠생활", "🛒쇼핑", "🍷유흥", "💰기타"],
+            labels: ["🍴식비", "👜잡화", "🚍교통", "🏠생활", "🛒쇼핑", "🍷유흥", "🏥의료" ,"💰기타"],
             dataLabels: {
                 style: {
                     fontSize: '14px',
@@ -62,7 +62,7 @@ function ConsumeReportInfo() {
                 },
             },
             fill: {
-                colors: ['#6DD193', '#F56A71', '#E9A260', '#66B1B5', '#4AADE5', '#9B7F9E', '#625B8B']
+                colors: ['#6DD193', '#F56A71', '#E9A260', '#66B1B5', '#4AADE5', '#9B7F9E', '#615EDE', '#625B8B']
             }
         },
     };
@@ -70,7 +70,7 @@ function ConsumeReportInfo() {
     const barData = {
         series: [{
             name: "지출",
-            data: [28900, 38900, 18900, 30900, 29900, 29900, 9900]
+            data: [28900, 38900, 18900, 30900, 29900, 29900, 44200, 9900]
         }],
         options: {
             chart: {
@@ -96,7 +96,7 @@ function ConsumeReportInfo() {
                 }
             },
             xaxis: {
-                categories: ["🍴식비", "👜잡화", "🚍교통", "🏠생활", "🛒쇼핑", "🍷유흥", "💰기타"],
+                categories: ["🍴식비", "👜잡화", "🚍교통", "🏠생활", "🛒쇼핑", "🍷유흥", "🏥의료", "💰기타"],
                 labels: {
                     show: false // 눈금 제거
                 },
@@ -106,10 +106,10 @@ function ConsumeReportInfo() {
                 axisTicks: {
                     show: false // x축의 틱 제거
                 },
-                tickAmount: Math.max(...[28900, 38900, 18900, 30900, 29900, 29900, 9900]) / 10 // 최대값을 10단위로 나눔
+                tickAmount: Math.max(...[28900, 38900, 18900, 30900, 29900, 29900, 44200, 9900]) / 10 // 최대값을 10단위로 나눔
             },
             yaxis: {
-                categories: ["🍴식비", "👜잡화", "🚍교통", "🏠생활", "🛒쇼핑", "🍷유흥", "💰기타"],
+                categories: ["🍴식비", "👜잡화", "🚍교통", "🏠생활", "🛒쇼핑", "🍷유흥", "🏥의료", "💰기타"],
                 labels: {
                     style: {
                         colors: '#2c2c2c',
@@ -129,7 +129,7 @@ function ConsumeReportInfo() {
                 enabled: false // 기본 툴팁을 비활성화
             },
             fill: {
-                colors: ['#6DD193', '#F56A71', '#E9A260', '#66B1B5', '#4AADE5', '#9B7F9E', '#625B8B'],
+                colors: ['#6DD193', '#F56A71', '#E9A260', '#66B1B5', '#4AADE5', '#9B7F9E', '#615EDE', '#625B8B'],
                 opacity: 1
             },
             dataLabels: {
@@ -162,10 +162,11 @@ function ConsumeReportInfo() {
             colors: ['#6DD193', '#F56A71', '#E9A260', '#66B1B5', '#4AADE5', '#9B7F9E', '#625B8B'],
         }
     };
-    
-    
-    
-    
+
+    // 합계 계산
+    const totalPrice = useMemo(() => {
+        return donutData.series.reduce((total, num) => total + num, 0);
+    }, [donutData.series]);
 
     const renderChart = () => {
         switch (selectedFilter) {
@@ -264,7 +265,7 @@ function ConsumeReportInfo() {
     return (
         <div className='consume-report-price-container'>
             <div className='consume-report-price-section'>
-                <span className='total-price'>총 <span className='go-mainred'>{formatPrice(177400)}</span> 원</span>
+                <span className='total-price'>총 <span className='go-mainred'>{formatPrice(totalPrice)}</span> 원</span>
                 <div className='report-search-filter'>
                     <span
                         style={{ fontWeight: selectedFilter === 'personal' ? 'bold' : 'normal' }}

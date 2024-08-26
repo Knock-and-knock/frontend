@@ -47,7 +47,7 @@ function DolbomMain() {
       backgroundColor: "rgba(0, 0, 0, 0.5)"
     },
     content: {
-      height: "300px",
+      height: "270px",
       margin: "auto",
       borderRadius: "15px",
       padding: "20px",

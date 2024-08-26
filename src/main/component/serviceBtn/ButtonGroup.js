@@ -13,12 +13,14 @@ function ButtonGruop(props) {
    const handleWelfareClick=()=>{
     navigate("/welfare-main");
   }
+   const handleConsumeReport=()=>{
+    navigate("/consume-report");
+  }
   return (
     <div className="button-group">
       <PayBtn handlePayClick={handlePayClick}/>
-      <WelfareBtn handleWelfareClick={handleWelfareClick}/>
-      
-      <PayReportBtn/>
+      <WelfareBtn handleWelfareClick={handleWelfareClick}/>      
+      <PayReportBtn handleConsumeReport={handleConsumeReport}/>
     </div>
   );
 }

@@ -7,6 +7,7 @@ import LoginPw from 'login/LoginPw';
 import ModifyInfo from 'mypage/component/ModifyInfo';
 import SubstituteInput from 'mypage/component/SubstituteInput';
 import MyPage from 'mypage/MyPage';
+import MyPageTest from 'mypage/MyPageTest';
 import { createContext, useState } from 'react';
 import Modal from 'react-modal';
 import { Route, Routes } from 'react-router-dom';
@@ -37,6 +38,7 @@ function App(props) {
           <Route path="/modifyinfo" element={<ModifyInfo />} />
           <Route path="/consumption" element={<Consumption />} />
           <Route path="/alarm" element={<AlarmList />} />
+          <Route path="/mypageTest" element={<MyPageTest />} />
           
           <Route path="/signup/*" element={<SignUpMain/>} >
             <Route path="register" element={<Register/>} />

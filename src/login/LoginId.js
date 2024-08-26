@@ -29,37 +29,51 @@ function LoginId(props) {
     setIsUserIdError(false);
     setIsUserPwError(false);
 
-    call("/api/v1/auth/login/normal", "POST", {
-      userId: userId,
-      userPassword: userPassword,
-    })
-      .then((response) => {
-        if (response.accessToken) {
-          // 로컬 스토리지에 토큰 저장
-          localStorage.setItem("loginUser", response.userType);
-          localStorage.setItem("userNo", response.userNo);
-          localStorage.setItem(ACCESS_TOKEN, response.accessToken);
+        localStorage.setItem(ACCESS_TOKEN, '');
 
-          // token이 존재하는 경우 Todo 화면으로 리디렉트
-          if (response.userType === "PROTECTOR") {
-            navigate("/nokmain");
-          } else {
-            navigate("/main");
-          }
-        }
-      })
-      .catch((error) => {
-        if (error.message === "아이디가 존재하지 않습니다.") {
-          setIdErrorMessage(error.message);
-          setIsUserIdError(true);
-        } else if ("비밀번호가 일치하지 않습니다.") {
-          setPwErrorMessage(error.message);
-          setIsUserPwError(true);
-        } else {
-          alert("로그인 실패");
-        }
-      });
-  };
+        call("/api/v1/auth/login/normal", "POST", { userId: userId, userPassword: userPassword }).then((response)=>{
+            if (response.accessToken) {
+              // 로컬 스토리지에 토큰 저장
+              localStorage.setItem("loginUser", response.userType);
+              localStorage.setItem("userNo", response.userNo);
+              localStorage.setItem(ACCESS_TOKEN, response.accessToken);
+
+              // token이 존재하는 경우 Todo 화면으로 리디렉트
+              if (response.userType === "PROTECTOR") {
+                // call("/api/v1/match","GET",null)
+                // .then((response)=>{
+                //     if(response.matchStatus==="ACCEPT"){
+                //         navigate('/nokmain');
+                //     }else{
+                //         navigate('/match');
+                //     }
+                // }).catch((error)=>{
+                //     if (error.response && error.response.status === 404) {
+                //         navigate('/match');
+                //     } else {
+                //         alert("실패");
+                //     }
+                // });
+                navigate('/match');
+              } else {
+                navigate('/main');
+              }
+          } 
+          }).catch(
+            (error)=>{
+                
+                if(error.message==='아이디가 존재하지 않습니다.'){
+                    setIdErrorMessage(error.message);
+                    setIsUserIdError(true);
+                    
+                }else if('비밀번호가 일치하지 않습니다.'){
+                    setPwErrorMessage(error.message);
+                    setIsUserPwError(true);
+                }else{
+                    alert("로그인 실패");
+                }
+              
+         });
 
   const isButtonDisabled = !userId || !userPassword;
 

@@ -34,7 +34,7 @@ export function call(api, method, request) {
     )
     .catch((error) => {
       // 추가된 부분
-      console.log(error.status);
+      console.log(error);
       if (error.status === undefined || error.status === 403) {
        // window.location.href = "/login"; // redirect
       }
