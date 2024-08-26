@@ -1,4 +1,4 @@
-.modiInfo-container, .subInput-container{
+.modiInfo-container{
     padding: 20px;
 }
 .infoInput-container{
@@ -51,4 +51,15 @@
 
 .infoInput-glasses{
     float: right;
+}
+.infoInput-gender{
+    display: inline-block;
+    width: 50%;
+}
+.infoInput-gender p{
+    display: inline-block;
+}
+.infoInput-gender input{
+    display: inline-block;
+    width: 50%;
 }
