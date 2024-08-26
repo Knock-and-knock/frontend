@@ -30,9 +30,10 @@ function LoginId(props) {
                 }
             })
             .catch((error) => {
-                if (error.response && error.response.status === 404) {
+                if (error.matchStatus === null) {
                     navi('/match');
                 } else {
+                    console.log(error);
                     alert("실패");
                 }
             });

@@ -8,19 +8,18 @@ function MyExtraInfo({userInfo}) {
     const [isExtraInfo, setIsExtraInfo] = useState(true);
 
     const navi = useNavigate();
-    const handelSubstituteClick=()=>{
-        navi("/subinput");
-    };
     const handleModifyClick=()=>{
         navi("/modifyinfo",{state:{userInfo}});
     }
     const {loginUser} = useContext(CommonContext);
     const getSubstituteBtn = (userType)=>{
-        switch(userType){
-            case 'PROTECTOR':
-                return <button className='substituteBtn' onClick={handelSubstituteClick}>어르신 정보 대신 입력하기</button>;
-            default:
-                return null;
+        if(isExtraInfo===false){
+            switch(userType){
+                case 'PROTECTOR':
+                    return <button className='substituteBtn' onClick={handleModifyClick}>어르신 정보 대신 입력하기</button>;
+                default:
+                    return null;
+            }
         }
     };
     
@@ -39,7 +38,7 @@ function MyExtraInfo({userInfo}) {
         <div className='info-container'>
             <div className='info-title'>
                 <p><span className="info-protegeName">{userInfo.protegeName === userInfo.userName?"나":`${userInfo.protegeName}님`}</span>의 부가정보</p>
-                <p className='info-changeBtn' onClick={handleModifyClick} >변경</p>
+                {isExtraInfo===true?<p className='info-changeBtn' onClick={handleModifyClick}>변경</p>:""}
             </div>
             {isExtraInfo?<MyExtraInfoContent userInfo={userInfo} />:<p className="info-none"><img src={info} alt="" className="card-info-icon" />등록된 정보가 없습니다.</p>}
             {getSubstituteBtn(loginUser)}

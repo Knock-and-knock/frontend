@@ -24,15 +24,15 @@ function MyPage(props) {
         call('/api/v1/users', 'GET', null)
             .then(response => setUserInfo(response))
             .catch(error => {
-                console.log("정보 조회 오류", error);
-                setError("정보를 불러오는 데 문제가 발생했습니다.");
+                console.log("회원 정보 조회 오류", error);
+                setError("회원 정보를 불러오는 데 문제가 발생했습니다.");
             });
     }, []);
     
     const getModal = (loginUser)=>{
         switch(loginUser){
             case 'PROTEGE':
-                return <DisconnectionModal userInfo={userInfo}/>;
+                return <DisconnectionModal matchNo={userInfo.matchNo}/>;
             default: 
                 return null;
         }
@@ -41,6 +41,7 @@ function MyPage(props) {
     return (
         <div className='mypage-container'>
             <Header/>
+            {error && <p className='error-message'>{error}</p>}
             <p className='mypage-name'>{userInfo.userName}</p>
             <MyBasicInfo userInfo={userInfo}/>
             <MyExtraInfo userInfo={userInfo}/>
@@ -49,7 +50,7 @@ function MyPage(props) {
                 <p className='logoutBtn'>로그아웃</p>
                 <p className='withdrawalBtn'>회원탈퇴</p>
             </div>
-            {error && <p className='error-message'>{error}</p>}
+            
         </div>
     );
 }

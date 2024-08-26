@@ -1,10 +1,10 @@
-import Header from 'header/Header';
-import React, { useEffect, useState } from 'react';
-import ConsumList from './component/ConsumList';
 import "consume/Consumption.css";
-import ConsumFilter from './component/ConsumFilter';
-import ConsumDate from './component/ConsumDate';
+import Header from 'header/Header';
+import { useEffect, useState } from 'react';
+import ConsumCard from "./component/ConsumCard";
 import ConsumDetailModal from './component/ConsumDetailModal';
+import ConsumFilter from './component/ConsumFilter';
+import ConsumList from './component/ConsumList';
 
 function Consumption(props) {
     const [isOpen, setIsOpen] = useState(false);
@@ -19,12 +19,12 @@ function Consumption(props) {
         document.body.classList.toggle("unscrollable",isOpen)
     },[isOpen]);
 
-
+    
     return (
         <div>
             <Header/>
             <div className="consumption-container">
-                {/* <ConsumDate/> */}
+                <ConsumCard/>
                 <ConsumFilter/>
                 <ConsumList handleOpenModal={handleOpenModal}/>
                 

@@ -1,11 +1,19 @@
+import { call } from 'login/service/ApiService';
 import 'main/component/header/HeaderA.css';
+import { useEffect, useState } from 'react';
 
 function Profile(props) {
+  const [userName, setUserName] = useState('');
+  useEffect(()=>{
+    call('/api/v1/users','GET',null).then((response)=>{
+      setUserName(response.userName)
+    }).catch();
+  });
   return (
     <div className="main-header">
       <div className="profile-info">
-        <h2 className="profile-name"><a href="/mypage">홍길동님 ▶</a></h2>
-        {/* <p className="profile-subtext">홍길동보호자</p> */}
+        <h2 className="profile-name"><a href="/mypage">{userName}님 ▶</a></h2>
+        <p className="profile-subtext">홍길동보호자</p> 
       </div>
     </div>
   );

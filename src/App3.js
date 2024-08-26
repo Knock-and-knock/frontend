@@ -5,7 +5,6 @@ import LoginBio from 'login/LoginBio';
 import LoginId from 'login/LoginId';
 import LoginPw from 'login/LoginPw';
 import ModifyInfo from 'mypage/component/ModifyInfo';
-import SubstituteInput from 'mypage/component/SubstituteInput';
 import MyPage from 'mypage/MyPage';
 import { createContext, useState } from 'react';
 import Modal from 'react-modal';
@@ -33,7 +32,6 @@ function App(props) {
           <Route path="/loginid" element={<LoginId />} />
           <Route path="/loginpw" element={<LoginPw />} />
           <Route path="/mypage" element={<MyPage />} />
-          <Route path="/subinput" element={<SubstituteInput />} />
           <Route path="/modifyinfo" element={<ModifyInfo />} />
           <Route path="/consumption" element={<Consumption />} />
           <Route path="/alarm" element={<AlarmList />} />
