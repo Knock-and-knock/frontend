@@ -1,33 +1,33 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import LoginBtn from "./component/button/LoginBtn";
-import LoginHeader from "./component/header/LoginHeader";
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import LoginBtn from './component/button/LoginBtn';
+import LoginHeader from './component/header/LoginHeader';
 import "./Login.css";
-import { call } from "./service/ApiService";
+import { call } from './service/ApiService';
 
 function LoginId(props) {
-  const ACCESS_TOKEN = "ACCESS_TOKEN";
-  const [userId, setUserId] = useState("");
-  const [userPassword, setUserPassword] = useState("");
-  const [idErrorMessage, setIdErrorMessage] = useState("");
-  const [pwErrorMessage, setPwErrorMessage] = useState("");
-  const [isUserIdError, setIsUserIdError] = useState(false);
-  const [isUserPwError, setIsUserPwError] = useState(false);
+    const ACCESS_TOKEN = "ACCESS_TOKEN";
+    const [userId, setUserId] = useState('');
+    const [userPassword, setUserPassword] = useState('');
+    const[idErrorMessage, setIdErrorMessage] = useState('');
+    const[pwErrorMessage, setPwErrorMessage] = useState('');
+    const [isUserIdError, setIsUserIdError] = useState(false);
+    const [isUserPwError, setIsUserPwError] = useState(false);
 
-  const navigate = useNavigate();
-  const handleGoSignUp = () => {
-    navigate("/signup/register");
-  };
-  const handleSubmit = (event) => {
-    event.preventDefault(); //default이벤트 취소
-    const data = new FormData(event.target);
-    const userId = data.get("userId");
-    const userPassword = data.get("userPassword");
-    console.log({ userId: userId, userPassword: userPassword });
-    setIdErrorMessage("");
-    setPwErrorMessage("");
-    setIsUserIdError(false);
-    setIsUserPwError(false);
+    const navigate =useNavigate();
+    const handleGoSignUp = () =>{
+        navigate("/signup/register")
+    }
+    const handleSubmit = (event) => {
+        event.preventDefault(); //default이벤트 취소
+        const data = new FormData(event.target);
+        const userId = data.get("userId");
+        const userPassword = data.get("userPassword");
+        console.log({ userId: userId, userPassword: userPassword });
+        setIdErrorMessage('');
+        setPwErrorMessage('');
+        setIsUserIdError(false);
+        setIsUserPwError(false);
 
         localStorage.setItem(ACCESS_TOKEN, '');
 
@@ -75,45 +75,29 @@ function LoginId(props) {
               
          });
 
-  const isButtonDisabled = !userId || !userPassword;
+      };
 
-  return (
-    <div>
-      <LoginHeader />
-      <form noValidate onSubmit={handleSubmit}>
-        <div className="login-container">
-          <input
-            className={`login-input ${
-              isUserIdError ? "login-input-error" : ""
-            }`}
-            type="text"
-            value={userId}
-            name="userId"
-            placeholder="아이디"
-            onChange={(e) => setUserId(e.target.value)}
-          />
-          <div className="check-input">{idErrorMessage}</div>
-          <input
-            className={`login-input ${
-              isUserPwError ? "login-input-error" : ""
-            }`}
-            type="password"
-            value={userPassword}
-            name="userPassword"
-            placeholder="비밀번호"
-            onChange={(e) => setUserPassword(e.target.value)}
-          />
-          <div className="check-input">{pwErrorMessage}</div>
+    const isButtonDisabled = !userId || !userPassword;
 
-          <div className="login-options">
-            <p className="border-separator">아이디 찾기</p>
-            <p className="border-separator">비밀번호 찾기</p>
-            <p onClick={handleGoSignUp}>회원가입</p>
-          </div>
+    return (
+        <div>
+            <LoginHeader/>
+            <form noValidate onSubmit={handleSubmit}>
+                <div className="login-container">
+                    <input className={`login-input ${isUserIdError?'login-input-error':''}`} type="text"  value={userId} name='userId' placeholder="아이디" onChange={(e) => setUserId(e.target.value)}/>
+                    <div className='check-input'>{idErrorMessage}</div>
+                    <input className={`login-input ${isUserPwError?'login-input-error':''}`} type="password" value={userPassword} name='userPassword' placeholder="비밀번호" onChange={(e) => setUserPassword(e.target.value)}/>
+                    <div className='check-input'>{pwErrorMessage}</div>
+               
+                    <div className="login-options">
+                        <p className='border-separator'>아이디 찾기</p>
+                        <p className='border-separator'>비밀번호 찾기</p>
+                        <p onClick={handleGoSignUp}>회원가입</p>
+                    </div>
+                </div>
+                <LoginBtn isButtonDisabled={isButtonDisabled}/>
+            </form>
         </div>
-        <LoginBtn isButtonDisabled={isButtonDisabled} />
-      </form>
-    </div>
-  );
+    );
 }
 export default LoginId;
