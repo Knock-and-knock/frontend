@@ -1,6 +1,6 @@
 import AddressSearchComponent from 'cardCreate/application/AddressSearchComponent';
-import { useEffect, useState } from 'react';
 import glasses from "image/glasses.png";
+import { useState } from 'react';
 
 function InfoInput({protegeInfo}) {
     const [isPostcodeOpen, setIsPostcodeOpen] = useState(false);
@@ -21,8 +21,6 @@ function InfoInput({protegeInfo}) {
       }
       fullAddress += extraAddress? ` (${extraAddress})` : "";
     }
-
-      
     setAddress(fullAddress);
     setIsPostcodeOpen(false);
     };
