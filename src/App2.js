@@ -10,8 +10,6 @@ import WelfareInputDisease from 'welfare/component/WelfareInputDisease';
 import WelfareInputGender from 'welfare/component/WelfareInputGender';
 import WelfareInputHeight from 'welfare/component/WelfareInputHeight';
 import WelfareList from 'welfare/component/WelfareList';
-import WelfareMain from 'welfare/component/WelfareMain';
-import WelfarePayComplete from 'welfare/component/WelfarePayComplete';
 import WelfareNursingModal from 'welfare/component/WelfareNursingModal';
 import WelfareReserveCancelModal from 'welfare/component/WelfareReserveCancelModal';
 import WelfareReservedList from 'welfare/component/WelfareReservedList';
