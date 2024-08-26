@@ -4,6 +4,7 @@ import ConsumList from './component/ConsumList';
 import "consume/Consumption.css";
 import ConsumFilter from './component/ConsumFilter';
 import ConsumDate from './component/ConsumDate';
+import ConsumCard from './component/ConsumCard';
 import ConsumDetailModal from './component/ConsumDetailModal';
 
 function Consumption(props) {
@@ -25,6 +26,7 @@ function Consumption(props) {
             <Header/>
             <div className="consumption-container">
                 {/* <ConsumDate/> */}
+                <ConsumCard/>
                 <ConsumFilter/>
                 <ConsumList handleOpenModal={handleOpenModal}/>
                 

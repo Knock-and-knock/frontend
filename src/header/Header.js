@@ -37,6 +37,8 @@ function Header() {
 
       case "/mypage":
         return "마이페이지";
+      case "/mypageTest":
+        return "마이페이지";
       case "/modifyinfo":
         return "마이페이지";
       case "/subinput":

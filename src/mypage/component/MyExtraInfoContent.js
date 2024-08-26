@@ -39,28 +39,28 @@ function MyExtraInfoContent({userInfo}) {
         <div>
         <div className='info-content'>
            <p>생년월일</p>
-           <p>1950. 01. 01</p>
+           <p>1962. 03. 16</p>
        </div>
        <div className='info-content'>
            <p>성별</p>
-           <p>남</p>
+           <p>남성</p>
        </div>
        <div className='info-content'>
            <p>키</p>
-           <p>175 cm</p>
+           <p>170 cm</p>
        </div>  
        <div className='info-content'>
            <p>몸무게</p>
-           <p>75 kg</p>
+           <p>60 kg</p>
        </div>
        <div className='info-content'>
            <p>질병</p>
-           <p>감기</p>
+           <p>고혈압, 당뇨병, 감기</p>
        </div>
        <div className='info-content'>
            <p className='info-content-address'>주소</p>
-           <p>경기도 과천시 별양로 66-11 </p>
-           <p>347동 1002호</p>
+           <p>부산 남구 무민사로 5 </p>
+           <p>102동 105호</p>
        </div>
    </div>
     );

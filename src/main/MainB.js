@@ -5,6 +5,8 @@ import CardTagB from "./component/card/CardTagB";
 import IsCardSectionB from "./component/card/IsCardSectionB";
 import AlarmSection from "./component/payAlarm/AlarmSection";
 import { useNavigate } from "react-router-dom";
+import CardSectionA from "./component/card/CardSectionA";
+import CardSectionB from "./component/card/CardSectionB";
 
 function MainB() {
   //화면전환

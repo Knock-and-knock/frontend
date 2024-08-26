@@ -11,8 +11,8 @@ function ConsumFilter(props) {
             <p className='filter-price'>총 <span className='priceNum'>231,500</span> 원</p>
             <ul className='filter-type'>
                 {/* '개인'이 기본으로 선택된 상태 */}
-                <li onClick={() => handleTypeClick('individual')} className={selectedTpe === 'individual' ? 'selected' : ''}>개인</li>
-                <li onClick={() => handleTypeClick('family')} className={selectedTpe === 'family' ? 'selected' : ''}>가족</li>
+                {/* <li onClick={() => handleTypeClick('individual')} className={selectedTpe === 'individual' ? 'selected' : ''}>개인</li>
+                <li onClick={() => handleTypeClick('family')} className={selectedTpe === 'family' ? 'selected' : ''}>가족</li> */}
             </ul>
         </div>
     );

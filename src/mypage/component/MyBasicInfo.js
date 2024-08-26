@@ -13,11 +13,11 @@ function MyBasicInfo({userInfo}) {
             </div>
             <div className='info-content'>
                 <p>아이디</p>
-                <p>{userInfo.userId}</p>
+                <p>dooly123</p>
             </div>
             <div className='info-content'>
                 <p>전화번호</p>
-                <p>{formatPhoneNumber(userInfo.userPhone)}</p>
+                <p>010-2235-0970</p>
             </div>
         </div>
     );

@@ -13,9 +13,9 @@ function CardSectionA(props) {
       <div className="card-add-A">
         <div className="card-content-A">
           <img src={info} alt="" className="card-info-icon" />
-          <div className="card-text">등록된 카드가 없습니다.</div>
+          <div className="card-text">카드 발급 심사중입니다.</div>
         </div>
-        <CreateCard handleCardCreate={handleCardCreate}/>
+        {/* <CreateCard handleCardCreate={handleCardCreate}/> */}
       </div>
     </div>
   );

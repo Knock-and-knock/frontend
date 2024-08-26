@@ -5,6 +5,7 @@ import "main/Main.css";
 import { useNavigate } from "react-router-dom";
 import CardSectionA from "./component/card/CardSectionA";
 import CardTagA from "./component/card/CardTagA";
+import IsCardSectionA from "./component/card/IsCardSectionA";
 
 function MainA() {
   //화면전환
@@ -19,7 +20,7 @@ function MainA() {
       <ChatSection handleVoiceChatClick={handleVoiceChatClick}/>
       <ButtonGroup />
       <CardTagA/>
-      <CardSectionA />
+      <IsCardSectionA />
     </div>
   );
 }

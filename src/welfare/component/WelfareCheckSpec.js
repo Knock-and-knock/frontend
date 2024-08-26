@@ -55,7 +55,8 @@ function WelfareCheckSpec() {
                     <input className={styles["spec-check"]} type="text" placeholder="성별" value={formatGender(userSpec.userGender) || ''} disabled />
 
                     <p className={styles["spec-info"]}>주소</p>
-                    <input className={styles["spec-check"]} type="text" placeholder="주소" value={userSpec.userAddress || ''} disabled />
+                    <input className={styles["spec-check"]} type="text" placeholder="주소" value="부산 남구 무민사로 5
+102동 105호" disabled />
 
                     <p className={styles["spec-info"]}>연락처</p>
                     <input className={styles["spec-check"]} type="text" placeholder="연락처" value="010-4519-3851" disabled />
