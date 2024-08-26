@@ -1,9 +1,9 @@
+import AddressSearchComponent from "cardCreate/application/AddressSearchComponent";
+import { useCardCreate } from "cardCreate/application/CardApp";
 import "cardCreate/application/CardApplication.css";
 import Header from "header/Header.js";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import AddressSearchComponent from "cardCreate/application/AddressSearchComponent";
-import { useCardCreate } from "cardCreate/application/CardApp";
 
 function AddAddress() {
   const { userInfo, setUserInfo } = useCardCreate();
@@ -34,7 +34,7 @@ function AddAddress() {
 
     // 주소 업데이트 및 userInfo에 저장
     setUserInfo({ ...userInfo, address: fullAddress /*district*/ });
-    setIsPostcodeOpen(false); // 주소 검색 후 창 닫기
+    setIsPostcodeOpen(false);
   };
   // 빈칸 확인
   useEffect(() => {
