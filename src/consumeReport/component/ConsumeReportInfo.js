@@ -1,19 +1,62 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import 'consumeReport/ConsumeReport.css';
 import Chart from "react-apexcharts";
+import ConsumeReportDate from './ConsumeReportDate'; // 날짜 선택 컴포넌트를 불러옴
 
 function ConsumeReportInfo() {
     const [selectedFilter, setSelectedFilter] = useState('personal');
     const [selectedData, setSelectedData] = useState(null); // 클릭된 데이터를 저장하기 위한 상태
     const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 }); // 툴팁 위치 상태
+    const [data, setData] = useState([]); // API로부터 받은 데이터를 저장할 상태
+
+    const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
+    const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth() + 1);
+
+    const handleDateChange = (year, month) => {
+        setSelectedYear(year);
+        setSelectedMonth(month);
+    };
 
     // 숫자를 세 자리마다 쉼표로 구분하는 포맷터
     const formatPrice = (price) => {
         return new Intl.NumberFormat('ko-KR').format(price);
     };
 
+    // API 호출 함수
+    const fetchData = async () => {
+        const jwt = localStorage.getItem('ACCESS_TOKEN');
+
+        const startDate = `${selectedYear}-${String(selectedMonth).padStart(2, '0')}-01`;
+        const lastDayOfMonth = new Date(selectedYear, selectedMonth, 0).getDate();
+        const endDate = `${selectedYear}-${String(selectedMonth).padStart(2, '0')}-${String(lastDayOfMonth).padStart(2, '0')}`;
+
+        try {
+            const response = await fetch(`http://192.168.0.9:9090/api/v1/consumption/${startDate}/${endDate}`, {
+                headers: {
+                    'Authorization': 'Bearer ' + jwt, // JWT 토큰 설정
+                },
+            });
+            const result = await response.json();
+            setData(result);
+        } catch (error) {
+            console.error("Error fetching data:", error);
+        }
+    };
+
+    // 연도나 월이 변경될 때마다 API 호출
+    useEffect(() => {
+        fetchData();
+    }, [selectedYear, selectedMonth]);
+
+    // API로부터 받은 데이터를 시리즈와 레이블 형식으로 변환
+    const processedData = useMemo(() => {
+        const labels = data.map(item => item.categoryName);
+        const series = data.map(item => item.amount);
+        return { labels, series };
+    }, [data]);
+
     const donutData = {
-        series: [28900, 38900, 18900, 30900, 29900, 29900, 44200, 9900],
+        series: processedData.series,
         options: {
             chart: {
                 type: 'donut',
@@ -24,9 +67,7 @@ function ConsumeReportInfo() {
                         const label = donutData.options.labels[dataIndex];
                         const value = donutData.series[dataIndex];
                         const color = donutData.options.fill.colors[dataIndex]; // 여기에서 수정
-
                         const { clientX, clientY } = event; // 클릭 시 마우스 위치
-
                         if (selectedData && selectedData.label === label) {
                             // 이미 선택된 항목을 다시 클릭하면 툴팁을 숨김
                             setSelectedData(null);
@@ -54,7 +95,7 @@ function ConsumeReportInfo() {
                     }
                 }
             },
-            labels: ["🍴식비", "👜잡화", "🚍교통", "🏠생활", "🛒쇼핑", "🍷유흥", "🏥의료" ,"💰기타"],
+            labels: processedData.labels,
             dataLabels: {
                 style: {
                     fontSize: '14px',
@@ -70,7 +111,7 @@ function ConsumeReportInfo() {
     const barData = {
         series: [{
             name: "지출",
-            data: [28900, 38900, 18900, 30900, 29900, 29900, 44200, 9900]
+            data: processedData.series
         }],
         options: {
             chart: {
@@ -96,7 +137,7 @@ function ConsumeReportInfo() {
                 }
             },
             xaxis: {
-                categories: ["🍴식비", "👜잡화", "🚍교통", "🏠생활", "🛒쇼핑", "🍷유흥", "🏥의료", "💰기타"],
+                categories: processedData.labels,
                 labels: {
                     show: false // 눈금 제거
                 },
@@ -106,10 +147,10 @@ function ConsumeReportInfo() {
                 axisTicks: {
                     show: false // x축의 틱 제거
                 },
-                tickAmount: Math.max(...[28900, 38900, 18900, 30900, 29900, 29900, 44200, 9900]) / 10 // 최대값을 10단위로 나눔
+                tickAmount: Math.max(...processedData.series) / 10 // 최대값을 10단위로 나눔
             },
             yaxis: {
-                categories: ["🍴식비", "👜잡화", "🚍교통", "🏠생활", "🛒쇼핑", "🍷유흥", "🏥의료", "💰기타"],
+                categories: processedData.labels,
                 labels: {
                     style: {
                         colors: '#2c2c2c',
@@ -129,7 +170,7 @@ function ConsumeReportInfo() {
                 enabled: false // 기본 툴팁을 비활성화
             },
             fill: {
-                colors: ['#6DD193', '#F56A71', '#E9A260', '#66B1B5', '#4AADE5', '#9B7F9E', '#615EDE', '#625B8B'],
+                colors: ['#6DD193', '#F56A71', '#E9A260', '#66B1B5', '#4AADE5', '#9B7F9E', '#625B8B'],
                 opacity: 1
             },
             dataLabels: {
@@ -199,7 +240,6 @@ function ConsumeReportInfo() {
                                 <p style={{ margin: 0, fontWeight: 'bold' }}>{selectedData.label}</p>
                                 <p style={{ margin: 0 }}>{formatPrice(selectedData.value)} 원</p>
                             </div>
-
                         )}
                         <div className='bar-chart-container'>
                             <Chart
@@ -211,7 +251,6 @@ function ConsumeReportInfo() {
                         </div>
                     </div>
                 );
-
             case 'family':
                 return (
                     <div className='chart-container'>
@@ -264,6 +303,7 @@ function ConsumeReportInfo() {
 
     return (
         <div className='consume-report-price-container'>
+            <ConsumeReportDate onDateChange={handleDateChange} />
             <div className='consume-report-price-section'>
                 <span className='total-price'>총 <span className='go-mainred'>{formatPrice(totalPrice)}</span> 원</span>
                 <div className='report-search-filter'>
