@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-function ConsumeReportDate() {
+function ConsumeReportDate({ onDateChange }) {  // onDateChange를 props로 받음
     const currentYear = new Date().getFullYear();
     const currentMonth = new Date().getMonth() + 1;
 
@@ -16,11 +16,13 @@ function ConsumeReportDate() {
             : lastDayOfMonth;
 
         setDisplayDate(`${selectedYear}. ${String(selectedMonth).padStart(2, '0')}. 01 ~ ${selectedYear}. ${String(selectedMonth).padStart(2, '0')}. ${String(endDate).padStart(2, '0')}`);
-    }, [selectedYear, selectedMonth]);
+        if (onDateChange) {
+            onDateChange(selectedYear, selectedMonth);  // onDateChange 함수 호출
+        }
+    }, [selectedYear, selectedMonth, onDateChange]);
 
     const handleYearChange = (event) => {
         setSelectedYear(Number(event.target.value));
-        // 선택된 연도를 변경할 때, 월을 다시 현재 월로 설정하여 미래 월 선택 방지
         if (Number(event.target.value) === currentYear && selectedMonth > currentMonth) {
             setSelectedMonth(currentMonth);
         }
