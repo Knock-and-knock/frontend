@@ -1,10 +1,7 @@
-// chatScript.js
-
 import { call } from "login/service/ApiService";
 
 // 음성 끝났을 때 자동 답변 실행
 export function handleAutoSub(roomNo, message, setChatResponse, setIsLoading, setIsSpeaking) {
-  
   setIsLoading(false);
   setIsSpeaking(true);
 
@@ -38,12 +35,12 @@ export function handleAutoSub(roomNo, message, setChatResponse, setIsLoading, se
     .catch((error) => {
       alert("실패");
       console.error(error);
-      setIsLoading(false); // 오류 발생 시 로딩 상태 해제
+      setIsSpeaking(false); // 오류 발생 시 로딩 상태 해제
     });
 }
 
 // 음성 인식의 자동 시작 상태를 제어하는 함수
-export function availabilityFunc(setRecognition, sendMessage) {
+export function availabilityFunc(setRecognitionCallback, sendMessage) {
   const newRecognition = new (window.SpeechRecognition ||
     window.webkitSpeechRecognition)();
   newRecognition.lang = "ko";
@@ -68,7 +65,7 @@ export function availabilityFunc(setRecognition, sendMessage) {
   } else {
     console.log("음성 인식이 초기화되었습니다.");
   }
-  setRecognition(newRecognition);
+  setRecognitionCallback(newRecognition);
 }
 
 // 음성 인식을 자동으로 시작하는 함수
@@ -84,15 +81,13 @@ export function endRecord(recognition) {
 }
 
 // 채팅 방을 설정하는 함수
-export function handleChatRoom(userInfo, setRoomNo, availabilityFunc) {
-  availabilityFunc();
+export function handleChatRoom(userInfo, setRoomNoCallback) { 
   call("/api/v1/conversation-room", "POST", userInfo)
     .then((response) => {
-      setRoomNo(response.conversationRoomNo);
+      setRoomNoCallback(response.conversationRoomNo); 
     })
     .catch((error) => {
       alert("실패");
+      console.error(error);
     });
 }
-
-

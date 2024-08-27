@@ -17,8 +17,10 @@ function VoiceChat(props) {
   const [recognition, setRecognition] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isSpeaking, setIsSpeaking] = useState(false); 
-  const [roomNo, setRoomNo] = useState(null);
+  // const [roomNo, setRoomNo] = useState(null); // **변경된 부분: useState로 관리하던 roomNo 제거**
   const [chatResponse, setChatResponse] = useState("");
+
+  var roomNo;
   
   const handleInputChange = (e) => {
     setUserInfo(e.target.value);
@@ -26,14 +28,24 @@ function VoiceChat(props) {
 
   const handleChat = () => {
     setIsSpeaking(true);
-    handleAutoSub(roomNo, userInfo, setChatResponse, setIsLoading, setIsSpeaking);
+    handleAutoSub(roomNo, userInfo, setChatResponse, setIsLoading, setIsSpeaking, handleChat);
   };
 
   function sendMessage(recognizedText) {
     setChatResponse("");
     setIsLoading(true);
-    handleAutoSub(roomNo, recognizedText, setChatResponse, setIsLoading, setIsSpeaking);
+    handleAutoSub(roomNo, recognizedText, setChatResponse, setIsLoading, setIsSpeaking, handleChat);
   }
+
+  const handleStartChat = () => {
+    handleChatRoom(userInfo, (roomNumber) => {
+      roomNo = roomNumber;
+      availabilityFunc((newRecognition) => {
+        setRecognition(newRecognition);
+        startAutoRecord(newRecognition); // 음성 인식 자동 시작
+      }, sendMessage);
+    });
+  };
 
   return (
     <div className="voicechat-section">
@@ -50,11 +62,7 @@ function VoiceChat(props) {
       <textarea className="textbox" value={chatResponse} readOnly />
       <button
         className="chat-startBtn"
-        onClick={() =>
-          handleChatRoom(userInfo, setRoomNo, () =>
-            availabilityFunc(setRecognition, sendMessage)
-          )
-        }
+        onClick={handleStartChat}
       >
         똑똑!
       </button>
