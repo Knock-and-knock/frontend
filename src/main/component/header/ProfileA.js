@@ -3,17 +3,23 @@ import 'main/component/header/HeaderA.css';
 import { useEffect, useState } from 'react';
 
 function Profile(props) {
-  const [userName, setUserName] = useState('');
+  const [protectorName, setProtectorName] = useState('');
+  const [protegeName, setProtegeName] = useState('');
+  
   useEffect(()=>{
-    call('/api/v1/users','GET',null).then((response)=>{
-      setUserName(response.userName)
-    }).catch();
+    call('/api/v1/match','GET',null).then((response)=>{
+      if(response.matchStatus !== null)
+      setProtectorName(response.matchProtectorName);
+      setProtegeName(response.matchProtegeName);
+    }).catch((error)=>{
+
+    });
   });
   return (
     <div className="main-header">
       <div className="profile-info">
-        <h2 className="profile-name"><a href="/mypage">{userName}님 ▶</a></h2>
-        <p className="profile-subtext">홍길동보호자</p> 
+        <h2 className="profile-name"><a href="/mypage">{protegeName}님(나중에 이름으로 변경) ▶</a></h2>
+        <p className="profile-subtext">{protectorName}</p> 
       </div>
     </div>
   );

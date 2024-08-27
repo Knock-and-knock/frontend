@@ -1,29 +1,33 @@
 import AddressSearchComponent from 'cardCreate/application/AddressSearchComponent';
 import glasses from "image/glasses.png";
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
-function InfoInput({protegeInfo,handlechange}) {
+function InfoInput({protegeInfo,handleChange}) {
     const [isPostcodeOpen, setIsPostcodeOpen] = useState(false);
-    const [address, setAddress] = useState('');
-    
+    const [address, setAddress] = useState(protegeInfo.userAddress);
+    useEffect(() => {
+        if (protegeInfo.userAddress) {
+            setAddress(protegeInfo.userAddress);
+        }
+    }, [protegeInfo.userAddress]);
 
     const handleComplete = (data) => {
         let fullAddress = data.address;
         let extraAddress = "";
-    
+
         if (data.addressType === "R") {
-          if (data.bname !== "") {
-            extraAddress += data.bname;
-          }
-          if (data.buildingName) {
-            extraAddress +=
-              extraAddress !== "" ? `, ${data.buildingName}` : data.buildingName;
-          }
-          fullAddress += extraAddress? ` (${extraAddress})` : "";
+            if (data.bname !== "") {
+                extraAddress += data.bname;
+            }
+            if (data.buildingName) {
+                extraAddress += extraAddress !== "" ? `, ${data.buildingName}` : data.buildingName;
+            }
+            fullAddress += extraAddress ? ` (${extraAddress})` : "";
         }
         setAddress(fullAddress);
         setIsPostcodeOpen(false);
-        };
+        handleChange({ target: { name: 'userAddress', value: fullAddress } });
+    };
     
     return (
         <div className='infoInput-container'>
@@ -31,8 +35,8 @@ function InfoInput({protegeInfo,handlechange}) {
                 <p>생년월일</p>
                 <input type='date' 
                 name='userBirth' 
-                defaultValue={protegeInfo.protegeBirth} 
-                onChange={handlechange}
+                defaultValue={protegeInfo.userBirth} 
+                onChange={handleChange}
                 placeholder= "생년월일"/>
             </div>
             <div className='infoInput-box'>
@@ -42,14 +46,17 @@ function InfoInput({protegeInfo,handlechange}) {
                     <input type='radio'
                     name='userGender' 
                     value="1"
-                    onChange={handlechange}/>
+                    onChange={handleChange}
+                    checked={protegeInfo.userGender==='1'}
+                    />
                 </div>
                 <div className='infoInput-gender'>
                     <p>여</p>
                     <input type='radio'
                     name='userGender' 
                     value="2"
-                    onChange={handlechange}/>
+                    checked={protegeInfo.userGender==='2'}
+                    onChange={handleChange}/>
                 </div>
                 
             </div>
@@ -59,7 +66,7 @@ function InfoInput({protegeInfo,handlechange}) {
                     <div className='body-content'>
                         <input type='number' 
                         name='userHeight' 
-                        defaultValue={protegeInfo.protegeHeight} onChange={handlechange}
+                        defaultValue={protegeInfo.userHeight} onChange={handleChange}
                         placeholder="키"/>
                         <p>cm</p>
                     </div>
@@ -69,8 +76,8 @@ function InfoInput({protegeInfo,handlechange}) {
                     <div className='body-content'>
                         <input type='number' 
                         name='userWeight' 
-                        defaultValue={protegeInfo.protegeWeight} 
-                        onChange={handlechange}
+                        defaultValue={protegeInfo.userWeight} 
+                        onChange={handleChange}
                         placeholder="몸무게"/>
                         <p className='body-content'>kg</p>
                     </div>
@@ -80,8 +87,8 @@ function InfoInput({protegeInfo,handlechange}) {
                 <p>질병</p>
                 <input type='text'
                 name='userDisease' 
-                defaultValue={protegeInfo.protegeDisease} 
-                onChange={handlechange}
+                defaultValue={protegeInfo.userDisease} 
+                onChange={handleChange}
                 placeholder="질병"/>
             </div>
             <div className='infoInput-box'>
@@ -91,7 +98,7 @@ function InfoInput({protegeInfo,handlechange}) {
                         type='text' 
                         placeholder= "도로명, 지번, 건물명 검색"
                         value={address} 
-                        onChange={(e) => setAddress(e.target.value)} 
+                        onChange={handleChange} 
                         className='addressInfo'
                         name='userAddress'
                     />
@@ -106,8 +113,8 @@ function InfoInput({protegeInfo,handlechange}) {
                 )}
                 <input type='text' 
                 name='userAddressDetail' 
-                defaultValue={protegeInfo.protegeAddressDetail} 
-                onChange={handlechange}
+                defaultValue={protegeInfo.userAddressDetail} 
+                onChange={handleChange}
                 placeholder="상세주소"/>
             </div>
             

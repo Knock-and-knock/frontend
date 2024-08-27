@@ -24,7 +24,7 @@ function LoginId(props) {
         call("/api/v1/match", "GET", null)
             .then((response) => {
                 if (response.matchStatus === "ACCEPT") {
-                    navi('/nokmain');
+                    navi('/home');
                 } else {
                     navi('/match');
                 }
@@ -64,7 +64,7 @@ function LoginId(props) {
               if (response.userType === "PROTECTOR") {
                 handleMatchCheck();
               } else {
-                navi('/main');
+                navi('/home');
               }
           } 
           }).catch(

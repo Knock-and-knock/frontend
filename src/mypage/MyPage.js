@@ -6,6 +6,7 @@ import MyExtraInfo from './component/MyExtraInfo';
 import "mypage/MyPage.css"
 import DisconnectionModal from './component/modal/DisconnectionModal';
 import { call } from 'login/service/ApiService';
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -15,6 +16,7 @@ function MyPage(props) {
     const loginUserType = localStorage.getItem("loginUser");
     const [userInfo, setUserInfo] = useState({});
     const [error, setError] = useState(null);
+    const navi = useNavigate();
 
     useEffect(() => {
         setLoginUser(loginUserType);
@@ -28,16 +30,13 @@ function MyPage(props) {
                 setError("회원 정보를 불러오는 데 문제가 발생했습니다.");
             });
     }, []);
-    
-    const getModal = (loginUser)=>{
-        switch(loginUser){
-            case 'PROTEGE':
-                return <DisconnectionModal matchNo={userInfo.matchNo}/>;
-            default: 
-                return null;
-        }
-    };
-    
+
+    const handleLogoutClick = ()=>{
+        call('/api/v1/auth/logout',"POST",null)
+        .then(()=>navi("/loginid"))
+        .catch(()=>alert("로그아웃 실패"));
+    }
+
     return (
         <div className='mypage-container'>
             <Header/>
@@ -45,9 +44,9 @@ function MyPage(props) {
             <p className='mypage-name'>{userInfo.userName}</p>
             <MyBasicInfo userInfo={userInfo}/>
             <MyExtraInfo userInfo={userInfo}/>
-            {getModal(loginUser)}
+            {loginUser==="PROTEGE"&& userInfo.matchNo !== 0?<DisconnectionModal matchNo={userInfo.matchNo}/>:""}
             <div className='mypage-bottom'>
-                <p className='logoutBtn'>로그아웃</p>
+                <p className='logoutBtn' onClick={handleLogoutClick}>로그아웃</p>
                 <p className='withdrawalBtn'>회원탈퇴</p>
             </div>
             

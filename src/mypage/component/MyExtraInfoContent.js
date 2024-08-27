@@ -33,7 +33,7 @@ function MyExtraInfoContent({userInfo}) {
             </div>
             <div className='info-content'>
                 <p>주소</p>
-                <p>{userInfo.protegeAddress}</p>
+                <p>{userInfo.protegeAddress} {userInfo.protegeAddressDetail}</p>
             </div>
         </div>
 

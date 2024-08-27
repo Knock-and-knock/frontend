@@ -47,6 +47,8 @@ function App(props) {
         <Route path="/voicechat" element={<VoiceChat />} />
 
         <Route path="/cardcreate" element={<CardCreate />} />
+
+        
         <Route path="/cardapp/*" element={<CardApp />}>
           <Route path="defaultinfo" element={<DefaultInfo />} />
           <Route path="extrainfo" element={<ExtraInfo />} />

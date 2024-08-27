@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react';
 import Modal from 'react-modal';
 import "mypage/component/modal/DisconnectionModal.css"
 import { call } from 'login/service/ApiService';
+import { useNavigate } from 'react-router-dom';
 
 function DisconnectionModal({matchNo}) {
-    
+    const navi = useNavigate();
     const [isOpen, setIsOpen] = useState(false);
     const handleOpenModal = () => {
         setIsOpen(true);
@@ -28,8 +29,8 @@ function DisconnectionModal({matchNo}) {
           },
     };
     const handleSubmit = ()=>{
-        call(`/api/v1/match/${matchNo.matchNo}`,"DELETE",null).then((response)=>{
-            console.log(response);
+        call(`/api/v1/match/${matchNo}`,"DELETE",null).then((response)=>{
+            navi('/mypage');
         }).catch((error)=>{
             console.log(error);
             alert(error.message);

@@ -1,0 +1,14 @@
+.main-header{
+    padding: 20px;
+    background-color: #FFF8F3;
+    margin: 0px;
+}
+.main-logo{
+    width: 36px;
+    margin-right: 10px;
+}
+.main-name{
+    font-size: 20px;
+    font-weight: bold;
+    color: #2C2C2C;
+}

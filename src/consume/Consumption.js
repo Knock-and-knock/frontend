@@ -1,4 +1,4 @@
-import "consume/Consumption.css";
+ import "consume/Consumption.css";
 import Header from 'header/Header';
 import { useEffect, useState } from 'react';
 import ConsumCard from "./component/ConsumCard";
@@ -26,8 +26,7 @@ function Consumption(props) {
             <div className="consumption-container">
                 <ConsumCard/>
                 <ConsumFilter/>
-                <ConsumList handleOpenModal={handleOpenModal}/>
-                
+                <ConsumList handleOpenModal={handleOpenModal}/>  
                 <ConsumDetailModal isOpen={isOpen} closeModal={closeModal}/>
             </div>
         </div>

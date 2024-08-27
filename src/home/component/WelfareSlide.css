@@ -1,0 +1,9 @@
+.slide-container{
+    background-color: #FFF8F3;
+    height: 25vh;
+    padding: 20px;
+}
+.slide-container h1{
+    font-size: 32px;
+    font-weight: normal;
+}
