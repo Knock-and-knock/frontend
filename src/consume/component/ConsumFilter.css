@@ -1,7 +1,13 @@
 .filter-content{
-    display: flex;
-    justify-content: space-between;
     border: 1px green solid;
+}
+.filter-content div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.filter-content p{
+    text-align: center;
 }
 .filter-price{
     margin: 0px 0px;

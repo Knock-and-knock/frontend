@@ -1,6 +1,7 @@
 
 import AlarmList from 'alarm/AlarmList';
 import Consumption from 'consume/Consumption';
+import MainPage from 'home/MainPage';
 import LoginBio from 'login/LoginBio';
 import LoginId from 'login/LoginId';
 import LoginPw from 'login/LoginPw';
@@ -35,6 +36,7 @@ function App(props) {
           <Route path="/modifyinfo" element={<ModifyInfo />} />
           <Route path="/consumption" element={<Consumption />} />
           <Route path="/alarm" element={<AlarmList />} />
+          <Route path="/home" element={<MainPage />} />
           
           <Route path="/signup/*" element={<SignUpMain/>} >
             <Route path="register" element={<Register/>} />

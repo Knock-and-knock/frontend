@@ -6,6 +6,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 function Header() {
   const navigate = useNavigate();
   const location = useLocation();
+  const loginUserType = localStorage.getItem("loginUser");
 
   const getTitle = (pathname) => {
     switch (pathname) {
@@ -81,7 +82,7 @@ function Header() {
             src={home}
             alt="홈 가기"
             className={styles["home-icon"]}
-            onClick={() => navigate("/main")} // 홈으로 가기 기능 추가
+            onClick={() => navigate("/home")} // 홈으로 가기 기능 추가
           />
         </div>
       </div>
