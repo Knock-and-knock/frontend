@@ -43,7 +43,7 @@ export function handleAutoSub(roomNo, message, setChatResponse, setIsLoading, se
 }
 
 // 음성 인식의 자동 시작 상태를 제어하는 함수
-export function availabilityFunc(setRecognition, sendMessage, handleChat/*이것도 안되면지우기*/) {
+export function availabilityFunc(setRecognition, sendMessage) {
   const newRecognition = new (window.SpeechRecognition ||
     window.webkitSpeechRecognition)();
   newRecognition.lang = "ko";
@@ -60,7 +60,6 @@ export function availabilityFunc(setRecognition, sendMessage, handleChat/*이것
   newRecognition.addEventListener("result", (e) => {
     const recognizedText = e.results[0][0].transcript;
     console.log(recognizedText);
-    handleChat();//될까?안되면지우기
     sendMessage(recognizedText);
   });
 
