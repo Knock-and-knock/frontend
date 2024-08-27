@@ -31,21 +31,24 @@ function VoiceChat(props) {
   };*/
 
   const [userInfo, setUserInfo] = useState("");
-  const [roomNum, setRoomNum] = useState("");
   const [recognition, setRecognition] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const handleInputChange = (e) => {
     setUserInfo(e.target.value);
   };
 
-  const handleChat = () => {
+  const [roomNo, setRoomNo] = useState(null);
+
+  //음성 끝났을 때 자동 답변실행
+   function handleAutoSub(message){
     call("/api/v1/conversation", "POST", {
-      input: userInfo,
-      conversationRoomNo: roomNum,
+      input: message,
+      conversationRoomNo: roomNo,
     })
       .then((response) => {
         const audioData = response.audioData;
-        const message = response.message;
+        const content = response.content;
+        console.log(content);
 
         const byteCharacters = atob(audioData);
         const byteNumbers = new Array(byteCharacters.length);
@@ -63,6 +66,10 @@ function VoiceChat(props) {
         alert("실패");
         console.error(error);
       });
+   }
+
+  const handleChat = () => {
+    handleAutoSub(userInfo);
   };
 
   // 음성 인식의 자동 시작 상태를 제어하는 변수
@@ -119,15 +126,16 @@ function VoiceChat(props) {
     call("/api/v1/conversation-room", "POST", userInfo)
       .then((response) => {
         console.log(response);
-        setRoomNum(response.conversationRoomNo);
+        // roomNo = response.conversationRoomNo
+        setRoomNo(response.conversationRoomNo);
       })
       .catch((error) => {
         alert("실패");
       });
   };
 
-  function sendMessage(){
-
+  function sendMessage(recognizedText){
+    handleAutoSub(recognizedText);
   }
 
   return (
@@ -136,12 +144,12 @@ function VoiceChat(props) {
       <SpeakLoading/>
       <Loading/>
       <img src={chatbot} alt="챗봇" className="chatbot" />
-      {/* <div>
+      <div>
         <button onClick={handleChat}>말ㅋ</button>
         <button onClick={startAutoRecord}>시작</button>
         <button onClick={endRecord}>종료</button>
       </div>
-      <input name="mal" onChange={handleInputChange} />  */}
+      <input name="mal" onChange={handleInputChange} />
       <textarea className="textbox" readOnly/>
       <button className="chat-startBtn" onClick={handleChatRoom}>
         똑똑!
