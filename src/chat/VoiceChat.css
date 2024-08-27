@@ -34,10 +34,14 @@
   transform: translateX(-50%); /* 버튼을 가로로 중앙 정렬 */
 }
 .textbox{
-  width: 340px;
+  font-family: 'Pretendard', sans-serif;
+  width: 330px;
   height: 100px;
   display: flex;
   border: 1px solid #d9d9d9;
+  font-size: 18px;
   position: relative;
   top: 60%;
+  padding: 10px;
+  line-height: 170%;
 }
