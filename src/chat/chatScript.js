@@ -29,19 +29,21 @@ export function handleAutoSub(roomNo, message, setChatResponse, setIsLoading, se
       const audioUrl = URL.createObjectURL(audioBlob);
       const audio = new Audio(audioUrl);
       audio.play();
+      setIsLoading(true);
       setIsSpeaking(false);
+      audio.onended = () => {
+        setIsLoading(false); // 음성 출력이 끝나면 로딩 상태 해제
+      };
     })
     .catch((error) => {
       alert("실패");
       console.error(error);
-    })
-    .finally(()=>{
-      setIsLoading(false);
-    })
+      setIsLoading(false); // 오류 발생 시 로딩 상태 해제
+    });
 }
 
 // 음성 인식의 자동 시작 상태를 제어하는 함수
-export function availabilityFunc(setRecognition, sendMessage) {
+export function availabilityFunc(setRecognition, sendMessage, handleChat/*이것도 안되면지우기*/) {
   const newRecognition = new (window.SpeechRecognition ||
     window.webkitSpeechRecognition)();
   newRecognition.lang = "ko";
@@ -58,6 +60,7 @@ export function availabilityFunc(setRecognition, sendMessage) {
   newRecognition.addEventListener("result", (e) => {
     const recognizedText = e.results[0][0].transcript;
     console.log(recognizedText);
+    handleChat();//될까?안되면지우기
     sendMessage(recognizedText);
   });
 

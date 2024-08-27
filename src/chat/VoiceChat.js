@@ -31,7 +31,7 @@ function VoiceChat(props) {
 
   function sendMessage(recognizedText) {
     setChatResponse("");
-    setIsSpeaking(true);
+    setIsLoading(true);
     handleAutoSub(roomNo, recognizedText, setChatResponse, setIsLoading, setIsSpeaking);
   }
 

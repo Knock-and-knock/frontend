@@ -22,7 +22,7 @@ import { Route, Routes } from 'react-router-dom';
 
 import Modal from 'react-modal';
 import WelfareInputTotal from 'welfare/component/WelfareInputTotal';
-import WelfarePayComplete from 'welfare/component/WelfarePayComplete';
+import WelfarePayComplete from 'welfare/component/welfarePayComplete';
 
 
 Modal.setAppElement('#root');
