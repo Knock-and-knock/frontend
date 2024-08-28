@@ -33,14 +33,14 @@ function AddAddress() {
     }
 
     // 주소 업데이트 및 userInfo에 저장
-    setUserInfo({ ...userInfo, address: fullAddress /*district*/ });
+    setUserInfo({ ...userInfo, cardIssueFirstAddress: fullAddress /*district*/ });
     setIsPostcodeOpen(false);
   };
   // 빈칸 확인
   useEffect(() => {
     const extraInfo = [
-      "address",
-      "detailAddress",
+      "cardIssueFirstAddress",
+      "cardIssueSecondAddress",
     ];
     const isFull = extraInfo.every(
       (field) =>
@@ -53,7 +53,7 @@ function AddAddress() {
 
   const handleDetailAddressChange = (e) => {
     const value = e.target.value;
-    setUserInfo({ ...userInfo, detailAddress: value });
+    setUserInfo({ ...userInfo, cardIssueSecondAddress: value });
   };
 
   return (
@@ -71,7 +71,7 @@ function AddAddress() {
         <div className="app-input">
           <input
             placeholder="도로명, 지번, 건물명 검색"
-            value={userInfo.address || ""}
+            value={userInfo.cardIssueFirstAddress || ""}
             onClick={() => setIsPostcodeOpen(true)}
             readOnly
           />
@@ -79,7 +79,7 @@ function AddAddress() {
         <div className="app-input">
           <input
             placeholder="상세주소"
-            value={userInfo.detailAddress || ""}
+            value={userInfo.cardIssueSecondAddress || ""}
             onChange={handleDetailAddressChange}
           />
         </div>

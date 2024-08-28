@@ -2,7 +2,6 @@
   display: flex;
   flex-direction: column;
   position: relative;
-  /* justify-content: space-between; */
   align-items: center;
   height: 100vh;
   background-color: #FFF8F3;
@@ -17,31 +16,49 @@
   width: 80%;
 }
 
+.hiddenBtn {
+  margin-bottom: 10px;
+  padding: 10px;
+  font-size: 16px;
+  border: none;
+  border-radius: 10px;
+  background-color: #FF961B;
+  color: #fff;
+  position: fixed;
+  width: 100px;
+  top: 70px;
+  left: 82%;
+  transform: translateX(-50%);
+}
+
 .chat-startBtn {
   margin-bottom: 20px;
-  padding: 20px 20px;
+  padding: 20px;
   font-size: 20px;
   border: none;
   border-radius: 10px;
   background-color: #FF961B;
   color: #fff;
-  cursor: pointer;
   position: fixed;
   font-weight: bold;
   width: 350px;
   bottom: 20px;
   left: 50%;
-  transform: translateX(-50%); /* 버튼을 가로로 중앙 정렬 */
+  transform: translateX(-50%);
 }
-.textbox{
+
+.textbox {
   font-family: 'Pretendard', sans-serif;
   width: 330px;
   height: 100px;
   display: flex;
   border: 1px solid #d9d9d9;
   font-size: 18px;
-  position: relative;
-  top: 60%;
+  position: fixed;
+  bottom: 170px;
+  left: 50%;
+  transform: translateX(-50%);
   padding: 10px;
   line-height: 170%;
+  z-index: 5;
 }

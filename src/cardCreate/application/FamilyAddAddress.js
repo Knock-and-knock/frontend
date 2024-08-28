@@ -9,8 +9,6 @@ function FamilyAddAddress() {
   const { userInfo, setUserInfo } = useCardCreate();
   const navigate = useNavigate();
   const [isButtonEnabled, setIsButtonEnabled] = useState(false);
-  const [address, setAddress] = useState(""); // 도로명 주소를 저장할 상태
-  const [detailAddress, setDetailAddress] = useState(""); // 상세주소를 저장할 상태
 
   const handlePaging = () => {
     navigate("/cardapp/fsimplepw");
@@ -34,45 +32,46 @@ function FamilyAddAddress() {
       fullAddress += extraAddress !== "" ? ` (${extraAddress})` : "";
     }
 
-    // 도로명 주소를 상태에 저장
-    setAddress(fullAddress);
-    setIsPostcodeOpen(false); // 주소 검색 후 창 닫기
-
-    // cardIssueAddress를 업데이트
-    setUserInfo({ ...userInfo, cardIssueAddress: `${fullAddress} ${detailAddress}`.trim() });
+    // 주소 업데이트 및 userInfo에 저장
+    setUserInfo({ ...userInfo, cardIssueFirstAddress: fullAddress /*district*/ });
+    setIsPostcodeOpen(false);
   };
-
-  // 상세주소 변경 시 처리
-  const handleDetailAddressChange = (e) => {
-    const value = e.target.value;
-    setDetailAddress(value);
-
-    // cardIssueAddress를 업데이트
-    setUserInfo({ ...userInfo, cardIssueAddress: `${address} ${value}`.trim() });
-  };
-
   // 빈칸 확인
   useEffect(() => {
-    const isFull = address.trim() !== "" && detailAddress.trim() !== "";
+    const extraInfo = [
+      "cardIssueFirstAddress",
+      "cardIssueSecondAddress",
+    ];
+    const isFull = extraInfo.every(
+      (field) =>
+        userInfo[field] &&
+        userInfo[field].trim() !== ""
+    );
+
     setIsButtonEnabled(isFull);
-  }, [address, detailAddress]);
+  }, [userInfo]);
+
+  const handleDetailAddressChange = (e) => {
+    const value = e.target.value;
+    setUserInfo({ ...userInfo, cardIssueSecondAddress: value });
+  };
 
   return (
     <div className="card-app-container">
       <Header />
       <div className="app-title">
         <div className="title-text">
-          <span>가족의 집주소를</span>
+          <span>집주소를</span>
           <br />
           <span>입력해주세요</span>
         </div>
-        <div className="pageNumber">3/4</div>
+        <div className="pageNumber">6/7</div>
       </div>
       <div className="app-input-container">
         <div className="app-input">
           <input
             placeholder="도로명, 지번, 건물명 검색"
-            value={address || ""}
+            value={userInfo.cardIssueFirstAddress || ""}
             onClick={() => setIsPostcodeOpen(true)}
             readOnly
           />
@@ -80,7 +79,7 @@ function FamilyAddAddress() {
         <div className="app-input">
           <input
             placeholder="상세주소"
-            value={detailAddress || ""}
+            value={userInfo.cardIssueSecondAddress || ""}
             onChange={handleDetailAddressChange}
           />
         </div>

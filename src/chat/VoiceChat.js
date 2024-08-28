@@ -3,7 +3,7 @@ import {
   endRecord,
   handleAutoSub,
   handleChatRoom,
-  startAutoRecord,
+  startAutoRecord
 } from "chat/chatScript";
 import "chat/VoiceChat.css";
 import VoiceHeader from "chat/VoiceHeader";
@@ -14,26 +14,52 @@ import SpeakLoading from "./SpeakLoading";
 
 function VoiceChat(props) {
   const [userInfo, setUserInfo] = useState("");
-  const [recognition, setRecognition] = useState(null);
+  // const [recognition, setRecognition] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [isSpeaking, setIsSpeaking] = useState(false); 
-  const [roomNo, setRoomNo] = useState(null);
+  const [isSpeaking, setIsSpeaking] = useState(false);
+  // const [roomNo, setRoomNo] = useState(null); // **변경된 부분: useState로 관리하던 roomNo 제거**
   const [chatResponse, setChatResponse] = useState("");
-  
+  const [visible, setVisible] = useState(false);
+  const [isStart, setIsStart] = useState(false);
+
   const handleInputChange = (e) => {
     setUserInfo(e.target.value);
   };
 
   const handleChat = () => {
     setIsSpeaking(true);
-    handleAutoSub(roomNo, userInfo, setChatResponse, setIsLoading, setIsSpeaking);
+    handleAutoSub(
+      userInfo,
+      setChatResponse,
+      setIsLoading,
+      setIsSpeaking,
+      handleChat
+    );
   };
 
   function sendMessage(recognizedText) {
     setChatResponse("");
-    setIsSpeaking(true);
-    handleAutoSub(roomNo, recognizedText, setChatResponse, setIsLoading, setIsSpeaking);
+    setIsLoading(true);
+    handleAutoSub(
+      recognizedText,
+      setChatResponse,
+      setIsLoading,
+      setIsSpeaking,
+      handleChat
+    );
   }
+
+  const handleStartChat = async () => {
+    if (!isStart) {
+      await handleChatRoom(userInfo);
+      availabilityFunc(sendMessage);
+      startAutoRecord();
+      setIsStart(true);
+    } else {
+      endRecord();//너 왜안되니...
+      setIsStart(false);
+    }
+  };
 
   return (
     <div className="voicechat-section">
@@ -41,22 +67,14 @@ function VoiceChat(props) {
       {isSpeaking && <SpeakLoading />}
       {isLoading && <Loading />}
       <img src={chatbot} alt="챗봇" className="chatbot" />
-      <div>
-        <button onClick={handleChat}>말ㅋ</button>
-        <button onClick={() => startAutoRecord(recognition)}>시작</button>
-        <button onClick={() => endRecord(recognition)}>종료</button>
-      </div>
-      <input name="mal" onChange={handleInputChange} />
-      <textarea className="textbox" value={chatResponse} readOnly />
-      <button
-        className="chat-startBtn"
-        onClick={() =>
-          handleChatRoom(userInfo, setRoomNo, () =>
-            availabilityFunc(setRecognition, sendMessage)
-          )
-        }
-      >
-        똑똑!
+      {visible && <textarea className="textbox" value={chatResponse} readOnly />}
+      <button className="hiddenBtn" onClick={()=>{
+        setVisible(!visible);
+      }}>
+        {visible ? "답변숨기기" : "답변보이기"}
+      </button>
+      <button className="chat-startBtn" onClick={handleStartChat}>
+        {isStart ? "중지" : "똑똑!"}
       </button>
     </div>
   );
