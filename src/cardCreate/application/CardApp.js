@@ -36,9 +36,9 @@ function CardApp(props) {
   };
 
   const navigate = useNavigate();
-  useEffect(() => {
-    navigate("/cardapp/defaultinfo");
-  }, []);
+  // useEffect(() => {
+  //   navigate("/cardapp/defaultinfo");
+  // }, []);
 
   useEffect(() => {
     console.log(userInfo);
