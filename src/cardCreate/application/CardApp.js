@@ -10,7 +10,7 @@ function CardApp(props) {
   const [userInfo, setUserInfo] = useState({});
   //데이터전송로직
   const handleSendInfo = (e) => {
-    call("http://122.128.54.136:20000/api/v1/card", "POST", userInfo)
+    call("/api/v1/card", "POST", userInfo)
       .then((response) => {
         console.log(response);
         navigate("/cardapp/familycardyn");
@@ -23,7 +23,7 @@ function CardApp(props) {
   };
 
   const handlefSendInfo = (e) => {
-    call("http://122.128.54.136:20000/api/v1/card", "POST", userInfo)
+    call("/api/v1/card", "POST", userInfo)
       .then((response) => {
         console.log(response);
         navigate("/cardapp/cardsuccess");
