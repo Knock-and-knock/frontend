@@ -1,5 +1,6 @@
 import {
   availabilityFunc,
+  endRecord,
   handleAutoSub,
   handleChatRoom,
   startAutoRecord
@@ -18,6 +19,8 @@ function VoiceChat(props) {
   const [isSpeaking, setIsSpeaking] = useState(false);
   // const [roomNo, setRoomNo] = useState(null); // **변경된 부분: useState로 관리하던 roomNo 제거**
   const [chatResponse, setChatResponse] = useState("");
+  const [visible, setVisible] = useState(false);
+  const [isStart, setIsStart] = useState(false);
 
   const handleInputChange = (e) => {
     setUserInfo(e.target.value);
@@ -47,9 +50,15 @@ function VoiceChat(props) {
   }
 
   const handleStartChat = async () => {
-    await handleChatRoom(userInfo);
-    availabilityFunc(sendMessage);
-    startAutoRecord();
+    if (!isStart) {
+      await handleChatRoom(userInfo);
+      availabilityFunc(sendMessage);
+      startAutoRecord();
+      setIsStart(true);
+    } else {
+      endRecord();//너 왜안되니...
+      setIsStart(false);
+    }
   };
 
   return (
@@ -58,9 +67,14 @@ function VoiceChat(props) {
       {isSpeaking && <SpeakLoading />}
       {isLoading && <Loading />}
       <img src={chatbot} alt="챗봇" className="chatbot" />
-      <textarea className="textbox" value={chatResponse} readOnly />
+      {visible && <textarea className="textbox" value={chatResponse} readOnly />}
+      <button className="hiddenBtn" onClick={()=>{
+        setVisible(!visible);
+      }}>
+        {visible ? "답변숨기기" : "답변보이기"}
+      </button>
       <button className="chat-startBtn" onClick={handleStartChat}>
-        똑똑!
+        {isStart ? "중지" : "똑똑!"}
       </button>
     </div>
   );
