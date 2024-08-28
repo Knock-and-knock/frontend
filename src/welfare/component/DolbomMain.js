@@ -47,10 +47,16 @@ function DolbomMain() {
       backgroundColor: "rgba(0, 0, 0, 0.5)"
     },
     content: {
-      height: "270px",
-      margin: "auto",
-      borderRadius: "15px",
-      padding: "20px",
+      position: "fixed",
+      top: "40%",
+      bottom: "0",
+      left: "0",
+      right: "0",
+      height: "auto",
+      width: "100%",
+      borderRadius: "15px 15px 0 0",
+      padding: "25px 25px 0px 25px",
+      boxSizing: "border-box"
     },
   };
 
