@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react';
 import "consume/component/ConsumList.css";
 import { call } from 'login/service/ApiService';
 
-function ConsumList({handleOpenModal}) {
+function ConsumList({handleOpenModal,cardId}) {
     const [consumList, setConsumList] = useState([]);
 
     useEffect(()=>{
-        call('/api/v1/card-history',"GET",null).then((response)=>{
+        call('/api/v1/card-history',"GET",{cardId}).then((response)=>{
             console.log(response);
             setConsumList(response);
         }).catch((error)=>{
@@ -33,7 +33,7 @@ function ConsumList({handleOpenModal}) {
                 <div className='consumList-box'>
                     <p className='consumList-time'>21:00 <span>{consumlist.cardFamily ? "가족" : "개인"}</span></p>
                     <div className='consumList-content'>
-                        <p>{consumlist.cardHistoryShopname}<span className='payment-cancel'>거래취소</span></p> 
+                        <p>{consumlist.cardHistoryShopname}{consumlist.cardHistoryIsCansle?<span className='payment-cancel'>거래취소</span>:""}</p> 
                         <p>{consumlist.cardHistoryAmount}</p>
                     </div>
                 </div>

@@ -11,7 +11,7 @@ import { Outlet, useNavigate } from "react-router-dom";
 function CardCreate(props) {
   const navigate=useNavigate();
   const handleApp=()=>{
-    navigate("/cardapp");
+    navigate("/cardapp/defaultinfo");
   }
   return (
     <div className="card-create-container">

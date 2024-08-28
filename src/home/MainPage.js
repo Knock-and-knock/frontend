@@ -1,21 +1,26 @@
+import Button from "home/component/Button";
 import Header from "home/component/Header";
 import WelfareSlide from "home/component/WelfareSlide";
-import ChatSection from "home/component/ChatSection";
-import AlarmSection from "home/component/AlarmSection";
-import CardSection from "home/component/CardSection";
-import "home/MainPage.css"
-import CardBottom from "./component/CardBottom";
-
+import "home/MainPage.css";
+import { useEffect, useState } from "react";
+import CardSlide from "./component/CardSlide";
 
 function MainPage() {
-  const userType = localStorage.getItem("loginUser");
+  const [isProtege, setIsProtege] = useState(true);
+  
+    useEffect(()=>{
+        const userType  = localStorage.getItem("loginUser");
+        if(userType === "PROTECTOR"){
+            setIsProtege(false);
+        }
+       
+    },[])
   return (
     <div className="main-container">
-      <Header/>
+      <Header isProtege={isProtege}/>
       <WelfareSlide/>
-      {userType==="PROTEGE"?<ChatSection/>:<AlarmSection/>}
-      <CardSection/>
-      <CardBottom/>
+      <Button isProtege={isProtege}/>
+      <CardSlide isProtege={isProtege}/>
     </div>
   );
 }

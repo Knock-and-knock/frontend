@@ -1,0 +1,16 @@
+.preBtn {
+    position: absolute;
+    top: 50%;
+    left: 10px; /* 버튼을 왼쪽에 배치 */
+    transform: translateY(-50%); /* 버튼을 수직 중앙에 배치 */
+    z-index: 99;
+  }
+  
+  .nextBtn {
+    position: absolute;
+    top: 50%;
+    right: 10px; /* 버튼을 오른쪽에 배치 */
+    transform: translateY(-50%); /* 버튼을 수직 중앙에 배치 */
+    z-index: 99;
+  }
+  

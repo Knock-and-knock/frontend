@@ -10,7 +10,6 @@ function AlarmList(props) {
             <Header/>
             <AlarmMark/>
             <AlarmHistory/>
-            <AlarmHistory/>
         </div>
     );
 }

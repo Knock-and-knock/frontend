@@ -1,31 +1,40 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import 'alarm/component/AlarmHistory.css'
+import { call } from 'login/service/ApiService';
 
 function AlarmHistory(props) {
+    const [alarmList, setAlarmList] = useState([]);
+    useEffect(()=>{
+        call('/api/v1/notification/read',"POST",null).then((response)=>{
+            setAlarmList(response);
+        }).catch((error)=>{
+            alert("알람 조회 실패");
+        });
+    },[]);
+
+    let previousDate = '';
     return (
-        <div className='alarmHistory'>
-            <p className='alarm-date'>2024.08.06</p>
-            <div className='alarmHistory-content'>
-                <p className='alarm-text'> 어르신께 이상 금융거래로 의심되는 상황을 감지했어요</p> 
-                <div className='alarm-circle'></div>
-                <p className='alarm-time'>한 시간 전</p>
-            </div>
-            <div className='alarmHistory-content'>
-                <p className='alarm-text'> 어르신께 이상 금융거래로 의심되는 상황을 감지했어요</p> 
-                <div className='alarm-circle'></div>
-                <p className='alarm-time'>한 시간 전</p>
-            </div>
-            <div className='alarmHistory-content'>
-                <p className='alarm-text'> 어르신께 이상 금융거래로 의심되는 상황을 감지했어요</p> 
-                <div className='alarm-circle'></div>
-                <p className='alarm-time'>한 시간 전</p>
-            </div>
-            <div className='alarmHistory-content'>
-                <p className='alarm-text'> 어르신께 이상 금융거래로 의심되는 상황을 감지했어요</p> 
-                <div className='alarm-circle'></div>
-                <p className='alarm-time'>한 시간 전</p>
-            </div>
-        </div>
+        <>
+         {alarmList.map((alarmlist, index) => {
+                // 알람의 날짜를 추출
+                const currentDate = alarmlist.notificationDateTime.split('T')[0];
+
+                // 날짜가 이전 날짜와 다른 경우에만 날짜를 표시
+                const showDate = currentDate !== previousDate;
+                previousDate = currentDate; // 현재 날짜를 이전 날짜로 업데이트
+
+                return (
+                    <div key={index} className='alarmHistory'>
+                        {showDate && <p className='alarm-date'>{currentDate}</p>}
+                        <div className='alarmHistory-content'>
+                            <p className='alarm-text'>{alarmlist.notificationTitle}</p>
+                            {alarmlist.notificationIsCheck ? <div className='alarm-circle' /> : ""}
+                            <p className='alarm-time'>한 시간 전</p>
+                        </div>
+                    </div>
+                );
+            })}
+        </>
     );
 }
 

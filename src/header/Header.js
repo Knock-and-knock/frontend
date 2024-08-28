@@ -43,7 +43,7 @@ function Header() {
       case "/subinput":
         return "마이페이지";
       case "/consumption":
-          return "소비내역 조회";
+          return "카드내역";
       case "/alarm":
           return "이상 징후 알림 내역";
 
