@@ -78,8 +78,9 @@ function WelfareNursingModal({ closeModal }) {
           <p className={`${styles["modal-text"]} ${styles["reserve-modal-title"]}`}>가정 간병 돌봄</p>
           
           <hr />
+          <div className={styles["reserve-info-container-box"]}>
           <div className={styles["reserve-info-container1"]}>
-            <span className={styles["reserve-info-text"]}>시작 날짜</span>
+            <span className={styles["reserve-info-text"]}>날짜</span>
             <input
               className={styles["insert-start-date"]}
               type="date"
@@ -100,6 +101,7 @@ function WelfareNursingModal({ closeModal }) {
           <div className={styles["reserve-info-container3"]}>
             <span className={styles["reserve-price-text"]}>요금</span>
             <span className={styles.price}>{formatPrice(welfarebookTotalprice)} 원</span>
+          </div>
           </div>
 
           <span className={`${styles["main-text"]} ${styles["reserve-cancel"]}`} onClick={closeModal}>닫기</span>

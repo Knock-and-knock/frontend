@@ -32,7 +32,11 @@ function WelfareHanwoolModal({ closeModal }) {
   }, []);
 
   const handleDateChange = (event) => {
-    const newStartDate = event.target.value;
+    let newStartDate = event.target.value;
+    if (newStartDate === '') {
+      // 날짜가 삭제되면 현재 날짜로 설정
+      newStartDate = today;
+    }
     setWelfarebookStartdate(newStartDate);
     const newEndDate = calculateEndDate(newStartDate, welfarebookUsetime);
     setWelfarebookEnddate(newEndDate);
@@ -69,7 +73,8 @@ function WelfareHanwoolModal({ closeModal }) {
           <p className={`${styles["modal-text"]} ${styles["reserve-modal-title"]}`}>한울 돌봄</p>
           
           <hr />
-          <div className={styles["reserve-info-container1"]}>
+          <div className={styles["reserve-info-container11"]}>
+            <div className={styles["start-date-container"]}>
             <span className={styles["reserve-info-text"]}>시작 날짜</span>
             <input
               className={styles["insert-start-date"]}
@@ -78,7 +83,9 @@ function WelfareHanwoolModal({ closeModal }) {
               min={today} // 현재 날짜 이전 선택 불가
               onChange={handleDateChange}
             />
+            </div>
             <br />
+            <div className={styles["end-date-container"]}>
             <span className={styles["reserve-info-text"]}>종료 날짜</span>
             <input
               className={styles["end-date"]}
@@ -86,10 +93,11 @@ function WelfareHanwoolModal({ closeModal }) {
               value={welfarebookEnddate}
               disabled
             />
+            </div>
           </div>
-          <div className={styles["reserve-info-container2"]}>
-            <span className={styles["reserve-info-text"]}>기간</span>
-            <select className={styles["insert-time"]} type="dropbox" onChange={handleTimeChange}>
+          <div className={`${styles["reserve-info-container2"]} ${styles["reserve-info-container2-option"]}`}>
+            <span className={styles["reserve-info-text1"]}>기간</span>
+            <select className={styles["insert-period"]} type="dropbox" onChange={handleTimeChange}>
               <option value="1">1개월</option>
               <option value="2">2개월</option>
               <option value="3">3개월</option>

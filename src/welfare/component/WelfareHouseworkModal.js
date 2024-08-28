@@ -77,7 +77,7 @@ function WelfareHouseworkModal({ closeModal }) {
           
           <hr />
           <div className={styles["reserve-info-container1"]}>
-            <span className={styles["reserve-info-text"]}>시작 날짜</span>
+            <span className={styles["reserve-info-text"]}>날짜</span>
             <input
               className={styles["insert-start-date"]}
               type="date"
