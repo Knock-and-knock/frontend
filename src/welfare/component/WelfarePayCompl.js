@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import styles from 'welfare/css/WelfarePayComplete.module.css';
+import styles from 'welfare/css/WelfarePayCompl.module.css';
 import { useNavigate } from 'react-router-dom';
 
 function WelfarePayComplete() {
