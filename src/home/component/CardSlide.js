@@ -21,8 +21,8 @@ function CardSlide({isProtege}) {
 
 
     useEffect(()=>{
-        call(`/api/v1/card/${userNo}`,"GET",null).then((response)=>{
-            if(response.length === 0 || response[0].cardNo === null){
+        call(`/api/v1/card`,"GET",null).then((response)=>{
+            if(response.length === 0 || response[0].cardId === null){
                 setIsCard(false);
             }else{      
                 setCardList(response);
