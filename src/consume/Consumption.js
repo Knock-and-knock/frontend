@@ -5,8 +5,9 @@ import ConsumCard from "./component/ConsumCard";
 import ConsumDetailModal from './component/ConsumDetailModal';
 import ConsumFilter from './component/ConsumFilter';
 import ConsumList from './component/ConsumList';
+import { call } from "login/service/ApiService";
 
-function Consumption(props) {
+function Consumption({cardId}) {
     const [isOpen, setIsOpen] = useState(false);
     const handleOpenModal = () => {
         setIsOpen(true);
@@ -19,14 +20,24 @@ function Consumption(props) {
         document.body.classList.toggle("unscrollable",isOpen)
     },[isOpen]);
 
+    const [consumList, setConsumList] = useState([]);
+
+    useEffect(()=>{
+        call('/api/v1/card-history',"GET",{cardId}).then((response)=>{
+            console.log(response);
+            setConsumList(response);
+        }).catch((error)=>{
+            console.log(error);
+        });
+    },[cardId]);
     
     return (
         <div>
             <Header/>
             <div className="consumption-container">
                 <ConsumCard/>
-                <ConsumFilter/>
-                <ConsumList handleOpenModal={handleOpenModal}/>  
+                <ConsumFilter consumList={consumList}/>
+                <ConsumList handleOpenModal={handleOpenModal} consumList={consumList}/>  
                 <ConsumDetailModal isOpen={isOpen} closeModal={closeModal}/>
             </div>
         </div>

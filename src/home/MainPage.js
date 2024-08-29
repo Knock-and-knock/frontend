@@ -7,14 +7,15 @@ import CardSlide from "./component/CardSlide";
 
 function MainPage() {
   const [isProtege, setIsProtege] = useState(true);
-  
+
     useEffect(()=>{
         const userType  = localStorage.getItem("loginUser");
         if(userType === "PROTECTOR"){
             setIsProtege(false);
         }
        
-    },[])
+    },[]);
+    
   return (
     <div className="main-container">
       <Header isProtege={isProtege}/>

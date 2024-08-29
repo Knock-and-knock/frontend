@@ -22,7 +22,7 @@ import { Route, Routes } from 'react-router-dom';
 
 import Modal from 'react-modal';
 import WelfareInputTotal from 'welfare/component/WelfareInputTotal';
-import WelfarePayComplete from 'welfare/component/welfarePayComplete';
+import WelfarePayComplete from 'welfare/component/WelfarePayComplete';
 
 
 Modal.setAppElement('#root');
@@ -56,7 +56,6 @@ function App(props) {
         <Route path="housework-modal" element={<WelfareHouseworkModal />} />
         <Route path="hanwool-modal" element={<WelfareHanwoolModal />} />
       </Route>
-
       <Route path="/consume-report" element={<ConsumeReport />} />
 
     </Routes>

@@ -1,16 +1,50 @@
+.cardSwiper-container{
+  position: relative;
+}
+
 .preBtn {
-    position: absolute;
-    top: 50%;
-    left: 10px; /* 버튼을 왼쪽에 배치 */
-    transform: translateY(-50%); /* 버튼을 수직 중앙에 배치 */
-    z-index: 99;
-  }
+  left: 5px; /* 버튼을 왼쪽에 배치 */
+}
+.nextBtn {
+  right: 10px; /* 버튼을 오른쪽에 배치 */
+}
+
+.preBtn,
+.nextBtn {
+  background-color: #686868;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 99;
+}
   
-  .nextBtn {
+.preBtn::after {
     position: absolute;
-    top: 50%;
-    right: 10px; /* 버튼을 오른쪽에 배치 */
-    transform: translateY(-50%); /* 버튼을 수직 중앙에 배치 */
-    z-index: 99;
-  }
+    content: '';
+    width: 10px; /* 사이즈 */
+    height: 10px; /* 사이즈 */
+    border-top: 3px solid #FFF; /* 선 두께 */
+    border-right: 3px solid #FFF; /* 선 두께 */
+    transform: rotate(225deg); /* 각도 */
+    left: 8px; 
+    top: 6px;
+}
   
+.nextBtn::after {
+    position: absolute;
+    content: '';
+    width: 10px; /* 사이즈 */
+    height: 10px; /* 사이즈 */
+    border-top: 3px solid #FFF; /* 선 두께 */
+    border-right: 3px solid #FFF; /* 선 두께 */
+    transform: rotate(45deg); /* 각도 */
+    right: 8px;
+    top: 6px;
+}
+
+.hidden {
+  display: none;
+}

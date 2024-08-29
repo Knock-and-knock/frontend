@@ -5,7 +5,7 @@ import { call } from 'login/service/ApiService';
 function AlarmHistory(props) {
     const [alarmList, setAlarmList] = useState([]);
     useEffect(()=>{
-        call('/api/v1/notification/read',"POST",null).then((response)=>{
+        call('/api/v1/notification/read',"GET",null).then((response)=>{
             setAlarmList(response);
         }).catch((error)=>{
             alert("알람 조회 실패");
