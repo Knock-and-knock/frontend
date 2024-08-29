@@ -1,18 +1,7 @@
-import React, { useEffect, useState } from 'react';
 import "consume/component/ConsumList.css";
-import { call } from 'login/service/ApiService';
 
-function ConsumList({handleOpenModal,cardId}) {
-    const [consumList, setConsumList] = useState([]);
-
-    useEffect(()=>{
-        call('/api/v1/card-history',"GET",{cardId}).then((response)=>{
-            console.log(response);
-            setConsumList(response);
-        }).catch((error)=>{
-            console.log(error);
-        });
-    },[]);
+function ConsumList({handleOpenModal,consumList}) {
+   
 
     function formatDate(dateString) {
         const date = new Date(dateString);

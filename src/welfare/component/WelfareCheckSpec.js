@@ -3,6 +3,7 @@ import styles from 'welfare/css/WelfareCheckSpec.module.css'; // CSS 모듈 impo
 import { useNavigate } from 'react-router-dom';
 import Header from 'header/Header.js';
 import { useSpecHook } from 'welfare/component/WelfareInputTotal';
+import { call } from 'login/service/ApiService';
 
 function WelfareCheckSpec() {
     const navigate = useNavigate();
@@ -14,7 +15,12 @@ function WelfareCheckSpec() {
     },[]);
 
     const goSetPW = () => {
-        navigate('/welfare-set-pw');
+        call('/api/v1/welfare-book/reserve', 'POST', userSpec).then((response)=>{
+            navigate('/welfare-set-pw');
+        }).catch((error)=>{
+            alert("예약 실패");
+        });
+       
     }
 
     const formatDate = (date) => {
@@ -55,7 +61,7 @@ function WelfareCheckSpec() {
                     <input className={styles["spec-check"]} type="text" placeholder="성별" value={formatGender(userSpec.userGender) || ''} disabled />
 
                     <p className={styles["spec-info"]}>주소</p>
-                    <input className={styles["spec-check"]} type="text" placeholder="주소" value={userSpec.userAddress || ''} disabled />
+                    <input className={styles["spec-check"]} type="text" placeholder="주소" value={userSpec.address + " " + userSpec.detailAddress || ''} disabled />
 
                     <p className={styles["spec-info"]}>연락처</p>
                     <input className={styles["spec-check"]} type="text" placeholder="연락처" value="010-4519-3851" disabled />

@@ -1,22 +1,28 @@
 import CardBottom from 'home/component/CardBottom';
 import CardSection from 'home/component/CardSection';
 import "home/component/CardSlide.css";
-import next from "image/icon/icon-next.png";
-import pre from "image/icon/icon-pre.png";
 import { call } from 'login/service/ApiService';
 import { useEffect, useState } from 'react';
 import { Navigation } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
+import 'swiper/css';
+import 'swiper/css/effect-cards';
+
+import { EffectCards } from 'swiper/modules';
+import NCardBottom from './NCardBottom';
+import NCardSection from './NCardSection';
+
 function CardSlide({isProtege}) {
     const userNo = localStorage.getItem("userNo");
     const [cardList, setCardList] = useState([]);
     const [isCard, setIsCard] = useState(true);
+    const [currentSlide, setCurrentSlide] = useState(0);
 
 
     useEffect(()=>{
         call(`/api/v1/card/${userNo}`,"GET",null).then((response)=>{
-            if(response.length === 0){
+            if(response.length === 0 || response[0].cardNo === null){
                 setIsCard(false);
             }else{      
                 setCardList(response);
@@ -25,32 +31,55 @@ function CardSlide({isProtege}) {
         }).catch((error)=>{
             alert("카드조회 실패");
     });
-    },[userNo]);
+    },[userNo,isCard]);
+
+    const handleSlideChange = (swiper) => {
+        setCurrentSlide(swiper.activeIndex);
+    };
 
     return (
-        <Swiper 
-        modules={[Navigation]}
-        navigation={{
-            prevEl: '.preBtn',
-            nextEl: '.nextBtn',
-        }}
-        slidesPerView={1} 
-        >
+        <div className="cardSwiper-container">
+                {isCard?(
+                    <>
+                        <Swiper
+                        effect={'cards'}
+                        grabCursor={true}
+                        modules={[Navigation, EffectCards]}
+                        className="mySwiper"
+                        navigation={{
+                            prevEl: '.preBtn',
+                            nextEl: '.nextBtn',
+                        }}
+                        slidesPerView={1}
+                        onSlideChange={handleSlideChange}
+                    >
+                        {cardList.map((card) => (
+                        
+                            <SwiperSlide key={card.cardId}>
+                                <CardSection cardlist={card}/>
+                                <CardBottom isProtege={isProtege} cardlist={card} cardId = {card.cardId}/>
+                            </SwiperSlide>
+                            
+                        
+                        ))}
+                        <SwiperSlide key="empty-slide">
+                            <NCardSection isCard={isCard}/>
+                            <NCardBottom isProtege={isProtege} isAddition={true}/>
+                        </SwiperSlide>
+                    </Swiper>
+                    <i className={`preBtn ${currentSlide === 0 ? 'hidden' : ''}`} />
+                    <i className={`nextBtn ${currentSlide === cardList.length ? 'hidden' : ''}`} />
+                    </>
+                    ):(
+                    <div>
+                        <NCardSection isCard={isCard}/>
+                        <NCardBottom isProtege={isProtege} isAddition={false}/>
+                    </div>
+                )}
+            
 
-        {cardList.map((cardlist, index)=>(
-            <SwiperSlide key={index}>
-                {isCard?<CardSection cardlist={cardlist}/>:""}
-                <CardBottom isProtege={isProtege}/>
-            </SwiperSlide>
-        ))}
-        <div className="preBtn" >
-                <img src={pre} alt="카드 이전 버튼" />
+            
         </div>
-        <div className="nextBtn" >
-            <img src={next} alt="카드 다음 버튼" />
-        </div>
-
-        </Swiper>
     );
 }
 

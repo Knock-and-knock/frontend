@@ -9,7 +9,7 @@ function WelfareAddressModal() {
     const navigate = useNavigate();
 
     const { userSpec, setUserSpec, handlechange } = useSpecHook();
-    const { userAddress, userDetailAddress } = userSpec;
+    const { address, detailAddress } = userSpec;
 
     useEffect(() => {
         if (!window.daum || !window.daum.Postcode) {
@@ -27,7 +27,7 @@ function WelfareAddressModal() {
             new window.daum.Postcode({
                 oncomplete: function(data) {
                     console.log(data);
-                    setUserSpec({ ...userSpec, userAddress: data.address });
+                    setUserSpec({ ...userSpec, address: data.address });
                     document.getElementById('detail-address-input').focus();
                 }
             }).open();
@@ -46,16 +46,16 @@ function WelfareAddressModal() {
         } else {
             setStyle(style2);
         }
-    }, [userAddress, userDetailAddress]);
+    }, [address, detailAddress]);
 
     const isFormComplete = () => {
-        return userAddress && userAddress.trim() !== '' && userDetailAddress && userDetailAddress.trim() !== '';
+        return address && address.trim() !== '' && detailAddress && detailAddress.trim() !== '';
     };
 
     const goInputDisease = () => {
         if (isFormComplete()) {
-            const fullAddress = `${userAddress} ${userDetailAddress}`.trim();
-            setUserSpec({ ...userSpec, userAddress: fullAddress }); // 합쳐진 주소를 저장
+            const fullAddress = `${address} ${detailAddress}`.trim();
+            setUserSpec({ ...userSpec, address: fullAddress }); // 합쳐진 주소를 저장
             navigate('/welfare-input/disease');
         }
     };
@@ -76,9 +76,9 @@ function WelfareAddressModal() {
                             onChange={handlechange}
                             className={styles["input-address"]} 
                             type="text" 
-                            name='userAddress'
+                            name='address'
                             placeholder="도로명, 지번, 건물명 검색" 
-                            value={userAddress || ""} 
+                            value={address || ""} 
                             readOnly
                         />
                         <img src={glasses} alt="돋보기" className={styles["glasses-icon"]} />
@@ -88,9 +88,9 @@ function WelfareAddressModal() {
                         onChange={handlechange}
                         className={styles["input-address-detail"]} 
                         type="text" 
-                        name='userDetailAddress'
+                        name='detailAddress'
                         placeholder="상세 주소" 
-                        value={userDetailAddress || ""}
+                        value={detailAddress || ""}
                     />
                 </div>
 

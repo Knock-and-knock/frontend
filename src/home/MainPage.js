@@ -70,8 +70,6 @@ function MainPage() {
     }
   };
 
-  
-
   return (
     <div className="main-container">
       <Header isProtege={isProtege} />
