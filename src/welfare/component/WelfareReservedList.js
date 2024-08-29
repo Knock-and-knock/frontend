@@ -4,10 +4,19 @@ import Modal from "react-modal";
 import WelfareReserveCancelModal from 'welfare/component/WelfareReserveCancelModal';
 import WelfareReservedItem from 'welfare/component/WelfareReservedItem';
 import Header from 'header/BlueHeader.js';
+import { call } from 'login/service/ApiService';
 
 function WelfareReservedList() {
   const [isOpen, setIsOpen] = useState(false);
+  const [reservedItems,setReserveItems] =useState([]);
 
+  useEffect(()=>{
+    call('/api/v1/welfare',"GET",null).then((response)=>{
+      setReserveItems(response);
+    }).catch((error)=>{
+      alert("복지목록 조회 실패");
+    });
+  },[]);
   useEffect(() => {
     if (isOpen) {
       // 모달이 열렸을 때 body의 스크롤을 막음
@@ -43,31 +52,6 @@ function WelfareReservedList() {
     },
   };
 
-  // 예약 데이터 배열
-  const reservedItems = [
-    {
-      title: "일상 가사 돌봄",
-      paymentDate: "2024.08.24",
-      reserveDate: "2024년 09월 01일",
-      reserveTime: "9시간 (09:00 ~ 18:00)",
-      price: "225,000"
-    },
-    // {
-    //   title: "일상가사 돌봄",
-    //   paymentDate: "2024.08.07",
-    //   reserveDate: "2026년 12월 29일",
-    //   reserveTime: "오전 3시간 (09:00 ~ 12:00)",
-    //   price: "75,000"
-    // },
-    // {
-    //   title: "한울 돌봄",
-    //   paymentDate: "2024.08.07",
-    //   reserveDate: "2026년 12월 29일",
-    //   reserveTime: "2개월",
-    //   price: "2,000,000"
-    // }
-  ];
-
   return (
     <div className={styles.container}>
       <Header />
@@ -76,11 +60,11 @@ function WelfareReservedList() {
         {reservedItems.map((item, index) => (
           <WelfareReservedItem
             key={index}
-            title={item.title}
+            title={item.welfareName}
             paymentDate={item.paymentDate}
             reserveDate={item.reserveDate}
             reserveTime={item.reserveTime}
-            price={item.price}
+            price={item.welfarePirce}
             onCancel={openModal}
           />
         ))}

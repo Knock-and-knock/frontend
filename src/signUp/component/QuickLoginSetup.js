@@ -27,6 +27,19 @@ function QuickLoginSetup(props) {
         console.log(isBioChecked);
     }, [isBioChecked]);
 
+    const handlePinCircleClick = () => {
+        if (isPinChecked) {
+            setUserInfo(prevState => ({
+                ...prevState,
+                userSimplePassword: ''
+            }));
+        }else{
+            setIsPinChecked(!isPinChecked);
+            navi("/signup/pinsetup");
+        }
+        
+    };
+
     // 생체 인증을 처리하는 함수
     const handleBiometricAuth = async () => {
         if (!navigator.credentials) {
@@ -65,7 +78,7 @@ function QuickLoginSetup(props) {
             <div className="signup-container">
                 <div className='signup-quickLogin'>
                     <p className='quickLogin-title'>간편 비밀번호</p>
-                    <div className='quickLogin-content' onClick={handleBiometricAuth}> {/* 생체 인증 함수 호출 */}
+                    <div className='quickLogin-content' onClick={handlePinCircleClick}> {/* 생체 인증 함수 호출 */}
                         <p>비밀번호 6자리로 로그인 합니다</p>
                         <div className='icon-check'>
                             <img src={check} alt="간편로그인설정" className="check" />
