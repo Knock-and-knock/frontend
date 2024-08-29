@@ -1,3 +1,4 @@
+import { call } from "login/service/ApiService";
 import NextBtn from "matching/button/NextBtn";
 import SkipBtn from "matching/button/SkipBtn";
 import Header from "matching/header/Header";
@@ -11,7 +12,6 @@ import FYIInput from "./notice/FYIInput";
 import FYINotice from "./notice/FYINotice";
 import TitleInput from "./notice/TitleInput";
 import TitleNotice from "./notice/TitleNotice";
-import { call } from "login/service/ApiService";
 
 // 컨텍스트 생성
 const InfoContext = createContext();
@@ -49,6 +49,7 @@ function Match(props) {
     }
     ).catch((error)=>{
       alert("매칭요청 실패");
+      console.log(error.message)
     });
   };
 
