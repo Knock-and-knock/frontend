@@ -1,11 +1,12 @@
 .cardSection-container{
     padding: 30px;
-    box-shadow: 0px 2px 5px #888;
+    /* box-shadow: 0px 2px 5px #888; */
     width: 90%;
     box-sizing: border-box;
     margin: 0 auto;
-    border-radius: 8px;  
-    z-index: 2;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    background-color: white;
 }
 .cardSection-title{
     font-size: 20px;
@@ -16,6 +17,17 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    height: 20vh;
+}
+.nCardSection-content{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 20vh;
+}
+.nCardSection-content p{
+    font-size: 18px;
+    color: #CCC7C0;
 }
 .cardSection-price{
     margin: 30px 0px;

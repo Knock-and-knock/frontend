@@ -1,7 +1,7 @@
 import "home/component/CardSection.css";
 import card from "image/home-card.png";
 
-function CardSection({cardlist}) {
+function CardSection({cardlist,}) {
     const cardNo = cardlist?.cardNo || '0000';
     return (
        
@@ -15,9 +15,8 @@ function CardSection({cardlist}) {
                     </div> 
                     <p className='cardSection-cardName'>{cardlist.cardBank} Life Care({cardNo.slice(-4)})</p> 
                 </div>
-        
                 <img src={card} alt="카드" className="creditCard" />           
-            </div>          
+            </div>
         </div>
        
     );

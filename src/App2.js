@@ -56,7 +56,6 @@ function App(props) {
         <Route path="housework-modal" element={<WelfareHouseworkModal />} />
         <Route path="hanwool-modal" element={<WelfareHanwoolModal />} />
       </Route>
-
       <Route path="/consume-report" element={<ConsumeReport />} />
 
     </Routes>

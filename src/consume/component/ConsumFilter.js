@@ -1,7 +1,18 @@
 import "consume/component/ConsumFilter.css";
+import { useEffect, useState } from "react";
 
-function ConsumFilter(props) {
-   
+function ConsumFilter({consumList}) {
+    // const [isOpen, setIsOpen] = useState(false);
+    // const handleOpenModal = () => {
+    //     setIsOpen(true);
+    // };
+    
+    // const closeModal = () => {
+    //     setIsOpen(false);
+    // }
+    // useEffect(()=>{
+    //     document.body.classList.toggle("unscrollable",isOpen)
+    // },[isOpen]);
     return (
         <div className='filter-content'>
             <div className="filter-date">
@@ -12,7 +23,7 @@ function ConsumFilter(props) {
                 <p className='filter-price'>총 이용금액</p>
                 <p className='filter-num'>231,500 원</p>
             </div>
-            
+            {/* <ConsumFilter isOpen={isOpen} closeModal={closeModal}/> */}
 
         </div>
     );
