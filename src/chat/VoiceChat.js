@@ -22,6 +22,9 @@ function VoiceChat(props) {
   const [chatResponse, setChatResponse] = useState("");
   const [visible, setVisible] = useState(false);
   const [isStart, setIsStart] = useState(false);
+  //예약확인 모달
+  // const [isProtege, setIsProtege] = useState(true);
+  // const [isOpen, setIsOpen] = useState(false);
 
   const handleInputChange = (e) => {
     setUserInfo(e.target.value);
@@ -94,6 +97,13 @@ function VoiceChat(props) {
       <Modal isOpen={visible} onRequestClose={toggleModal} style={customStyles}>
         <textarea className="textbox" value={chatResponse} readOnly />
       </Modal>
+      {/* {isOpen && (
+        <MatchingModal
+          isOpen={isOpen}
+          closeModal={closeModal}
+          handleSubmit={handleSubmit}
+        />
+      )} */}
     </div>
   );
 }
