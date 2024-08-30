@@ -3,6 +3,7 @@ import fingerprint from 'image/icon/fingerprint.svg';
 import LoginBtn from './component/button/LoginBtn';
 import LoginHeader from './component/header/LoginHeader';
 import { call } from './service/ApiService';
+import { Navigate } from 'react-router-dom';
 
 function LoginBio(props) {
     const userNo = localStorage.getItem("userNo");
@@ -54,10 +55,11 @@ function LoginBio(props) {
             console.log('지문 인증 성공:', credential);
             console.log("userNo: " + userNo);
             console.log("userBioPassword: " + userBioPassword);
-            console.log();
+            // const userType = localStorage.setItem("userType", "userType");
+            // const ACCESS_TOKEN = localStorage.setItem("ACCESS_TOKEN", "ACCESS_TOKEN");
             setCheck(true);
             setIsBioChecked(true);
-            return true;
+            Navigate('/home');
         } catch (error) {
             console.error('Biometric authentication failed:', error);
             console.log("못 보냈어요" + error);
@@ -70,7 +72,7 @@ function LoginBio(props) {
     const handleSubmit = (event) => {
         event.preventDefault(); //default이벤트 취소
         const userNo = localStorage.getItem("userNo");
-        const userBioPassword = localStorage.getItem("bioPW");
+        const userBioPassword = localStorage.getItem("userBioPassword");
         call("/api/v1/auth/login/bio", "POST", { userNo: userNo, userBioPassword: userBioPassword }).then((response)=>{
            console.log(userNo, userBioPassword);
           }).catch(

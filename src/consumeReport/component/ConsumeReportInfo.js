@@ -2,9 +2,9 @@ import React, { useState, useMemo, useEffect } from 'react';
 import 'consumeReport/ConsumeReport.css';
 import Chart from "react-apexcharts";
 import ConsumeReportDate from './ConsumeReportDate'; // 날짜 선택 컴포넌트를 불러옴
-import { useLocation } from 'react-router-dom';
+import { call } from 'login/service/ApiService';
 
-function ConsumeReportInfo({cardId}) {
+function ConsumeReportInfo({ cardId }) {
     const [selectedFilter, setSelectedFilter] = useState('personal');
     const [selectedData, setSelectedData] = useState(null); // 클릭된 데이터를 저장하기 위한 상태
     const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 }); // 툴팁 위치 상태
@@ -19,9 +19,6 @@ function ConsumeReportInfo({cardId}) {
         setSelectedMonth(month);
     };
 
-    // const location = useLocation();
-    // const cardId = location.state.value;
-
     // 숫자를 세 자리마다 쉼표로 구분하는 포맷터
     const formatPrice = (price) => {
         return new Intl.NumberFormat('ko-KR').format(price);
@@ -29,26 +26,23 @@ function ConsumeReportInfo({cardId}) {
 
     // API 호출 함수
     const fetchData = async () => {
-        const jwt = localStorage.getItem('ACCESS_TOKEN');
-
         const startDate = `${selectedYear}-${String(selectedMonth).padStart(2, '0')}-01`;
         const lastDayOfMonth = new Date(selectedYear, selectedMonth, 0).getDate();
         const endDate = `${selectedYear}-${String(selectedMonth).padStart(2, '0')}-${String(lastDayOfMonth).padStart(2, '0')}`;
 
         try {
-            const response = await fetch(`http://192.168.0.12:9090/api/v1/consumption/1/${startDate}/${endDate}`, {
-                headers: {
-                    'Authorization': 'Bearer ' + jwt, // JWT 토큰 설정
-                },
-            });
-            const result = await response.json();
-            setData(result);
+            const response = await call(`/api/v1/consumption/${cardId}/${startDate}/${endDate}`, "GET", null);
+            setData(response);
             setLoading(false); // 데이터 로드 완료 후 로딩 상태 업데이트
         } catch (error) {
             console.error("Error fetching data:", error);
             setLoading(false); // 오류가 발생해도 로딩 상태 해제
         }
     };
+
+    useEffect(() => {
+        console.log("카드아이디: " + cardId);
+    }, []);
 
     // 연도나 월이 변경될 때마다 API 호출
     useEffect(() => {
@@ -236,8 +230,6 @@ function ConsumeReportInfo({cardId}) {
             return <div>Loading...</div>; // 데이터 로드 중일 때 로딩 표시
         }
 
-        // 원래 전체, 개인, 가족 이렇게 3개의 필터가 있었으나 삭제됨
-        // 하지만 바꾸기 귀찮으므로 냅두겠읍니다
         switch (selectedFilter) {
             default:
                 return (
