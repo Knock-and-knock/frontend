@@ -17,6 +17,7 @@ function WelfareReservedList() {
       alert("복지목록 조회 실패");
     });
   },[]);
+
   useEffect(() => {
     if (isOpen) {
       // 모달이 열렸을 때 body의 스크롤을 막음
