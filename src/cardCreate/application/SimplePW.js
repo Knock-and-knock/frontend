@@ -9,6 +9,7 @@ function SimplePW(props) {
   const [simplePw, setSimplePw] = useState(["", "", "", ""]);
   const [isButtonEnabled, setIsButtonEnabled] = useState(false);
   
+  //autoFocus
   useEffect(() => {
     inputRefs[0].current.focus();
   }, []);
