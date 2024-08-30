@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import Modal from 'react-modal';
 import "consume/component/ConsumDateModal.css";
+import { call } from 'login/service/ApiService';
 
-function ConsumDateModal({ isOpen, closeModal, updateDates }) {
+function ConsumDateModal({ isOpen, closeModal, updateDates, setConsumList, cardId }) {
     const getCurrentDate = () => {
         const date = new Date();
         return date.toISOString().split('T')[0]; // 현재 날짜를 'YYYY-MM-DD' 형식으로 반환
@@ -26,6 +27,15 @@ function ConsumDateModal({ isOpen, closeModal, updateDates }) {
 
     const handleSaveDates = () => {
         updateDates(localStartDate, localEndDate); // 부모 컴포넌트로 날짜 정보 전달
+        call('/api/v1/card-history', "GET", { 
+            cardId:cardId, 
+            startDate:localStartDate,
+            endDate:localEndDate
+        }).then((response) => {
+            setConsumList(response);
+        }).catch((error) => {
+            console.log(error);
+        });
         closeModal(); // 모달 닫기
     };
 
