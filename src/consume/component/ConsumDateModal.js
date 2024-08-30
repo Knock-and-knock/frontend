@@ -28,7 +28,7 @@ function ConsumDateModal({ isOpen, closeModal, updateDates, setConsumList, cardI
     const handleSaveDates = () => {
         updateDates(localStartDate, localEndDate); // 부모 컴포넌트로 날짜 정보 전달
         call('/api/v1/card-history', "GET", { 
-            cardId:cardId, 
+            cardId:20, 
             startDate:localStartDate,
             endDate:localEndDate
         }).then((response) => {

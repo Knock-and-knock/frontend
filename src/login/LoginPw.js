@@ -49,6 +49,9 @@ function LoginPw(props) {
         ).then((response) => {
             console.log(response);
             localStorage.setItem("ACCESS_TOKEN", response.accessToken);
+            localStorage.setItem("loginUser", response.userType);
+            localStorage.setItem("userNo", response.userNo);
+
 
             if (response.userType === "PROTECTOR") {
                 handleMatchCheck();
