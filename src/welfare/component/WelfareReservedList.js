@@ -11,7 +11,7 @@ function WelfareReservedList() {
   const [reservedItems,setReserveItems] =useState([]);
 
   useEffect(()=>{
-    call('/api/v1/welfare',"GET",null).then((response)=>{
+    call('/api/v1/welfare-book',"GET",null).then((response)=>{
       setReserveItems(response);
     }).catch((error)=>{
       alert("복지목록 조회 실패");
