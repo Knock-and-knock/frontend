@@ -44,7 +44,8 @@ function DolbomMain() {
 
   const ReserveStyles = {
     overlay: {
-      backgroundColor: "rgba(0, 0, 0, 0.5)"
+      backgroundColor: "rgba(0, 0, 0, 0.5)",
+      zIndex: "2"
     },
     content: {
       position: "fixed",
@@ -56,7 +57,7 @@ function DolbomMain() {
       width: "100%",
       borderRadius: "15px 15px 0 0",
       padding: "25px 25px 0px 25px",
-      boxSizing: "border-box"
+      boxSizing: "border-box",
     },
   };
 

@@ -4,7 +4,7 @@ import Chart from "react-apexcharts";
 import ConsumeReportDate from './ConsumeReportDate'; // 날짜 선택 컴포넌트를 불러옴
 import { useLocation } from 'react-router-dom';
 
-function ConsumeReportInfo() {
+function ConsumeReportInfo({cardId}) {
     const [selectedFilter, setSelectedFilter] = useState('personal');
     const [selectedData, setSelectedData] = useState(null); // 클릭된 데이터를 저장하기 위한 상태
     const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 }); // 툴팁 위치 상태
@@ -19,8 +19,8 @@ function ConsumeReportInfo() {
         setSelectedMonth(month);
     };
 
-    const location = useLocation();
-    const cardId = location.state.value;
+    // const location = useLocation();
+    // const cardId = location.state.value;
 
     // 숫자를 세 자리마다 쉼표로 구분하는 포맷터
     const formatPrice = (price) => {
@@ -36,7 +36,7 @@ function ConsumeReportInfo() {
         const endDate = `${selectedYear}-${String(selectedMonth).padStart(2, '0')}-${String(lastDayOfMonth).padStart(2, '0')}`;
 
         try {
-            const response = await fetch(`http://192.168.0.12:9090/api/v1/consumption/${cardId}/${startDate}/${endDate}`, {
+            const response = await fetch(`http://192.168.0.12:9090/api/v1/consumption/1/${startDate}/${endDate}`, {
                 headers: {
                     'Authorization': 'Bearer ' + jwt, // JWT 토큰 설정
                 },
@@ -63,7 +63,7 @@ function ConsumeReportInfo() {
     }, [data]);
 
     const donutData = {
-        series: processedData.series,
+        series: processedData.series, // series에 있는 값 그대로 사용
         options: {
             chart: {
                 type: 'donut',
@@ -73,13 +73,11 @@ function ConsumeReportInfo() {
                         const dataIndex = config.dataPointIndex;
                         const label = donutData.options.labels[dataIndex];
                         const value = donutData.series[dataIndex];
-                        const color = donutData.options.fill.colors[dataIndex]; // 여기에서 수정
-                        const { clientX, clientY } = event; // 클릭 시 마우스 위치
+                        const color = donutData.options.fill.colors[dataIndex]; 
+                        const { clientX, clientY } = event; 
                         if (selectedData && selectedData.label === label) {
-                            // 이미 선택된 항목을 다시 클릭하면 툴팁을 숨김
                             setSelectedData(null);
                         } else {
-                            // 클릭된 데이터에 대한 정보를 설정하고 툴팁 위치와 색상을 업데이트
                             setSelectedData({ label, value, color });
                             setTooltipPosition({ x: clientX, y: clientY });
                         }
@@ -93,12 +91,15 @@ function ConsumeReportInfo() {
                 show: false
             },
             tooltip: {
-                enabled: false // 기본 툴팁을 비활성화
+                enabled: false 
             },
             plotOptions: {
                 pie: {
                     donut: {
-                        size: '30%',
+                        size: '50%',
+                    },
+                    dataLabels: {
+                        minAngleToShowLabel: 0 // 각도가 0도일 때도 라벨을 표시하지 않도록 설정
                     }
                 }
             },
@@ -111,9 +112,23 @@ function ConsumeReportInfo() {
             },
             fill: {
                 colors: ['#6DD193', '#F56A71', '#E9A260', '#66B1B5', '#4AADE5', '#9B7F9E', '#615EDE', '#625B8B']
+            },
+            noData: {
+                text: '소비 내역이 없습니다.',
+                align: 'center',
+                fontSize: '24px', // 이거 왜 안됨??
+                fontWeight: 'bold',
+                verticalAlign: 'middle',
+                offsetX: 0,
+                offsetY: 0,
+                style: {
+                    color: '#2c2c2c',
+                    fontSize: '14px',
+                }
             }
         },
     };
+    
 
     const barData = {
         series: [{
@@ -221,95 +236,50 @@ function ConsumeReportInfo() {
             return <div>Loading...</div>; // 데이터 로드 중일 때 로딩 표시
         }
 
+        // 원래 전체, 개인, 가족 이렇게 3개의 필터가 있었으나 삭제됨
+        // 하지만 바꾸기 귀찮으므로 냅두겠읍니다
         switch (selectedFilter) {
-            case 'personal':
-                return (
-                    <div className='chart-container'>
-                        <div className='circle-chart-container'>
-                            <Chart
-                                options={donutData.options}
-                                series={donutData.series}
-                                type="donut"
-                            />
-                        </div>
-                        {selectedData && (
-                            <div
-                                className='tooltip'
-                                style={{
-                                    position: 'absolute',
-                                    top: `${tooltipPosition.y}px`,
-                                    left: `${tooltipPosition.x}px`,
-                                    backgroundColor: selectedData.color, // 항목 색상으로 배경색 설정
-                                    padding: '4px 8px',
-                                    borderRadius: '8px',
-                                    pointerEvents: 'none',
-                                    border: 'none',
-                                    color: '#fff',
-                                    zIndex: 1000
-                                }}
-                            >
-                                <p style={{ margin: 0, fontWeight: 'bold' }}>{selectedData.label}</p>
-                                <p style={{ margin: 0 }}>{formatPrice(selectedData.value)} 원</p>
-                            </div>
-                        )}
-                        <div className='bar-chart-container'>
-                            <Chart
-                                options={barData.options}
-                                series={barData.series}
-                                type="bar"
-                                height={360} // 차트의 총 높이 조정
-                            />
-                        </div>
-                    </div>
-                );
-            case 'family':
-                return (
-                    <div className='chart-container'>
-                        <div className='circle-chart-container'>
-                            <Chart
-                                options={donutData.options}
-                                series={donutData.series}
-                                type="donut"
-                            />
-                        </div>
-                        {selectedData && (
-                            <div
-                                className='tooltip'
-                                style={{
-                                    position: 'absolute',
-                                    top: `${tooltipPosition.y}px`,
-                                    left: `${tooltipPosition.x}px`,
-                                    backgroundColor: selectedData.color, // 항목 색상으로 배경색 설정
-                                    padding: '4px 8px',
-                                    borderRadius: '8px',
-                                    pointerEvents: 'none',
-                                    border: 'none',
-                                    color: '#fff',
-                                    zIndex: 1000
-                                }}
-                            >
-                                <p style={{ margin: 0, fontWeight: 'bold' }}>{selectedData.label}</p>
-                                <p style={{ margin: 0 }}>{formatPrice(selectedData.value)} 원</p>
-                            </div>
-                            
-                        )}
-                        <div className='bar-chart-container'>
-                            <Chart
-                                options={barData.options}
-                                series={barData.series}
-                                type="bar"
-                                height={360} // 차트의 총 높이 조정
-                            />
-                        </div>
-                    </div>
-                );
             default:
-                return null;
+                return (
+                    <div className='chart-container'>
+                        <div className='circle-chart-container'>
+                            <Chart
+                                options={donutData.options}
+                                series={donutData.series}
+                                type="donut"
+                            />
+                        </div>
+                        {selectedData && (
+                            <div
+                                className='tooltip'
+                                style={{
+                                    position: 'absolute',
+                                    top: `${tooltipPosition.y}px`,
+                                    left: `${tooltipPosition.x}px`,
+                                    backgroundColor: selectedData.color, // 항목 색상으로 배경색 설정
+                                    padding: '4px 8px',
+                                    borderRadius: '8px',
+                                    pointerEvents: 'none',
+                                    border: 'none',
+                                    color: '#fff',
+                                    zIndex: 1000
+                                }}
+                            >
+                                <p style={{ margin: 0, fontWeight: 'bold' }}>{selectedData.label}</p>
+                                <p style={{ margin: 0 }}>{formatPrice(selectedData.value)} 원</p>
+                            </div>
+                        )}
+                        <div className='bar-chart-container'>
+                            <Chart
+                                options={barData.options}
+                                series={barData.series}
+                                type="bar"
+                                height={360} // 차트의 총 높이 조정
+                            />
+                        </div>
+                    </div>
+                );
         }
-    };
-
-    const handleClick = (id) => {
-        setSelectedFilter(id);
     };
 
     return (
@@ -317,14 +287,6 @@ function ConsumeReportInfo() {
             <ConsumeReportDate onDateChange={handleDateChange} />
             <div className='consume-report-price-section'>
                 <span className='total-price'>총 <span className='go-mainred'>{formatPrice(totalPrice)}</span> 원</span>
-                <div className='report-search-filter'>
-                    <span
-                        style={{ fontWeight: selectedFilter === 'personal' ? 'bold' : 'normal' }}
-                        onClick={() => handleClick('personal')}>개인</span>
-                    <span
-                        style={{ fontWeight: selectedFilter === 'family' ? 'bold' : 'normal' }}
-                        onClick={() => handleClick('family')}>가족</span>
-                </div>
             </div>
             {renderChart()}
         </div>

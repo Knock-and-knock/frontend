@@ -27,11 +27,21 @@ input::placeholder {
     border-bottom: 2px solid #FF5959;
 }
 
+.pw-check-error-message {
+    margin: 0 auto;
+    width: 325px;
+    margin-top: -35px;
+    display: none;
+    color: #FF5959;
+}
+
   /* button */
 .signUpBtn{
     width: 100%;
     margin: 0 auto;
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     position: absolute;
     bottom: 30px;
 } 
@@ -40,12 +50,15 @@ input::placeholder {
     color:#686868;
     border: none;
     width: 120px;
+    height: 57px;
     padding: 15px;
     border-radius: 10px;
     font-size: 18px;
     font-weight: bold;
-    display: inline-block;
     box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   
 }
 .signup-nextBtn{
@@ -54,12 +67,14 @@ input::placeholder {
     margin-left: 10px;
     border: none;
     width: 220px;
+    height: 57px;
     padding: 15px;
     border-radius: 10px;
     font-size: 18px;
     font-weight: bold;
     display: inline-block;
     box-sizing: border-box;
+    
 } 
 
 .signup-nextBtn.disabled {
