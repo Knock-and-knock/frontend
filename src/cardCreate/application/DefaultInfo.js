@@ -1,15 +1,29 @@
 import "cardCreate/application/CardApplication.css";
 import Header from "header/Header";
+import { call } from "login/service/ApiService";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function DefaultInfo(props) {
+  
+  const [userName, setUserName] = useState("");
+  const [userPhone, setUserPhone] = useState("");
 
   const navigate = useNavigate();
 
-  const handlePaging=()=>{
+  const handlePaging = () => {
     navigate("/cardapp/extrainfo");
-  }
-  
+  };
+  useEffect(() => {
+    call("/api/v1/card/myInfo", "GET")
+      .then((response) => {
+        setUserName(response.userName);
+        setUserPhone(response.userPhone);
+      })
+      .catch((error) => {
+      });
+  });
+
   return (
     <div className="card-app-container">
       <Header />
@@ -24,14 +38,16 @@ function DefaultInfo(props) {
       <div className="app-input-container">
         <div className="app-input">
           <span>이름</span>
-          <input placeholder="손동희" name="name" readOnly/>
+          <input name="name" value={userName} readOnly />
         </div>
         <div className="app-input">
           <span>연락처</span>
-          <input placeholder="010-2235-0970" name="phoneNum"readOnly/>
+          <input name="phoneNum" value={userPhone} readOnly />
         </div>
       </div>
-      <button className="appBtn" onClick={handlePaging}>다음</button>
+      <button className="appBtn" onClick={handlePaging}>
+        다음
+      </button>
     </div>
   );
 }
