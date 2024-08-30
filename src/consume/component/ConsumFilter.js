@@ -1,7 +1,7 @@
 import "consume/component/ConsumFilter.css";
 import { useEffect, useState } from "react";
 
-function ConsumFilter({consumList}) {
+function ConsumFilter({startDate,endDate,handleOpenModal}) {
     // const [isOpen, setIsOpen] = useState(false);
     // const handleOpenModal = () => {
     //     setIsOpen(true);
@@ -16,15 +16,13 @@ function ConsumFilter({consumList}) {
     return (
         <div className='filter-content'>
             <div className="filter-date">
-                <p>2024.08.01 ~ 2024.08.06</p>
-                <button className="filterBtn">기간설정</button>
+                <p>{startDate && endDate ? `${startDate} ~ ${endDate}` : '날짜 선택'}</p>
+                <button onClick={handleOpenModal} className="filterBtn">기간설정</button>
             </div>
             <div className="filter-totalPrice">
                 <p className='filter-price'>총 이용금액</p>
                 <p className='filter-num'>231,500 원</p>
             </div>
-            {/* <ConsumFilter isOpen={isOpen} closeModal={closeModal}/> */}
-
         </div>
     );
 }

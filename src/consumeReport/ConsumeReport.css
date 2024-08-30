@@ -33,21 +33,6 @@
   font-size: 18px;
 }
 
-.report-search-filter {
-  width: 80px;
-  display: flex;
-  justify-content: space-between;
-  color: #686868;
-}
-
-.report-search-filter-selected {
-  width: 120px;
-  display: flex;
-  justify-content: space-between;
-  color: #686868;
-  font-weight: bold;
-}
-
 .total-price {
   font-weight: bold;
 }

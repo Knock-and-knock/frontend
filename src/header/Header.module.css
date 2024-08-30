@@ -4,6 +4,7 @@
   height: 25px;
   margin: 0 auto;
   padding-top: 70px;
+  z-index: 1;
 }
 
 .blue-header-container {
@@ -13,6 +14,7 @@
   margin: 0 auto;
   padding-top: 70px;
   height: 20px;
+  z-index: 1;
 }
 
 .header-info {
@@ -24,6 +26,7 @@
   position: fixed;
   top: 0;
   left: 0;
+  z-index: 1;
 }
 
 .blue-header-info {
@@ -35,6 +38,7 @@
   position: fixed;
   top: 0;
   left: 0;
+  z-index: 1;
 }
 
 .back-icon {
