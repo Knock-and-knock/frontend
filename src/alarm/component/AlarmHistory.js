@@ -24,7 +24,7 @@ function AlarmHistory({handleOpenModal}) {
                 previousDate = currentDate; // 현재 날짜를 이전 날짜로 업데이트
 
                 return (
-                    <div key={index} className='alarmHistory'>
+                    <div key={index} className='alarmHistory' onClick={handleOpenModal}>
                         {showDate && <p className='alarm-date'>{currentDate}</p>}
                         <div className='alarmHistory-content'>
                             <p className='alarm-text'>{alarmlist.notificationTitle}</p>

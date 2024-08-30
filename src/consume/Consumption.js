@@ -1,17 +1,20 @@
-import React, { useEffect, useState } from 'react';
 import Header from 'header/Header';
+import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import ConsumCard from "./component/ConsumCard";
-import ConsumDetailModal from './component/ConsumDetailModal';
 import ConsumDateModal from './component/ConsumDateModal';
+import ConsumDetailModal from './component/ConsumDetailModal';
 import ConsumFilter from './component/ConsumFilter';
 import ConsumList from './component/ConsumList';
-import { call } from "login/service/ApiService";
 
-function Consumption({ cardId }) {
+function Consumption() {
     const [isOpenDetail, setIsOpenDetail] = useState(false);
     const [isOpenDate, setIsOpenDate] = useState(false);
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
+
+    const location = useLocation();
+    const cardId = location.state.value;
 
     const updateDates = (start, end) => {
         setStartDate(start);
@@ -40,13 +43,6 @@ function Consumption({ cardId }) {
 
     const [consumList, setConsumList] = useState([]);
 
-    useEffect(() => {
-        call('/api/v1/card-history', "GET", { cardId }).then((response) => {
-            setConsumList(response);
-        }).catch((error) => {
-            console.log(error);
-        });
-    }, [cardId]);
 
     return (
         <div>
@@ -56,7 +52,7 @@ function Consumption({ cardId }) {
                 <ConsumFilter handleOpenModal={handleOpenDateModal} startDate={startDate} endDate={endDate} />
                 <ConsumList handleOpenModal={handleOpenDetailModal} consumList={consumList} />
                 <ConsumDetailModal isOpen={isOpenDetail} closeModal={closeDetailModal} />
-                <ConsumDateModal isOpen={isOpenDate} closeModal={closeDateModal} updateDates={updateDates} />
+                <ConsumDateModal setConsumList={setConsumList} isOpen={isOpenDate} closeModal={closeDateModal} updateDates={updateDates} cardId={cardId} />
             </div>
         </div>
     );

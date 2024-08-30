@@ -3,21 +3,31 @@ export function call(api, method, request) {
   let headers = new Headers({
     "Content-Type": "application/json",
   });
+
   // 로컬 스토리지에서 ACCESS TOKEN 가져오기
   const accessToken = localStorage.getItem("ACCESS_TOKEN");
   if (accessToken && accessToken !== null) {
     headers.append("Authorization", "Bearer " + accessToken);
   }
+
+  // 쿼리 문자열을 생성하는 함수
+  const buildQueryString = (params) => {
+    return Object.keys(params)
+      .map(key => encodeURIComponent(key) + '=' + encodeURIComponent(params[key]))
+      .join('&');
+  };
+
   let options = {
     headers: headers,
-    url: "https://ds-knock-knock.duckdns.org"+api,
+    url: process.env.REACT_APP_URL+api,
     method: method,
     // credentials: 'include',
+    body: method !== 'GET' ? JSON.stringify(request) : null,
   };
-  //조회는 요청 data가 없음, 입력과 수정시에는 보내는 data있음
-  if (request) {
-    // GET method
-    options.body = JSON.stringify(request);
+
+  // GET 요청인 경우 쿼리 문자열을 URL에 추가
+  if (method === 'GET' && request) {
+    options.url += '?' + buildQueryString(request);
   }
 
   //비동기통신: axios, ajax, fetch, promise...
