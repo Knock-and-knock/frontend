@@ -1,18 +1,7 @@
 import "consume/component/ConsumFilter.css";
-import { useEffect, useState } from "react";
 
 function ConsumFilter({startDate,endDate,handleOpenModal}) {
-    // const [isOpen, setIsOpen] = useState(false);
-    // const handleOpenModal = () => {
-    //     setIsOpen(true);
-    // };
-    
-    // const closeModal = () => {
-    //     setIsOpen(false);
-    // }
-    // useEffect(()=>{
-    //     document.body.classList.toggle("unscrollable",isOpen)
-    // },[isOpen]);
+
     return (
         <div className='filter-content'>
             <div className="filter-date">

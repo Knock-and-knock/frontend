@@ -1,3 +1,4 @@
+import "consume/Consumption.css";
 import Header from 'header/Header';
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
@@ -49,7 +50,7 @@ function Consumption() {
             <Header />
             <div className="consumption-container">
                 <ConsumCard />
-                <ConsumFilter handleOpenModal={handleOpenDateModal} startDate={startDate} endDate={endDate} />
+                <ConsumFilter handleOpenModal={handleOpenDateModal} startDate={startDate} endDate={endDate} cardId={cardId}/>
                 <ConsumList handleOpenModal={handleOpenDetailModal} consumList={consumList} />
                 <ConsumDetailModal isOpen={isOpenDetail} closeModal={closeDetailModal} />
                 <ConsumDateModal setConsumList={setConsumList} isOpen={isOpenDate} closeModal={closeDateModal} updateDates={updateDates} cardId={cardId} />
