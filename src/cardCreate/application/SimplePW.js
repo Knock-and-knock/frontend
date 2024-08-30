@@ -1,6 +1,6 @@
 import "cardCreate/application/CardApplication.css";
 import Header from "header/Header";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCardCreate } from "./CardApp";
 
@@ -8,6 +8,10 @@ function SimplePW(props) {
   const { userInfo, setUserInfo, handleSendInfo } = useCardCreate();
   const [simplePw, setSimplePw] = useState(["", "", "", ""]);
   const [isButtonEnabled, setIsButtonEnabled] = useState(false);
+  
+  useEffect(() => {
+    inputRefs[0].current.focus();
+  }, []);
 
   // 입력 필드 참조
   const inputRefs = [
