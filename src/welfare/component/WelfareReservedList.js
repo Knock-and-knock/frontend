@@ -82,9 +82,9 @@ function WelfareReservedList() {
           <WelfareReservedItem
             key={index}
             title={item.welfareName}
-            paymentDate={item.paymentDate}
-            reserveDate={item.reserveDate}
-            reserveTime={item.reserveTime}
+            paymentDate={item.welfarebookReservationdate}
+            reserveDate={item.welfarebookStartdate}
+            reserveTime={item.welfarebookUsetime}
             price={item.welfarePirce}
             onCancel={() => openModal(item.id)}
           />
