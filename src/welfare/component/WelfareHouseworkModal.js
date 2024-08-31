@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styles from 'welfare/css/WelfareReserveModal.module.css';
 import { useNavigate } from 'react-router-dom';
 import { useSpecHook } from 'welfare/component/WelfareInputTotal';
+import { call } from 'login/service/ApiService';
 
 function WelfareHouseworkModal({ closeModal }) { 
   const [today, setToday] = useState('');
@@ -17,6 +18,23 @@ function WelfareHouseworkModal({ closeModal }) {
   const goInputBirth = () => {
       navigate('/welfare-input/birth');
   }
+
+  useEffect(() => {
+    if (localStorage.getItem("loginUser") === "PROTECTOR") {
+      call("/api/v1/match", "GET", null)
+        .then((response) => {
+  
+          // userSpec에 protegeUserName 추가
+          setUserSpec({
+            ...userSpec,
+            protegeUserName: response.protegeUserName
+          });
+        })
+        .catch((error) => {
+          console.log(error.message);
+        });
+    }
+  }, []);
 
   useEffect(() => {
     const currentDate = new Date();
@@ -55,16 +73,17 @@ function WelfareHouseworkModal({ closeModal }) {
     setWelfarebookUsetime(newDuration);
 
     const newPrice = 75000 * newDuration;
-    setCalculatedPrice(newPrice); // 가격을 다시 계산하여 상태에 저장
+    setCalculatedPrice(newPrice); // Update calculated price
 
     const updatedSpec = { 
       ...userSpec, 
       welfarebookUsetime: newDuration,
-      welfarebookTotalprice: newPrice // 계산된 가격을 userSpec에 추가
+      welfarebookTotalprice: newPrice, 
+      welfarebookDurationText: `${newDuration * 3}시간 (${9 + (newDuration - 1) * 3}:00 ~ ${12 + (newDuration - 1) * 3}:00)`
     };
     setUserSpec(updatedSpec);
     console.log("Updated userSpec:", updatedSpec);
-  };
+};
 
   const formatPrice = (price) => {
     return new Intl.NumberFormat('ko-KR').format(price);
