@@ -8,15 +8,19 @@ import { call } from 'login/service/ApiService';
 
 function WelfareReservedList() {
   const [isOpen, setIsOpen] = useState(false);
-  const [reservedItems,setReserveItems] =useState([]);
+  const [reservedItems, setReserveItems] = useState([]);
+  //삭제정보아이템
+  const [selectedItemId, setSelectedItemId] = useState(null);
 
-  useEffect(()=>{
-    call('/api/v1/welfare-book',"GET",null).then((response)=>{
-      setReserveItems(response);
-    }).catch((error)=>{
-      alert("복지목록 조회 실패");
-    });
-  },[]);
+  useEffect(() => {
+    call('/api/v1/welfare-book', "GET", null)
+      .then((response) => {
+        setReserveItems(response);
+      })
+      .catch((error) => {
+        alert("복지목록 조회 실패");
+      });
+  }, []);
 
   useEffect(() => {
     if (isOpen) {
@@ -33,17 +37,33 @@ function WelfareReservedList() {
     };
   }, [isOpen]);
 
-  const openModal = () => {
+  const openModal = (itemId) => {
+    setSelectedItemId(itemId); // 삭제항목선택
     setIsOpen(true);
   };
 
   const closeModal = () => {
     setIsOpen(false);
+    setSelectedItemId(null); // 삭제항목초기화
+  };
+
+  const handleDelete = () => {
+    if (selectedItemId) {
+      call(`/api/v1/welfare-book/${selectedItemId}`, "DELETE", null)
+        .then(() => {
+          setReserveItems(reservedItems.filter(item => item.id !== selectedItemId));
+          closeModal();
+        })
+        .catch((error) => {
+          alert("실패");
+        });
+    }
   };
 
   const CancelStyles = {
     overlay: {
-      backgroundColor: "rgba(0, 0, 0, 0.5)"
+      backgroundColor: "rgba(0, 0, 0, 0.5)",
+      zIndex: 100
     },
     content: {
       height: "250px",
@@ -66,13 +86,13 @@ function WelfareReservedList() {
             reserveDate={item.reserveDate}
             reserveTime={item.reserveTime}
             price={item.welfarePirce}
-            onCancel={openModal}
+            onCancel={() => openModal(item.id)}
           />
         ))}
       </div>
 
       <Modal isOpen={isOpen} onRequestClose={closeModal} style={CancelStyles}>
-        <WelfareReserveCancelModal closeModal={closeModal} />
+        <WelfareReserveCancelModal closeModal={closeModal} handleDelete={handleDelete} />
       </Modal>
     </div>
   );

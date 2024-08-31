@@ -22,6 +22,9 @@ function VoiceChat(props) {
   const [chatResponse, setChatResponse] = useState("");
   const [visible, setVisible] = useState(false);
   const [isStart, setIsStart] = useState(false);
+  //예약확인 모달
+  // const [isProtege, setIsProtege] = useState(true);
+  // const [isOpen, setIsOpen] = useState(false);
 
   const handleInputChange = (e) => {
     setUserInfo(e.target.value);
@@ -51,17 +54,18 @@ function VoiceChat(props) {
   }
 
   const handleStartChat = async () => {
-    if (!isStart) {
-      await handleChatRoom(userInfo);
-      availabilityFunc(sendMessage);
-      startAutoRecord();
-      setIsStart(true);
-    } else {
-      endRecord(); //너 왜안되니...
-      setIsStart(false);
-    }
-  };
-
+  if (!isStart) {
+    // 챗봇 시작
+    await handleChatRoom(userInfo); // 필요 시 이 라인을 유지하거나 제거하세요
+    availabilityFunc(sendMessage);  // 필요 시 이 라인을 유지하거나 제거하세요
+    startAutoRecord();  // 자동 녹음 시작
+    setIsStart(true);   // 상태를 '시작됨'으로 변경
+  } else {
+    // 챗봇 중지
+    endRecord();        // 자동 녹음 중지
+    setIsStart(false);  // 상태를 '중지됨'으로 변경
+  }
+};
   const customStyles = {
     overlay: {
       backgroundColor: "rgba(0, 0, 0, 0.5)",
@@ -94,6 +98,13 @@ function VoiceChat(props) {
       <Modal isOpen={visible} onRequestClose={toggleModal} style={customStyles}>
         <textarea className="textbox" value={chatResponse} readOnly />
       </Modal>
+      {/* {isOpen && (
+        <MatchingModal
+          isOpen={isOpen}
+          closeModal={closeModal}
+          handleSubmit={handleSubmit}
+        />
+      )} */}
     </div>
   );
 }

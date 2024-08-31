@@ -86,9 +86,13 @@ export function startAutoRecord() {
 }
 
 // 음성 인식을 중단하는 함수
-export function endRecord(recognition) {
-  recognition.stop();
-  console.log("음성 인식 중단");
+export function endRecord() {
+  if (recognition && recognition.stop) { 
+    recognition.stop();
+    console.log("음성 인식 중단");
+  } else {
+    console.error("Recognition없음");
+  }
 }
 
 // 채팅 방을 설정하는 함수
