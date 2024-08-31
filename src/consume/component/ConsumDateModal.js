@@ -26,24 +26,27 @@ function ConsumDateModal({ isOpen, closeModal, updateDates, setConsumList, cardI
     };
 
     const handleSaveDates = () => {
-        updateDates(localStartDate, localEndDate); // 부모 컴포넌트로 날짜 정보 전달
+        updateDates(localStartDate, localEndDate);
         call('/api/v1/card-history', "GET", { 
-            cardId:20, 
-            startDate:localStartDate,
-            endDate:localEndDate
+            cardId: cardId, 
+            startDate: localStartDate,
+            endDate: localEndDate
         }).then((response) => {
             setConsumList(response);
         }).catch((error) => {
-            console.log(error);
+            console.error("데이터 조회 실패", error);
         });
         closeModal(); // 모달 닫기
     };
 
     return (
-        <div>
-            <Modal isOpen={isOpen} onRequestClose={closeModal} style={{
+        <Modal
+            isOpen={isOpen}
+            onRequestClose={closeModal}
+            style={{
                 overlay: {
-                    backgroundColor: "rgba(0, 0, 0, 0.5)"
+                    backgroundColor: "rgba(0, 0, 0, 0.5)",
+                    zIndex: "2"
                 },
                 content: {
                     top: "50%",
@@ -53,39 +56,41 @@ function ConsumDateModal({ isOpen, closeModal, updateDates, setConsumList, cardI
                     height: "auto",
                     borderRadius: "15px 15px 0px 0px",
                 },
-            }}>
-                <div className="container">
-                    <div className="modal-section modal-container">
-                        <p className="consume-modal-title">기간 설정</p>
-                        <hr />
-                        <div className="reserve-info-container-box">
-                            <div className="consume-info-container1">
-                                <span className="consume-info-text">시작일</span>
-                                <input 
-                                    type="date" 
-                                    className='consume-start-date' 
-                                    value={localStartDate}
-                                    onChange={handleStartDateChange} 
-                                />
-                            </div>
-                            <div className="consume-info-container2">
-                                <span className="consume-info-text">종료일</span>
-                                <input 
-                                    type="date" 
-                                    className='consume-end-date' 
-                                    value={localEndDate}
-                                    min={localStartDate}
-                                    onChange={handleEndDateChange} 
-                                />
-                            </div>
-                            <hr />
+            }}
+        >
+            <div className="container">
+                <div className="modal-section modal-container">
+                    <p className="consume-modal-title">기간 설정</p>
+                    <hr />
+                    <div className="reserve-info-container-box">
+                        <div className="consume-info-container1">
+                            <span className="consume-info-text">시작일</span>
+                            <input 
+                                type="date" 
+                                className='consume-start-date' 
+                                value={localStartDate}
+                                onChange={handleStartDateChange} 
+                            />
                         </div>
+                        <div className="consume-info-container2">
+                            <span className="consume-info-text">종료일</span>
+                            <input 
+                                type="date" 
+                                className='consume-end-date' 
+                                value={localEndDate}
+                                min={localStartDate}
+                                onChange={handleEndDateChange} 
+                            />
+                        </div>
+                        <hr />
+                    </div>
+                    <div className="modal-buttons">
                         <span className="main-text modal-cancel" onClick={closeModal}>닫기</span>
                         <span className="main-text modal-yeah" onClick={handleSaveDates}>다음</span>
                     </div>
                 </div>
-            </Modal>
-        </div>
+            </div>
+        </Modal>
     );
 }
 
