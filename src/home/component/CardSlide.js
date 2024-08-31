@@ -57,7 +57,7 @@ function CardSlide({isProtege}) {
                         
                             <SwiperSlide key={card.cardId}>
                                 <CardSection cardlist={card}/>
-                                <CardBottom isProtege={isProtege} cardlist={card} cardId = {card.cardId}/>
+                                <CardBottom isProtege={isProtege} cardlist={card}/>
     
                             </SwiperSlide>
                             
