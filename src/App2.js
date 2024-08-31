@@ -35,8 +35,11 @@ function App(props) {
       <Route path="/welfare-list" element={<WelfareList />} />
       <Route path="/welfare-main" element={<WelfareMain />} />
       <Route path="/welfare-paycomplete" element={<WelfarePayComplete />} />
-      <Route path="/welfare-reserve-cancelmodal" element={<WelfareReserveCancelModal />} />
-      <Route path="/welfare-reserved-list" element={<WelfareReservedList />} />
+      
+      <Route path="/welfare-reserved-list/*" element={<WelfareReservedList />} >
+        <Route path="welfare-reserve-cancelmodal" element={<WelfareReserveCancelModal />} />
+      </Route>
+      
       <Route path="/welfare-set-pw" element={<WelfareSetPW />} />
       
       <Route path="/welfare-input/*" element={<WelfareInputTotal />}>

@@ -11,17 +11,17 @@ function WelfareInputHeight() {
 
     const {userSpec, setUserSpec} = useSpecHook();
 
-    useEffect(()=> {
-        const newUserSpec = {...userSpec, userHeight, userWeight};
+    useEffect(() => {
+        const newUserSpec = { ...userSpec, userHeight, userWeight };
         setUserSpec(newUserSpec);
         console.log("Updated userSpec:", newUserSpec); // 최신 상태의 userSpec 로그 출력
-    },[userHeight, userWeight]);
+    }, [userHeight, userWeight]);
 
     const goInputGender = () => {
         if (userHeight && userWeight) {
             navigate('/welfare-input/gender');
         }
-    }
+    };
 
     // userHeight와 userWeight의 상태를 업데이트하고 3자리로 제한하는 함수
     const handleHeightChange = (e) => {
@@ -36,6 +36,14 @@ function WelfareInputHeight() {
         if (value.length <= 3) {
             setWeight(value);
         }
+    };
+
+    const handleFocus = (e) => {
+        e.target.placeholder = '';
+    };
+
+    const handleBlur = (e, originalPlaceholder) => {
+        e.target.placeholder = originalPlaceholder;
     };
 
     return (
@@ -55,6 +63,8 @@ function WelfareInputHeight() {
                         placeholder="키"
                         value={userHeight}
                         onChange={handleHeightChange}
+                        onFocus={handleFocus}
+                        onBlur={(e) => handleBlur(e, '키')}
                     />
                     <span className={styles.cm}>cm</span>
                     <input
@@ -63,6 +73,8 @@ function WelfareInputHeight() {
                         placeholder="몸무게"
                         value={userWeight}
                         onChange={handleWeightChange}
+                        onFocus={handleFocus}
+                        onBlur={(e) => handleBlur(e, '몸무게')}
                     />
                     <span className={styles.kg}>kg</span>
                 </div>

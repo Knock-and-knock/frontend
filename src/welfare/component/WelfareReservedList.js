@@ -24,39 +24,40 @@ function WelfareReservedList() {
 
   useEffect(() => {
     if (isOpen) {
-      // 모달이 열렸을 때 body의 스크롤을 막음
       document.body.style.overflow = 'hidden';
     } else {
-      // 모달이 닫혔을 때 body의 스크롤을 허용
       document.body.style.overflow = 'auto';
     }
-
-    // 컴포넌트가 언마운트 될 때 스크롤을 다시 허용
     return () => {
       document.body.style.overflow = 'auto';
     };
   }, [isOpen]);
 
   const openModal = (itemId) => {
-    setSelectedItemId(itemId); // 삭제항목선택
+    console.log("Opening modal for item ID:", itemId);
+    setSelectedItemId(itemId);
     setIsOpen(true);
   };
 
   const closeModal = () => {
     setIsOpen(false);
-    setSelectedItemId(null); // 삭제항목초기화
+    setSelectedItemId(null);
   };
 
   const handleDelete = () => {
     if (selectedItemId) {
       call(`/api/v1/welfare-book/${selectedItemId}`, "DELETE", null)
         .then(() => {
-          setReserveItems(reservedItems.filter(item => item.id !== selectedItemId));
+          const updatedItems = reservedItems.filter(item => item.id !== selectedItemId);
+          setReserveItems(updatedItems);
           closeModal();
         })
         .catch((error) => {
-          alert("실패");
+          console.error("삭제 실패:", error);
+          alert("삭제 처리 중 오류가 발생했습니다.");
         });
+    } else {
+      alert("삭제할 항목이 선택되지 않았습니다.");
     }
   };
 
@@ -78,17 +79,21 @@ function WelfareReservedList() {
       <Header />
 
       <div className={styles["main-container"]}>
-        {reservedItems.map((item, index) => (
-          <WelfareReservedItem
-            key={index}
-            title={item.welfareName}
-            paymentDate={item.welfarebookReservationdate}
-            reserveDate={item.welfarebookStartdate}
-            reserveTime={item.welfarebookUsetime}
-            price={item.welfarePirce}
-            onCancel={() => openModal(item.id)}
-          />
-        ))}
+        {reservedItems.length > 0 ? (
+          reservedItems.map((item, index) => (
+            <WelfareReservedItem
+              key={index}
+              title={item.welfareName}
+              welfareBookReservationDate={item.welfareBookReservationDate}
+              welfareBookStartDate={item.welfareBookStartDate}
+              welfareBookUsetime={item.welfareBookUsetime}
+              welfareTotalPrice={item.welfareTotalPrice}
+              onCancel={() => openModal(item.welfareBookNo)}
+            />
+          ))
+        ) : (
+          <p className={styles.noItems}>예약된 서비스가 없습니다.</p>
+        )}
       </div>
 
       <Modal isOpen={isOpen} onRequestClose={closeModal} style={CancelStyles}>

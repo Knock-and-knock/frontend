@@ -44,6 +44,16 @@ hr {
   color: #2c2c2c;
 }
 
+.noItems {
+  margin: 0 auto;
+  font-weight: bold;
+  font-size: 20px;
+  color: #FF5959;
+  position: absolute;
+  top: 50%;
+  bottom: 0%;
+}
+
 .main-container {
   flex: 1;
   width: 100%;

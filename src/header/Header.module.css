@@ -1,3 +1,11 @@
+.white-header {
+  background-color: white;
+}
+
+.blue-header {
+  background-color: #f8fbff;
+}
+
 .header-container {
   background-color: white;
   width: 360px;
