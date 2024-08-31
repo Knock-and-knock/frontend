@@ -34,10 +34,11 @@ function ConsumList({ handleOpenModal, consumList }) {
                         <p className='consumList-time'>21:00 <span>{consum.cardFamily ? "가족" : "개인"}</span></p>
                         <div className='consumList-content'>
                             <p>{consum.cardHistoryShopname}{consum.cardHistoryIsCansle ? <span className='payment-cancel'>거래취소</span> : ""}</p>
-                            <p>{consum.cardHistoryAmount}</p>
+                            <p>{consum.cardHistoryAmount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</p>
                         </div>
                     </div>
                 </div>
+                
             ))}
         </div>
     );

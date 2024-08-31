@@ -6,15 +6,29 @@ import ConsumCard from "./component/ConsumCard";
 import ConsumDateModal from './component/ConsumDateModal';
 import ConsumDetailModal from './component/ConsumDetailModal';
 import ConsumList from './component/ConsumList';
+import { useLocation } from "react-router-dom";
 
 function Consumption() {
+    const location = useLocation();
+    const cardList = location.state.value;
+;
     const [isOpenDetail, setIsOpenDetail] = useState(false);
     const [isOpenDate, setIsOpenDate] = useState(false);
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
-    const [cardlist, setCardList] = useState([]);
     const [consumList, setConsumList] = useState([]);
     const [selectedCardId, setSelectedCardId] = useState(null);
+
+    const getStartOfMonth = () => {
+        const today = new Date();
+        const firstDayOfNextMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+        return firstDayOfNextMonth.toISOString().split('T')[0];
+    };
+
+    const getEndOfMonth = () => {
+        const today = new Date();
+        return today.toISOString().split('T')[0];
+    };
 
     const updateDates = (start, end) => {
         setStartDate(start);
@@ -34,28 +48,44 @@ function Consumption() {
     }, [isOpenDetail, isOpenDate]);
 
     useEffect(() => {
-        call('/api/v1/card', "GET", null)
-            .then((response) => setCardList(response))
-            .catch(() => alert("카드 조회 실패"));
-    }, []);
+        const start = getStartOfMonth();
+        const end = getEndOfMonth();
+        setStartDate(start);
+        setEndDate(end);
 
+        call('/api/v1/card-history', "GET", {
+            cardId: cardList.cardId, 
+            startDate: start, 
+            endDate: end
+        })
+        .then((response) => setConsumList(response))
+        .catch(() => alert("내역 조회 실패"));
+
+    }, [cardList.cardId]);
+
+    // 총 이용금액 계산
+    const calculateTotalAmount = () => {
+        return consumList.reduce((total, item) => total + item.cardHistoryAmount, 0);
+    };
     return (
         <div>
             <Header />
             <div className="consumption-container">
                 <ConsumCard 
-                    cardlist={cardlist}
+                    cardlist={cardList}
                     handleOpenModal={handleOpenDateModal}
                     startDate={startDate}
                     endDate={endDate}
+                    totalAmount={calculateTotalAmount()}
                 />
                 <ConsumList 
                     handleOpenModal={handleOpenDetailModal}
                     consumList={consumList} 
-                />
+                /> 
                 <ConsumDetailModal 
                     isOpen={isOpenDetail} 
                     closeModal={closeDetailModal} 
+                    consumList={consumList} 
                 />
                 <ConsumDateModal 
                     setConsumList={setConsumList} 
