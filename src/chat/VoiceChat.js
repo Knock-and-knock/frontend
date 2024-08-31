@@ -8,15 +8,13 @@ import {
 import "chat/VoiceChat.css";
 import VoiceHeader from "chat/VoiceHeader";
 import chatbot from "image/chat-char.png";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Modal from "react-modal";
 import Loading from "./Loading";
 import SpeakLoading from "./SpeakLoading";
 import VoiceChatMovePageModal from "./VoiceChatMovePageModal";
-import { useNavigate } from "react-router-dom";
 
 function VoiceChat(props) {
-  const navigate = useNavigate();
   const [userInfo, setUserInfo] = useState("");
   // const [recognition, setRecognition] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -28,6 +26,15 @@ function VoiceChat(props) {
   //예약확인 모달
   const [isOpen, setIsOpen] = useState(false);
   const [serviceUrl, setServiceUrl] = useState("");
+
+  useEffect(() => {
+    async function initializeChat() {
+      await handleChatRoom(userInfo);
+      availabilityFunc(sendMessage);
+    }
+
+    initializeChat();
+  }, [userInfo]);
 
 
   function sendMessage(recognizedText) {
@@ -42,20 +49,18 @@ function VoiceChat(props) {
       setServiceUrl 
     );
   }
+  
 
-  const handleStartChat = async () => {
-  if (!isStart) {
-    //시작
-    await handleChatRoom(userInfo);
-    availabilityFunc(sendMessage);
-    startAutoRecord();
-    setIsStart(true);
-  } else {
-    //중지
-    endRecord();
-    setIsStart(false); 
-  }
-};
+  const handleStartChat = () => {
+    if (!isStart) {
+      startAutoRecord();
+      setIsStart(true);
+    } else {
+      endRecord();
+      setIsStart(false);
+    }
+  };
+  
   const customStyles = {
     overlay: {
       backgroundColor: "rgba(0, 0, 0, 0.5)",
