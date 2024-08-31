@@ -65,7 +65,6 @@ function MainPage() {
       closeModal();
     } catch (error) {
       console.log(error.message);
-      alert("매칭 수락 실패");
     }
   };
 

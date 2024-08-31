@@ -5,7 +5,7 @@ function VoiceChatMovePageModal({ isOpen, closeModal,handleSubmit}) {
   const customStyles = {
     overlay: {
       backgroundColor: "rgba(0, 0, 0, 0.5)",
-      zIndex: 1,
+      zIndex: 999,
     },
     content: {
       height: "200px",
@@ -27,7 +27,7 @@ function VoiceChatMovePageModal({ isOpen, closeModal,handleSubmit}) {
           </p>
         </div>
         <div className="modalContainer">
-          <button className="matchModalBtn" onClick={closeModal}>
+          <button className="matchModalAgreeBtn" onClick={closeModal}>
             닫기
           </button>
           <button className="matchModalBtn" onClick={handleSubmit}>

@@ -7,8 +7,17 @@ import { useCardCreate } from "./CardApp";
 function FamilyExtraInfo(props) {
 
   const { userInfo, setUserInfo } = useCardCreate();
+
   const handlechange = (e) => {
-    setUserInfo({ ...userInfo, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+
+    if (name === "cardIssueFirstEname" || name === "cardIssueLastEname") {
+      const upperCaseValue = value.toUpperCase();
+      const englishOnlyValue = upperCaseValue.replace(/[^A-Z]/g, ""); // 영어만
+      setUserInfo({ ...userInfo, [name]: englishOnlyValue });
+    } else {
+      setUserInfo({ ...userInfo, [name]: value });
+    }
   };
   const navigate = useNavigate();
   const handlePaging = () => {

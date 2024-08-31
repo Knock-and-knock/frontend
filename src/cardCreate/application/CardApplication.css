@@ -93,6 +93,7 @@
   }
   .top-accordion {
     border-radius: 10px 10px 0 0;
+    border-bottom: none;
   }
   .bottom-accordion {
     border-radius: 0 0 10px 10px;

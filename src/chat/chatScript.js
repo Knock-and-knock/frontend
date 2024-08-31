@@ -8,7 +8,9 @@ export function handleAutoSub(
   message,
   setChatResponse,
   setIsLoading,
-  setIsSpeaking
+  setIsSpeaking,
+  setIsOpen,
+  setServiceUrl
 ) {
   setIsLoading(false);
   setIsSpeaking(true);
@@ -20,8 +22,13 @@ export function handleAutoSub(
     .then((response) => {
       const audioData = response.audioData;
       const content = response.content;
+      const actionRequired = response.actionRequired;
+      const redirectionResult = response.redirectionResult;
+      const reservationResult = response.reservationResult;
       console.log(content);
       setChatResponse(content);
+      
+      
 
       const byteCharacters = atob(audioData);
       const byteNumbers = new Array(byteCharacters.length);
@@ -39,12 +46,22 @@ export function handleAutoSub(
       audio.onended = () => {
         setIsLoading(false); // 음성 출력이 끝나면 로딩 상태 해제
         startAutoRecord();
+
+        if(actionRequired === true && redirectionResult){
+          setServiceUrl(redirectionResult.serviceUrl);
+          setIsOpen(true);
+        }else if(actionRequired === true && reservationResult){
+          setServiceUrl("/welfare-input/check-spec");
+          setIsOpen(true);
+        }else{
+          setIsOpen(false);
+        }
       };
     })
     .catch((error) => {
       alert("실패");
       console.error(error);
-      setIsSpeaking(false); // 오류 발생 시 로딩 상태 해제
+      setIsSpeaking(false);
     });
 }
 
@@ -76,7 +93,6 @@ export function availabilityFunc(sendMessage) {
     recognition = newRecognition;
     return newRecognition;
   }
-  // setRecognitionCallback(newRecognition);
 }
 
 // 음성 인식을 자동으로 시작하는 함수

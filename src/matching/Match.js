@@ -48,7 +48,6 @@ function Match(props) {
       navigate("/matching", { state: { matchStatus: response.matchStatus } });
     }
     ).catch((error)=>{
-      alert("매칭요청 실패");
       console.log(error.message)
     });
   };

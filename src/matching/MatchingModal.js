@@ -27,7 +27,7 @@ function MatchingModal({ isOpen, closeModal,handleSubmit}) {
           </p>
         </div>
         <div className="modalContainer">
-          <button className="matchModalBtn" onClick={handleSubmit}>
+          <button className="matchModalAgreeBtn" onClick={handleSubmit}>
             수락
           </button>
           <button className="matchModalBtn" onClick={closeModal}>
