@@ -63,7 +63,7 @@ function Button({isProtege}) {
       call('/api/v1/match',"GET",null).then((response)=>{
         setProteName(response.protegeUserName);
       }).catch((error)=>{
-        alert("매칭 정보 조회 실패");
+        console.log(error);
       });
     });
 

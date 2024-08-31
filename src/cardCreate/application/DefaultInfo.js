@@ -11,6 +11,15 @@ function DefaultInfo(props) {
 
   const navigate = useNavigate();
 
+  function formatPhoneNumber(phoneNumber) {
+    if (phoneNumber.length === 11) {
+      return phoneNumber.replace(/(\d{3})(\d{4})(\d{4})/, "$1-$2-$3");
+    } else if (phoneNumber.length === 10) {
+      return phoneNumber.replace(/(\d{3})(\d{3})(\d{4})/, "$1-$2-$3");
+    }
+    return phoneNumber; // 예상하지 못한 포맷이라면 원래 값을 반환
+  }
+
   const handlePaging = () => {
     navigate("/cardapp/extrainfo");
   };
@@ -18,7 +27,7 @@ function DefaultInfo(props) {
     call("/api/v1/card/myInfo", "GET")
       .then((response) => {
         setUserName(response.userName);
-        setUserPhone(response.userPhone);
+        setUserPhone(formatPhoneNumber(response.userPhone));
       })
       .catch((error) => {
       });

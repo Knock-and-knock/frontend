@@ -27,7 +27,7 @@ function VoiceChatMovePageModal({ isOpen, closeModal,handleSubmit}) {
           </p>
         </div>
         <div className="modalContainer">
-          <button className="matchModalBtn" onClick={closeModal}>
+          <button className="matchModalAgreeBtn" onClick={closeModal}>
             닫기
           </button>
           <button className="matchModalBtn" onClick={handleSubmit}>
