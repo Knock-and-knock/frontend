@@ -30,6 +30,14 @@ function VoiceChat(props) {
   useEffect(() => {
     async function initializeChat() {
       await handleChatRoom(userInfo);
+      handleAutoSub(
+        "Greeting",
+        setChatResponse,
+        setIsLoading,
+        setIsSpeaking,
+        setIsOpen,
+        setServiceUrl
+      );
       availabilityFunc(sendMessage);
     }
 
@@ -60,7 +68,7 @@ function VoiceChat(props) {
       setIsStart(false);
     }
   };
-  
+
   const customStyles = {
     overlay: {
       backgroundColor: "rgba(0, 0, 0, 0.5)",
