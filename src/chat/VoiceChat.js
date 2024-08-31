@@ -12,8 +12,11 @@ import { useState } from "react";
 import Modal from "react-modal";
 import Loading from "./Loading";
 import SpeakLoading from "./SpeakLoading";
+import VoiceChatMovePageModal from "./VoiceChatMovePageModal";
+import { useNavigate } from "react-router-dom";
 
 function VoiceChat(props) {
+  const navigate = useNavigate();
   const [userInfo, setUserInfo] = useState("");
   // const [recognition, setRecognition] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -23,23 +26,9 @@ function VoiceChat(props) {
   const [visible, setVisible] = useState(false);
   const [isStart, setIsStart] = useState(false);
   //예약확인 모달
-  // const [isProtege, setIsProtege] = useState(true);
-  // const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const [serviceUrl, setServiceUrl] = useState("");
 
-  const handleInputChange = (e) => {
-    setUserInfo(e.target.value);
-  };
-
-  const handleChat = () => {
-    setIsSpeaking(true);
-    handleAutoSub(
-      userInfo,
-      setChatResponse,
-      setIsLoading,
-      setIsSpeaking,
-      handleChat
-    );
-  };
 
   function sendMessage(recognizedText) {
     setChatResponse("");
@@ -49,21 +38,22 @@ function VoiceChat(props) {
       setChatResponse,
       setIsLoading,
       setIsSpeaking,
-      handleChat
+      setIsOpen,
+      setServiceUrl 
     );
   }
 
   const handleStartChat = async () => {
   if (!isStart) {
-    // 챗봇 시작
-    await handleChatRoom(userInfo); // 필요 시 이 라인을 유지하거나 제거하세요
-    availabilityFunc(sendMessage);  // 필요 시 이 라인을 유지하거나 제거하세요
-    startAutoRecord();  // 자동 녹음 시작
-    setIsStart(true);   // 상태를 '시작됨'으로 변경
+    //시작
+    await handleChatRoom(userInfo);
+    availabilityFunc(sendMessage);
+    startAutoRecord();
+    setIsStart(true);
   } else {
-    // 챗봇 중지
-    endRecord();        // 자동 녹음 중지
-    setIsStart(false);  // 상태를 '중지됨'으로 변경
+    //중지
+    endRecord();
+    setIsStart(false); 
   }
 };
   const customStyles = {
@@ -79,6 +69,19 @@ function VoiceChat(props) {
 
   const toggleModal = () => {
     setVisible(!visible);
+  };
+
+  const closeModal =()=>{
+    setIsOpen(false);
+  }
+
+  const handleSubmit = () => {
+    if (serviceUrl) {
+      window.location.href = serviceUrl;
+    }
+    console.log("이동 처리");
+    closeModal();
+    endRecord();
   };
 
   return (
@@ -98,13 +101,13 @@ function VoiceChat(props) {
       <Modal isOpen={visible} onRequestClose={toggleModal} style={customStyles}>
         <textarea className="textbox" value={chatResponse} readOnly />
       </Modal>
-      {/* {isOpen && (
-        <MatchingModal
+       {isOpen && (
+        <VoiceChatMovePageModal
           isOpen={isOpen}
           closeModal={closeModal}
           handleSubmit={handleSubmit}
         />
-      )} */}
+      )}
     </div>
   );
 }
