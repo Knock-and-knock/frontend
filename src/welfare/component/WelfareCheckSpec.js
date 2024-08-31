@@ -10,6 +10,11 @@ function WelfareCheckSpec() {
 
     const { userSpec } = useSpecHook();
 
+    const formattedReservationInfo = () => {
+        if (!userSpec.welfarebookStartdate || !userSpec.welfarebookDurationText) return '정보 없음';
+        return `${userSpec.welfarebookStartdate} | ${userSpec.welfarebookDurationText}`;
+    };
+
     useEffect(()=> {
         console.log("Updated userSpec:", userSpec); // 최신 상태의 userSpec 로그 출력
     },[]);
@@ -52,7 +57,7 @@ function WelfareCheckSpec() {
 
                 <div className={styles["spec-container"]}>
                     <p className={styles["spec-info"]}>이름</p>
-                    <input className={styles["spec-check"]} type="text" placeholder="이름" value="홍길동" disabled />
+                    <input className={styles["spec-check"]} type="text" placeholder="이름" value={userSpec.protegeUserName || ''} disabled />
 
                     <p className={styles["spec-info"]}>생년월일</p>
                     <input className={styles["spec-check"]} type="Date" placeholder="생년월일" value={formatDate(userSpec.userBirth) || ''} disabled />
@@ -63,8 +68,8 @@ function WelfareCheckSpec() {
                     <p className={styles["spec-info"]}>주소</p>
                     <input className={styles["spec-check"]} type="text" placeholder="주소" value={userSpec.address + " " + userSpec.detailAddress || ''} disabled />
 
-                    <p className={styles["spec-info"]}>연락처</p>
-                    <input className={styles["spec-check"]} type="text" placeholder="연락처" value="010-4519-3851" disabled />
+                    {/* <p className={styles["spec-info"]}>연락처</p>
+                    <input className={styles["spec-check"]} type="text" placeholder="연락처" value="010-4519-3851" disabled /> */}
 
                     <p className={styles["spec-info"]}>신체</p>
                     <input className={styles["spec-check-hw"]} type="number" placeholder="키" value={userSpec.userHeight || ''} disabled />
@@ -74,6 +79,9 @@ function WelfareCheckSpec() {
 
                     <p className={styles["spec-info"]}>질병</p>
                     <input className={`${styles["spec-check"]} ${styles.disease}`} type="text" placeholder="질병" value={userSpec.userDisease || ''} disabled />
+                    
+                    <p className={styles["spec-info"]}>예약 정보</p>
+                    <input className={`${styles["spec-check"]} ${styles.last}`} type="text" placeholder="예약 정보" value={formattedReservationInfo()} disabled />
                 </div>
 
                 <div className={`${styles["main-section"]} ${styles["go-password"]}`} onClick={goSetPW}>

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styles from 'welfare/css/WelfareReserveModal.module.css';
 import { useNavigate } from 'react-router-dom';
 import { useSpecHook } from 'welfare/component/WelfareInputTotal';
+import { call } from 'login/service/ApiService';
 
 function WelfareHanwoolModal({ closeModal }) { 
   const [today, setToday] = useState('');
@@ -17,6 +18,23 @@ function WelfareHanwoolModal({ closeModal }) {
   const goInputBirth = () => {
       navigate('/welfare-input/birth');
   }
+
+  useEffect(() => {
+    if (localStorage.getItem("loginUser") === "PROTECTOR") {
+      call("/api/v1/match", "GET", null)
+        .then((response) => {
+  
+          // userSpec에 protegeUserName 추가
+          setUserSpec({
+            ...userSpec,
+            protegeUserName: response.protegeUserName
+          });
+        })
+        .catch((error) => {
+          console.log(error.message);
+        });
+    }
+  }, []);
 
   useEffect(() => {
     const currentDate = new Date();
@@ -52,16 +70,22 @@ function WelfareHanwoolModal({ closeModal }) {
     const newEndDate = calculateEndDate(welfarebookStartdate, newDuration);
     setWelfarebookEnddate(newEndDate);
 
-    const updatedSpec = { ...userSpec, welfarebookUsetime: newDuration, welfarebookEnddate: newEndDate };
+    const updatedSpec = {
+        ...userSpec,
+        welfarebookUsetime: newDuration,
+        welfarebookEnddate: newEndDate,
+        welfarebookDurationText: `${newDuration}개월`  // For display in CheckSpec
+    };
     setUserSpec(updatedSpec);
     console.log("Updated userSpec:", updatedSpec);
-  };
+};
 
-  const calculateEndDate = (welfarebookStartdate, welfarebookUsetime) => {
-    const start = new Date(welfarebookStartdate);
-    start.setMonth(start.getMonth() + welfarebookUsetime); 
+const calculateEndDate = (startDate, months) => {
+    const start = new Date(startDate);
+    start.setMonth(start.getMonth() + months);
     return start.toISOString().slice(0, 10);
-  };
+};
+
 
   const formatPrice = (price) => {
     return new Intl.NumberFormat('ko-KR').format(price);

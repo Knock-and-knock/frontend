@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styles from 'welfare/css/WelfareReserveModal.module.css';
 import { useNavigate } from 'react-router-dom';
 import { useSpecHook } from 'welfare/component/WelfareInputTotal';
+import { call } from 'login/service/ApiService';
 
 function WelfareNursingModal({ closeModal }) { 
   const [today, setToday] = useState('');
@@ -9,6 +10,7 @@ function WelfareNursingModal({ closeModal }) {
   const [welfarebookUsetime, setDuration] = useState(1);
   const [welfarebookTotalprice, setWelfarebookTotalprice] = useState(75000); // 초기 가격 설정
   const navigate = useNavigate();
+  const [matchData, setMatchData] = useState({});
 
   const { userSpec, setUserSpec } = useSpecHook();
 
@@ -17,6 +19,28 @@ function WelfareNursingModal({ closeModal }) {
   const goInputBirth = () => {
       navigate('/welfare-input/birth');
   }
+  
+
+  useEffect(() => {
+    if (localStorage.getItem("loginUser") === "PROTECTOR") {
+      call("/api/v1/match", "GET", null)
+        .then((response) => {
+          const data = {
+            protegeUserName: response.protegeUserName,
+          };
+          setMatchData(data); // 로컬 상태 업데이트
+  
+          // userSpec에 protegeUserName 추가
+          setUserSpec({
+            ...userSpec,
+            protegeUserName: response.protegeUserName
+          });
+        })
+        .catch((error) => {
+          console.log(error.message);
+        });
+    }
+  }, []);
 
   useEffect(() => {
     const currentDate = new Date();
@@ -53,20 +77,22 @@ function WelfareNursingModal({ closeModal }) {
   };
 
   const handleTimeChange = (event) => {
-    const newDuration = parseInt(event.target.value.replace('option', ''), 10);
+    const newDuration = parseInt(event.target.value, 10);
     setDuration(newDuration);
     
     const newPrice = 75000 * newDuration;
     setWelfarebookTotalprice(newPrice); // 계산된 가격을 상태에 저장
 
-    const updatedSpec = { 
-      ...userSpec, 
-      welfarebookUsetime: newDuration,
-      welfarebookTotalprice: newPrice // 계산된 가격을 userSpec에 추가
+    const updatedSpec = {
+        ...userSpec,
+        welfarebookUsetime: newDuration,
+        welfarebookTotalprice: newPrice,
+        welfarebookDurationText: `${newDuration * 3}시간 (${9 + (newDuration - 1) * 3}:00 ~ ${12 + (newDuration - 1) * 3}:00)`
+        
     };
     setUserSpec(updatedSpec);
     console.log("Updated userSpec:", updatedSpec);
-  };
+};
 
   const formatPrice = (price) => {
     return new Intl.NumberFormat('ko-KR').format(price);
