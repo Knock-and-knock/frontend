@@ -14,6 +14,9 @@ function WelfareInputBirth() {
     const navigate = useNavigate();
 
     const {userSpec, setUserSpec} = useSpecHook();
+    
+    // 현재 연도 가져오기
+    const currentYear = new Date().getFullYear();
 
     useEffect(()=> {
         if (year && month && day) {
@@ -26,9 +29,11 @@ function WelfareInputBirth() {
     }, [year, month, day]); 
 
     const handleYearChange = (e) => {
-        const value = e.target.value;
-        if (value.length <= 4) {
+        let value = e.target.value;
+        if (value.length <= 4 && value <= currentYear) { // 현재 연도보다 큰 값을 막음
             setYear(value);
+        } else if (value > currentYear) {
+            setYear(''); // 현재 연도보다 크면 값을 비움
         }
     };
 

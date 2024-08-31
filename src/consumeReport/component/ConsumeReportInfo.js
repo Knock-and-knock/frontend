@@ -3,8 +3,9 @@ import 'consumeReport/ConsumeReport.css';
 import Chart from "react-apexcharts";
 import ConsumeReportDate from './ConsumeReportDate'; // 날짜 선택 컴포넌트를 불러옴
 import { call } from 'login/service/ApiService';
+import { useLocation } from 'react-router-dom';
 
-function ConsumeReportInfo({ cardId }) {
+function ConsumeReportInfo() {
     const [selectedFilter, setSelectedFilter] = useState('personal');
     const [selectedData, setSelectedData] = useState(null); // 클릭된 데이터를 저장하기 위한 상태
     const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 }); // 툴팁 위치 상태
@@ -18,6 +19,11 @@ function ConsumeReportInfo({ cardId }) {
         setSelectedYear(year);
         setSelectedMonth(month);
     };
+
+    // ★★★★★ Navigate로 보낸 페이지에서 데이터를 받으려면 아래처럼 받아야함!!! ★★★★★
+    // 함수에 받는 것이 아님!!
+    const location = useLocation();
+    const cardId = location.state.value;
 
     // 숫자를 세 자리마다 쉼표로 구분하는 포맷터
     const formatPrice = (price) => {

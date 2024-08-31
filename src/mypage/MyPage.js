@@ -36,7 +36,7 @@ function MyPage(props) {
         .then(()=>{
             navi("/loginid");
             localStorage.removeItem('ACCESS_TOKEN');  
-            localStorage.removeItem('loginUser'); 
+            // localStorage.removeItem('loginUser'); 
         })
         .catch(()=>alert("로그아웃 실패"));
     }
