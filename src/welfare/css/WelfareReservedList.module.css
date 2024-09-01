@@ -44,6 +44,20 @@ hr {
   color: #2c2c2c;
 }
 
+.noItemsContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 80%;
+}
+
+.noItems {
+  margin: 0 auto;
+  font-size: 20px;
+  color: #999;
+  margin-left: 5px;
+}
+
 .main-container {
   flex: 1;
   width: 100%;

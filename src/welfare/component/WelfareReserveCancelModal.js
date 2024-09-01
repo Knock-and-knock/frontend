@@ -2,6 +2,7 @@ import React from 'react';
 import styles from 'welfare/css/WelfareReserveCancelModal.module.css';
 
 function WelfareReserveCancelModal({ closeModal, handleDelete  }) {
+  
   return (
     <div className={styles.container}>
       <div className={styles["main-container"]}>
