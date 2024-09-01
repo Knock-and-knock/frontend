@@ -6,9 +6,9 @@ import { call } from 'login/service/ApiService';
 
 function WelfareNursingModal({ closeModal }) { 
   const [today, setToday] = useState('');
-  const [welfarebookStartdate, setWelfarebookStartdate] = useState('');
-  const [welfarebookUsetime, setDuration] = useState(1);
-  const [welfarebookTotalprice, setWelfarebookTotalprice] = useState(75000); // 초기 가격 설정
+  const [welfareBookStartDate, setWelfarebookStartdate] = useState('');
+  const [welfareBookUseTime, setDuration] = useState(1);
+  const [welfareBookTotalPrice, setWelfarebookTotalprice] = useState(75000); // 초기 가격 설정
   const navigate = useNavigate();
   const [matchData, setMatchData] = useState({});
 
@@ -43,24 +43,27 @@ function WelfareNursingModal({ closeModal }) {
   }, []);
 
   useEffect(() => {
+    setUserSpec(prevSpec => ({
+      ...prevSpec,
+      welfareNo: 1  // welfareNo 초기값 설정
+    }));
+
     const currentDate = new Date();
     const formattedDate = currentDate.toISOString().slice(0, 10);
-
     setToday(formattedDate);
     setWelfarebookStartdate(formattedDate);
-    const initialPrice = 75000 * welfarebookUsetime;
+    const initialPrice = 75000 * welfareBookUseTime;
     setWelfarebookTotalprice(initialPrice);
+    
+    setUserSpec(prevSpec => ({
+      ...prevSpec,
+      welfareBookStartDate: formattedDate,
+      welfareBookEndDate: formattedDate,
+      welfareBookUseTime,
+      welfareBookTotalPrice: initialPrice
+    }));
 
-    const newUserSpec = { 
-      ...userSpec, 
-      welfarebookStartdate: formattedDate, 
-      welfarebookEnddate: formattedDate, // 종료 날짜를 시작 날짜와 동일하게 설정
-      welfarebookUsetime, 
-      welfarebookTotalprice: initialPrice // 초기 가격을 userSpec에 추가
-    };
-    setUserSpec(newUserSpec);
-    console.log("Updated userSpec:", newUserSpec);
-  }, []);
+  }, [setUserSpec, welfareBookUseTime]);
 
   const handleDateChange = (event) => {
     const newStartDate = event.target.value || today;
@@ -69,8 +72,8 @@ function WelfareNursingModal({ closeModal }) {
     // 시작 날짜를 변경할 때 종료 날짜도 동일하게 설정
     const updatedSpec = { 
       ...userSpec, 
-      welfarebookStartdate: newStartDate, 
-      welfarebookEnddate: newStartDate // 종료 날짜를 시작 날짜와 동일하게 설정
+      welfareBookStartDate: newStartDate, 
+      welfareBookEndDate: newStartDate // 종료 날짜를 시작 날짜와 동일하게 설정
     };
     setUserSpec(updatedSpec);
     console.log("Updated userSpec:", updatedSpec);
@@ -85,8 +88,8 @@ function WelfareNursingModal({ closeModal }) {
 
     const updatedSpec = {
         ...userSpec,
-        welfarebookUsetime: newDuration,
-        welfarebookTotalprice: newPrice,
+        welfareBookUseTime: newDuration,
+        welfareBookTotalPrice: newPrice,
         welfarebookDurationText: `${newDuration * 3}시간 (${9 + (newDuration - 1) * 3}:00 ~ ${12 + (newDuration - 1) * 3}:00)`
         
     };
@@ -110,7 +113,7 @@ function WelfareNursingModal({ closeModal }) {
             <input
               className={styles["insert-start-date"]}
               type="date"
-              value={welfarebookStartdate}
+              value={welfareBookStartDate}
               min={today} // 현재 날짜 이전 선택 불가
               onChange={handleDateChange}
             />
@@ -126,7 +129,7 @@ function WelfareNursingModal({ closeModal }) {
           <hr />
           <div className={styles["reserve-info-container3"]}>
             <span className={styles["reserve-price-text"]}>요금</span>
-            <span className={styles.price}>{formatPrice(welfarebookTotalprice)} 원</span>
+            <span className={styles.price}>{formatPrice(welfareBookTotalPrice)} 원</span>
           </div>
           </div>
 

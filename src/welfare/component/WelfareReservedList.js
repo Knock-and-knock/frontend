@@ -26,6 +26,7 @@ function WelfareReservedList() {
           const protegeNo = response.protegeUserNo;
           setUserNo(protegeNo);  // PROTECTOR일 경우 protegeUserNo를 상태로 저장
           setIsProtege(true);
+          console.log(protegeNo);
         })
         .catch((error) => {
           console.log(error.message);
@@ -126,7 +127,7 @@ function WelfareReservedList() {
               title={item.welfareName}
               welfareBookReservationDate={item.welfareBookReservationDate}
               welfareBookStartDate={item.welfareBookStartDate}
-              welfareBookUsetime={item.welfareBookUsetime}
+              welfareBookUseTime={item.welfareBookUseTime}
               welfareTotalPrice={item.welfareTotalPrice}
               onCancel={() => openModal(item.welfareBookNo)}
             />

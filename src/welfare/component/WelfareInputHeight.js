@@ -26,15 +26,17 @@ function WelfareInputHeight() {
     // userHeight와 userWeight의 상태를 업데이트하고 3자리로 제한하는 함수
     const handleHeightChange = (e) => {
         const value = e.target.value;
-        if (value.length <= 3) {
-            setHeight(value);
+        const numericValue = parseInt(value, 10); // 문자열을 정수로 변환
+        if (!isNaN(numericValue) && numericValue.toString().length <= 3) {
+            setHeight(numericValue);
         }
     };
-
+    
     const handleWeightChange = (e) => {
         const value = e.target.value;
-        if (value.length <= 3) {
-            setWeight(value);
+        const numericValue = parseInt(value, 10); // 문자열을 정수로 변환
+        if (!isNaN(numericValue) && numericValue.toString().length <= 3) {
+            setWeight(numericValue);
         }
     };
 

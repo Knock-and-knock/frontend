@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import styles from 'welfare/css/WelfareCheckSpec.module.css'; // CSS 모듈 import
+import styles from 'welfare/css/WelfareCheckSpec.module.css';
 import { useNavigate } from 'react-router-dom';
 import Header from 'header/Header.js';
 import { useSpecHook } from 'welfare/component/WelfareInputTotal';
@@ -7,17 +7,40 @@ import { call } from 'login/service/ApiService';
 
 function WelfareCheckSpec() {
     const navigate = useNavigate();
+    const { userSpec, setUserSpec } = useSpecHook();
 
-    const { userSpec } = useSpecHook();
+    useEffect(() => {
+        if (localStorage.getItem("loginUser") === "PROTECTOR") {
+          call("/api/v1/match", "GET", null)
+            .then((response) => {
+              // userSpec에 protegeUserName 추가
+              setUserSpec({
+                ...userSpec,
+                protegeUserNo: response.protegeUserNo
+              });
+            })
+            .catch((error) => {
+              console.log(error.message);
+            });
+        }
+        else {
+            const userNo = localStorage.getItem("userNo");
+            console.log(userNo);
+    
+            setUserSpec({
+                ...userSpec,
+                userNo: parseInt( userNo,10)  // userNo를 userSpec 상태에 추가
+
+            });
+            console.log(userSpec);
+        
+        }
+      }, []);
 
     const formattedReservationInfo = () => {
         if (!userSpec.welfarebookStartdate || !userSpec.welfarebookDurationText) return '정보 없음';
         return `${userSpec.welfarebookStartdate} | ${userSpec.welfarebookDurationText}`;
     };
-
-    useEffect(()=> {
-        console.log("Updated userSpec:", userSpec); // 최신 상태의 userSpec 로그 출력
-    },[]);
 
     const goSetPW = () => {
         call('/api/v1/welfare-book/reserve', 'POST', userSpec).then((response)=>{
