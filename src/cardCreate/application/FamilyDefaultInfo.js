@@ -13,12 +13,13 @@ function FamilyDefaultInfo(props) {
       .replace(/[^0-9]/g, '')  // 숫자만 남기기
       .replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`); // 하이픈 추가
   };
-  useEffect(()=>{
-    setUserInfo({
-      ...userInfo,
-      cardIssueIsFamily: true
-    });
-  })
+
+  useEffect(() => {
+    setUserInfo((prevUserInfo) => ({
+      ...prevUserInfo,
+      cardIssueIsFamily: true,
+    }));
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
