@@ -19,11 +19,7 @@ function Register(props) {
         const passwordValid = userPassword && userPassword.length >= 8 && userPassword.length <= 16;
         const pwCheckValid = userPwCheck && userPwCheck.length >= 8 && userPwCheck.length <= 16;
 
-        const isUserIdValid = (id) => /^[a-zA-Z0-9]+$/.test(id); // 영문자와 숫자만 허용
-
-        const userIdErrorMsg = userId
-            ? (userIdValid ? (isUserIdValid(userId) ? '' : '아이디는 영문자와 숫자만 포함할 수 있습니다.') : '아이디는 4자 이상 16자 이하로 입력해주세요.')
-            : '';
+        const userIdErrorMsg = userId? (userIdValid ? '' : '아이디는 4자 이상 16자 이하로 입력해주세요.'): '';
         setUserIdError(userIdErrorMsg);
 
         const userPasswordErrorMsg = userPassword ? (passwordValid ? '' : '비밀번호는 8자 이상 16자 이하로 입력해주세요.') : '';
@@ -37,6 +33,8 @@ function Register(props) {
 
     }, [userInfo]);
 
+    
+      
     const handleSubmit = (e) => {
         if (!isNextEnabled) {
             e.preventDefault();
@@ -48,11 +46,16 @@ function Register(props) {
                 if (response.result === true) {
                     navi("/signup/infoinput");
                 } else {
-                    setUserIdError(response.message);
+                    if(response.message === "이미 사용중인 아이디입니다."){
+                        setUserIdError(response.message);
+                    }else{
+                        setUserIdError("중복체크 실패");
+                    }
+                    
                 }
             }
         ).catch(()=>{
-            alert("중복체크 실패");
+            setUserIdError("중복체크 실패");
         });
     };
 
