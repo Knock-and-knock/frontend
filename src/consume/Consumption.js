@@ -7,6 +7,7 @@ import ConsumDateModal from './component/ConsumDateModal';
 import ConsumDetailModal from './component/ConsumDetailModal';
 import ConsumList from './component/ConsumList';
 import { useLocation } from "react-router-dom";
+import info from "image/icon/info.png";
 
 function Consumption() {
     const location = useLocation();
@@ -87,11 +88,13 @@ function Consumption() {
                     endDate={endDate}
                     totalAmount={calculateTotalAmount()}
                 />
-                <ConsumList 
+                {consumList.length !== 0?(<ConsumList 
                     setIsOpenDetail={setIsOpenDetail}
                     setCardDetail={setCardDetail}
                     consumList={consumList}
-                /> 
+                />):
+                (<p className="cardlist-none"><img src={info} alt="카드내역 없음" className="card-info-icon" />해당 기간 카드내역이 없습니다.</p>)} 
+
                 <ConsumDetailModal 
                     isOpen={isOpenDetail} 
                     closeModal={closeDetailModal} 

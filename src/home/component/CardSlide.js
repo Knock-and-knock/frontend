@@ -56,7 +56,7 @@ function CardSlide({isProtege}) {
                         {cardList.map((card) => (
                         
                             <SwiperSlide key={card.cardId}>
-                                <CardSection cardlist={card}/>
+                                <CardSection isProtege={isProtege} cardlist={card}/>
                                 <CardBottom isProtege={isProtege} cardlist={card}/>
     
                             </SwiperSlide>

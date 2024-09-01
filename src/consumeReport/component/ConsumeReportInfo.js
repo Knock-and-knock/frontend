@@ -23,7 +23,7 @@ function ConsumeReportInfo() {
     // ★★★★★ Navigate로 보낸 페이지에서 데이터를 받으려면 아래처럼 받아야함!!! ★★★★★
     // 함수에 받는 것이 아님!!
     const location = useLocation();
-    const cardId = location.state.value;
+    const cardList = location.state.value;
 
     // 숫자를 세 자리마다 쉼표로 구분하는 포맷터
     const formatPrice = (price) => {
@@ -37,7 +37,7 @@ function ConsumeReportInfo() {
         const endDate = `${selectedYear}-${String(selectedMonth).padStart(2, '0')}-${String(lastDayOfMonth).padStart(2, '0')}`;
 
         try {
-            const response = await call(`/api/v1/consumption/${cardId}/${startDate}/${endDate}`, "GET", null);
+            const response = await call(`/api/v1/consumption/${cardList.cardId}/${startDate}/${endDate}`, "GET", null);
             setData(response);
             setLoading(false); // 데이터 로드 완료 후 로딩 상태 업데이트
         } catch (error) {
@@ -46,9 +46,9 @@ function ConsumeReportInfo() {
         }
     };
 
-    useEffect(() => {
-        console.log("카드아이디: " + cardId);
-    }, []);
+    // useEffect(() => {
+    //     console.log("카드아이디: " + cardList.cardId);
+    // }, []);
 
     // 연도나 월이 변경될 때마다 API 호출
     useEffect(() => {

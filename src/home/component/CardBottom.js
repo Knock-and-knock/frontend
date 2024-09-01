@@ -21,14 +21,14 @@ function CardBottom({ isProtege, cardlist }) {
 
     return (
         <div className={`cardBottom-container ${!isProtege ? 'blue-bottom' : ''}`}>
-            <p className="cardBottom-separator" onClick={handleCardListClick}>카드내역</p>
+            <p className="cardBottom-Rseparator" onClick={handleCardListClick}>카드내역</p>
             <p 
-                className={`cardBottom-separator ${cardlist.cardIsFamily ? "family-card" : ""}`} 
+                className={`${cardlist.cardIsFamily ? "family-card" : ""}`} 
                 onClick={handleFamilyCardClick}
             >
                 가족카드 발급
             </p>
-            <p onClick={handleConsumeReportClick}>소비리포트</p>
+            <p className="cardBottom-Lseparator" onClick={handleConsumeReportClick}>소비리포트</p>
         </div>
     );
 }

@@ -13,6 +13,13 @@ function ConsumList({ setIsOpenDetail, setCardDetail, consumList }) {
         return `${year}. ${month}. ${day}`;
     }
 
+    function formatTime(dateString) {
+        const date = new Date(dateString);
+        const hours = String(date.getHours()).padStart(2, '0');
+        const minutes = String(date.getMinutes()).padStart(2, '0');
+        return `${hours}:${minutes}`;
+    }
+
     // 모달을 열고 선택한 카드의 상세 정보를 설정하는 함수
     const handleOpenDetailModal = (cardHistoryNo) => {
         call(`/api/v1/card-history/${cardHistoryNo}`)
@@ -38,7 +45,7 @@ function ConsumList({ setIsOpenDetail, setCardDetail, consumList }) {
                 <div key={index} className='consumList-container' onClick={() => handleOpenDetailModal(consum.cardHistoryNo)}>
                     {consum.showDate && <p className='consumList-date'>{formatDate(consum.cardHistoryApprove)}</p>}
                     <div className='consumList-box'>
-                        <p className='consumList-time'>21:00 <span>{consum.cardFamily ? "가족" : "개인"}</span></p>
+                        <p className='consumList-time'>{formatTime(consum.cardHistoryApprove)} <span>{consum.cardFamily ? "가족" : "개인"}</span></p>
                         <div className='consumList-content'>
                             <p>{consum.cardHistoryShopname}{consum.cardHistoryIsCansle ? <span className='payment-cancel'>거래취소</span> : ""}</p>
                             <p>{consum.cardHistoryAmount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</p>
