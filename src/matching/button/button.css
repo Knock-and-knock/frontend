@@ -1,6 +1,10 @@
+*{
+  font-family: 'Pretendard', sans-serif;
+}
 .btnContainer{
   display: flex;
   justify-content: center;
+  font-family: 'Pretendard', sans-serif;
   position: absolute;
   padding-left: 20px;
   bottom: 30px;

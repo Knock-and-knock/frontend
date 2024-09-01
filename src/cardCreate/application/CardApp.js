@@ -23,7 +23,14 @@ function CardApp(props) {
   };
 
   const handlefSendInfo = (e) => {
-    call("/api/v1/card", "POST", userInfo)
+    setUserInfo((prevInfo) => ({
+      ...prevInfo,
+      cardIssueIsFamily: true,
+    }));
+    call("/api/v1/card", "POST",  {
+      ...userInfo,
+      cardIssueIsFamily: true,
+    })
       .then((response) => {
         console.log(response);
         navigate("/cardapp/cardsuccess");
