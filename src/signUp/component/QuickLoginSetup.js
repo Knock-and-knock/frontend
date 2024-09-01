@@ -97,9 +97,10 @@ function QuickLoginSetup(props) {
 
     const handleSubmit = () => {
         call('/api/v1/users/signup', "POST", userInfo).then((response) => {
-            localStorage.setItem("bioPW", response.userBioPassword);
+            localStorage.setItem("userBioPassword", response.userBioPassword);
             navi("/signup/signupsuccess");
         }).catch((error) => {
+            console.error("Registration error:", error);
             alert("Registration failed. Please try again.");
             navi("/signup/register");
         });

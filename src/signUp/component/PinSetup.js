@@ -49,6 +49,7 @@ function PinSetup(props) {
                     position: 'absolute', 
                     zIndex: -1 
                 }}
+                autoComplete="off" 
             />
             </div>
             <div className="signUpBtn">

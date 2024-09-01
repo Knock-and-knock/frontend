@@ -68,7 +68,7 @@ function Header() {
   };
 
   return (
-    <header>
+    <header className={styles['white-header']}>
       <div className={styles["header-container"]}>
         <div className={styles["header-info"]}>
           <img

@@ -14,7 +14,7 @@ function CardAppSuccess(props) {
                 <p className='cardapp-success'>카드발급 완료</p>
             </div>
             <div className='mainBtn'>
-                <Link to="/main" className='goMainBtn'>메인으로 돌아가기</Link>
+                <Link to="/home" className='goMainBtn'>메인으로 돌아가기</Link>
             </div>
         </div>
     );

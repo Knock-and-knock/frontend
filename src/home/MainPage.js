@@ -48,7 +48,6 @@ function MainPage() {
         })
         .catch((error) => {
           console.log(error.message);
-          alert("매칭 실패");
         });
     }else{
       setIsProtege(false);
@@ -66,7 +65,6 @@ function MainPage() {
       closeModal();
     } catch (error) {
       console.log(error.message);
-      alert("매칭 수락 실패");
     }
   };
 

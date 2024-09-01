@@ -10,8 +10,8 @@ function WelfareInputAddress() {
   const { userSpec, setUserSpec } = useSpecHook();
 
   const [isButtonEnabled, setIsButtonEnabled] = useState(false);
-  const [address, setAddress] = useState(""); // 도로명 주소를 저장할 상태
-  const [detailAddress, setDetailAddress] = useState(""); // 상세주소를 저장할 상태
+  const [protegeAddress, setProtegeAddress] = useState(""); // 도로명 주소를 저장할 상태
+  const [protegeAddressDetail, setProtegeAddressDetail] = useState(""); // 상세주소를 저장할 상태
 
   const handlePaging = () => {
     if (isButtonEnabled) {
@@ -23,27 +23,27 @@ function WelfareInputAddress() {
   const [isPostcodeOpen, setIsPostcodeOpen] = useState(false);
 
   const handleComplete = (data) => {
-    setAddress(data.address); // 선택된 주소를 address 상태에 저장
+    setProtegeAddress(data.address); // 선택된 주소를 protegeAddress 상태에 저장
     setIsPostcodeOpen(false); // 주소 검색 후 창 닫기
 
     // userSpec에 주소 업데이트
-    setUserSpec({ ...userSpec, address: data.address });
+    setUserSpec({ ...userSpec, protegeAddress: data.address });
   };
 
   // 상세주소 변경 시 처리
   const handleDetailAddressChange = (e) => {
     const value = e.target.value;
-    setDetailAddress(value);
+    setProtegeAddressDetail(value);
 
     // userSpec에 상세주소 업데이트
-    setUserSpec({ ...userSpec, detailAddress: value });
+    setUserSpec({ ...userSpec, protegeAddressDetail: value });
   };
 
   // 빈칸 확인
   useEffect(() => {
-    const isFull = address.trim() !== "" && detailAddress.trim() !== "";
+    const isFull = (protegeAddress?.trim() || "") !== "" && (protegeAddressDetail?.trim() || "") !== "";
     setIsButtonEnabled(isFull);
-  }, [address, detailAddress]);
+  }, [protegeAddress, protegeAddressDetail]);
 
   return (
     <div className="card-app-container">
@@ -59,7 +59,7 @@ function WelfareInputAddress() {
         <div className="app-input">
           <input
             placeholder="도로명, 지번, 건물명 검색"
-            value={address || ""}
+            value={protegeAddress || ""}
             onClick={() => setIsPostcodeOpen(true)}
             readOnly
           />
@@ -67,7 +67,7 @@ function WelfareInputAddress() {
         <div className="app-input">
           <input
             placeholder="상세주소"
-            value={detailAddress || ""}
+            value={protegeAddressDetail || ""}
             onChange={handleDetailAddressChange}
           />
         </div>

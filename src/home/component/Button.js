@@ -9,6 +9,7 @@ function Button({isProtege}) {
     const navi = useNavigate();
     const [alarmNum, setAlarmNum] = useState('');
     const [talkTime, setTalkTime] = useState('');
+    const [protegeName, setProteName] = useState('');
 
     // 페이지 이동
     const handleButtonClick = ()=>{
@@ -57,16 +58,21 @@ function Button({isProtege}) {
       });
       }
       
-
-     
     },[isProtege]);
+    useEffect(()=>{
+      call('/api/v1/match',"GET",null).then((response)=>{
+        setProteName(response.protegeUserName);
+      }).catch((error)=>{
+        console.log(error);
+      });
+    });
 
     return (
       <div className={`chat-section-container ${!isProtege ? 'blue-main' : ''}`} onClick={handleButtonClick}>
         <div className="chat-section-button">
           {isProtege ? <img src={chatbot} alt="챗봇" className="icon-chat" />:<img src={alarm} alt="이상징후" className="icon-alarm" />}
           <div className="chat-section-text">
-            <p className="head-text">{isProtege?"똑똑이와 대화해보세요":"홍길동님의 소비이상징후"}</p>
+            <p className="head-text">{isProtege?"똑똑이와 대화해보세요": `${protegeName}님의 소비이상징후`}</p>
             <p className="info-text">{isProtege?"마지막 대화시간 : ":"읽지 않은 알람 : "}<span>{isProtege? talkTime : `${alarmNum}건`}</span></p>
           </div>
         </div>

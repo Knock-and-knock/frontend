@@ -1,29 +1,40 @@
+import "alarm/AlarmList.css";
 import Header from 'header/Header';
-import React, { useEffect, useState } from 'react';
-import AlarmMark from './component/AlarmMark';
-import "alarm/AlarmList.css"
 import AlarmHistory from './component/AlarmHistory';
-import AlarmDetailModal from 'alarm/component/AlarmDetailModal.js'
+import AlarmMark from './component/AlarmMark';
+import { useEffect, useState } from "react";
+import { call } from "login/service/ApiService";
 
 function AlarmList(props) {
-    const [isOpen, setIsOpen] = useState(false);
-    const handleOpenModal = () => {
-        setIsOpen(true);
+
+    const [alarmList, setAlarmList] = useState([]);
+    const [alarmNum, setAlarmNum] = useState(0);
+
+    // 알람 목록 조회
+    useEffect(() => {
+        getAlarmList();
+        fetchAlarmCount();
+    }, []);
+
+    const getAlarmList = ()=>{
+        call('/api/v1/notification/read', "GET", null)
+        .then(response => setAlarmList(response))
+        .catch(() => alert("알람 조회 실패"));
     };
-    
-    const closeModal = () => {
-        setIsOpen(false);
-    }
-    useEffect(()=>{
-        document.body.classList.toggle("unscrollable",isOpen)
-    },[isOpen]);
+
+     // 알림 수를 가져오는 함수
+     const fetchAlarmCount = () => {
+        call('/api/v1/notification/read/count', 'GET', null)
+            .then(response => setAlarmNum(response))
+            .catch(() => alert("알람 건수 조회 실패"));
+    };
 
     return (
         <div className='alarmList-container'>
             <Header/>
-            <AlarmMark handleOpenModal={handleOpenModal}/>
-            <AlarmHistory handleOpenModal={handleOpenModal}/>
-            <AlarmDetailModal isOpen={isOpen} closeModal={closeModal}/>
+            <AlarmMark alarmNum={alarmNum} fetchAlarmCount={fetchAlarmCount} getAlarmList={getAlarmList}/>
+            <AlarmHistory fetchAlarmCount={fetchAlarmCount} alarmList={alarmList} getAlarmList={getAlarmList}/>
+            
         </div>
     );
 }
