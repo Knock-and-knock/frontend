@@ -55,8 +55,9 @@ function PinCheck(props) {
                 style={{ 
                     opacity: 0, 
                     position: 'absolute', 
-                    zIndex: -1 
+                    zIndex: -1, 
                 }}
+                autoComplete="off" 
             />
             </div>
             <div className="signUpBtn">

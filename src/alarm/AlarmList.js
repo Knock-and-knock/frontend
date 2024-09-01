@@ -8,9 +8,12 @@ import { call } from "login/service/ApiService";
 function AlarmList(props) {
 
     const [alarmList, setAlarmList] = useState([]);
+    const [alarmNum, setAlarmNum] = useState(0);
+
     // 알람 목록 조회
     useEffect(() => {
         getAlarmList();
+        fetchAlarmCount();
     }, []);
 
     const getAlarmList = ()=>{
@@ -19,11 +22,18 @@ function AlarmList(props) {
         .catch(() => alert("알람 조회 실패"));
     };
 
+     // 알림 수를 가져오는 함수
+     const fetchAlarmCount = () => {
+        call('/api/v1/notification/read/count', 'GET', null)
+            .then(response => setAlarmNum(response))
+            .catch(() => alert("알람 건수 조회 실패"));
+    };
+
     return (
         <div className='alarmList-container'>
             <Header/>
-            <AlarmMark getAlarmList={getAlarmList}/>
-            <AlarmHistory alarmList={alarmList}/>
+            <AlarmMark alarmNum={alarmNum} fetchAlarmCount={fetchAlarmCount} getAlarmList={getAlarmList}/>
+            <AlarmHistory fetchAlarmCount={fetchAlarmCount} alarmList={alarmList} getAlarmList={getAlarmList}/>
             
         </div>
     );

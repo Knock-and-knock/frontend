@@ -68,6 +68,7 @@ function VerifyCode(props) {
                     className="hidden-input"
                     maxLength={6}
                     name='validation'
+                    autoComplete="off" 
                     
                 />
             </div>
