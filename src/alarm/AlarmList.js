@@ -23,7 +23,7 @@ function AlarmList(props) {
         <div className='alarmList-container'>
             <Header/>
             <AlarmMark getAlarmList={getAlarmList}/>
-            <AlarmHistory alarmList={alarmList}/>
+            <AlarmHistory alarmList={alarmList} getAlarmList={getAlarmList}/>
             
         </div>
     );

@@ -3,7 +3,7 @@ import 'alarm/component/AlarmHistory.css';
 import { call } from 'login/service/ApiService';
 import AlarmDetailModal from './AlarmDetailModal';
 
-function AlarmHistory({alarmList}) {
+function AlarmHistory({alarmList, getAlarmList}) {
     
     const [selectedAlarm, setSelectedAlarm] = useState(null);
     const [isOpen, setIsOpen] = useState(false);
