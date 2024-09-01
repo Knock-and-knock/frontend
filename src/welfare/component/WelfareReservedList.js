@@ -92,6 +92,7 @@ function WelfareReservedList() {
           const updatedItems = reservedItems.filter(item => item.id !== selectedItemId);
           setReserveItems(updatedItems);
           closeModal();
+          window.location.reload();
         })
         .catch((error) => {
           console.error("삭제 실패:", error);
