@@ -34,7 +34,7 @@ function App(props) {
       <Route path="/welfare-check-pw" element={<WelfareCheckPW />} />
       <Route path="/welfare-list" element={<WelfareList />} />
       <Route path="/welfare-main" element={<WelfareMain />} />
-      <Route path="/welfare-paycomplete" element={<WelfarePayComplete />} />
+      
       
       <Route path="/welfare-reserved-list/*" element={<WelfareReservedList />} >
         <Route path="welfare-reserve-cancelmodal" element={<WelfareReserveCancelModal />} />
@@ -52,6 +52,8 @@ function App(props) {
         <Route path="height" element={<WelfareInputHeight />} />
 
         <Route path="check-spec" element={<WelfareCheckSpec />} />
+
+        <Route path="paycomplete" element={<WelfarePayComplete />} />
 
         <Route path="dolbom-main" element={<DolbomMain />} /> 
         {/* dolbom-main을 통해서 모달을 열기 때문에 dolbom-main 또한 WelfareInputTotal의 자식 요소여야함 */}

@@ -9,6 +9,17 @@ function WelfareCheckSpec() {
     const navigate = useNavigate();
     const { userSpec, setUserSpec } = useSpecHook();
 
+    const getCurrentFormattedDate = () => {
+        const now = new Date();
+        const year = now.getFullYear();
+        const month = String(now.getMonth() + 1).padStart(2, '0'); // 월은 0부터 시작하므로 1을 더해줍니다.
+        const day = String(now.getDate()).padStart(2, '0');
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const seconds = String(now.getSeconds()).padStart(2, '0');
+        return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}`;
+    };
+
     useEffect(() => {
         if (localStorage.getItem("loginUser") === "PROTECTOR") {
           call("/api/v1/match", "GET", null)
@@ -38,14 +49,36 @@ function WelfareCheckSpec() {
       }, []);
 
     const formattedReservationInfo = () => {
-        if (!userSpec.welfarebookStartdate || !userSpec.welfarebookDurationText) return '정보 없음';
-        return `${userSpec.welfarebookStartdate} | ${userSpec.welfarebookDurationText}`;
+        if (!userSpec.welfareBookStartDate || !userSpec.welfarebookDurationText) return '정보 없음';
+        return `${userSpec.welfareBookStartDate} | ${userSpec.welfarebookDurationText}`;
     };
 
     const goSetPW = () => {
         call('/api/v1/welfare-book/reserve', 'POST', userSpec).then((response)=>{
-            navigate('/welfare-set-pw');
+            console.log(response);
+
+            call('/api/v1/card-history', 'POST', userSpec).then((response)=> {
+                setUserSpec(prevSpec => ({
+                    ...prevSpec,
+                    cardHistoryAmount: userSpec.welfareBookTotalPrice,
+                    cardHistoryShopname: "돌봄 서비스",
+                    // cardHistoryApprove: getCurrentFormattedDate(),
+                    cardCategoryNo: 8,
+                    cardId: 5,
+                    cardFamily: false
+                }));
+                
+                
+
+                navigate('/welfare-input/paycomplete');
+            }).catch((error)=>{
+                console.log("카드내역 생성 실패: " + error)
+                alert("카드내역 생성 실패했음");
+            });
+
+            // navigate('/welfare-set-pw', { state: { reservationData: response.data } });
         }).catch((error)=>{
+            console.log("예약 실패: " + error)
             alert("예약 실패");
         });
     };
