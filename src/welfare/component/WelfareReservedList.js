@@ -43,24 +43,31 @@ function WelfareReservedList() {
   
 
   useEffect(() => {
-    if (userNo) {
-      call(`/api/v1/welfare-book?userNo=${userNo}`, "GET", null)
-        .then((response) => {
-          setReserveItems(response);  // userNo에 해당하는 데이터만 가져옴
-        })
-        .catch((error) => {
-          alert("복지목록 조회 실패");
-        });
-    } else {
-      call('/api/v1/welfare-book', "GET", null)
+    // if (userNo) {
+    //   call(`/api/v1/welfare-book?userNo=${userNo}`, "GET", null)
+    //     .then((response) => {
+    //       setReserveItems(response);  // userNo에 해당하는 데이터만 가져옴
+    //     })
+    //     .catch((error) => {
+    //       alert("복지목록 조회 실패");
+    //     });
+    // } else {
+    //   call('/api/v1/welfare-book', "GET", null)
+    //     .then((response) => {
+    //       setReserveItems(response);
+    //     })
+    //     .catch((error) => {
+    //       alert("복지목록 조회 실패");
+    //     });
+    // }
+    call('/api/v1/welfare-book', "GET", null)
         .then((response) => {
           setReserveItems(response);
         })
         .catch((error) => {
           alert("복지목록 조회 실패");
         });
-    }
-  }, [userNo]);
+  }, []);
   
 
   useEffect(() => {

@@ -22,7 +22,25 @@ function WelfareNursingModal({ closeModal }) {
   
 
   useEffect(() => {
-    if (localStorage.getItem("loginUser") === "PROTECTOR") {
+    // if (localStorage.getItem("loginUser") === "PROTECTOR") {
+    //   call("/api/v1/match", "GET", null)
+    //     .then((response) => {
+    //       const data = {
+    //         protegeUserName: response.protegeUserName,
+    //       };
+    //       setMatchData(data); // 로컬 상태 업데이트
+  
+    //       // userSpec에 protegeUserName 추가
+    //       setUserSpec({
+    //         ...userSpec,
+    //         protegeUserName: response.protegeUserName
+    //       });
+    //     })
+    //     .catch((error) => {
+    //       console.log(error.message);
+    //     });
+    // }
+
       call("/api/v1/match", "GET", null)
         .then((response) => {
           const data = {
@@ -33,20 +51,21 @@ function WelfareNursingModal({ closeModal }) {
           // userSpec에 protegeUserName 추가
           setUserSpec({
             ...userSpec,
-            protegeUserName: response.protegeUserName
+            protegeUserName: response.protegeUserName,
+            welfareNo: 2 // welfareNo 초기값 설정
           });
         })
         .catch((error) => {
           console.log(error.message);
         });
-    }
+
   }, []);
 
   useEffect(() => {
-    setUserSpec(prevSpec => ({
-      ...prevSpec,
-      welfareNo: 1  // welfareNo 초기값 설정
-    }));
+    // setUserSpec(prevSpec => ({
+    //   ...prevSpec,
+    //   welfareNo: 1  // welfareNo 초기값 설정
+    // }));
 
     const currentDate = new Date();
     const formattedDate = currentDate.toISOString().slice(0, 10);

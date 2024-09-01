@@ -48,6 +48,17 @@ function WelfarePayCompl() {
     return new Intl.NumberFormat('ko-KR').format(price);
   };
 
+  const getProtegeName = (welfareNo)=>{
+    switch(welfareNo){
+      case 1:
+        return "일상 가사";
+      case 2:
+        return "가정 간병";
+      default:
+        return "한울 돌봄";
+    }
+
+  }
   return (
     <div className={styles.container}>
       <div className={styles.header}>
@@ -67,7 +78,7 @@ function WelfarePayCompl() {
         <hr className={styles["dotted-hr"]} />
         <p>
           <span className={styles["pay-info-cate"]}>예약 항목</span>
-          <span className={styles["pay-info-title"]}>가정 간병 돌봄</span>
+          <span className={styles["pay-info-title"]}>{getProtegeName(userSpec.welfareNo)}</span>
         </p>
         <p>
           <span className={styles["pay-info-cate"]}>예약 날짜</span>
