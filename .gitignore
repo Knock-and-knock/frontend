@@ -18,3 +18,7 @@ yarn-debug.log*
 yarn-error.log*
 index.js
 .env
+.env.deploy
+
+# docker
+docker-compose.yml

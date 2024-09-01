@@ -3,13 +3,16 @@ name: knockknock front deploy
 env:
   IMAGE_NAME: knock-knock-front
   CONTAINER_NAME: knock-knock-front
+  EC2_HOST: ${{secrets.EC2_HOST}}
+  EC2_SSH_USER: ubuntu
+  PRIVATE_KEY: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
 
 on:
   push:
     branches: [ "main" ]
 
 jobs:
-  build:
+  build-and-push:
     runs-on: ubuntu-latest
 
     steps:
@@ -29,3 +32,37 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
+  
+  deploy-to-server:
+    needs: build-and-push
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to EC2
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ env.EC2_HOST }}
+          username: ${{ env.EC2_SSH_USER }}
+          key: ${{ env.PRIVATE_KEY }}
+          script: |
+            CONTAINER_ID=$(sudo docker ps -q --filter "publish=80-80")
+
+            echo "DOCKER_USERNAME=${{ secrets.DOCKER_USERNAME }}" > /root/knockknock/frontend/.env
+            echo "IMAGE_NAME=${{ env.IMAGE_NAME }}" >> /root/knockknock/frontend/.env
+            echo "IMAGE_TAG=${{ github.sha }}" >> /root/knockknock/frontend/.env
+  
+            if [ ! -z "$CONTAINER_ID" ]; then
+              sudo docker stop $CONTAINER_ID
+              sudo docker rm $CONTAINER_ID
+            fi
+            
+            DOCKER_IMAGE_NAME="${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}:${{ github.sha }}"
+            sudo docker pull $DOCKER_IMAGE_NAME
+            #sudo docker run --name ${{ env.CONTAINER_NAME }} -d -p 80:80 $DOCKER_IMAGE_NAME
+
+            # Stop and remove existing containers
+            sudo docker-compose -f /root/knockknock/frontend/docker-compose.yml down || true
+
+            # Deploy Docker containers
+            sudo docker-compose --env-file .env.deploy -f /root/knockknock/frontend/docker-compose.yml up -d
+
+            sudo docker image prune -af
