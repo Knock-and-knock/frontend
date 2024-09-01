@@ -38,9 +38,9 @@ function LoginOptionModal(props) {
     
     return (
         <div>
-            <div className="login-option">
+            <div className="login-option"  onClick={handleOpenModal}>
                 <p className="text-normal" >다른 로그인 방법</p>
-                <img src={arrow} alt="다른로그인방법" className="icon-arrow" onClick={handleOpenModal}/> 
+                <img src={arrow} alt="다른로그인방법" className="icon-arrow"/> 
             </div>
             <Modal isOpen={isOpen} onRequestClose={closeModal} className="login-modal" style={customStyles}>
                 <div className="modal-content">
