@@ -6,6 +6,7 @@ env:
   EC2_HOST: ${{secrets.EC2_HOST}}
   EC2_SSH_USER: ubuntu
   PRIVATE_KEY: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
+  PROJECT_DIR: /home/ubuntu/knockknock/frontend
 
 on:
   push:
@@ -46,9 +47,9 @@ jobs:
           script: |
             CONTAINER_ID=$(sudo docker ps -q --filter "publish=80-80")
 
-            echo "DOCKER_USERNAME=${{ secrets.DOCKER_USERNAME }}" > /home/ubuntu/knockknock/frontend/.env.deploy
-            echo "IMAGE_NAME=${{ env.IMAGE_NAME }}" >> /home/ubuntu/knockknock/frontend/.env.deploy
-            echo "IMAGE_TAG=${{ github.sha }}" >> /home/ubuntu/knockknock/frontend/.env.deploy
+            echo "DOCKER_USERNAME=${{ secrets.DOCKER_USERNAME }}" > ${{PROJECT_DIR}}/.env.deploy
+            echo "IMAGE_NAME=${{ env.IMAGE_NAME }}" >> ${{PROJECT_DIR}}/.env.deploy
+            echo "IMAGE_TAG=${{ github.sha }}" >> ${{PROJECT_DIR}}/.env.deploy
   
             if [ ! -z "$CONTAINER_ID" ]; then
               sudo docker stop $CONTAINER_ID
@@ -60,9 +61,9 @@ jobs:
             #sudo docker run --name ${{ env.CONTAINER_NAME }} -d -p 80:80 $DOCKER_IMAGE_NAME
 
             # Stop and remove existing containers
-            sudo docker-compose -f /home/ubuntu/knockknock/frontend/docker-compose.yml down || true
+            sudo docker-compose -f ${{PROJECT_DIR}}/docker-compose.yml down || true
 
             # Deploy Docker containers
-            sudo docker-compose --env-file .env.deploy -f /home/ubuntu/knockknock/frontend/docker-compose.yml up -d
+            sudo docker-compose --env-file ${{PROJECT_DIR}}/.env.deploy -f ${{env.PROJECT_DIR}}/docker-compose.yml up -d
 
             sudo docker image prune -af
