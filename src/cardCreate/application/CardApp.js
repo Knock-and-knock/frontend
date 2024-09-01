@@ -16,28 +16,29 @@ function CardApp(props) {
         navigate("/cardapp/familycardyn");
       })
       .catch((error) => {
+        //alert("카드발급에 실패했습니다.");
+        //navigate("/cardapp");
         navigate("/cardapp/familycardyn");
       });
   };
 
   const handlefSendInfo = (e) => {
-    const updatedUserInfo = {
-      ...userInfo,
-      cardIssueIsFamily: true,
-    };
-    setUserInfo(updatedUserInfo); // 상태 업데이트
-  
-    call("/api/v1/card", "POST", updatedUserInfo) // 업데이트된 값을 바로 사용
+    call("/api/v1/card", "POST", userInfo)
       .then((response) => {
         console.log(response);
         navigate("/cardapp/cardsuccess");
       })
       .catch((error) => {
-        navigate("/cardapp/cardsuccess"); // 임시(나중에 삭제)
+        //alert("가족카드 발급에 실패했습니다.");
+        //navigate("/cardapp/familycardyn");
+        navigate("/cardapp/cardsuccess");//임시(나중에 삭제)
       });
   };
 
   const navigate = useNavigate();
+  // useEffect(() => {
+  //   navigate("/cardapp/defaultinfo");
+  // }, []);
 
   useEffect(() => {
     console.log(userInfo);
