@@ -42,6 +42,7 @@ function ConsumeReportInfo() {
             setLoading(false); // 데이터 로드 완료 후 로딩 상태 업데이트
         } catch (error) {
             console.error("Error fetching data:", error);
+            console.log("cardId: " + {cardId} + "startDate: " + {startDate} + "endDate: " + {startDate})
             setLoading(false); // 오류가 발생해도 로딩 상태 해제
         }
     };
