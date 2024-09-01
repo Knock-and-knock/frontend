@@ -24,6 +24,7 @@ import Modal from 'react-modal';
 import WelfareInputTotal from 'welfare/component/WelfareInputTotal';
 import WelfarePayComplete from 'welfare/component/WelfarePayCompl';
 
+import 'index.css';
 
 Modal.setAppElement('#root');
 

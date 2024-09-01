@@ -88,12 +88,14 @@ dotted-hr {
 .main-section {
   width: 90%;
   height: 100%;
-  padding: 10px;
+  padding-top: 7px;
+  padding-bottom: 7px;
   border: 1px solid #ccc;
   border-radius: 15px;
   text-align: center;
   margin: 0 auto;
   margin-top: 65%;
+  
 }
 
 .go-main {

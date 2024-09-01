@@ -38,7 +38,7 @@
 
 .input-date {
   border: none;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 2px solid #ccc;
   width: 60px;
   text-align: center;
   font-size: 18px;
@@ -48,7 +48,7 @@
 
 .input-date:focus {
   outline: none;
-  border-bottom: 1px solid #80BAFF;
+  border-bottom: 2px solid #80BAFF;
 }
 
 .input-divide {

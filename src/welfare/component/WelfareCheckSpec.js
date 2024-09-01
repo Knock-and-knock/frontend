@@ -24,10 +24,9 @@ function WelfareCheckSpec() {
         if (localStorage.getItem("loginUser") === "PROTECTOR") {
           call("/api/v1/match", "GET", null)
             .then((response) => {
-              // userSpec에 protegeUserName 추가
               setUserSpec({
                 ...userSpec,
-                protegeUserNo: response.protegeUserNo
+                protegeUserNo: response.protegeUserNo // 날짜 모달창에서 userSpec에 protegeUserName 추가했으므로 여기서 쓸 수 있음
               });
             })
             .catch((error) => {
@@ -64,7 +63,7 @@ function WelfareCheckSpec() {
                     // cardHistoryApprove: getCurrentFormattedDate(),
                     cardCategoryNo: 8,
                     cardId: 5,
-                    cardFamily: false
+                    cardFamily: false   // cardId가 기본키인데 받을 이유가 있나?
                 }).then((response)=> {
                
                 navigate('/welfare-input/paycomplete');
@@ -127,7 +126,7 @@ function WelfareCheckSpec() {
                     <span className={styles.hw}>kg</span>
 
                     <p className={styles["spec-info"]}>질병</p>
-                    <input className={`${styles["spec-check"]} ${styles.disease}`} type="text" placeholder="질병" value={userSpec.userDisease || ''} disabled />
+                    <input className={`${styles["spec-check"]} ${styles.disease}`} type="text" placeholder="질병 내역이 없습니다." value={userSpec.userDisease || ''} disabled />
                     
                     <p className={styles["spec-info"]}>예약 정보</p>
                     <input className={`${styles["spec-check"]} ${styles.last}`} type="text" placeholder="예약 정보" value={formattedReservationInfo()} disabled />
