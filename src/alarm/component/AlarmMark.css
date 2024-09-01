@@ -5,3 +5,6 @@
 .alarmMarkNum{
     color: #80BAFF;
 }
+.checked{
+    opacity: 0.3;
+}

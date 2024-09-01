@@ -1,11 +1,11 @@
 import "matching/MatchingModal.css";
 import Modal from "react-modal";
 
-function MatchingModal({ isOpen, closeModal,handleSubmit}) {
+function VoiceChatMovePageModal({ isOpen, closeModal,handleSubmit}) {
   const customStyles = {
     overlay: {
       backgroundColor: "rgba(0, 0, 0, 0.5)",
-      zIndex: 1,
+      zIndex: 999,
     },
     content: {
       height: "200px",
@@ -20,18 +20,18 @@ function MatchingModal({ isOpen, closeModal,handleSubmit}) {
   return (
     <div>
       <Modal isOpen={isOpen} onRequestClose={closeModal} style={customStyles}>
-        <p className="matchModal-title">매칭하기</p>
+        <p className="matchModal-title">이동</p>
         <div className="matchModal-content matchModal-line">
           <p>
-            <span className="blueText">홍길동보호자님</span>과 연결하시겠습니까?
+            해당 페이지로<span className="blueText">이동</span>하시겠습니까?
           </p>
         </div>
         <div className="modalContainer">
-          <button className="matchModalAgreeBtn" onClick={handleSubmit}>
-            수락
-          </button>
-          <button className="matchModalBtn" onClick={closeModal}>
+          <button className="matchModalAgreeBtn" onClick={closeModal}>
             닫기
+          </button>
+          <button className="matchModalBtn" onClick={handleSubmit}>
+            예
           </button>
         </div>
       </Modal>
@@ -39,4 +39,4 @@ function MatchingModal({ isOpen, closeModal,handleSubmit}) {
   );
 }
 
-export default MatchingModal;
+export default VoiceChatMovePageModal;

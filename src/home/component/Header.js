@@ -14,7 +14,7 @@ function Header({isProtege}) {
     };
 
     useEffect(()=>{
-        call('/api/v1/users',"GET",null).then((response)=>setUserName(response.userName)).catch((error)=>alert("이름 조회 실패"));
+        call('/api/v1/users',"GET",null).then((response)=>setUserName(response.userName)).catch((error)=>console.log(error));
     },[]);
 
     return (

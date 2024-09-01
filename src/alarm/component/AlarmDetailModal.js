@@ -1,11 +1,25 @@
+import "alarm/component/AlarmDetailModal.css";
+import { call } from 'login/service/ApiService';
+import { useEffect, useState } from 'react';
 import Modal from 'react-modal';
-import "alarm/component/AlarmDetailModal.css"
 
-function AlarmDetailModal({isOpen,closeModal}) {
+function AlarmDetailModal({isOpen,closeModal,notificationNo,getAlarmList,fetchAlarmCount}) {
+    const [notification, setNotification] =useState([]);
    
+    useEffect(()=>{
+        call(`/api/v1/notification/read/${notificationNo}`,"GET",null).then((response)=>{
+            setNotification(response);
+            getAlarmList();
+            fetchAlarmCount();
+        }).catch((error)=>{
+            alert("상세 조회 실패");
+        });
+    },[notificationNo, isOpen]);
+
     const AlarmDetailStyles = {
         overlay: {
-            backgroundColor: "rgba(0, 0, 0, 0.5)"
+            backgroundColor: "rgba(0, 0, 0, 0.5)",
+            zIndex: "2"
           },
           content: {
             top: "60%",
@@ -22,11 +36,11 @@ function AlarmDetailModal({isOpen,closeModal}) {
                 <p className='adModal-title'>상세조회</p>
                 {/* <hr></hr> */}
                 <div className='adModal-info-title'>
-                    <p>이상 징후</p>
+                    <p>{notification.notificationCategory}</p>
                 </div>
 
                 <div className='adModal-content adModal-dashed'>
-                    <p>어르신께 이상 금융거래로 의심되는 상황을 감지했어요</p>
+                    <p>{notification.notificationContent}</p>
                 </div>
                 <button className='adModalBtn' onClick={closeModal}>닫기</button>
             </Modal>

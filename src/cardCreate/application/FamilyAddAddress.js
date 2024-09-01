@@ -65,7 +65,7 @@ function FamilyAddAddress() {
           <br />
           <span>입력해주세요</span>
         </div>
-        <div className="pageNumber">6/7</div>
+        <div className="pageNumber">3/4</div>
       </div>
       <div className="app-input-container">
         <div className="app-input">

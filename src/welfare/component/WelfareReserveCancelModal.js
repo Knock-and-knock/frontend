@@ -1,7 +1,8 @@
 import React from 'react';
 import styles from 'welfare/css/WelfareReserveCancelModal.module.css';
 
-function WelfareReserveCancelModal({ closeModal }) {
+function WelfareReserveCancelModal({ closeModal, handleDelete  }) {
+  
   return (
     <div className={styles.container}>
       <div className={styles["main-container"]}>
@@ -14,7 +15,7 @@ function WelfareReserveCancelModal({ closeModal }) {
             </span>
           </div>
           <span className={`${styles["main-text"]} ${styles["reserved-cancel-cancel"]}`} onClick={closeModal}>닫기</span>
-          <span className={`${styles["main-text"]} ${styles["reserved-cancel-yeah"]}`}>예</span>
+          <span className={`${styles["main-text"]} ${styles["reserved-cancel-yeah"]}`} onClick={handleDelete}>예</span>
         </div>
       </div>
     </div>

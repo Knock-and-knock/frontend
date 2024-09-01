@@ -6,10 +6,21 @@ import { useCardCreate } from "./CardApp";
 
 function ExtraInfo(props) {
   const { userInfo, setUserInfo } = useCardCreate();
+
   const handlechange = (e) => {
-    setUserInfo({ ...userInfo, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+
+    if (name === "cardIssueFirstEname" || name === "cardIssueLastEname") {
+      const upperCaseValue = value.toUpperCase();
+      const englishOnlyValue = upperCaseValue.replace(/[^A-Z]/g, ""); // 영어만
+      setUserInfo({ ...userInfo, [name]: englishOnlyValue });
+    } else {
+      setUserInfo({ ...userInfo, [name]: value });
+    }
   };
+
   const navigate = useNavigate();
+
   const handlePaging = () => {
     navigate("/cardapp/agreement");
   };
@@ -22,6 +33,7 @@ function ExtraInfo(props) {
     { value: "shinhan", name: "신한은행" },
     { value: "woori", name: "우리은행" },
   ];
+  
   // 빈칸 확인
   useEffect(() => {
     const extraInfo = [

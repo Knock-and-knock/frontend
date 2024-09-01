@@ -36,7 +36,7 @@ function MyPage(props) {
         .then(()=>{
             navi("/loginid");
             localStorage.removeItem('ACCESS_TOKEN');  
-            localStorage.removeItem('loginUser'); 
+            // localStorage.removeItem('loginUser'); // 생체인증때문에 지웠습니다
         })
         .catch(()=>alert("로그아웃 실패"));
     }

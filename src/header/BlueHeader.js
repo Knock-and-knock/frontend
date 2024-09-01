@@ -33,7 +33,7 @@ function Header() {
     };
 
     return (
-        <header>
+        <header className={styles['blue-header']}>
             <div className={styles['blue-header-container']}>
                 <div className={styles["blue-header-info"]}>
                     <img 

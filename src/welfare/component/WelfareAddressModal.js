@@ -9,7 +9,7 @@ function WelfareAddressModal() {
     const navigate = useNavigate();
 
     const { userSpec, setUserSpec, handlechange } = useSpecHook();
-    const { address, detailAddress } = userSpec;
+    const { protegeAddress, protegeAddressDetail } = userSpec;
 
     useEffect(() => {
         if (!window.daum || !window.daum.Postcode) {
@@ -27,8 +27,8 @@ function WelfareAddressModal() {
             new window.daum.Postcode({
                 oncomplete: function(data) {
                     console.log(data);
-                    setUserSpec({ ...userSpec, address: data.address });
-                    document.getElementById('detail-address-input').focus();
+                    setUserSpec({ ...userSpec, protegeAddress: data.address });
+                    document.getElementById('detail-protegeAddress-input').focus();
                 }
             }).open();
         } else {
@@ -46,16 +46,16 @@ function WelfareAddressModal() {
         } else {
             setStyle(style2);
         }
-    }, [address, detailAddress]);
+    }, [protegeAddress, protegeAddressDetail]);
 
     const isFormComplete = () => {
-        return address && address.trim() !== '' && detailAddress && detailAddress.trim() !== '';
+        return protegeAddress && protegeAddress.trim() !== '' && protegeAddressDetail && protegeAddressDetail.trim() !== '';
     };
 
     const goInputDisease = () => {
         if (isFormComplete()) {
-            const fullAddress = `${address} ${detailAddress}`.trim();
-            setUserSpec({ ...userSpec, address: fullAddress }); // 합쳐진 주소를 저장
+            const fullAddress = `${protegeAddress} ${protegeAddressDetail}`.trim();
+            setUserSpec({ ...userSpec, protegeAddress: fullAddress }); // 합쳐진 주소를 저장
             navigate('/welfare-input/disease');
         }
     };
@@ -70,27 +70,27 @@ function WelfareAddressModal() {
                     <p className={styles.infomation}>입력해 주세요</p>
                 </div>
 
-                <div className={styles["address-container"]}>
-                    <div className={styles["address-section"]} onClick={openAddressSearch}>
+                <div className={styles["protegeAddress-container"]}>
+                    <div className={styles["protegeAddress-section"]} onClick={openAddressSearch}>
                         <input 
                             onChange={handlechange}
-                            className={styles["input-address"]} 
+                            className={styles["input-protegeAddress"]} 
                             type="text" 
-                            name='address'
+                            name='protegeAddress'
                             placeholder="도로명, 지번, 건물명 검색" 
-                            value={address || ""} 
+                            value={protegeAddress || ""} 
                             readOnly
                         />
                         <img src={glasses} alt="돋보기" className={styles["glasses-icon"]} />
                     </div>
                     <input 
-                        id="detail-address-input"
+                        id="detail-protegeAddress-input"
                         onChange={handlechange}
-                        className={styles["input-address-detail"]} 
+                        className={styles["input-protegeAddress-detail"]} 
                         type="text" 
-                        name='detailAddress'
+                        name='protegeAddressDetail'
                         placeholder="상세 주소" 
-                        value={detailAddress || ""}
+                        value={protegeAddressDetail || ""}
                     />
                 </div>
 

@@ -10,7 +10,7 @@ function Matching(props) {
 
   useEffect(() => {
     if (matchStatus === "ACCEPT") {
-      navi("/home");
+      navi("/nokmain");
     }
   }, [matchStatus, navi]);
 
@@ -19,16 +19,26 @@ function Matching(props) {
       console.log(response);
       if (response.matchStatus === "ACCEPT") {
         navi("/home");
-      } else {
-        navi(-1);
       }
     })
     .catch((error) => {
       console.log(error.message);
       alert("매칭실패");
+      navi(-1);
     });
 
-  return <div className="match-load">매칭중입니다...</div>;
+  const handleRefresh = () => {
+    window.location.reload();
+  };
+
+  return (
+    <div className="match-load">
+      매칭중입니다...
+      <button className="refresh-button" onClick={handleRefresh}>
+        새로고침
+      </button>
+    </div>
+  );
 }
 
 export default Matching;

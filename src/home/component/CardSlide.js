@@ -19,7 +19,6 @@ function CardSlide({isProtege}) {
     const [isCard, setIsCard] = useState(true);
     const [currentSlide, setCurrentSlide] = useState(0);
 
-
     useEffect(()=>{
         call(`/api/v1/card`,"GET",null).then((response)=>{
             if(response.length === 0 || response[0].cardId === null){
@@ -30,6 +29,7 @@ function CardSlide({isProtege}) {
             
         }).catch((error)=>{
             alert("카드조회 실패");
+            
     });
     },[userNo,isCard]);
 
@@ -56,8 +56,9 @@ function CardSlide({isProtege}) {
                         {cardList.map((card) => (
                         
                             <SwiperSlide key={card.cardId}>
-                                <CardSection cardlist={card}/>
-                                <CardBottom isProtege={isProtege} cardlist={card} cardId = {card.cardId}/>
+                                <CardSection isProtege={isProtege} cardlist={card}/>
+                                <CardBottom isProtege={isProtege} cardlist={card}/>
+    
                             </SwiperSlide>
                             
                         
