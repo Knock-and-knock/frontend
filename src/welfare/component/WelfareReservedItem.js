@@ -34,6 +34,10 @@ function WelfareReservedItem({ title, welfareBookReservationDate, welfareBookSta
   }
 
   const formattedwelfareBookReservationDate = formatDate(welfareBookReservationDate);
+
+  const formatPrice = (price) => {
+    return new Intl.NumberFormat('ko-KR').format(price);
+  };
   
   return (
       <div className={`${styles["main-section"]} ${styles["detailed-reserve"]}`}>
@@ -55,7 +59,7 @@ function WelfareReservedItem({ title, welfareBookReservationDate, welfareBookSta
         <hr />
         <div className={styles["detailed-reserved-info-container3"]}>
           <span className={styles["total-price-text"]}>최종결제금액</span>
-          <span className={styles["total-price-number"]}>{welfareTotalPrice} 원</span>
+          <span className={styles["total-price-number"]}>{formatPrice(welfareTotalPrice)} 원</span>
         </div>
       </div>
   );

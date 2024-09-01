@@ -20,7 +20,21 @@ function WelfareHanwoolModal({ closeModal }) {
   }
 
   useEffect(() => {
-    if (localStorage.getItem("loginUser") === "PROTECTOR") {
+    // if (localStorage.getItem("loginUser") === "PROTECTOR") {
+    //   call("/api/v1/match", "GET", null)
+    //     .then((response) => {
+    //       // userSpec에 protegeUserName 추가
+    //       setUserSpec({
+    //         ...userSpec,
+    //         protegeUserName: response.protegeUserName,
+    //         welfareNo: 3 // welfareNo 초기값 설정
+    //       });
+    //     })
+    //     .catch((error) => {
+    //       console.log(error.message);
+    //     });
+    // }
+    
       call("/api/v1/match", "GET", null)
         .then((response) => {
           // userSpec에 protegeUserName 추가
@@ -33,7 +47,7 @@ function WelfareHanwoolModal({ closeModal }) {
         .catch((error) => {
           console.log(error.message);
         });
-    }
+    
   }, []);
 
   useEffect(() => {
