@@ -1,7 +1,7 @@
 import "home/component/CardSection.css";
 import card from "image/home-card.png";
 
-function CardSection({cardlist}) {
+function CardSection({cardlist,isProtege}) {
     const cardNo = cardlist?.cardNo || '0000';
    
     return (
@@ -15,6 +15,7 @@ function CardSection({cardlist}) {
                         <p>{cardlist.totalAmount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원</p>
                 
                     </div> 
+                    <p className={`cardSection-isFamily ${!isProtege ? 'blue-tag' : ''}`} >{cardlist.cardIsFamily?"가족카드":"개인카드"}</p>
                     <p className='cardSection-cardName'>{cardlist.cardBank} Life Care({cardNo.slice(-4)})</p> 
                 </div>
                 <img src={card} alt="카드" className="creditCard" />           

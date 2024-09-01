@@ -1,4 +1,4 @@
-const ACCESS_TOKEN = "ACCESS_TOKEN";
+
 export function call(api, method, request) {
   let headers = new Headers({
     "Content-Type": "application/json",
@@ -32,32 +32,41 @@ export function call(api, method, request) {
 
   //비동기통신: axios, ajax, fetch, promise...
   return fetch(options.url, options)
-    .then((response) =>
-      response.json().then((json) => {
+  .then((response) => {
+    const contentType = response.headers.get("content-type");
+    
+    // 응답이 JSON 형식인지 확인
+    if (contentType && contentType.indexOf("application/json") !== -1) {
+      return response.json().then((json) => {
         console.log(json);
         if (!response.ok) {
-          // response.ok가 true이면 정상적인 리스폰스를 받은것, 아니면 에러 리스폰스를 받은것.
           return Promise.reject(json);
         }
         return json;
-      })
-    )
-    .catch((error) => {
-      // 추가된 부분
-      console.log(error);
-      if (error.status === undefined || error.status === 403) {
-       // window.location.href = "/login"; // redirect
-      }
-      return Promise.reject(error);
-    });
+      });
+    } else if (contentType && contentType.indexOf("text/plain") !== -1) {
+      // 응답이 텍스트 형식인 경우 처리
+      return response.text().then((text) => {
+        console.log(text);
+        if (!response.ok) {
+          return Promise.reject(text);
+        }
+        return text;
+      });
+    } else {
+      // 예상치 못한 Content-Type의 경우
+      return Promise.reject("Unexpected content type: " + contentType);
+    }
+  })
+  .catch((error) => {
+    console.log(error);
+    if (error.status === undefined || error.status === 403) {
+     // window.location.href = "/login"; // redirect
+    }
+    return Promise.reject(error);
+  });
 }
 
 
-
-export function signout() {
-  localStorage.setItem(ACCESS_TOKEN, null);
-  window.location.href = "/loginId";
-
-}
 
 

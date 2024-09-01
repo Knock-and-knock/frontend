@@ -39,7 +39,19 @@
     font-size: 22px;
     font-weight: bold;
 }
+.cardSection-isFamily{
+    background-color: #FFC37D;
+    border-radius: 15px;
+    width: 40%;
+    text-align: center;
+    margin: 0px;
+    padding: 5px;
+}
+.blue-tag{
+    background-color: #B5D7FF !important;
+}
 .cardSection-cardName{
     font-size: 16px;
     color: #686868;
+    margin-top: 5px;
 }

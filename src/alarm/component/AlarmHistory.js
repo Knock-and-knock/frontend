@@ -3,8 +3,8 @@ import 'alarm/component/AlarmHistory.css';
 import { call } from 'login/service/ApiService';
 import AlarmDetailModal from './AlarmDetailModal';
 
-function AlarmHistory() {
-    const [alarmList, setAlarmList] = useState([]);
+function AlarmHistory({alarmList}) {
+    
     const [selectedAlarm, setSelectedAlarm] = useState(null);
     const [isOpen, setIsOpen] = useState(false);
 
@@ -25,12 +25,7 @@ function AlarmHistory() {
         document.body.classList.toggle("unscrollable", isOpen);
     }, [isOpen]);
 
-    // 알람 목록 조회
-    useEffect(() => {
-        call('/api/v1/notification/read', "GET", null)
-            .then(response => setAlarmList(response))
-            .catch(() => alert("알람 조회 실패"));
-    }, []);
+    
 
     let previousDate = '';
 

@@ -22,11 +22,16 @@
     margin: 0px 0px 0px 10px;
 }
 
-.cardBottom-separator{
+.cardBottom-Rseparator{
     padding-right: 10px;
     border-right: 1px solid #2C2C2C;
     margin-right: 10px;
 }
+.cardBottom-Lseparator{
+    padding-left: 10px;
+    border-left: 1px solid #2C2C2C;
+    margin-left: 10px;
+}
 .family-card{
-    color: #BDB8B1 !important;
+    opacity: 0.3 !important;
 }
