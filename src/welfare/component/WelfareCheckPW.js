@@ -8,7 +8,7 @@ function WelfareCheckPW() {
 
     const gopayComplete = () => {
         if (password.length === 6) {
-            navigate('/welfare-paycomplete');
+            navigate('/welfare-input/paycomplete');
         }
     }
 

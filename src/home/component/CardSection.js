@@ -16,7 +16,7 @@ function CardSection({cardlist,isProtege}) {
                 
                     </div> 
                     <p className={`cardSection-isFamily ${!isProtege ? 'blue-tag' : ''}`} >{cardlist.cardIsFamily?"가족카드":"개인카드"}</p>
-                    <p className='cardSection-cardName'>{cardlist.cardBank} Life Care({cardNo.slice(-4)})</p> 
+                    <p className='cardSection-cardName'>신한 Life Care({cardNo.slice(-4)})</p> 
                 </div>
                 <img src={card} alt="카드" className="creditCard" />           
             </div>

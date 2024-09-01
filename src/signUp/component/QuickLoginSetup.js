@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import SignUpHeader from './header/SignUpHeader';
 import { Link, useNavigate } from 'react-router-dom';
-import check from 'image/icon/small-check.svg';
+import loginCheck from 'image/icon/small-check.svg';
 import { useMember } from 'signUp/SignUpMain';
 import { call } from 'login/service/ApiService';
 
@@ -112,12 +112,12 @@ function QuickLoginSetup(props) {
             <div className="signup-container">
                 <div className='signup-quickLogin'>
                     <p className='quickLogin-title'>간편 비밀번호</p>
-                    <div className='quickLogin-content' onClick={handlePinCircleClick}> {/* 생체 인증 함수 호출 */}
+                    <div className='quickLogin-content' onClick={handlePinCircleClick}>
                         <p>비밀번호 6자리로 로그인 합니다</p>
                         <div className='icon-check'>
-                            <img src={check} alt="간편로그인설정" className="check" />
+                            <img src={loginCheck} alt="간편로그인설정" className="checkLogin" />
                             <div 
-                                className={`icon-circle ${isPinChecked ? 'checked' : ''}`} 
+                                className={`icon-circle ${isPinChecked ? 'checkedLogin' : ''}`} 
                             />
                         </div>
                     </div>
@@ -127,9 +127,9 @@ function QuickLoginSetup(props) {
                     <div className='quickLogin-content' onClick={handleBiometricAuth}> {/* 생체 인증 함수 호출 */}
                         <p>등록된 생체 정보로 로그인 합니다</p>
                         <div className='icon-check'>
-                            <img src={check} alt="간편로그인설정" className="check" />
+                            <img src={loginCheck} alt="간편로그인설정" className="checkLogin" />
                             <div 
-                                className={`icon-circle ${isBioChecked ? 'checked' : ''}`} 
+                                className={`icon-circle ${isBioChecked ? 'checkedLogin' : ''}`} 
                             />
                         </div>
                     </div>

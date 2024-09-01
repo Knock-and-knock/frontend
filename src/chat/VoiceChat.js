@@ -29,15 +29,16 @@ function VoiceChat(props) {
 
   useEffect(() => {
     async function initializeChat() {
+      // await handleChatRoom(userInfo);
+      // handleAutoSub(
+      //   "Greeting",
+      //   setChatResponse,
+      //   setIsLoading,
+      //   setIsSpeaking,
+      //   setIsOpen,
+      //   setServiceUrl
+      // );
       await handleChatRoom(userInfo);
-      handleAutoSub(
-        "Greeting",
-        setChatResponse,
-        setIsLoading,
-        setIsSpeaking,
-        setIsOpen,
-        setServiceUrl
-      );
       availabilityFunc(sendMessage);
     }
 

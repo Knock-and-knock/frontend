@@ -25,6 +25,8 @@ function PinCheck(props) {
             navi("/signup/quickloginsetup");
         }else{
             setErrorMessage("비밀번호가 다릅니다");
+            setPin('');
+            inputRef.current.focus();
         }
     }
     const buttonClass = pin.length === 6 ? "signup-nextBtn" : "signup-nextBtn disabled";

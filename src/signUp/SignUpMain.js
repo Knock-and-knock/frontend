@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useState } from "react";
 import { Outlet } from "react-router-dom";
 import "./SignUpMain.css";
 
@@ -9,10 +9,17 @@ function SignUpMain(props) {
     const [userInfo, setUserInfo] = useState({});
     const handlechange =(e)=>{
         setUserInfo({...userInfo, [e.target.name]:e.target.value} );
+        const { name, value } = e.target;
+        if (name === "userId") {
+            // 영문자와 숫자만 허용
+            const filteredValue = value.replace(/[^a-zA-Z0-9]/g, "");
+            setUserInfo({ ...userInfo, [name]: filteredValue });
+        } else {
+            setUserInfo({ ...userInfo, [name]: value });
+        }
     };
-    useEffect(()=>{
-        console.log(userInfo);
-    }, [userInfo]);
+     
+   
     return (
         <div>
             <UserContext.Provider value={{userInfo, setUserInfo, handlechange}}>
