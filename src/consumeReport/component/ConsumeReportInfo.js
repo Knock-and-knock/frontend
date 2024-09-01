@@ -48,6 +48,7 @@ function ConsumeReportInfo() {
         console.log("카드아이디: " + cardList.cardId);
     }, []);
 
+
     useEffect(() => {
         fetchData();
     }, [selectedYear, selectedMonth]);

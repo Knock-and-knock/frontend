@@ -7,27 +7,36 @@ import ConsumDateModal from './component/ConsumDateModal';
 import ConsumDetailModal from './component/ConsumDetailModal';
 import ConsumList from './component/ConsumList';
 import { useLocation } from "react-router-dom";
+import info from "image/icon/info.png";
 
 function Consumption() {
     const location = useLocation();
     const cardList = location.state.value;
-;
+
     const [isOpenDetail, setIsOpenDetail] = useState(false);
     const [isOpenDate, setIsOpenDate] = useState(false);
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
     const [consumList, setConsumList] = useState([]);
     const [selectedCardId, setSelectedCardId] = useState(null);
+    const [cardDetail, setCardDetail] = useState({});
+    
+    // 한국 시간으로 날짜를 반환하는 함수
+    const getKSTDate = (date) => {
+        const offset = 9 * 60; // 한국 시간대는 UTC+9
+        const utcDate = new Date(date.getTime() + offset * 60 * 1000);
+        return utcDate.toISOString().split('T')[0];
+    };
 
     const getStartOfMonth = () => {
         const today = new Date();
         const firstDayOfNextMonth = new Date(today.getFullYear(), today.getMonth(), 1);
-        return firstDayOfNextMonth.toISOString().split('T')[0];
+        return getKSTDate(firstDayOfNextMonth);
     };
 
     const getEndOfMonth = () => {
         const today = new Date();
-        return today.toISOString().split('T')[0];
+        return getKSTDate(today);
     };
 
     const updateDates = (start, end) => {
@@ -35,11 +44,11 @@ function Consumption() {
         setEndDate(end);
     };
 
-    const handleOpenDetailModal = () => setIsOpenDetail(true);
     const handleOpenDateModal = (cardId) => {
         setSelectedCardId(cardId);
         setIsOpenDate(true);
     };
+
     const closeDetailModal = () => setIsOpenDetail(false);
     const closeDateModal = () => setIsOpenDate(false);
 
@@ -67,6 +76,7 @@ function Consumption() {
     const calculateTotalAmount = () => {
         return consumList.reduce((total, item) => total + item.cardHistoryAmount, 0);
     };
+
     return (
         <div>
             <Header />
@@ -78,14 +88,17 @@ function Consumption() {
                     endDate={endDate}
                     totalAmount={calculateTotalAmount()}
                 />
-                <ConsumList 
-                    handleOpenModal={handleOpenDetailModal}
-                    consumList={consumList} 
-                /> 
+                {consumList.length !== 0?(<ConsumList 
+                    setIsOpenDetail={setIsOpenDetail}
+                    setCardDetail={setCardDetail}
+                    consumList={consumList}
+                />):
+                (<p className="cardlist-none"><img src={info} alt="카드내역 없음" className="card-info-icon" />해당 기간 카드내역이 없습니다.</p>)} 
+
                 <ConsumDetailModal 
                     isOpen={isOpenDetail} 
                     closeModal={closeDetailModal} 
-                    consumList={consumList} 
+                    cardDetail={cardDetail}
                 />
                 <ConsumDateModal 
                     setConsumList={setConsumList} 

@@ -13,12 +13,7 @@ function AlarmDetailModal({isOpen,closeModal,notificationNo}) {
             alert("상세 조회 실패");
         });
     },[notificationNo, isOpen]);
-     // 모달이 닫힐 때 상태 초기화
-     useEffect(() => {
-        if (!isOpen) {
-            setNotification(null);
-        }
-    }, [isOpen]);
+
     const AlarmDetailStyles = {
         overlay: {
             backgroundColor: "rgba(0, 0, 0, 0.5)"

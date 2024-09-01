@@ -7,17 +7,34 @@ import { call } from 'login/service/ApiService';
 function Register(props) {
     const {userInfo, handlechange} = useMember();
     const [isNextEnabled, setIsNextEnabled] = useState(false);
-    const [errorMessage, setErrorMessage] = useState('');
-    const [userIdError, setUserIdError] = useState(false);
+    const [userIdError, setUserIdError] = useState('');
+    const [userPasswordError, setUserPasswordError] = useState('');
     const [isPasswordMismatch, setIsPasswordMismatch] = useState(false); // 비밀번호 불일치 상태 추가
     const navi = useNavigate();
 
     useEffect(() => {
         const { userId, userPassword, userPwCheck } = userInfo;
-        const isValid = userId && userPassword && userPassword === userPwCheck && userId.length >= 4 && userId.length <= 16 && userPassword.length >= 8 && userPassword.length <= 16 && userPwCheck.length >= 8 && userPwCheck.length <= 16;
 
+        const userIdValid = userId && userId.length >= 4 && userId.length <= 16;
+        const passwordValid = userPassword && userPassword.length >= 8 && userPassword.length <= 16;
+        const pwCheckValid = userPwCheck && userPwCheck.length >= 8 && userPwCheck.length <= 16;
+
+        const isUserIdValid = (id) => /^[a-zA-Z0-9]+$/.test(id); // 영문자와 숫자만 허용
+
+        const userIdErrorMsg = userId
+            ? (userIdValid ? (isUserIdValid(userId) ? '' : '아이디는 영문자와 숫자만 포함할 수 있습니다.') : '아이디는 4자 이상 16자 이하로 입력해주세요.')
+            : '';
+        setUserIdError(userIdErrorMsg);
+
+        const userPasswordErrorMsg = userPassword ? (passwordValid ? '' : '비밀번호는 8자 이상 16자 이하로 입력해주세요.') : '';
+        setUserPasswordError(userPasswordErrorMsg);
+
+        const isMismatch = userPwCheck && userPassword && userPassword !== userPwCheck;
+        setIsPasswordMismatch(isMismatch);
+
+        const isValid = userIdValid && passwordValid && pwCheckValid && !isMismatch;
         setIsNextEnabled(isValid);
-        setIsPasswordMismatch(userPassword !== userPwCheck); // 비밀번호 불일치 상태 업데이트
+
     }, [userInfo]);
 
     const handleSubmit = (e) => {
@@ -31,21 +48,27 @@ function Register(props) {
                 if (response.result === true) {
                     navi("/signup/infoinput");
                 } else {
-                    setErrorMessage(response.message);
-                    setUserIdError(true);
+                    setUserIdError(response.message);
                 }
             }
-        ).catch();
+        ).catch(()=>{
+            alert("중복체크 실패");
+        });
     };
 
     return (
         <div>
             <SignUpHeader/>
             <div className="signup-container">
-                <input onChange={handlechange} className={`signup-input ${userIdError ? 'signup-input-error' : ''}`} type="text" name="userId" value={userInfo.userId} placeholder="아이디(4 ~ 16자리 이내)" />
-                <div className={'check-input'}>{errorMessage}</div>
-                <input onChange={handlechange} className="signup-input" type="password" name="userPassword" value={userInfo.userPassword} placeholder="비밀번호(8 ~ 16자리 이내)" />
-                <div className='check-input check-userpw'></div>
+                <input 
+                onChange={handlechange}
+                 className={`signup-input ${userIdError ? 'signup-input-error' : ''}`} 
+                 type="text" name="userId" 
+                 value={userInfo.userId} 
+                 placeholder="아이디(4 ~ 16자리 이내)" />
+                <div className={'check-input'}>{userIdError}</div>
+                <input onChange={handlechange}  className={`signup-input ${userPasswordError ? 'signup-input-error' : ''}`}  type="password" name="userPassword" value={userInfo.userPassword} placeholder="비밀번호(8 ~ 16자리 이내)" />
+                <div className='check-input check-userpw'>{userPasswordError}</div>
                 <input 
                     onChange={handlechange} 
                     className={`signup-input ${isPasswordMismatch ? 'signup-input-error' : ''}`} 
