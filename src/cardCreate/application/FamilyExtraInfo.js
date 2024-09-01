@@ -62,12 +62,14 @@ function FamilyExtraInfo(props) {
               placeholder="영문 성"
               name="cardIssueFirstEname"
               onChange={handlechange}
+              value={userInfo.cardIssueFirstEname || ""}
             />
             <input
               className="secInput"
               placeholder="영문 이름"
               name="cardIssueLastEname"
               onChange={handlechange}
+              value={userInfo.cardIssueLastEname || ""}
             />
           </div>
           <p className="caption-text">여권과 동일한 영문명을 입력해 주세요</p>
