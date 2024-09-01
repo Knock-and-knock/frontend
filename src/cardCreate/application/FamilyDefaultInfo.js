@@ -86,7 +86,6 @@ function FamilyDefaultInfo(props) {
             placeholder="이름"
             name="cardIssueKname"
             onChange={handleChange}
-            value={userInfo.cardIssueKname || ""}
           />
         </div>
         <div className="app-input">
@@ -97,7 +96,6 @@ function FamilyDefaultInfo(props) {
             name="cardIssuePhone"
             onChange={handleChange}
             maxLength={13}
-            value={userInfo.cardIssuePhone || ""}
           />
         </div>
       </div>
