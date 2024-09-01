@@ -3,12 +3,14 @@ import { call } from 'login/service/ApiService';
 import { useEffect, useState } from 'react';
 import Modal from 'react-modal';
 
-function AlarmDetailModal({isOpen,closeModal,notificationNo}) {
+function AlarmDetailModal({isOpen,closeModal,notificationNo,getAlarmList,fetchAlarmCount}) {
     const [notification, setNotification] =useState([]);
    
     useEffect(()=>{
         call(`/api/v1/notification/read/${notificationNo}`,"GET",null).then((response)=>{
             setNotification(response);
+            getAlarmList();
+            fetchAlarmCount();
         }).catch((error)=>{
             alert("상세 조회 실패");
         });
@@ -16,7 +18,8 @@ function AlarmDetailModal({isOpen,closeModal,notificationNo}) {
 
     const AlarmDetailStyles = {
         overlay: {
-            backgroundColor: "rgba(0, 0, 0, 0.5)"
+            backgroundColor: "rgba(0, 0, 0, 0.5)",
+            zIndex: "2"
           },
           content: {
             top: "60%",
