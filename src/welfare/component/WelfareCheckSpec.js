@@ -57,19 +57,16 @@ function WelfareCheckSpec() {
         call('/api/v1/welfare-book/reserve', 'POST', userSpec).then((response)=>{
             console.log(response);
 
-            call('/api/v1/card-history', 'POST', userSpec).then((response)=> {
-                setUserSpec(prevSpec => ({
-                    ...prevSpec,
+            call('/api/v1/card-history', 'POST',{
+             
                     cardHistoryAmount: userSpec.welfareBookTotalPrice,
                     cardHistoryShopname: "돌봄 서비스",
                     // cardHistoryApprove: getCurrentFormattedDate(),
                     cardCategoryNo: 8,
                     cardId: 5,
                     cardFamily: false
-                }));
-                
-                
-
+                }).then((response)=> {
+               
                 navigate('/welfare-input/paycomplete');
             }).catch((error)=>{
                 console.log("카드내역 생성 실패: " + error)
