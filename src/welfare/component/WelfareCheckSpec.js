@@ -25,14 +25,13 @@ function WelfareCheckSpec() {
         }).catch((error)=>{
             alert("예약 실패");
         });
-       
-    }
+    };
 
     const formatDate = (date) => {
         if (!date) return '';
         const d = new Date(date);
         const year = d.getFullYear();
-        const month = String(d.getMonth() + 1).padStart(2, '0'); // 월은 0부터 시작하므로 1을 더해줍니다.
+        const month = String(d.getMonth() + 1).padStart(2, '0');
         const day = String(d.getDate()).padStart(2, '0');
         return `${year}-${month}-${day}`;
     };
@@ -66,10 +65,7 @@ function WelfareCheckSpec() {
                     <input className={styles["spec-check"]} type="text" placeholder="성별" value={formatGender(userSpec.userGender) || ''} disabled />
 
                     <p className={styles["spec-info"]}>주소</p>
-                    <input className={styles["spec-check"]} type="text" placeholder="주소" value={userSpec.address + " " + userSpec.detailAddress || ''} disabled />
-
-                    {/* <p className={styles["spec-info"]}>연락처</p>
-                    <input className={styles["spec-check"]} type="text" placeholder="연락처" value="010-4519-3851" disabled /> */}
+                    <input className={styles["spec-check"]} type="text" placeholder="주소" value={`${userSpec.protegeAddress} ${userSpec.protegeAddressDetail}` || ''} disabled />
 
                     <p className={styles["spec-info"]}>신체</p>
                     <input className={styles["spec-check-hw"]} type="number" placeholder="키" value={userSpec.userHeight || ''} disabled />

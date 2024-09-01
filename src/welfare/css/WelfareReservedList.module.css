@@ -44,14 +44,18 @@ hr {
   color: #2c2c2c;
 }
 
+.noItemsContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 80%;
+}
+
 .noItems {
   margin: 0 auto;
-  font-weight: bold;
   font-size: 20px;
-  color: #FF5959;
-  position: absolute;
-  top: 50%;
-  bottom: 0%;
+  color: #999;
+  margin-left: 5px;
 }
 
 .main-container {

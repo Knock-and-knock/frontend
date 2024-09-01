@@ -49,6 +49,24 @@
   margin-top: 25px;
 }
 
+.no-data-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50%;
+}
+
+.no-data-image {
+  margin-right: 5px;
+}
+
+.no-data-text {
+  text-align: center;
+  font-size: 18px;
+  color: #999;
+  
+}
+
 /* 반응형 디자인 */
 @media (min-width: 768px) {
     .consume-report-container {

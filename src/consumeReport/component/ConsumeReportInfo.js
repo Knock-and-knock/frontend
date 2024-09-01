@@ -4,6 +4,7 @@ import Chart from "react-apexcharts";
 import ConsumeReportDate from './ConsumeReportDate'; // 날짜 선택 컴포넌트를 불러옴
 import { call } from 'login/service/ApiService';
 import { useLocation } from 'react-router-dom';
+import info from "image/icon/info.png";
 
 function ConsumeReportInfo() {
     const [selectedFilter, setSelectedFilter] = useState('personal');
@@ -20,51 +21,48 @@ function ConsumeReportInfo() {
         setSelectedMonth(month);
     };
 
-    // ★★★★★ Navigate로 보낸 페이지에서 데이터를 받으려면 아래처럼 받아야함!!! ★★★★★
-    // 함수에 받는 것이 아님!!
     const location = useLocation();
-    const cardId = location.state.value;
+    const cardList = location.state.value;
 
-    // 숫자를 세 자리마다 쉼표로 구분하는 포맷터
     const formatPrice = (price) => {
         return new Intl.NumberFormat('ko-KR').format(price);
     };
 
-    // API 호출 함수
     const fetchData = async () => {
         const startDate = `${selectedYear}-${String(selectedMonth).padStart(2, '0')}-01`;
         const lastDayOfMonth = new Date(selectedYear, selectedMonth, 0).getDate();
         const endDate = `${selectedYear}-${String(selectedMonth).padStart(2, '0')}-${String(lastDayOfMonth).padStart(2, '0')}`;
 
         try {
-            const response = await call(`/api/v1/consumption/${cardId}/${startDate}/${endDate}`, "GET", null);
+            const response = await call(`/api/v1/consumption/${cardList.cardId}/${startDate}/${endDate}`, "GET", null);
             setData(response);
-            setLoading(false); // 데이터 로드 완료 후 로딩 상태 업데이트
+            setLoading(false); 
         } catch (error) {
             console.error("Error fetching data:", error);
-            console.log("cardId: " + {cardId} + "startDate: " + {startDate} + "endDate: " + {startDate})
-            setLoading(false); // 오류가 발생해도 로딩 상태 해제
+            console.log("cardId: " + cardList.cardId + "startDate: " + {startDate} + "endDate: " + {startDate})
+            setLoading(false);
         }
     };
 
     useEffect(() => {
-        console.log("카드아이디: " + cardId);
+        console.log("카드아이디: " + cardList.cardId);
     }, []);
 
-    // 연도나 월이 변경될 때마다 API 호출
     useEffect(() => {
         fetchData();
     }, [selectedYear, selectedMonth]);
 
-    // API로부터 받은 데이터를 시리즈와 레이블 형식으로 변환
     const processedData = useMemo(() => {
         const labels = data.map(item => item.categoryName);
         const series = data.map(item => item.amount);
         return { labels, series };
     }, [data]);
 
+    // 모든 카테고리의 totalAmount가 0인지 확인
+    const isAllZero = data.every(item => item.totalAmount === 0);
+
     const donutData = {
-        series: processedData.series, // series에 있는 값 그대로 사용
+        series: processedData.series,
         options: {
             chart: {
                 type: 'donut',
@@ -100,7 +98,7 @@ function ConsumeReportInfo() {
                         size: '50%',
                     },
                     dataLabels: {
-                        minAngleToShowLabel: 0 // 각도가 0도일 때도 라벨을 표시하지 않도록 설정
+                        minAngleToShowLabel: 0
                     }
                 }
             },
@@ -117,19 +115,15 @@ function ConsumeReportInfo() {
             noData: {
                 text: '소비 내역이 없습니다.',
                 align: 'center',
-                fontSize: '24px', // 이거 왜 안됨??
-                fontWeight: 'bold',
                 verticalAlign: 'middle',
-                offsetX: 0,
-                offsetY: 0,
                 style: {
                     color: '#2c2c2c',
-                    fontSize: '14px',
+                    fontSize: '24px',
+                    fontWeight: 'bold',
                 }
             }
         },
     };
-    
 
     const barData = {
         series: [{
@@ -141,7 +135,7 @@ function ConsumeReportInfo() {
                 type: 'bar',
                 fontFamily: 'inherit',
                 toolbar: {
-                    show: false // 다운로드 등의 버튼을 제거
+                    show: false
                 },
             },
             plotOptions: {
@@ -150,10 +144,10 @@ function ConsumeReportInfo() {
                     barHeight: '50%',
                     endingShape: 'rounded',
                     borderRadius: 5,
-                    distributed: true, // 각 막대를 개별 색상으로 설정
-                    rangeBarOverlap: true, // 막대가 겹치도록 설정
+                    distributed: true,
+                    rangeBarOverlap: true,
                     colors: {
-                        backgroundBarColors: ['#d9d9d9'], // 모든 막대의 배경을 회색으로 설정
+                        backgroundBarColors: ['#d9d9d9'],
                         backgroundBarOpacity: 1,
                         backgroundBarRadius: 5,
                     },
@@ -162,15 +156,15 @@ function ConsumeReportInfo() {
             xaxis: {
                 categories: processedData.labels,
                 labels: {
-                    show: false // 눈금 제거
+                    show: false
                 },
                 axisBorder: {
-                    show: false // x축의 회색 선 제거
+                    show: false
                 },
                 axisTicks: {
-                    show: false // x축의 틱 제거
+                    show: false
                 },
-                tickAmount: Math.max(...processedData.series) / 10 // 최대값을 10단위로 나눔
+                tickAmount: Math.max(...processedData.series) / 10
             },
             yaxis: {
                 categories: processedData.labels,
@@ -183,14 +177,14 @@ function ConsumeReportInfo() {
                 }
             },
             grid: {
-                show: false // 그리드 라인 제거
+                show: false
             },
             legend: {
                 show: false,
                 position: 'left',
             },
             tooltip: {
-                enabled: false // 기본 툴팁을 비활성화
+                enabled: false
             },
             fill: {
                 colors: ['#6DD193', '#F56A71', '#E9A260', '#66B1B5', '#4AADE5', '#9B7F9E', '#625B8B'],
@@ -198,9 +192,9 @@ function ConsumeReportInfo() {
             },
             dataLabels: {
                 enabled: true,
-                formatter: (value) => `${formatPrice(value)} 원`, // 값 뒤에 ' 원'을 추가
+                formatter: (value) => `${formatPrice(value)} 원`,
                 textAnchor: 'middle',
-                offsetX: 450, // 값을 오른쪽으로 약간 이동
+                offsetX: 450,
                 style: {
                     colors: ['#2c2c2c'],
                     fontSize: '14px',
@@ -209,7 +203,7 @@ function ConsumeReportInfo() {
                 dropShadow: {
                     enabled: false,
                 },
-                position: 'right' // 값이 막대의 오른쪽 끝에 위치하도록 설정
+                position: 'right'
             },
             states: {
                 normal: {
@@ -227,58 +221,65 @@ function ConsumeReportInfo() {
         }
     };
 
-    // 합계 계산
     const totalPrice = useMemo(() => {
         return donutData.series.reduce((total, num) => total + num, 0);
     }, [donutData.series]);
 
     const renderChart = () => {
         if (loading) {
-            return <div>Loading...</div>; // 데이터 로드 중일 때 로딩 표시
+            return <div>Loading...</div>;
         }
 
-        switch (selectedFilter) {
-            default:
-                return (
-                    <div className='chart-container'>
-                        <div className='circle-chart-container'>
-                            <Chart
-                                options={donutData.options}
-                                series={donutData.series}
-                                type="donut"
-                            />
-                        </div>
-                        {selectedData && (
-                            <div
-                                className='tooltip'
-                                style={{
-                                    position: 'absolute',
-                                    top: `${tooltipPosition.y}px`,
-                                    left: `${tooltipPosition.x}px`,
-                                    backgroundColor: selectedData.color, // 항목 색상으로 배경색 설정
-                                    padding: '4px 8px',
-                                    borderRadius: '8px',
-                                    pointerEvents: 'none',
-                                    border: 'none',
-                                    color: '#fff',
-                                    zIndex: 1000
-                                }}
-                            >
-                                <p style={{ margin: 0, fontWeight: 'bold' }}>{selectedData.label}</p>
-                                <p style={{ margin: 0 }}>{formatPrice(selectedData.value)} 원</p>
-                            </div>
-                        )}
-                        <div className='bar-chart-container'>
-                            <Chart
-                                options={barData.options}
-                                series={barData.series}
-                                type="bar"
-                                height={360} // 차트의 총 높이 조정
-                            />
-                        </div>
-                    </div>
-                );
+        if (isAllZero) {
+            return <div className='no-data-container'>
+                    <img 
+                        src={info} 
+                        alt="지문 인증 로그인" 
+                        className="no-data-image" 
+                    />
+                    <p className='no-data-text'>소비 내역이 없습니다.</p>
+                    </div>;
         }
+
+        return (
+            <div className='chart-container'>
+                <div className='circle-chart-container'>
+                    <Chart
+                        options={donutData.options}
+                        series={donutData.series}
+                        type="donut"
+                    />
+                </div>
+                {selectedData && (
+                    <div
+                        className='tooltip'
+                        style={{
+                            position: 'absolute',
+                            top: `${tooltipPosition.y}px`,
+                            left: `${tooltipPosition.x}px`,
+                            backgroundColor: selectedData.color,
+                            padding: '4px 8px',
+                            borderRadius: '8px',
+                            pointerEvents: 'none',
+                            border: 'none',
+                            color: '#fff',
+                            zIndex: 1000
+                        }}
+                    >
+                        <p style={{ margin: 0, fontWeight: 'bold' }}>{selectedData.label}</p>
+                        <p style={{ margin: 0 }}>{formatPrice(selectedData.value)} 원</p>
+                    </div>
+                )}
+                <div className='bar-chart-container'>
+                    <Chart
+                        options={barData.options}
+                        series={barData.series}
+                        type="bar"
+                        height={360}
+                    />
+                </div>
+            </div>
+        );
     };
 
     return (
