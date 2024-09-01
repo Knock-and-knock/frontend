@@ -30,7 +30,7 @@ function VerifyCode(props) {
             if(response.result === true){
                 navi("/signup/rolecheck")
             }else{
-                alert(response.message);
+                setErrorMessage(response.message);
             }
             
         }).catch((error)=>{
