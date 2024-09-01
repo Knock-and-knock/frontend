@@ -1,6 +1,12 @@
 .csModal-wrap{
     background-color: white;
     width: 100%;
+    position:fixed !important;
+    bottom: 0;
+    left: 0;
+    padding: 20px;
+    border-radius: 15px 15px 0px 0px;
+    box-sizing: border-box;
 }
 .csModal-title{
     font-size: 22px;

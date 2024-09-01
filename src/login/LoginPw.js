@@ -62,6 +62,8 @@ function LoginPw(props) {
         }).catch((error) => {
             console.error("간편비밀번호로그인 실패", error);
             setErrorMessage("로그인에 실패했습니다. 다시 시도해주세요.");
+            setPw('');
+            inputRef.current.focus();
         });
     };
 
