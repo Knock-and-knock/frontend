@@ -47,7 +47,7 @@ jobs:
           script: |
             CONTAINER_ID=$(sudo docker ps -q --filter "publish=80-80")
 
-            echo "DOCKER_USERNAME=${{ secrets.DOCKER_USERNAME }}" > ${{env.PROJECT_DIR}}/.env.deploy
+            echo "DOCKER_USERNAME=${{ secrets.DOCKERHUB_USERNAME }}" >> ${{env.PROJECT_DIR}}/.env.deploy
             echo "IMAGE_NAME=${{ env.IMAGE_NAME }}" >> ${{env.PROJECT_DIR}}/.env.deploy
             echo "IMAGE_TAG=${{ github.sha }}" >> ${{env.PROJECT_DIR}}/.env.deploy
   
