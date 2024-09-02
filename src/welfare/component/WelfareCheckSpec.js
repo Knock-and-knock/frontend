@@ -53,30 +53,7 @@ function WelfareCheckSpec() {
     };
 
     const goSetPW = () => {
-        call('/api/v1/welfare-book/reserve', 'POST', userSpec).then((response)=>{
-            console.log(response);
-
-            call('/api/v1/card-history', 'POST',{
-             
-                    cardHistoryAmount: userSpec.welfareBookTotalPrice,
-                    cardHistoryShopname: "돌봄 서비스",
-                    // cardHistoryApprove: getCurrentFormattedDate(),
-                    cardCategoryNo: 8,
-                    cardId: 5,
-                    cardFamily: false   // cardId가 기본키인데 받을 이유가 있나?
-                }).then((response)=> {
-               
-                navigate('/welfare-input/paycomplete');
-            }).catch((error)=>{
-                console.log("카드내역 생성 실패: " + error)
-                alert("카드내역 생성 실패했음");
-            });
-
-            // navigate('/welfare-set-pw', { state: { reservationData: response.data } });
-        }).catch((error)=>{
-            console.log("예약 실패: " + error)
-            alert("예약 실패");
-        });
+        navigate('/welfare-input/welfare-check-pw');
     };
 
     const formatDate = (date) => {
