@@ -19,12 +19,12 @@ Modal.setAppElement('#root');
 function DolbomMain() {
   const [selectedId, setSelectedId] = useState('nursing');
   const [isOpen, setIsOpen] = useState(false);
-  const [cardIsIt, setCardIsIt] = useState(false);//이거변경
+  const [isCard, setIsCard] = useState(false);//이거변경
 
   useEffect(() => {
-    call("/api/v1/cardIsIt", "GET", null)//주소변경
+    call("/api/v1/iscard", "GET", null)
       .then((response) => {
-        setCardIsIt(response);//ㅇ거변경
+        setIsCard(response);//ㅇ거변경
       })
       .catch((error) => {
         console.error("Error fetching card status:", error);
@@ -92,7 +92,7 @@ function DolbomMain() {
   };
 
   const renderButtonText = () => {
-    return cardIsIt ? '신청하기' : '카드를 신청하고 이용해주세요';
+    return isCard ? '신청하기' : '카드를 신청하고 이용해주세요';
   };
 
   const renderContent = () => {
@@ -106,8 +106,8 @@ function DolbomMain() {
             
             <div 
               className={`${styles["button-section"]} ${styles["go-reserve-nursing"]}`} 
-              onClick={cardIsIt ? openModal : null}
-              style={{ cursor: cardIsIt ? 'pointer' : 'not-allowed', opacity: cardIsIt ? 1 : 0.5 }}
+              onClick={isCard ? openModal : null}
+              style={{ cursor: isCard ? 'pointer' : 'not-allowed', opacity: isCard ? 1 : 0.5 }}
             >
               <p className={`${styles["main-text"]} ${styles["go-reserve-nursing-text"]}`}>{renderButtonText()}</p>
             </div>
@@ -122,8 +122,8 @@ function DolbomMain() {
 
             <div 
               className={`${styles["button-section"]} ${styles["go-reserve-nursing"]}`} 
-              onClick={cardIsIt ? openModal : null}
-              style={{ cursor: cardIsIt ? 'pointer' : 'not-allowed', opacity: cardIsIt ? 1 : 0.5 }}
+              onClick={isCard ? openModal : null}
+              style={{ cursor: isCard ? 'pointer' : 'not-allowed', opacity: isCard ? 1 : 0.5 }}
             >
               <p className={`${styles["main-text"]} ${styles["go-reserve-nursing-text"]}`}>{renderButtonText()}</p>
             </div>
@@ -138,8 +138,8 @@ function DolbomMain() {
 
             <div 
               className={`${styles["button-section"]} ${styles["go-reserve-nursing"]}`} 
-              onClick={cardIsIt ? openModal : null}
-              style={{ cursor: cardIsIt ? 'pointer' : 'not-allowed', opacity: cardIsIt ? 1 : 0.5 }}
+              onClick={isCard ? openModal : null}
+              style={{ cursor: isCard ? 'pointer' : 'not-allowed', opacity: isCard ? 1 : 0.5 }}
             >
               <p className={`${styles["main-text"]} ${styles["go-reserve-nursing-text"]}`}>{renderButtonText()}</p>
             </div>
