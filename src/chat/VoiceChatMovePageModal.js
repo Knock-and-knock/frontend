@@ -5,13 +5,19 @@ function VoiceChatMovePageModal({ isOpen, closeModal,handleSubmit}) {
   const customStyles = {
     overlay: {
       backgroundColor: "rgba(0, 0, 0, 0.5)",
-      zIndex: 999,
+      zIndex: 999
     },
     content: {
-      height: "200px",
-      margin: "auto",
-      borderRadius: "15px",
-      padding: "20px",
+      position: "fixed",
+      top: "40%",
+      bottom: "0",
+      left: "0",
+      right: "0",
+      height: "auto",
+      width: "100%",
+      borderRadius: "15px 15px 0 0",
+      padding: "25px 25px 0px 25px",
+      boxSizing: "border-box",
     },
   };
 
