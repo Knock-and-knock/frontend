@@ -24,6 +24,7 @@ import Modal from 'react-modal';
 import WelfareInputTotal from 'welfare/component/WelfareInputTotal';
 import WelfarePayComplete from 'welfare/component/WelfarePayCompl';
 
+import 'index.css';
 
 Modal.setAppElement('#root');
 
@@ -31,7 +32,7 @@ function App(props) {
   return (
     <Routes>
       
-      <Route path="/welfare-check-pw" element={<WelfareCheckPW />} />
+      
       <Route path="/welfare-list" element={<WelfareList />} />
       <Route path="/welfare-main" element={<WelfareMain />} />
       
@@ -52,7 +53,7 @@ function App(props) {
         <Route path="height" element={<WelfareInputHeight />} />
 
         <Route path="check-spec" element={<WelfareCheckSpec />} />
-
+        <Route path="welfare-check-pw" element={<WelfareCheckPW />} />
         <Route path="paycomplete" element={<WelfarePayComplete />} />
 
         <Route path="dolbom-main" element={<DolbomMain />} /> 

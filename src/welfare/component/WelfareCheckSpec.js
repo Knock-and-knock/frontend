@@ -24,10 +24,9 @@ function WelfareCheckSpec() {
         if (localStorage.getItem("loginUser") === "PROTECTOR") {
           call("/api/v1/match", "GET", null)
             .then((response) => {
-              // userSpec에 protegeUserName 추가
               setUserSpec({
                 ...userSpec,
-                protegeUserNo: response.protegeUserNo
+                protegeUserNo: response.protegeUserNo // 날짜 모달창에서 userSpec에 protegeUserName 추가했으므로 여기서 쓸 수 있음
               });
             })
             .catch((error) => {
@@ -54,33 +53,7 @@ function WelfareCheckSpec() {
     };
 
     const goSetPW = () => {
-        call('/api/v1/welfare-book/reserve', 'POST', userSpec).then((response)=>{
-            console.log(response);
-
-            call('/api/v1/card-history', 'POST', userSpec).then((response)=> {
-                setUserSpec(prevSpec => ({
-                    ...prevSpec,
-                    cardHistoryAmount: userSpec.welfareBookTotalPrice,
-                    cardHistoryShopname: "돌봄 서비스",
-                    // cardHistoryApprove: getCurrentFormattedDate(),
-                    cardCategoryNo: 8,
-                    cardId: 5,
-                    cardFamily: false
-                }));
-                
-                
-
-                navigate('/welfare-input/paycomplete');
-            }).catch((error)=>{
-                console.log("카드내역 생성 실패: " + error)
-                alert("카드내역 생성 실패했음");
-            });
-
-            // navigate('/welfare-set-pw', { state: { reservationData: response.data } });
-        }).catch((error)=>{
-            console.log("예약 실패: " + error)
-            alert("예약 실패");
-        });
+        navigate('/welfare-input/welfare-check-pw');
     };
 
     const formatDate = (date) => {
@@ -130,7 +103,7 @@ function WelfareCheckSpec() {
                     <span className={styles.hw}>kg</span>
 
                     <p className={styles["spec-info"]}>질병</p>
-                    <input className={`${styles["spec-check"]} ${styles.disease}`} type="text" placeholder="질병" value={userSpec.userDisease || ''} disabled />
+                    <input className={`${styles["spec-check"]} ${styles.disease}`} type="text" placeholder="질병 내역이 없습니다." value={userSpec.userDisease || ''} disabled />
                     
                     <p className={styles["spec-info"]}>예약 정보</p>
                     <input className={`${styles["spec-check"]} ${styles.last}`} type="text" placeholder="예약 정보" value={formattedReservationInfo()} disabled />

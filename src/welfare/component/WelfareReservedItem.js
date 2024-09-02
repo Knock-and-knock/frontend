@@ -3,6 +3,14 @@ import styles from 'welfare/css/WelfareReservedList.module.css';
 
 function WelfareReservedItem({ title, welfareBookReservationDate, welfareBookStartDate, welfareBookUseTime, welfareTotalPrice, onCancel }) {
   
+  function formatPrice(price) {
+    return new Intl.NumberFormat('ko-KR', {
+      style: 'currency',
+      currency: 'KRW',
+      minimumFractionDigits: 0 // 소수점 아래 자리수를 0으로 설정하여 정수로 표시
+    }).format(price);
+  }
+
   function formatDate(dateString) {
     const date = new Date(dateString);
     return date.toLocaleDateString('en-CA'); // 'en-CA' 로케일은 yyyy-mm-dd 형식을 반환합니다.
@@ -55,7 +63,7 @@ function WelfareReservedItem({ title, welfareBookReservationDate, welfareBookSta
         <hr />
         <div className={styles["detailed-reserved-info-container3"]}>
           <span className={styles["total-price-text"]}>최종결제금액</span>
-          <span className={styles["total-price-number"]}>{welfareTotalPrice} 원</span>
+          <span className={styles["total-price-number"]}>{formatPrice(welfareTotalPrice)} 원</span>
         </div>
       </div>
   );
