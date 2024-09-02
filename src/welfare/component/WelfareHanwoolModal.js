@@ -8,97 +8,91 @@ function WelfareHanwoolModal({ closeModal }) {
   const [today, setToday] = useState('');
   const [welfareBookStartDate, setWelfareBookStartDate] = useState('');
   const [welfareBookEndDate, setWelfareBookEndDate] = useState('');
-  const [welfareBookUseTime, setWelfareBookUseTime] = useState(1);
-  const [welfareBookTotalPrice, setWelfareBookTotalPrice] = useState(2000000); // 초기 가격 설정
+  const [welfareBookUseTime, setWelfareBookUseTime] = useState(0); // 기간 초기 설정 제거
+  const [welfareBookTotalPrice, setWelfareBookTotalPrice] = useState(0); // 가격 초기 설정 제거
   const navigate = useNavigate();
   const { userSpec, setUserSpec } = useSpecHook();
 
-  if (userSpec === undefined) setUserSpec({});
-
   const goInputBirth = () => {
     navigate('/welfare-input/birth');
-  }
+}
 
   useEffect(() => {
-    // if (localStorage.getItem("loginUser") === "PROTECTOR") {
-    //   call("/api/v1/match", "GET", null)
-    //     .then((response) => {
-    //       // userSpec에 protegeUserName 추가
-    //       setUserSpec({
-    //         ...userSpec,
-    //         protegeUserName: response.protegeUserName,
-    //         welfareNo: 3 // welfareNo 초기값 설정
-    //       });
-    //     })
-    //     .catch((error) => {
-    //       console.log(error.message);
-    //     });
-    // }
+    call("/api/v1/match", "GET", null)
+      .then((response) => {
+        setUserSpec(prevSpec => ({
+          ...prevSpec,
+          protegeUserName: response.protegeUserName,
+          welfareNo: 3 // welfareNo 설정
+        }));
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
     
-      call("/api/v1/match", "GET", null)
-        .then((response) => {
-          // userSpec에 protegeUserName 추가
-          setUserSpec({
-            ...userSpec,
-            protegeUserName: response.protegeUserName,
-            welfareNo: 3 // welfareNo 초기값 설정
-          });
-        })
-        .catch((error) => {
-          console.log(error.message);
-        });
-    
-  }, []);
-
-  useEffect(() => {
     const currentDate = new Date();
     const formattedDate = currentDate.toISOString().slice(0, 10);
     setToday(formattedDate);
-    setWelfareBookStartDate(formattedDate);
-    setWelfareBookEndDate(formattedDate); // 초기 종료 날짜 설정
-
-    const newUserSpec = {
-      ...userSpec,
-      welfareBookStartDate: formattedDate,
-      welfareBookEndDate: formattedDate,
-      welfareBookUseTime: 1,
-      welfareBookTotalPrice: 2000000 // 초기 가격 설정
-    };
-    setUserSpec(newUserSpec);
-  }, [setUserSpec]);
+  }, []);
 
   const handleDateChange = (event) => {
-    const newStartDate = event.target.value || today;
+    const newStartDate = event.target.value;
     setWelfareBookStartDate(newStartDate);
-    setWelfareBookEndDate(newStartDate); // 종료 날짜를 시작 날짜와 동일하게 설정
 
-    const updatedSpec = {
-      ...userSpec,
-      welfareBookStartDate: newStartDate,
-      welfareBookEndDate: newStartDate
-    };
-    setUserSpec(updatedSpec);
-  };
+    if (!newStartDate) {
+        // 날짜가 공백일 때
+        setWelfareBookEndDate('');
+        setUserSpec(prevSpec => ({
+            ...prevSpec,
+            welfareBookStartDate: '',
+            welfareBookEndDate: ''
+        }));
+    } else {
+        // 유효한 날짜가 입력된 경우
+        setWelfareBookEndDate(newStartDate);
+        setUserSpec(prevSpec => ({
+            ...prevSpec,
+            welfareBookStartDate: newStartDate,
+            welfareBookEndDate: newStartDate
+        }));
+    }
+};
+
+
 
   const handleTimeChange = (event) => {
     const newDuration = parseInt(event.target.value, 10);
     setWelfareBookUseTime(newDuration);
-    
-    const newPrice = 2000000 * newDuration;
+  
+    // 조정된 기간을 기반으로 요금 계산, 기간에서 3을 뺀 후 계산
+    const adjustedDuration = Math.max(0, newDuration - 3); // 음수가 되지 않도록 보장
+    const newPrice = 2000000 * adjustedDuration;
     setWelfareBookTotalPrice(newPrice); // 계산된 가격을 상태에 저장
-
+  
+    // 새로운 종료 날짜 계산, 기간에서 3개월 빼기
+    const startDate = new Date(welfareBookStartDate);
+    startDate.setMonth(startDate.getMonth() + adjustedDuration); // 기간에서 3 빼기
+    const newEndDate = startDate.toISOString().slice(0, 10);
+  
+    setWelfareBookEndDate(newEndDate); // 종료 날짜를 업데이트
+  
     const updatedSpec = {
       ...userSpec,
+      welfareBookStartDate: welfareBookStartDate,
+      welfareBookEndDate: newEndDate,
       welfareBookUseTime: newDuration,
       welfareBookTotalPrice: newPrice,
       welfarebookDurationText: `${newDuration}개월`  // For display in CheckSpec
     };
     setUserSpec(updatedSpec);
   };
+  
 
   const formatPrice = (price) => {
     return new Intl.NumberFormat('ko-KR').format(price);
   };
+
+  const isNextButtonDisabled = !welfareBookStartDate || welfareBookUseTime === 0;
 
   return (
     <div className={styles.container}>
@@ -113,30 +107,31 @@ function WelfareHanwoolModal({ closeModal }) {
             className={styles["insert-start-date"]}
             type="date"
             value={welfareBookStartDate}
-            min={today} // 현재 날짜 이전 선택 불가
+            min={today}
             onChange={handleDateChange}
           />
           </div>
           <br />
           <div className={styles["end-date-container"]}>
-          <span className={styles["reserve-info-text"]}>종료 날짜</span>
-          <input
-            className={styles["end-date"]}
-            type="date"
-            value={welfareBookEndDate}
-            disabled
-          />
+            <span className={styles["reserve-info-text"]}>종료 날짜</span>
+            <input
+              className={styles["end-date"]}
+              type="date"
+              value={welfareBookEndDate}
+              disabled
+            />
           </div>
         </div>
         <div className={`${styles["reserve-info-container2"]} ${styles["reserve-info-container2-option"]}`}>
           <span className={styles["reserve-info-text1"]}>기간</span>
-          <select className={styles["insert-period"]} type="dropbox" onChange={handleTimeChange}>
-            <option value="1">1개월</option>
-            <option value="2">2개월</option>
-            <option value="3">3개월</option>
-            <option value="4">4개월</option>
-            <option value="5">5개월</option>
-            <option value="6">6개월</option>
+          <select className={styles["insert-period"]} disabled={!welfareBookStartDate} value={welfareBookUseTime} onChange={handleTimeChange}>
+            <option value="0">기간 선택</option>
+            <option value="4">1개월</option>
+            <option value="5">2개월</option>
+            <option value="6">3개월</option>
+            <option value="7">4개월</option>
+            <option value="8">5개월</option>
+            <option value="9">6개월</option>
           </select>
         </div>
         <hr />
@@ -146,9 +141,9 @@ function WelfareHanwoolModal({ closeModal }) {
         </div>
 
         <span className={`${styles["main-text"]} ${styles["reserve-cancel"]}`} onClick={closeModal}>닫기</span>
-        <span className={`${styles["main-text"]} ${styles["reserve-yeah"]}`} onClick={goInputBirth}>다음</span>
+        <span className={`${styles["main-text"]} ${styles["reserve-yeah"]}`} style={{ opacity: isNextButtonDisabled ? 0.5 : 1, pointerEvents: isNextButtonDisabled ? 'none' : 'auto' }} onClick={isNextButtonDisabled ? undefined : goInputBirth}>다음</span>
       </div>
-  </div>
+    </div>
   );
 }
 

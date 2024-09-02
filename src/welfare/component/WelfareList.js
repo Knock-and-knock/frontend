@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from 'welfare/css/WelfareList.module.css';
 import moonhwaro from "image/moonhwaro.png";
 import education from "image/education.png";
@@ -14,9 +14,12 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import slide01 from "image/slide01.png";
 import slide02 from "image/slide02.png";
 import slide03 from "image/slide03.png";
+import { call } from 'login/service/ApiService';
 
 function WelfareList() {
     const navigate = useNavigate();
+
+    const [loginUser, setLoginUser] = useState({});
 
     const goDolbomMain = () => {
         navigate('/welfare-input/dolbom-main');
@@ -47,6 +50,28 @@ function WelfareList() {
       }
     }
 
+    useEffect(() => {
+        const loginUserStored = localStorage.getItem("loginUser");
+        if (loginUserStored === "PROTECTOR") {
+          call("/api/v1/match", "GET", null)
+            .then((response) => {
+              setLoginUser({ protegeUserName: response.protegeUserName });
+            })
+            .catch((error) => {
+              console.log(error.message);
+            });
+        } else {
+          const userNo = localStorage.getItem("userNo");
+          call('/api/v1/users', 'GET', userNo)
+            .then((response) => {
+              setLoginUser({ userName: response.userName });
+            })
+            .catch(error => {
+              console.log("회원 정보 조회 오류", error);
+            });
+        }
+      }, []);
+
     return (
         <div className={styles.container}>
 
@@ -72,7 +97,7 @@ function WelfareList() {
                 <SwiperSlide><img src={slide03} alt="복지슬라이드03" className="slide" /></SwiperSlide>
             </Swiper> */}
                 <div className={`${styles["foryou-section"]} ${styles["detailed-reserve"]}`}>
-                    <p className={`${styles["main-text"]} ${styles.foryou}`}>홍길동님을 위한</p>
+                    <p className={`${styles["main-text"]} ${styles.foryou}`}>{loginUser.protegeUserName ? `${loginUser.protegeUserName}` : `${loginUser.userName || ''}`} 님을 위한</p>
                     <div className={styles["go-reserve-container"]}>
                         <span className={`${styles["main-text"]} ${styles["foryou-service"]}`}>노인 돌봄 서비스</span>
                     </div>

@@ -7,25 +7,30 @@ import { call } from 'login/service/ApiService';
 
 function WelfareMain() {
   // useState를 올바르게 사용하기 위해 배열 구조 분해 할당 사용
-  const [loginUser, setLoginUser] = useState(null);
+  const [loginUser, setLoginUser] = useState({});
 
   useEffect(() => {
-    // 로컬 스토리지에서 "loginUser" 확인하고, API 호출 조건 적용
-    const storedUser = localStorage.getItem("loginUser");
-    if (storedUser === "PROTECTOR") {
+    const loginUserStored = localStorage.getItem("loginUser");
+    if (loginUserStored === "PROTECTOR") {
       call("/api/v1/match", "GET", null)
         .then((response) => {
-          // 상태 업데이트시 loginUser가 null일 수 있으므로 주의
-          setLoginUser(prevUser => ({
-            ...prevUser,
-            protegeUserName: response.protegeUserName
-          }));
+          setLoginUser({ protegeUserName: response.protegeUserName });
         })
         .catch((error) => {
           console.log(error.message);
         });
+    } else {
+      const userNo = localStorage.getItem("userNo");
+      call('/api/v1/users', 'GET', userNo)
+        .then((response) => {
+          setLoginUser({ userName: response.userName });
+        })
+        .catch(error => {
+          console.log("회원 정보 조회 오류", error);
+        });
     }
   }, []);
+  
 
   const navigate = useNavigate();
 
@@ -43,8 +48,8 @@ function WelfareMain() {
 
       <div className={styles["main-container"]}>
         <p className={styles["info-container"]}>
-          <span className={styles["user-name"]}>{loginUser ? `${loginUser.protegeUserName}님` : '사용자님'}</span>
-          <span className={styles.for}>을 위한</span>
+          <span className={styles["user-name"]}>{loginUser.protegeUserName ? `${loginUser.protegeUserName}` : `${loginUser.userName || ''}`}</span>
+          <span className={styles.for}> 님을 위한</span>
         </p>
         <p className={styles.infomation}>복지 서비스를</p>
         <p className={styles.infomation}>똑똑에서 찾아보세요</p>

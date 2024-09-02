@@ -81,6 +81,7 @@ function WelfareInputAddress() {
           backgroundColor: isButtonEnabled
             ? "#80BAFF"
             : "rgba(128,186,255,0.5)",
+          height: "60px",
         }}
       >
         다음

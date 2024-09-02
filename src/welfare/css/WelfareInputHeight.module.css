@@ -70,7 +70,7 @@
 .input-height,
 .input-weight {
   border: none;
-  border-bottom: 1px solid #d9d9d9;
+  border-bottom: 2px solid #d9d9d9;
   width: 120px;
   height: 5vh;
   text-align: center;
@@ -81,7 +81,7 @@
 .input-height:focus,
 .input-weight:focus {
   outline: none;
-  border-bottom: 1px solid #80BAFF;
+  border-bottom: 2px solid #80BAFF;
 }
 
 .cm {
