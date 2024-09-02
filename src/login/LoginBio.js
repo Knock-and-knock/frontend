@@ -27,7 +27,7 @@ function LoginBio(props) {
             console.error('This browser does not support the Web Authentication API');
             return;
         }
-
+    
         try {
             const publicKey = {
                 challenge: window.crypto.getRandomValues(new Uint8Array(32)),
@@ -42,19 +42,37 @@ function LoginBio(props) {
                 pubKeyCredParams: [
                     {
                         type: "public-key",
-                        alg: -7 // ECDSA with SHA-256
+                        alg: -7 // ECDSA with SHA-256, 지문 인식용으로 구체적 알고리즘 지정이 필요하면 여기를 수정
                     }
                 ],
+                authenticatorSelection: {
+                    authenticatorAttachment: "platform", // 플랫폼 인증기(디바이스) 제한
+                    userVerification: "required" // 사용자 확인을 필수로 요구
+                },
                 timeout: 60000,
                 attestation: "direct"
             };
             const credential = await navigator.credentials.create({ publicKey });
             console.log('지문 인증 성공:', credential);
+            
+            // 사용자 정보 및 세션 관리 코드
+            const userNo = localStorage.getItem("userNo");
+            const userBioPassword = localStorage.getItem("userBioPassword");
+    
             console.log("userNo: " + userNo);
             console.log("userBioPassword: " + userBioPassword);
+    
+            call("/api/v1/auth/login/bio", "POST", { userNo: userNo, userBioPassword: userBioPassword }).then((response)=>{
+                localStorage.setItem("ACCESS_TOKEN", response.accessToken);
+            }).catch(
+                (error)=>{
+                console.log("못 받았어요" + error);
+            });
+
             setCheck(true);
             setIsBioChecked(true);
-            // navigate('/home'); // 페이지 전환
+            navigate('/home');
+            
         } catch (error) {
             console.error('Biometric authentication failed:', error);
             console.log("못 보냈어요" + error);
@@ -69,10 +87,11 @@ function LoginBio(props) {
         const userNo = localStorage.getItem("userNo");
         const userBioPassword = localStorage.getItem("userBioPassword");
         call("/api/v1/auth/login/bio", "POST", { userNo: userNo, userBioPassword: userBioPassword }).then((response)=>{
-           console.log(userNo, userBioPassword);
+            const accessToken = localStorage.setItem("ACCESS_TOKEN", response.accessToken);
+            console.log(userNo, userBioPassword, accessToken);
           }).catch(
             (error)=>{
-            console.log("못 보냈어요" + error);
+            console.log("못 받았어요" + error);
          });
 
       };
