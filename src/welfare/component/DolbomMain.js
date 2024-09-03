@@ -13,6 +13,7 @@ import WelfareHanwoolModal from 'welfare/component/WelfareHanwoolModal';
 import WelfareHouseworkModal from 'welfare/component/WelfareHouseworkModal';
 import WelfareNursingModal from 'welfare/component/WelfareNursingModal';
 import styles from 'welfare/css/DolbomMain.module.css';
+import { useSpecHook } from './WelfareInputTotal';
 
 Modal.setAppElement('#root');
 
@@ -20,6 +21,35 @@ function DolbomMain() {
   const [selectedId, setSelectedId] = useState('nursing');
   const [isOpen, setIsOpen] = useState(false);
   const [isCard, setIsCard] = useState(false);//이거변경
+
+  const [isExtraInfo, setIsExtraInfo] = useState(true);
+
+  const { userSpec, setUserSpec } = useSpecHook();
+
+  useEffect(() => {
+    const loginUser = localStorage.getItem("loginUser");
+    
+    if(loginUser === "PROTECTOR") {
+
+      call('/api/v1/users', 'GET', null)
+          .then(response => {
+            setUserSpec(response);
+            console.log(userSpec);
+            if(userSpec.protegeAddress === null 
+              && userSpec.protegeBirth === null 
+              && userSpec.protegeDisease === null
+              && userSpec.protegeGender === 0
+              && userSpec.protegeHeight === 0
+              && userSpec.protegeWeight === 0){
+              setIsExtraInfo(false);
+          };
+          })
+          .catch(error => {
+            console.log("회원 정보 조회 오류", error);
+          });
+    }
+    
+  }, []);
 
   useEffect(() => {
     call("/api/v1/iscard", "GET", null)
