@@ -7,6 +7,7 @@ import LoginId from 'login/LoginId';
 import LoginPw from 'login/LoginPw';
 import ModifyInfo from 'mypage/component/ModifyInfo';
 import MyPage from 'mypage/MyPage';
+import PrivateRoute from 'PrivateRoute';
 import { createContext, useState } from 'react';
 import Modal from 'react-modal';
 import { Route, Routes } from 'react-router-dom';
@@ -32,22 +33,21 @@ function App(props) {
           <Route path="/loginbio" element={<LoginBio />} />
           <Route path="/loginid" element={<LoginId />} />
           <Route path="/loginpw" element={<LoginPw />} />
-          <Route path="/mypage" element={<MyPage />} />
-          <Route path="/modifyinfo" element={<ModifyInfo />} />
-          <Route path="/consumption" element={<Consumption />} />
-          <Route path="/alarm" element={<AlarmList />} />
-          <Route path="/home" element={<MainPage />} />
+          <Route path="/mypage" element={<PrivateRoute><MyPage /></PrivateRoute>} />
+          <Route path="/modifyinfo" element={<PrivateRoute><ModifyInfo /></PrivateRoute>} />
+          <Route path="/consumption" element={<PrivateRoute><Consumption /></PrivateRoute>} />
+          <Route path="/alarm" element={<PrivateRoute><AlarmList /></PrivateRoute>} />
+          <Route path="/home" element={<PrivateRoute><MainPage /></PrivateRoute>} />
           
           <Route path="/signup/*" element={<SignUpMain/>} >
-            <Route path="register" element={<Register/>} />
-            <Route path="infoinput" element={<InfoInput/>} />
-            <Route path="verifycode" element={<VerifyCode/>} />
-            <Route path="rolecheck" element={<RoleCheck/>} />
-            <Route path="quickloginsetup" element={<QuickLoginSetup/>} />  
-            <Route path="pinsetup" element={<PinSetup/>} /> 
-            <Route path="pincheck" element={<PinCheck/>} />   
-            <Route path="signupsuccess" element={<SignUpSuccess/>} />
-
+            <Route path="register" element={<PrivateRoute><Register/></PrivateRoute>} />
+            <Route path="infoinput" element={<PrivateRoute><InfoInput/></PrivateRoute>} />
+            <Route path="verifycode" element={<PrivateRoute><VerifyCode/></PrivateRoute>} />
+            <Route path="rolecheck" element={<PrivateRoute><RoleCheck/></PrivateRoute>} />
+            <Route path="quickloginsetup" element={<PrivateRoute><QuickLoginSetup/></PrivateRoute>} />  
+            <Route path="pinsetup" element={<PrivateRoute><PinSetup/></PrivateRoute>} /> 
+            <Route path="pincheck" element={<PrivateRoute><PinCheck/></PrivateRoute>} />   
+            <Route path="signupsuccess" element={<PrivateRoute><SignUpSuccess/></PrivateRoute>} />
           </Route>
         </Routes>
 
