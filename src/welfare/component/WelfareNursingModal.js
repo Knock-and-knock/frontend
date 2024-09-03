@@ -40,6 +40,10 @@ useEffect(() => {
     })
     .catch((error) => {
       console.log(error.message);
+      setUserSpec({
+        ...userSpec,
+        welfareNo: 2
+      });
     });
 
   const currentDate = new Date();
@@ -56,6 +60,7 @@ const handleDateChange = (event) => {
     welfareBookStartDate: newStartDate,
     welfareBookEndDate: newStartDate
   });
+  
 };
 
 const handleTimeChange = (event) => {
