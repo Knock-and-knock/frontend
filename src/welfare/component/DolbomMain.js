@@ -19,12 +19,12 @@ Modal.setAppElement('#root');
 function DolbomMain() {
   const [selectedId, setSelectedId] = useState('nursing');
   const [isOpen, setIsOpen] = useState(false);
-  const [isCard, setIsCard] = useState(false);//이거변경
+  const [isCard, setIsCard] = useState(false);
 
   useEffect(() => {
-    call("/api/v1/iscard", "GET", null)
+    call("/api/v1/card/isCard", "GET", null)
       .then((response) => {
-        setIsCard(response);//ㅇ거변경
+        setIsCard(response.isCard);
       })
       .catch((error) => {
         console.error("Error fetching card status:", error);
