@@ -19,8 +19,7 @@ export function call(api, method, request) {
 
   let options = {
     headers: headers,
-    //url: process.env.REACT_APP_URL+api,
-    url: "http://192.168.0.27:9090"+api,
+    url: process.env.REACT_APP_URL+api,
     method: method,
     // credentials: 'include',
     body: method !== 'GET' ? JSON.stringify(request) : null,
