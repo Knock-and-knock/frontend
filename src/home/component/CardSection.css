@@ -14,10 +14,11 @@
     margin: 0px;
 }
 .cardSection-content{
+    height: 20vh;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 20vh;
+
 }
 .nCardSection-content{
     display: flex;
@@ -25,9 +26,13 @@
     align-items: center;
     height: 20vh;
 }
+
 .nCardSection-content p{
     font-size: 18px;
     color: #CCC7C0;
+}
+.cardSection-price-wrap{
+    width: 60%;
 }
 .cardSection-price{
     margin: 30px 0px;
@@ -54,4 +59,8 @@
     font-size: 16px;
     color: #686868;
     margin-top: 5px;
+}
+
+.creditCard{
+    height: 100%;
 }

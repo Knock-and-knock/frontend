@@ -9,6 +9,7 @@ function WelfarePay(props) {
     const [cardId, setCardId] = useState(null);
     const [cardList, setCardList] = useState([]);
     const [cardNo, setCardNo] = useState('');
+    const [errorMsg,setErrorMsg] = useState('');
     const navi = useNavigate();
 
     useEffect(() => {
@@ -23,7 +24,7 @@ function WelfarePay(props) {
                 }
             })
             .catch(error => {
-                alert("카드 조회에 실패했습니다.");
+                setErrorMsg("카드 조회에 실패했습니다.");
             });
     }, []);
 
@@ -39,9 +40,18 @@ function WelfarePay(props) {
 
     const handleGoCheckPW = () => {
         if (cardId) {
-            navi('/welfare-input/welfare-check-pw', { state: { value: cardId } });
+            call('/api/v1/users/payment',"GET",null).then((response)=>{
+                if(response.result){
+                    navi('/welfare-input/welfare-check-pw', { state: { value: cardId } });
+                }else{
+                    navi('/welfare-input/welfare-set-pw', { state: { value: cardId } });
+                }
+            }).catch((error)=>{
+                setErrorMsg("결제에 실패했습니다.");
+            });
+            
         } else {
-            alert("카드를 선택해 주세요.");
+            setErrorMsg("카드를 선택해 주세요.");
         }
     };
 
@@ -62,7 +72,8 @@ function WelfarePay(props) {
             <div className='pay-card-wrap'>
                 <img src={cardImage} alt="카드" className="pay-card" />
             </div>
-            <p className='pay-cardNo'>신한 Life Care ({cardNo})</p>
+            <p className='pay-cardNo'>신한 Silver Care ({cardNo})</p>
+            <p className='pay-error-message'>{errorMsg}</p>
             <div className='goCheckBtn-wrap'>
                 <p className='goCheckBtn' onClick={handleGoCheckPW}>다음</p>
             </div>

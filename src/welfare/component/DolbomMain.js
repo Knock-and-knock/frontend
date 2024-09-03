@@ -79,6 +79,10 @@ function DolbomMain() {
     
   }, []);
 
+  useEffect(()=> {
+    console.log("isExtraInfo 값: " + isExtraInfo);
+  },[isExtraInfo]);
+
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
@@ -127,9 +131,9 @@ function DolbomMain() {
       case 'nursing':
         return <WelfareNursingModal closeModal={closeModal} loginUser={loginUser} isExtraInfo={isExtraInfo} />;
       case 'housework':
-        return <WelfareHouseworkModal closeModal={closeModal} />;
+        return <WelfareHouseworkModal closeModal={closeModal} loginUser={loginUser} isExtraInfo={isExtraInfo} />;
       case 'hanwool':
-        return <WelfareHanwoolModal closeModal={closeModal} />;
+        return <WelfareHanwoolModal closeModal={closeModal} loginUser={loginUser} isExtraInfo={isExtraInfo} />;
       default:
         return null;
     }

@@ -25,12 +25,6 @@ jobs:
         with:
           username: ${{secrets.DOCKERHUB_USERNAME}}
           password: ${{secrets.DOCKERHUB_TOKEN}}
-
-      # .env 파일 생성
-      - name: Create .env file
-        run: |
-          echo "REACT_APP_API_URL=${{ secrets.REACT_APP_URL }}" >> .env
-        working-directory: .
   
       - name: Build and Push Docker images
         uses: docker/build-push-action@v6.7.0
@@ -40,7 +34,7 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
           build-args: |
-            REACT_APP_API_URL=${{secrets.REACT_APP_URL}}
+            REACT_APP_URL=${{secrets.REACT_APP_URL}}
   
   deploy-to-server:
     needs: build-and-push

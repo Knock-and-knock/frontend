@@ -1,17 +1,25 @@
 import React, { useState, useRef, useEffect } from 'react';
 import styles from 'welfare/css/WelfareSetPW.module.css'; // CSS 모듈 import
 import Header from 'header/Header.js';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { call } from 'login/service/ApiService';
 
 function WelfareSetPW() {
-    const navigate = useNavigate();
+    const location = useLocation();
+    const cardId = location.state.value;
+    const navi = useNavigate();
+
     const goCheckPW = () => {
         if (password.length === 6) {
-            navigate('/welfare-check-pw');
+            call('/api/v1/users/payment',"PUT",{userPaymentPassword:password}).then(()=>{
+                navi('/welfare-input/welfare-check-pw', { state: { value: cardId } });
+            }).catch((error)=>{
+                alert("간편비밀번호 설정에 실패했습니다.")
+            });
         }
     }
 
-    const [password, setPassword] = useState("");
+    const [password, setPassword] = useState('');
     const inputRef = useRef(null);
 
     useEffect(() => {

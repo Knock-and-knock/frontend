@@ -43,7 +43,7 @@ function App(props) {
         <Route path="welfare-reserve-cancelmodal" element={<PrivateRoute><WelfareReserveCancelModal /></PrivateRoute>} />
       </Route>
       
-      <Route path="/welfare-set-pw" element={<PrivateRoute><WelfareSetPW /></PrivateRoute>} />
+      
       
       <Route path="/welfare-input/*" element={<PrivateRoute><WelfareInputTotal /></PrivateRoute>}>
         <Route path="address" element={<PrivateRoute><WelfareInputAddress /></PrivateRoute>} />
@@ -56,6 +56,7 @@ function App(props) {
 
         <Route path="check-spec" element={<PrivateRoute><WelfareCheckSpec /></PrivateRoute>} />
         <Route path="pay" element={<PrivateRoute><WelfarePay /></PrivateRoute>} />
+        <Route path="welfare-set-pw" element={<PrivateRoute><WelfareSetPW /></PrivateRoute>} />
         <Route path="welfare-check-pw" element={<PrivateRoute><WelfareCheckPW /></PrivateRoute>} />
         <Route path="paycomplete" element={<PrivateRoute><WelfarePayComplete /></PrivateRoute>} />
 

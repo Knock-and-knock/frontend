@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useSpecHook } from 'welfare/component/WelfareInputTotal';
 import { call } from 'login/service/ApiService';
 
-function WelfareHanwoolModal({ closeModal }) { 
+function WelfareHanwoolModal({ closeModal, loginUser, isExtraInfo }) { 
   const [today, setToday] = useState('');
   const [welfareBookStartDate, setWelfareBookStartDate] = useState('');
   const [welfareBookEndDate, setWelfareBookEndDate] = useState('');
@@ -15,7 +15,20 @@ function WelfareHanwoolModal({ closeModal }) {
 
   const goInputBirth = () => {
     navigate('/welfare-input/birth');
-}
+  }
+
+  const goCheckSpec = () => {
+    navigate('/welfare-input/check-spec');
+  }
+
+  const handleNextClick = () => {
+    if (isExtraInfo === false && (loginUser === 'PROTECTOR' || loginUser === 'PROTEGE')) {
+      goInputBirth();
+    } else {
+      goCheckSpec();
+    }
+  };
+
 
   useEffect(() => {
     call("/api/v1/match", "GET", null)
@@ -141,7 +154,7 @@ function WelfareHanwoolModal({ closeModal }) {
         </div>
 
         <span className={`${styles["main-text"]} ${styles["reserve-cancel"]}`} onClick={closeModal}>닫기</span>
-        <span className={`${styles["main-text"]} ${styles["reserve-yeah"]}`} style={{ opacity: isNextButtonDisabled ? 0.5 : 1, pointerEvents: isNextButtonDisabled ? 'none' : 'auto' }} onClick={isNextButtonDisabled ? undefined : goInputBirth}>다음</span>
+        <span className={`${styles["main-text"]} ${styles["reserve-yeah"]}`} style={{ opacity: isNextButtonDisabled ? 0.5 : 1, pointerEvents: isNextButtonDisabled ? 'none' : 'auto' }} onClick={isNextButtonDisabled ? undefined : handleNextClick}>다음</span>
       </div>
     </div>
   );

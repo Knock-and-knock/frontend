@@ -13,28 +13,34 @@ function WelfareCheckPW() {
 
     const gopayComplete = () => {
         if (password.length === 6) {
-            navigate('/welfare-input/paycomplete');
-            call('/api/v1/welfare-book/reserve', 'POST', userSpec).then((response)=>{
-                console.log(response);
-    
-                call('/api/v1/card-history', 'POST',{
-                        cardHistoryAmount: userSpec.welfareBookTotalPrice,
-                        cardHistoryShopname: "돌봄 서비스",
-                        // cardHistoryApprove: getCßurrentFormattedDate(),
-                        cardCategoryNo: 8,
-                        cardId: cardId,
-                    }).then((response)=> {    
-                    navigate('/welfare-input/paycomplete');
+            alert(password);
+            call('/api/v1/users/payment',"POST",{userPaymentPassword:password}).then((response)=>{
+                navigate('/welfare-input/paycomplete');
+                call('/api/v1/welfare-book/reserve', 'POST', userSpec).then((response)=>{
+                    console.log(response);
+        
+                    call('/api/v1/card-history', 'POST',{
+                            cardHistoryAmount: userSpec.welfareBookTotalPrice,
+                            cardHistoryShopname: "돌봄 서비스",
+                            // cardHistoryApprove: getCßurrentFormattedDate(),
+                            cardCategoryNo: 8,
+                            cardId: cardId,
+                        }).then((response)=> {    
+                        navigate('/welfare-input/paycomplete');
+                    }).catch((error)=>{
+                        console.log("카드내역 생성 실패: " + error)
+                        alert("카드내역 생성 실패했음");
+                    });
+        
+                    // navigate('/welfare-set-pw', { state: { reservationData: response.data } });
                 }).catch((error)=>{
-                    console.log("카드내역 생성 실패: " + error)
-                    alert("카드내역 생성 실패했음");
+                    console.log("예약 실패: " + error)
+                    alert("예약 실패");
                 });
-    
-                // navigate('/welfare-set-pw', { state: { reservationData: response.data } });
-            }).catch((error)=>{
-                console.log("예약 실패: " + error)
-                alert("예약 실패");
+            }).catch(()=>{
+
             });
+           
         }
     }
 
