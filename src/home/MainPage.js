@@ -29,6 +29,7 @@ function MainPage() {
 
   useEffect(() => {
     const userType = localStorage.getItem("loginUser");
+    
     if (userType === "PROTEGE") {
       call("/api/v1/match", "GET", null)
         .then((response) => {

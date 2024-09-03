@@ -20,7 +20,17 @@ hr {
   align-items: center;
   flex-direction: column;
 }
-
+.welfare-protegeName{
+  padding: 0px 20px;
+  font-weight: bold;
+  margin: 0px 0px 5px !important;
+}
+.welfare-slide-container{
+  text-align: center;
+}
+.welfare-slide{
+  width: 90%;
+}
 .main-section-container {
   display: flex;
   flex-direction: row;
@@ -38,13 +48,10 @@ hr {
 }
 
 .foryou-section {
-  width: 80%;
-  padding: 5px 20px 20px 20px;
+  width: 100%;
+  /* padding: 5px 20px 20px 20px; */
   margin-left: 15px;
   margin-right: 15px;
-  border-radius: 15px;
-  margin-top: 7%;
-  background-color: #e1e6ec;
   position: relative;
 }
 
@@ -54,7 +61,7 @@ hr {
   margin-left: 5px;
   margin-right: 5px;
   border-radius: 15px;
-  margin-top: 7%;
+  margin-top: 5%;
   background-color: white;
   position: relative;
 }
@@ -93,16 +100,17 @@ hr {
 /* id -> class 변경 */
 .go-reserve {
   text-align: center;
+  margin: 0px 20px;
   height: 40px;
-  border: 1px none;
-  border-radius: 7px;
+  border-radius: 5px;
   background-color: #324255;
   font-size: 20px;
   color: white;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 35%;
+
+
 }
 
 .welfare-intro {
@@ -110,8 +118,6 @@ hr {
   color: #686868;
 }
 
-.welfare-title-container {
-}
 
 .welfare-title1 {
   margin-top: -8px;

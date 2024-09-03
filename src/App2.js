@@ -25,6 +25,7 @@ import WelfareInputTotal from 'welfare/component/WelfareInputTotal';
 import WelfarePayComplete from 'welfare/component/WelfarePayCompl';
 
 import 'index.css';
+import WelfarePay from 'welfare/component/WelfarePay';
 
 Modal.setAppElement('#root');
 
@@ -53,6 +54,7 @@ function App(props) {
         <Route path="height" element={<WelfareInputHeight />} />
 
         <Route path="check-spec" element={<WelfareCheckSpec />} />
+        <Route path="pay" element={<WelfarePay />} />
         <Route path="welfare-check-pw" element={<WelfareCheckPW />} />
         <Route path="paycomplete" element={<WelfarePayComplete />} />
 

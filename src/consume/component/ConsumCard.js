@@ -6,7 +6,7 @@ function ConsumCard({ cardlist, startDate, endDate, handleOpenModal,totalAmount}
     return (
         <div className='consumCard-container'>
             <img src={card} alt="카드" className="consume-card" />
-            <p>{cardlist.cardBank} Life Care ({cardlist.cardNo.slice(-4)})</p>
+            <p>신한 Life Care ({cardlist.cardNo.slice(-4)})</p>
             <div className='filter-content'>
                 <div className="filter-date">
                     <p>{startDate && endDate ? `${startDate} ~ ${endDate}` : '날짜 선택'}</p>

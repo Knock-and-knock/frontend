@@ -53,7 +53,7 @@ function WelfareCheckSpec() {
     };
 
     const goSetPW = () => {
-        navigate('/welfare-input/welfare-check-pw');
+        navigate('/welfare-input/pay');
     };
 
     const formatDate = (date) => {
