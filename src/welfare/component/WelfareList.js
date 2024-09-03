@@ -78,30 +78,32 @@ function WelfareList() {
         <Header />
 
             <div className={styles["main-container"]}>
-            {/* <Swiper
-                spaceBetween={30}
-                centeredSlides={true}
-                autoplay={{
-                delay: 2500,
-                disableOnInteraction: false,
-                }}
-                pagination={{
-                clickable: true,
-                }}
-                navigation={true}
-                modules={[Autoplay, Pagination, Navigation]}
-                className='slide-container'>
-                    
-                <SwiperSlide><img src={slide01} alt="복지슬라이드01" className="slide" /></SwiperSlide>
-                <SwiperSlide><img src={slide02} alt="복지슬라이드02" className="slide" /></SwiperSlide>
-                <SwiperSlide><img src={slide03} alt="복지슬라이드03" className="slide" /></SwiperSlide>
-            </Swiper> */}
                 <div className={`${styles["foryou-section"]} ${styles["detailed-reserve"]}`}>
-                    <p className={`${styles["main-text"]} ${styles.foryou}`}>{loginUser.protegeUserName ? `${loginUser.protegeUserName}` : `${loginUser.userName || ''}`} 님을 위한</p>
-                    <div className={styles["go-reserve-container"]}>
-                        <span className={`${styles["main-text"]} ${styles["foryou-service"]}`}>노인 돌봄 서비스</span>
-                    </div>
-                    <span className={styles["go-reserve"]} onClick={goDolbomMain}>예약하러 가기</span>
+                  <p className={`${styles["main-text"]} ${styles["welfare-protegeName"]}`}>{loginUser.protegeUserName ? `${loginUser.protegeUserName}` : `${loginUser.userName || ''}`} 님을 위한</p>
+                  <Swiper
+                    spaceBetween={30}
+                    centeredSlides={true}
+                    autoplay={{
+                      delay: 2500,
+                      disableOnInteraction: false,
+                    }}
+                    pagination={{
+                      clickable: true,
+                    }}
+                    navigation={true}
+                    modules={[Autoplay, Pagination, Navigation]}
+                    className={styles['welfare-slide-container']}>
+                        
+                    <SwiperSlide>
+                      <img src={slide01} alt="복지슬라이드01" className={styles['welfare-slide']} />
+                
+                    </SwiperSlide>
+                    <SwiperSlide><img src={slide02} alt="복지슬라이드02" className={styles['welfare-slide']} /></SwiperSlide>
+                    <SwiperSlide><img src={slide03} alt="복지슬라이드03" className={styles['welfare-slide']} /></SwiperSlide>
+
+                  </Swiper>  
+                  <span className={styles["go-reserve"]} onClick={goDolbomMain}>예약하러 가기</span>
+                  
                 </div>
 
                 <div className={styles["main-section-container"]}>

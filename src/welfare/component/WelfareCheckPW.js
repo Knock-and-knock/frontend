@@ -1,13 +1,15 @@
 import React, { useState, useRef, useEffect } from 'react';
 import styles from 'welfare/css/WelfareCheckPW.module.css'; // CSS 모듈 import
 import Header from 'header/Header.js';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { call } from 'login/service/ApiService';
 import { useSpecHook } from './WelfareInputTotal';
 
 function WelfareCheckPW() {
     const navigate = useNavigate();
-    const { userSpec, setUserSpec } = useSpecHook();
+    const location = useLocation();
+    const cardId = location.state.value;
+    const { userSpec} = useSpecHook();
 
     const gopayComplete = () => {
         if (password.length === 6) {
@@ -20,9 +22,8 @@ function WelfareCheckPW() {
                         cardHistoryShopname: "돌봄 서비스",
                         // cardHistoryApprove: getCßurrentFormattedDate(),
                         cardCategoryNo: 8,
-                        cardId: 1,
-                        cardFamily: false   // cardId가 기본키인데 받을 이유가 있나?
-                    }).then((response)=> {
+                        cardId: cardId,
+                    }).then((response)=> {    
                     navigate('/welfare-input/paycomplete');
                 }).catch((error)=>{
                     console.log("카드내역 생성 실패: " + error)
