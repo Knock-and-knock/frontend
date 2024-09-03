@@ -25,8 +25,8 @@ function WelfareNursingModal({ closeModal }) {
         const data = {
           protegeUserName: response.protegeUserName,
         };
-        
-        setMatchData(data); // 로컬 상태 업데이트
+
+        setMatchData(data);
 
         // userSpec에 protegeUserName 추가
         setUserSpec({
