@@ -8,6 +8,8 @@ COPY package.json .
 RUN npm install
 # 현재 디렉토리의 모든 파일을 도커 컨테이너의 워킹 디렉토리에 복사
 COPY . .
+# .env 파일 복사
+COPY .env ./.env
 # 빌드 환경 변수 설정
 ARG REACT_APP_URL
 ENV REACT_APP_URL=$REACT_APP_URL
@@ -21,6 +23,8 @@ FROM nginx:alpine
 COPY nginx/nginx.conf /etc/nginx/nginx.conf
 # 빌드된 애플리케이션을 Nginx의 정적 파일 디렉토리로 복사
 COPY --from=build /app/build /usr/share/nginx/html
+# .env 파일 복사 (원하는 위치에 복사)
+COPY --from=build /app/.env /usr/share/nginx/html/.env
 # 컨테이너의 80번 포트 열어준다.
 EXPOSE 80
 # Nginx 서버 실행
