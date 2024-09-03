@@ -1,12 +1,13 @@
 import "consume/component/ConsumCard.css";
 import "consume/component/ConsumFilter.css";
-import card from "image/card2.png";
+import cardP from "image/personalCard.png";
+import cardF from "image/familyCard.png";
 
 function ConsumCard({ cardlist, startDate, endDate, handleOpenModal,totalAmount}) {
     return (
         <div className='consumCard-container'>
-            <img src={card} alt="카드" className="consume-card" />
-            <p>신한 Life Care ({cardlist.cardNo.slice(-4)})</p>
+            {cardlist.cardIsFamily?<img src={cardF} alt="카드" className="consumCard" />:<img src={cardP} alt="카드" className="consumCard" />}
+            <p>신한 Silver Care ({cardlist.cardNo.slice(-4)})</p>
             <div className='filter-content'>
                 <div className="filter-date">
                     <p>{startDate && endDate ? `${startDate} ~ ${endDate}` : '날짜 선택'}</p>
