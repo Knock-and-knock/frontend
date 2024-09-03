@@ -10,7 +10,7 @@ RUN npm install
 COPY . .
 # 빌드 환경 변수 설정
 ARG REACT_APP_URL
-ENV REACT_APP_URL=$REACT_APP_URL
+RUN echo "REACT_APP_URL=${REACT_APP_URL}" >> .env
 # 디버깅: 환경 변수 값 출력
 RUN echo "REACT_APP_URL: $REACT_APP_URL"
 # 애플리케이션 빌드
