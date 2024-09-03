@@ -115,8 +115,9 @@ function ExtraInfo(props) {
               ))}
             </select>
             <input
+            type="number"
               className="secInput"
-              placeholder="계좌번호"
+              placeholder="계좌번호 (- 제외)"
               name="cardIssueAccount"
               onChange={handlechange}
               value={userInfo.cardIssueAccount || ""}
