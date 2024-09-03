@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useSpecHook } from 'welfare/component/WelfareInputTotal';
 import { call } from 'login/service/ApiService';
 
-function WelfareHouseworkModal({ closeModal }) { 
+function WelfareHouseworkModal({ closeModal, loginUser, isExtraInfo }) { 
   const [today, setToday] = useState('');
   const [welfareBookStartDate, setWelfarebookStartdate] = useState('');
   const [welfareBookUseTime, setDuration] = useState(0); // 초기 시간 설정을 하지 않음
@@ -16,7 +16,19 @@ function WelfareHouseworkModal({ closeModal }) {
 
   const goInputBirth = () => {
     navigate('/welfare-input/birth');
-}
+  }
+
+  const goCheckSpec = () => {
+    navigate('/welfare-input/check-spec');
+  }
+
+  const handleNextClick = () => {
+    if (isExtraInfo === false && (loginUser === 'PROTECTOR' || loginUser === 'PROTEGE')) {
+      goInputBirth();
+    } else {
+      goCheckSpec();
+    }
+  };
 
   useEffect(() => {
       call("/api/v1/match", "GET", null)
@@ -104,7 +116,7 @@ function WelfareHouseworkModal({ closeModal }) {
             </div>
           </div>
           <span className={`${styles["main-text"]} ${styles["reserve-cancel"]}`} onClick={closeModal}>닫기</span>
-          <span className={`${styles["main-text"]} ${styles["reserve-yeah"]}`} style={{ opacity: isNextButtonDisabled ? 0.5 : 1, pointerEvents: isNextButtonDisabled ? 'none' : 'auto' }} onClick={goInputBirth}>다음</span>
+          <span className={`${styles["main-text"]} ${styles["reserve-yeah"]}`} style={{ opacity: isNextButtonDisabled ? 0.5 : 1, pointerEvents: isNextButtonDisabled ? 'none' : 'auto' }} onClick={handleNextClick}>다음</span>
         </div>
     </div>
   );
