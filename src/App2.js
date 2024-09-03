@@ -25,6 +25,7 @@ import WelfareInputTotal from 'welfare/component/WelfareInputTotal';
 import WelfarePayComplete from 'welfare/component/WelfarePayCompl';
 
 import 'index.css';
+import PrivateRoute from 'PrivateRoute';
 import WelfarePay from 'welfare/component/WelfarePay';
 
 Modal.setAppElement('#root');
@@ -34,37 +35,37 @@ function App(props) {
     <Routes>
       
       
-      <Route path="/welfare-list" element={<WelfareList />} />
-      <Route path="/welfare-main" element={<WelfareMain />} />
+      <Route path="/welfare-list" element={<PrivateRoute><WelfareList /></PrivateRoute>} />
+      <Route path="/welfare-main" element={<PrivateRoute><WelfareMain /></PrivateRoute>} />
       
       
-      <Route path="/welfare-reserved-list/*" element={<WelfareReservedList />} >
-        <Route path="welfare-reserve-cancelmodal" element={<WelfareReserveCancelModal />} />
+      <Route path="/welfare-reserved-list/*" element={<PrivateRoute><WelfareReservedList /></PrivateRoute>} >
+        <Route path="welfare-reserve-cancelmodal" element={<PrivateRoute><WelfareReserveCancelModal /></PrivateRoute>} />
       </Route>
       
-      <Route path="/welfare-set-pw" element={<WelfareSetPW />} />
+      <Route path="/welfare-set-pw" element={<PrivateRoute><WelfareSetPW /></PrivateRoute>} />
       
-      <Route path="/welfare-input/*" element={<WelfareInputTotal />}>
-        <Route path="address" element={<WelfareInputAddress />} />
-        <Route path="address-modal" element={<WelfareAddressModal />} />
+      <Route path="/welfare-input/*" element={<PrivateRoute><WelfareInputTotal /></PrivateRoute>}>
+        <Route path="address" element={<PrivateRoute><WelfareInputAddress /></PrivateRoute>} />
+        <Route path="address-modal" element={<PrivateRoute><WelfareAddressModal /></PrivateRoute>} />
 
-        <Route path="birth" element={<WelfareInputBirth />} />
-        <Route path="disease" element={<WelfareInputDisease />} />
-        <Route path="gender" element={<WelfareInputGender />} />
-        <Route path="height" element={<WelfareInputHeight />} />
+        <Route path="birth" element={<PrivateRoute><WelfareInputBirth /></PrivateRoute>} />
+        <Route path="disease" element={<PrivateRoute><WelfareInputDisease /></PrivateRoute>} />
+        <Route path="gender" element={<PrivateRoute><WelfareInputGender /></PrivateRoute>} />
+        <Route path="height" element={<PrivateRoute><WelfareInputHeight /></PrivateRoute>} />
 
-        <Route path="check-spec" element={<WelfareCheckSpec />} />
-        <Route path="pay" element={<WelfarePay />} />
-        <Route path="welfare-check-pw" element={<WelfareCheckPW />} />
-        <Route path="paycomplete" element={<WelfarePayComplete />} />
+        <Route path="check-spec" element={<PrivateRoute><WelfareCheckSpec /></PrivateRoute>} />
+        <Route path="pay" element={<PrivateRoute><WelfarePay /></PrivateRoute>} />
+        <Route path="welfare-check-pw" element={<PrivateRoute><WelfareCheckPW /></PrivateRoute>} />
+        <Route path="paycomplete" element={<PrivateRoute><WelfarePayComplete /></PrivateRoute>} />
 
-        <Route path="dolbom-main" element={<DolbomMain />} /> 
+        <Route path="dolbom-main" element={<PrivateRoute><DolbomMain /></PrivateRoute>} /> 
         {/* dolbom-main을 통해서 모달을 열기 때문에 dolbom-main 또한 WelfareInputTotal의 자식 요소여야함 */}
-        <Route path="nursing-modal" element={<WelfareNursingModal />} />
-        <Route path="housework-modal" element={<WelfareHouseworkModal />} />
-        <Route path="hanwool-modal" element={<WelfareHanwoolModal />} />
+        <Route path="nursing-modal" element={<PrivateRoute><WelfareNursingModal /></PrivateRoute>} />
+        <Route path="housework-modal" element={<PrivateRoute><WelfareHouseworkModal /></PrivateRoute>} />
+        <Route path="hanwool-modal" element={<PrivateRoute><WelfareHanwoolModal /></PrivateRoute>} />
       </Route>
-      <Route path="/consume-report" element={<ConsumeReport />} />
+      <Route path="/consume-report" element={<PrivateRoute><ConsumeReport /></PrivateRoute>} />
 
     </Routes>
   );
