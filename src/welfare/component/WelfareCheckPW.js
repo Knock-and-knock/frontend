@@ -6,6 +6,7 @@ import { call } from 'login/service/ApiService';
 import { useSpecHook } from './WelfareInputTotal';
 
 function WelfareCheckPW() {
+    const [error, serError] = useState('');
     const navigate = useNavigate();
     const location = useLocation();
     const cardId = location.state.value;
@@ -14,30 +15,22 @@ function WelfareCheckPW() {
     const gopayComplete = () => {
         if (password.length === 6) {
             call('/api/v1/users/payment',"POST",{userPaymentPassword:password}).then((response)=>{
-                navigate('/welfare-input/paycomplete');
                 call('/api/v1/welfare-book/reserve', 'POST', userSpec).then((response)=>{
-                    console.log(response);
-        
                     call('/api/v1/card-history', 'POST',{
                             cardHistoryAmount: userSpec.welfareBookTotalPrice,
                             cardHistoryShopname: "돌봄 서비스",
-                            // cardHistoryApprove: getCßurrentFormattedDate(),
                             cardCategoryNo: 8,
                             cardId: cardId,
                         }).then((response)=> {    
                         navigate('/welfare-input/paycomplete');
                     }).catch((error)=>{
-                        console.log("카드내역 생성 실패: " + error)
-                        alert("카드내역 생성 실패했음");
+                        serError("카드내역 생성에 실패했습니다");
                     });
-        
-                    // navigate('/welfare-set-pw', { state: { reservationData: response.data } });
                 }).catch((error)=>{
-                    console.log("예약 실패: " + error)
-                    alert("예약 실패");
+                    serError("예약에 실패했습니다");
                 });
-            }).catch(()=>{
-
+            }).catch((error)=>{
+                serError("비밀번호가 틀립니다.");
             });
            
         }
@@ -86,10 +79,10 @@ function WelfareCheckPW() {
                             />
                         ))}
                     </div>
-                    <p className={styles['incorrect-message']}>비밀번호가 틀립니다.</p>
+                    
                     {/* 비번 틀리면 css에서 나오게 하기!! */}
                 </div>
-
+                <p className={styles['incorrect-message']}>{error}</p> 
                 {/* 숨겨진 input 요소 */}
                 <input
                     ref={inputRef}
@@ -100,13 +93,13 @@ function WelfareCheckPW() {
                 />
 
                 <div
-                    className={`${styles["main-section"]} ${styles["go-pay"]}`}
+                    className={styles["go-pay"]}
                     onClick={password.length === 6 ? gopayComplete : null}  // 6자리일 때만 클릭 가능
+                >
+                    <p className={styles["go-pay-text"]}
                     style={{
                         backgroundColor: password.length === 6 ? '#80BAFF' : 'rgba(128,186,255,0.5)'
-                    }}
-                >
-                    <p className={`${styles["main-text"]} ${styles["go-pay-text"]}`}>다음</p>
+                    }}>다음</p>
                 </div>
             </div>
         </div>

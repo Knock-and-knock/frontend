@@ -8,6 +8,7 @@ import { useCardCreate } from "./CardApp";
 function FamilyDefaultInfo(props) {
   const { userInfo, setUserInfo } = useCardCreate();
 
+
   const formatPhoneNumber = (value) => {
     return value
       .replace(/[^0-9]/g, '')  // 숫자만 남기기
@@ -61,7 +62,7 @@ function FamilyDefaultInfo(props) {
   }, [userInfo]);
 
   const handleReadInfo = () => {
-    call("/api/v1/card/readInfo", "GET")
+    call('/api/v1/card/readInfo', "GET")
       .then((response) => {
         // 불러온 정보를 기존 userInfo에 병합
         setUserInfo((prevUserInfo) => ({

@@ -82,11 +82,10 @@ function ConsumDateModal({ isOpen, closeModal, updateDates, setConsumList, cardI
                                 onChange={handleEndDateChange} 
                             />
                         </div>
-                        <hr />
                     </div>
-                    <div className="modal-buttons">
-                        <span className="main-text modal-cancel" onClick={closeModal}>닫기</span>
-                        <span className="main-text modal-yeah" onClick={handleSaveDates}>다음</span>
+                    <div className="modal-date-buttons">
+                        <span className="dateBtn modal-cancel" onClick={closeModal}>닫기</span>
+                        <span className="dateBtn modal-yeah" onClick={handleSaveDates}>다음</span>
                     </div>
                 </div>
             </div>
