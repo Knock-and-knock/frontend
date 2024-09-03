@@ -13,7 +13,6 @@ function WelfareCheckPW() {
 
     const gopayComplete = () => {
         if (password.length === 6) {
-            alert(password);
             call('/api/v1/users/payment',"POST",{userPaymentPassword:password}).then((response)=>{
                 navigate('/welfare-input/paycomplete');
                 call('/api/v1/welfare-book/reserve', 'POST', userSpec).then((response)=>{
