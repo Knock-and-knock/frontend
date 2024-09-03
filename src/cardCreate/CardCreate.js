@@ -16,7 +16,7 @@ function CardCreate(props) {
     <div className="card-create-container">
       <Header />
       <div className="cardName">
-        <p>국민카드 Life Care</p>
+        <p>신한 Silver Care</p>
       </div>
       <div className="create-card-image">
         {/* <img src={card} alt="카드이미지" className="cardImage" /> */}

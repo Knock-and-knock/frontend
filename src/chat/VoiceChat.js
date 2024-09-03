@@ -115,7 +115,7 @@ function VoiceChat(props) {
       <Modal isOpen={visible} onRequestClose={toggleModal} style={customStyles}>
         <textarea className="textbox" value={chatResponse} readOnly />
       </Modal>
-       {isOpen && (
+      {isOpen && (
         <VoiceChatMovePageModal
           isOpen={isOpen}
           closeModal={closeModal}
