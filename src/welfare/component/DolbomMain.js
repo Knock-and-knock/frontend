@@ -14,6 +14,7 @@ import WelfareHouseworkModal from 'welfare/component/WelfareHouseworkModal';
 import WelfareNursingModal from 'welfare/component/WelfareNursingModal';
 import styles from 'welfare/css/DolbomMain.module.css';
 import { useSpecHook } from './WelfareInputTotal';
+import ExtraInfo from 'cardCreate/application/ExtraInfo';
 
 Modal.setAppElement('#root');
 
@@ -21,37 +22,15 @@ function DolbomMain() {
   const [selectedId, setSelectedId] = useState('nursing');
   const [isOpen, setIsOpen] = useState(false);
   const [isCard, setIsCard] = useState(false);
-
-  const [isExtraInfo, setIsExtraInfo] = useState(true);
+  const [isExtraInfo, setIsExtraInfo] = useState(false);
+  const [loginUser, setLoginUser] = useState(null); // loginUser 상태 추가
 
   const { userSpec, setUserSpec } = useSpecHook();
 
   useEffect(() => {
-    const loginUser = localStorage.getItem("loginUser");
-    
-    if(loginUser === "PROTECTOR") {
+    const storedLoginUser = localStorage.getItem("loginUser");
+    setLoginUser(storedLoginUser);
 
-      call('/api/v1/users', 'GET', null)
-          .then(response => {
-            setUserSpec(response);
-            console.log(userSpec);
-            if(userSpec.protegeAddress === null 
-              && userSpec.protegeBirth === null 
-              && userSpec.protegeDisease === null
-              && userSpec.protegeGender === 0
-              && userSpec.protegeHeight === 0
-              && userSpec.protegeWeight === 0){
-              setIsExtraInfo(false);
-          };
-          })
-          .catch(error => {
-            console.log("회원 정보 조회 오류", error);
-          });
-    }
-    
-  }, []);
-
-  useEffect(() => {
     call("/api/v1/card/isCard", "GET", null)
       .then((response) => {
         setIsCard(response.isCard);
@@ -59,23 +38,58 @@ function DolbomMain() {
       .catch((error) => {
         console.error("Error fetching card status:", error);
       });
+
+    if(storedLoginUser === "PROTECTOR") {
+      call('/api/v1/users', 'GET', null)
+          .then(response => {
+            setUserSpec(response);
+            if(userSpec.protegeAddress === null 
+              && userSpec.protegeBirth === null 
+              && userSpec.protegeDisease === null
+              && userSpec.protegeGender === 0
+              && userSpec.protegeHeight === 0
+              && userSpec.protegeWeight === 0) {
+              setIsExtraInfo(false);
+            } else {
+              setIsExtraInfo(true);
+            }
+          })
+          .catch(error => {
+            console.log("매칭된 피보호자의 정보 조회 오류", error);
+          });
+    } else {
+      call('/api/v1/users', 'GET', null)
+          .then(response => {
+            setUserSpec(response);
+            if(userSpec.protegeAddress === null 
+              && userSpec.protegeBirth === null 
+              && userSpec.protegeDisease === null
+              && userSpec.protegeGender === 0
+              && userSpec.protegeHeight === 0
+              && userSpec.protegeWeight === 0) {
+              setIsExtraInfo(false);
+            } else {
+              setIsExtraInfo(true);
+            }
+          })
+          .catch(error => {
+            console.log("피보호자 본인 정보 조회 오류", error);
+          });
+    }
+    
   }, []);
 
   useEffect(() => {
     if (isOpen) {
-      // 모달이 열렸을 때 body의 스크롤을 막음
       document.body.style.overflow = 'hidden';
     } else {
-      // 모달이 닫혔을 때 body의 스크롤을 허용
       document.body.style.overflow = 'auto';
     }
 
-    // 컴포넌트가 언마운트 될 때 스크롤을 다시 허용
     return () => {
       document.body.style.overflow = 'auto';
     };
   }, [isOpen]);
-  
 
   const openModal = () => {
     setIsOpen(true);
@@ -111,7 +125,7 @@ function DolbomMain() {
   const renderModalContent = () => {
     switch (selectedId) {
       case 'nursing':
-        return <WelfareNursingModal closeModal={closeModal} />;
+        return <WelfareNursingModal closeModal={closeModal} loginUser={loginUser} isExtraInfo={isExtraInfo} />;
       case 'housework':
         return <WelfareHouseworkModal closeModal={closeModal} />;
       case 'hanwool':
@@ -191,7 +205,6 @@ function DolbomMain() {
           style={{ backgroundColor: selectedId === 'nursing' ? '#80BAFF' : '', border: selectedId === 'nursing' ? '3px solid #80BAFF' : ''  }}
           onClick={() => handleClick('nursing')}
         >
-          {/* 글자 색상은 p 태그에만 적용 */}
           <p 
             className={`${styles["main-text"]} ${styles["nursing-list-text"]}`} 
             style={{ color: selectedId === 'nursing' ? 'white' : '#686868' }}
@@ -244,3 +257,4 @@ function DolbomMain() {
 }
 
 export default DolbomMain;
+
