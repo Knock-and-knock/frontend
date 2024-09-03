@@ -1,34 +1,91 @@
-import React, { useState, useEffect } from 'react';
-import styles from 'welfare/css/DolbomMain.module.css';
-import housework1 from "image/housework1.png";
-import nursing1 from "image/nursing1.png";
-import hanwool1 from "image/hanwool1.png";
-import housework2 from "image/housework_3.png";
-import nursing2 from "image/nursing_3.png";
-import hanwool2 from "image/hanwool_2.png";
-import dolbomi from "image/dolbomi.png";
 import Header from 'header/Header.js';
+import dolbomi from "image/dolbomi.png";
+import hanwool1 from "image/hanwool1.png";
+import hanwool2 from "image/hanwool_2.png";
+import housework1 from "image/housework1.png";
+import housework2 from "image/housework_3.png";
+import nursing1 from "image/nursing1.png";
+import nursing2 from "image/nursing_3.png";
+import { call } from 'login/service/ApiService';
+import { useEffect, useState } from 'react';
 import Modal from "react-modal";
-import WelfareNursingModal from 'welfare/component/WelfareNursingModal';
-import WelfareHouseworkModal from 'welfare/component/WelfareHouseworkModal';
 import WelfareHanwoolModal from 'welfare/component/WelfareHanwoolModal';
+import WelfareHouseworkModal from 'welfare/component/WelfareHouseworkModal';
+import WelfareNursingModal from 'welfare/component/WelfareNursingModal';
+import styles from 'welfare/css/DolbomMain.module.css';
+import { useSpecHook } from './WelfareInputTotal';
+import ExtraInfo from 'cardCreate/application/ExtraInfo';
 
 Modal.setAppElement('#root');
 
 function DolbomMain() {
   const [selectedId, setSelectedId] = useState('nursing');
   const [isOpen, setIsOpen] = useState(false);
+  const [isCard, setIsCard] = useState(false);
+  const [isExtraInfo, setIsExtraInfo] = useState(false);
+  const [loginUser, setLoginUser] = useState(null); // loginUser 상태 추가
+
+  const { userSpec, setUserSpec } = useSpecHook();
+
+  useEffect(() => {
+    const storedLoginUser = localStorage.getItem("loginUser");
+    setLoginUser(storedLoginUser);
+
+    call("/api/v1/card/isCard", "GET", null)
+      .then((response) => {
+        setIsCard(response.isCard);
+      })
+      .catch((error) => {
+        console.error("Error fetching card status:", error);
+      });
+
+    if(storedLoginUser === "PROTECTOR") {
+      call('/api/v1/users', 'GET', null)
+          .then(response => {
+            setUserSpec(response);
+            if(userSpec.protegeAddress === null 
+              && userSpec.protegeBirth === null 
+              && userSpec.protegeDisease === null
+              && userSpec.protegeGender === 0
+              && userSpec.protegeHeight === 0
+              && userSpec.protegeWeight === 0) {
+              setIsExtraInfo(false);
+            } else {
+              setIsExtraInfo(true);
+            }
+          })
+          .catch(error => {
+            console.log("매칭된 피보호자의 정보 조회 오류", error);
+          });
+    } else {
+      call('/api/v1/users', 'GET', null)
+          .then(response => {
+            setUserSpec(response);
+            if(userSpec.protegeAddress === null 
+              && userSpec.protegeBirth === null 
+              && userSpec.protegeDisease === null
+              && userSpec.protegeGender === 0
+              && userSpec.protegeHeight === 0
+              && userSpec.protegeWeight === 0) {
+              setIsExtraInfo(false);
+            } else {
+              setIsExtraInfo(true);
+            }
+          })
+          .catch(error => {
+            console.log("피보호자 본인 정보 조회 오류", error);
+          });
+    }
+    
+  }, []);
 
   useEffect(() => {
     if (isOpen) {
-      // 모달이 열렸을 때 body의 스크롤을 막음
       document.body.style.overflow = 'hidden';
     } else {
-      // 모달이 닫혔을 때 body의 스크롤을 허용
       document.body.style.overflow = 'auto';
     }
 
-    // 컴포넌트가 언마운트 될 때 스크롤을 다시 허용
     return () => {
       document.body.style.overflow = 'auto';
     };
@@ -68,7 +125,7 @@ function DolbomMain() {
   const renderModalContent = () => {
     switch (selectedId) {
       case 'nursing':
-        return <WelfareNursingModal closeModal={closeModal} />;
+        return <WelfareNursingModal closeModal={closeModal} loginUser={loginUser} isExtraInfo={isExtraInfo} />;
       case 'housework':
         return <WelfareHouseworkModal closeModal={closeModal} />;
       case 'hanwool':
@@ -76,6 +133,10 @@ function DolbomMain() {
       default:
         return null;
     }
+  };
+
+  const renderButtonText = () => {
+    return isCard ? '신청하기' : '카드를 신청하고 이용해주세요';
   };
 
   const renderContent = () => {
@@ -87,8 +148,12 @@ function DolbomMain() {
             <img src={dolbomi} alt='똑돌보미' className={styles['img-info']} />
             <img src={nursing2} alt='가정간병2' className={styles['img-info']} />
             
-            <div className={`${styles["button-section"]} ${styles["go-reserve-nursing"]}`} onClick={openModal}>
-              <p className={`${styles["main-text"]} ${styles["go-reserve-nursing-text"]}`}>신청하기</p>
+            <div 
+              className={`${styles["button-section"]} ${styles["go-reserve-nursing"]}`} 
+              onClick={isCard ? openModal : null}
+              style={{ cursor: isCard ? 'pointer' : 'not-allowed', opacity: isCard ? 1 : 0.5 }}
+            >
+              <p className={`${styles["main-text"]} ${styles["go-reserve-nursing-text"]}`}>{renderButtonText()}</p>
             </div>
           </div>
         );
@@ -99,8 +164,12 @@ function DolbomMain() {
             <img src={dolbomi} alt='똑돌보미' className={styles['img-info']} />
             <img src={housework2} alt='일상가사2' className={styles['img-info']} />
 
-            <div className={`${styles["button-section"]} ${styles["go-reserve-nursing"]}`} onClick={openModal}>
-              <p className={`${styles["main-text"]} ${styles["go-reserve-nursing-text"]}`}>신청하기</p>
+            <div 
+              className={`${styles["button-section"]} ${styles["go-reserve-nursing"]}`} 
+              onClick={isCard ? openModal : null}
+              style={{ cursor: isCard ? 'pointer' : 'not-allowed', opacity: isCard ? 1 : 0.5 }}
+            >
+              <p className={`${styles["main-text"]} ${styles["go-reserve-nursing-text"]}`}>{renderButtonText()}</p>
             </div>
           </div>
         );
@@ -111,8 +180,12 @@ function DolbomMain() {
             <img src={dolbomi} alt='똑돌보미' className={styles['img-info']} />
             <img src={hanwool2} alt='한울돌봄2' className={styles['img-info']} />
 
-            <div className={`${styles["button-section"]} ${styles["go-reserve-nursing"]}`} onClick={openModal}>
-              <p className={`${styles["main-text"]} ${styles["go-reserve-nursing-text"]}`}>신청하기</p>
+            <div 
+              className={`${styles["button-section"]} ${styles["go-reserve-nursing"]}`} 
+              onClick={isCard ? openModal : null}
+              style={{ cursor: isCard ? 'pointer' : 'not-allowed', opacity: isCard ? 1 : 0.5 }}
+            >
+              <p className={`${styles["main-text"]} ${styles["go-reserve-nursing-text"]}`}>{renderButtonText()}</p>
             </div>
           </div>
         );
@@ -132,7 +205,6 @@ function DolbomMain() {
           style={{ backgroundColor: selectedId === 'nursing' ? '#80BAFF' : '', border: selectedId === 'nursing' ? '3px solid #80BAFF' : ''  }}
           onClick={() => handleClick('nursing')}
         >
-          {/* 글자 색상은 p 태그에만 적용 */}
           <p 
             className={`${styles["main-text"]} ${styles["nursing-list-text"]}`} 
             style={{ color: selectedId === 'nursing' ? 'white' : '#686868' }}
@@ -185,3 +257,4 @@ function DolbomMain() {
 }
 
 export default DolbomMain;
+

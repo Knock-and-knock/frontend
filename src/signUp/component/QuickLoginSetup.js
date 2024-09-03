@@ -56,7 +56,7 @@ function QuickLoginSetup(props) {
                     name: "Example Corp"
                 },
                 user: {
-                    id: new Uint8Array(16), // 사용자 ID (예: 사용자 ID를 바이트 배열로 변환)
+                    id: new Uint8Array(16), // 사용자 ID를 바이트 배열로 변환
                     name: "user@example.com",
                     displayName: "User Name"
                 },
@@ -66,6 +66,10 @@ function QuickLoginSetup(props) {
                         alg: -7 // ECDSA with SHA-256
                     }
                 ],
+                authenticatorSelection: {
+                    authenticatorAttachment: "platform", // 'platform'은 내장된 인증기(디바이스)를 의미
+                    userVerification: "required" // 사용자 검증을 필수로 요구
+                },
                 timeout: 60000,
                 attestation: "direct"
             };
@@ -77,6 +81,7 @@ function QuickLoginSetup(props) {
             setIsBioChecked(false);
         }
     };
+    
 
     // 패스키 인증을 처리하는 함수
     const handlePasskeyAuth = async () => {

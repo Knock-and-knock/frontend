@@ -1,9 +1,9 @@
 import "cardCreate/application/CardApplication.css";
 import Header from "header/Header";
+import { call } from "login/service/ApiService";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCardCreate } from "./CardApp";
-import { call } from "login/service/ApiService";
 
 function FamilyDefaultInfo(props) {
   const { userInfo, setUserInfo } = useCardCreate();
@@ -93,6 +93,7 @@ function FamilyDefaultInfo(props) {
             placeholder="이름"
             name="cardIssueKname"
             onChange={handleChange}
+            value={userInfo.cardIssueKname || ""}
           />
         </div>
         <div className="app-input">
@@ -102,6 +103,7 @@ function FamilyDefaultInfo(props) {
             placeholder="전화번호"
             name="cardIssuePhone"
             onChange={handleChange}
+            value={userInfo.cardIssuePhone || ""}
             maxLength={13}
           />
         </div>
