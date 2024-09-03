@@ -1,34 +1,35 @@
-.welfarePay-container{
-    padding: 20px;
-}
 
 .information-container-pay{
     margin-top: 30px;
 }
   
 .information-pay {
+    text-align: center;
     font-weight: bold;
-    font-size: 22px;
+    font-size: 24px;
     margin-top: -15px;
     color: #2c2c2c;
 }
-.welfarePay-select{
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 20px;
-    font-size: 16px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-}
-.pay-card {
-    max-width: 100%;
-    height: auto;
-}
-
-.pay-cardNo {
+.payCard-swiper{
     text-align: center;
+}
+.payCard-swiper .swiper-slide {
+    opacity: 0.5; /* 기본 투명도 */
+    transition: opacity 0.3s ease, transform 0.3s ease; /* 부드러운 전환 효과 */
+    transform: scale(0.9);
+}
+.payCard-swiper .swiper-slide-active {
+    opacity: 1;
+    transform: scale(1); /* 활성화된 슬라이드가 조금 더 크게 보이도록 설정 */
+}
+.pay-card{
+    margin-top: 18%;
+    width: 90%;
+}
+.pay-cardNo {
     font-size: 16px;
     color: #555;
+    text-align: center;
 }
 .pay-error-message{
     text-align: center;
@@ -37,21 +38,19 @@
 }
 .goCheckBtn-wrap {
     width: 90%;
-    height: 60px;
-    padding: 0px 20px;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     position: absolute;
-    bottom: 19.5px;
-    box-sizing: border-box;
-    background-color: #80BAFF;
-    border-radius: 15px;
+    bottom: 3%;
+    left: 5%;
 }
   
 .goCheckBtn {
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
     color: white;
     font-size: 18px;
     font-weight: bold;
+    background-color: #80BAFF;
+    box-sizing: border-box;
+    border-radius: 15px;
 } 

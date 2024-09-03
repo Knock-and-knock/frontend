@@ -18,7 +18,7 @@ function ConsumDetailModal({isOpen,closeModal,cardDetail}) {
             zIndex: "3"
           },
           content: {
-            top: "50%",
+            top: "auto",
             left: "0",
             right: "0",
             bottom: "0",

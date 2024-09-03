@@ -75,13 +75,13 @@ function WelfareSetPW() {
                 />
 
                 <div
-                    className={`${styles["main-section"]} ${styles["go-pay"]}`}
+                    className={styles["go-pay"]}
                     onClick={password.length === 6 ? goCheckPW : null}  // 6자리일 때만 클릭 가능
+                    >
+                    <p className={styles["go-pay-text"]}
                     style={{
                         backgroundColor: password.length === 6 ? '#80BAFF' : 'rgba(128,186,255,0.5)'
-                    }}
-                >
-                    <p className={`${styles["main-text"]} ${styles["go-pay-text"]}`}>다음</p>
+                     }}>다음</p>
                 </div>
             </div>
         </div>

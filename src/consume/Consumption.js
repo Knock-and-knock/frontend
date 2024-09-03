@@ -93,7 +93,14 @@ function Consumption() {
                     setCardDetail={setCardDetail}
                     consumList={consumList}
                 />):
-                (<p className="cardlist-none"><img src={info} alt="카드내역 없음" className="card-info-icon" />해당 기간 카드내역이 없습니다.</p>)} 
+                (<div className='no-data-container'>
+                    <img 
+                        src={info} 
+                        alt="알림내역없음" 
+                        className="no-data-image" 
+                    />
+                    <p className='no-data-text'>알림 내역이 없습니다.</p>
+                    </div>)} 
 
                 <ConsumDetailModal 
                     isOpen={isOpenDetail} 

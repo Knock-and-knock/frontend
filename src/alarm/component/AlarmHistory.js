@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import 'alarm/component/AlarmHistory.css';
 import { call } from 'login/service/ApiService';
 import AlarmDetailModal from './AlarmDetailModal';
+import info from "image/icon/info.png";
 
 function AlarmHistory({alarmList,getAlarmList,fetchAlarmCount}) {
 
@@ -55,6 +56,15 @@ function AlarmHistory({alarmList,getAlarmList,fetchAlarmCount}) {
 
     return (
         <>
+            {alarmList.length ===0 ?(<div className='no-data-container'>
+            <img 
+                src={info} 
+                alt="알림내역없음" 
+                className="no-data-image" 
+            />
+            <p className='no-data-text'>알림 내역이 없습니다.</p>
+            </div>):""}
+
             {alarmList.map((alarm, index) => {
                 const { date, time } = formatDateTime(alarm.notificationDateTime);
 
