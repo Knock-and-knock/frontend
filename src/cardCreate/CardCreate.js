@@ -1,10 +1,9 @@
 import "cardCreate/CardCreate.css";
 import Header from "header/Header";
-import card from "image/create-card-image.png";
-import kookmincard from "image/card.png";
 import cashback from "image/icon/cashback.png";
 import insurance from "image/icon/insurance.png";
 import medical from "image/icon/medical.png";
+import personalCard from "image/personalCard.png";
 import { Outlet, useNavigate } from "react-router-dom";
 
 
@@ -21,7 +20,7 @@ function CardCreate(props) {
       </div>
       <div className="create-card-image">
         {/* <img src={card} alt="카드이미지" className="cardImage" /> */}
-        <img src={kookmincard} alt="카드이미지" className="cardImage" />
+        <img src={personalCard} alt="카드이미지" className="cardImage" />
       </div>
       <div className="boon-group">
         <div className="medical">
