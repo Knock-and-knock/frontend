@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import fingerprint from 'image/icon/fingerprint.svg';
-import LoginBtn from './component/button/LoginBtn';
 import LoginHeader from './component/header/LoginHeader';
 import { call } from './service/ApiService';
 import { useNavigate } from 'react-router-dom'; // useNavigate 훅 import
+import "login/component/button/LoginBtn.css";
 
 function LoginBio(props) {
     const userNo = localStorage.getItem("userNo");
@@ -107,12 +107,13 @@ function LoginBio(props) {
                         src={fingerprint} 
                         alt="지문 인증 로그인" 
                         className="fingerprint" 
-                        onClick={handleBiometricAuth}
                     />
                 </div>
                 
             </div>
-            <LoginBtn/>
+            <div className="loginBtn-wrap">
+                <button type="submit" className={`loginBtn`} onClick={handleBiometricAuth}>로그인</button>
+            </div>
             </form>
         </div>
     );
