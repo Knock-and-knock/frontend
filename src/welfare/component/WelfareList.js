@@ -5,7 +5,7 @@ import education from "image/education.png";
 import job from "image/job.png";
 import bokjiro from "image/bokjiro.png";
 import { useNavigate } from 'react-router-dom';
-import Header from 'header/BlueHeader';
+import Header from 'header/Header';
 
 import 'swiper/css';
 import 'swiper/css/pagination';

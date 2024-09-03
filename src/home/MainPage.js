@@ -12,6 +12,7 @@ function MainPage() {
   const [isOpen, setIsOpen] = useState(false);
   const [matchData, setMatchData] = useState({});
   const [isMatch, setIsMatch] = useState("REJECT");
+  const [protector, setProtector] = useState("");
 
   const closeModal = async () => {
     try {
@@ -37,11 +38,13 @@ function MainPage() {
           const data = {
             matchNo: response.matchNo,
             matchStatus: response.matchStatus,
+            matchProtectorName: response.matchProtectorName,
           };
           setMatchData(data);
 
           // matchStatus가 "WAIT"이 아니면 모달을 열지 않음
           if (data.matchStatus === "WAIT") {
+            setProtector(response.matchProtectorName)
             setIsOpen(true);
           } else {
             setIsOpen(false);
@@ -80,6 +83,7 @@ function MainPage() {
           isOpen={isOpen}
           closeModal={closeModal}
           handleSubmit={handleSubmit}
+          protector={protector}
         />
       )}
     </div>

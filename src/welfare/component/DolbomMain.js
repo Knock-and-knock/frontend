@@ -39,43 +39,46 @@ function DolbomMain() {
         console.error("Error fetching card status:", error);
       });
 
-    if(storedLoginUser === "PROTECTOR") {
-      call('/api/v1/users', 'GET', null)
-          .then(response => {
-            setUserSpec(response);
-            if(userSpec.protegeAddress === null 
-              && userSpec.protegeBirth === null 
-              && userSpec.protegeDisease === null
-              && userSpec.protegeGender === 0
-              && userSpec.protegeHeight === 0
-              && userSpec.protegeWeight === 0) {
-              setIsExtraInfo(false);
-            } else {
-              setIsExtraInfo(true);
-            }
-          })
-          .catch(error => {
-            console.log("매칭된 피보호자의 정보 조회 오류", error);
-          });
+      if (storedLoginUser === "PROTECTOR") {
+        call('/api/v1/users', 'GET', null)
+            .then(response => {
+                setUserSpec(response);
+    
+                // response 객체를 직접 사용하여 조건 평가
+                if(response.protegeAddress === null 
+                  || response.protegeBirth === null 
+                  || response.protegeDisease === null
+                  || response.protegeHeight === 0
+                  || response.protegeWeight === 0) {
+                  setIsExtraInfo(false);
+                } else {
+                  setIsExtraInfo(true);
+                }
+            })
+            .catch(error => {
+                console.log("매칭된 피보호자의 정보 조회 오류", error);
+            });
     } else {
-      call('/api/v1/users', 'GET', null)
-          .then(response => {
-            setUserSpec(response);
-            if(userSpec.protegeAddress === null 
-              && userSpec.protegeBirth === null 
-              && userSpec.protegeDisease === null
-              && userSpec.protegeGender === 0
-              && userSpec.protegeHeight === 0
-              && userSpec.protegeWeight === 0) {
-              setIsExtraInfo(false);
-            } else {
-              setIsExtraInfo(true);
-            }
-          })
-          .catch(error => {
-            console.log("피보호자 본인 정보 조회 오류", error);
-          });
+        call('/api/v1/users', 'GET', null)
+            .then(response => {
+                setUserSpec(response);
+    
+                // response 객체를 직접 사용하여 조건 평가
+                if(response.protegeAddress === null 
+                  || response.protegeBirth === null 
+                  || response.protegeDisease === null
+                  || response.protegeHeight === 0
+                  || response.protegeWeight === 0) {
+                  setIsExtraInfo(false);
+                } else {
+                  setIsExtraInfo(true);
+                }
+            })
+            .catch(error => {
+                console.log("피보호자 본인 정보 조회 오류", error);
+            });
     }
+    
     
   }, []);
 

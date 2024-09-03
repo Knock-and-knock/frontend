@@ -1,7 +1,7 @@
 import "matching/MatchingModal.css";
 import Modal from "react-modal";
 
-function MatchingModal({ isOpen, closeModal,handleSubmit}) {
+function MatchingModal({ isOpen, closeModal,handleSubmit, protector}) {
   const customStyles = {
     overlay: {
       backgroundColor: "rgba(0, 0, 0, 0.5)",
@@ -29,7 +29,7 @@ function MatchingModal({ isOpen, closeModal,handleSubmit}) {
         <p className="matchModal-title">매칭하기</p>
         <div className="matchModal-content matchModal-line">
           <p>
-            <span className="blueText">홍길동보호자님</span>과 연결하시겠습니까?
+            <span className="blueText">{protector}님</span>과 연결하시겠습니까?
           </p>
         </div>
         <div className="modalContainer">
