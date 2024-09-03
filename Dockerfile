@@ -8,11 +8,9 @@ COPY package.json .
 RUN npm install
 # 현재 디렉토리의 모든 파일을 도커 컨테이너의 워킹 디렉토리에 복사
 COPY . .
-# .env 파일 복사
-COPY .env ./.env
 # 빌드 환경 변수 설정
-ARG REACT_APP_API_URL
-ENV REACT_APP_API_URL=$REACT_APP_API_URL
+ARG REACT_APP_URL
+ENV REACT_APP_URL=$REACT_APP_API_URL
 # 디버깅: 환경 변수 값 출력
 RUN echo "REACT_APP_API_URL: $REACT_APP_API_URL"
 # 애플리케이션 빌드
