@@ -19,7 +19,8 @@ export function call(api, method, request) {
 
   let options = {
     headers: headers,
-    url: process.env.REACT_APP_URL+api,
+    //url: process.env.REACT_APP_URL+api,
+    url: "http://192.168.0.27:9090"+api,
     method: method,
     // credentials: 'include',
     body: method !== 'GET' ? JSON.stringify(request) : null,
@@ -34,6 +35,11 @@ export function call(api, method, request) {
   return fetch(options.url, options)
   .then((response) => {
     const contentType = response.headers.get("content-type");
+
+    //헤더에 값이 있으면 로컬 스토리지에 ACCESS TOKEN 저장하기
+    if(response.headers.authorization){
+      localStorage.setItem("ACCESS_TOKEN", response.headers.authorization);
+    }
     
     // 응답이 JSON 형식인지 확인
     if (contentType && contentType.indexOf("application/json") !== -1) {
