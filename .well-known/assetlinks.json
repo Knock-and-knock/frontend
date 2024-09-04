@@ -1,0 +1,8 @@
+[{
+      "relation": ["delegate_permission/common.handle_all_urls"],
+      "target": {
+        "namespace": "android_app",
+        "package_name": "site.knock_knock_sh.twa",
+        "sha256_cert_fingerprints": ["AF:4A:BC:07:51:25:83:0F:15:C9:04:E5:6B:6A:8D:A0:F1:DD:E1:64:30:42:FA:2A:86:10:62:AE:A4:05:4A:61"]
+      }
+    }]
