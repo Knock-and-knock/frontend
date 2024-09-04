@@ -178,14 +178,15 @@ function WelfareInputDisease() {
         <div className={styles["content-display"]}>{renderContent()}</div>
 
         <div
-          className={`${styles["main-section"]} ${styles["go-check-spec"]}`}
+          className= {styles["go-check-spec"]}
           onClick={goCheckSpec}
-          style={{
+         
+        >
+          <p className={styles["go-check-spec-text"]}
+           style={{
             backgroundColor: isNextButtonEnabled() ? '#80BAFF' : 'rgba(128, 186, 255, 0.5)',
             cursor: isNextButtonEnabled() ? 'pointer' : 'not-allowed',
-          }}
-        >
-          <p className={`${styles["main-text"]} ${styles["go-check-spec-text"]}`}>다음</p>
+          }}>다음</p>
         </div>
       </div>
     </div>

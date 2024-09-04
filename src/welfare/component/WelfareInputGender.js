@@ -63,14 +63,13 @@ function WelfareInputGender() {
                 </div>
 
                 <div
-                    className={`${styles["main-section"]} ${styles["go-input-address"]}`}
-                    onClick={goInputAddress}
+                    className={styles["go-input-address"]}
+                    onClick={goInputAddress}>
+                    <p className={styles["go-input-address-text"]}
                     style={{
                         backgroundColor: selectedGender ? '#80BAFF' : 'rgba(128, 186, 255, 0.5)',
                         cursor: selectedGender ? 'pointer' : 'not-allowed',
-                    }}
-                >
-                    <p className={`${styles["main-text"]} ${styles["go-input-address-text"]}`}>다음</p>
+                    }}>다음</p>
                 </div>
             </div>
         </div>

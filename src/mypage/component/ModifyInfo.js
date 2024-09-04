@@ -3,7 +3,7 @@ import { call } from 'login/service/ApiService';
 import "mypage/component/ModifyInfo.css";
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import InfoInput from './InfoInput';
+import InfoInput from 'mypage/component/InfoInput';
 
 function ModifyInfo() {
     const userType = localStorage.getItem("loginUser");
@@ -30,7 +30,7 @@ function ModifyInfo() {
                 });
             })
             .catch(error => {
-                console.error("Failed to fetch user info", error);
+                console.error("정보 입력 실패", error);
             });
     }, []);
 
@@ -39,7 +39,7 @@ function ModifyInfo() {
         e.preventDefault(); // form의 기본 동작인 페이지 새로고침 방지
         call("/api/v1/users", "PUT", infoInput)
         .then((response) => navi("/mypage"))
-        .catch((error) => {alert("실패");});
+        .catch((error) => {console.log("실패");});
     };
 
     return (
@@ -47,10 +47,10 @@ function ModifyInfo() {
             <Header />
             <div className="app-title">
                 <div className="title-text">
-                    <span>입력해 주세요</span>
+                    <span>부가 정보를 입력해 주세요</span>
                 </div>
             </div>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className='modiInfo-form'>
                 <InfoInput protegeInfo={infoInput} handleChange={handleChange} />
                 <button className='modiInfo-saveBtn' style={buttonStyle}>저장</button>
             </form>

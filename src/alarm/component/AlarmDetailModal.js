@@ -22,7 +22,7 @@ function AlarmDetailModal({isOpen,closeModal,notificationNo,getAlarmList,fetchAl
             zIndex: "2"
           },
           content: {
-            top: "60%",
+            top: "auto",
             left: "0",
             right: "0",
             bottom: "0",

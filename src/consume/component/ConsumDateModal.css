@@ -1,7 +1,9 @@
 .container {
-    max-width: 390px;
-    background-color: white;
-    z-index: 1;
+   display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
 }
 
 input[type="date"]::-webkit-clear-button {
@@ -32,14 +34,16 @@ hr {
     font-weight: bold;
     color: #2c2c2c;
     text-align: center;
-    height: 60px;
     display: flex;
     justify-content: center;
-    align-items: center;
-    margin-bottom: 0px;
-    margin-top: 10px;
+    border-bottom: 1px solid #D9D9D9;
+    box-sizing: border-box;
+    height: 50px;
 }
-
+.matchModal-line{
+    margin: 0px;
+    padding: 5px 0px;
+  }
 .reserve-info-container-box {
     margin-top: 20px;
 }
@@ -70,13 +74,13 @@ hr {
 .dateBtn{
     text-align: center;
     font-weight: bold;
-    width: 48%;
     height: 50px;
     border-radius: 10px;
     font-size: 18px;
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 48%;
 }
 .modal-cancel {
     border: 2px solid #ccc;

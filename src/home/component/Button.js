@@ -47,14 +47,14 @@ function Button({isProtege}) {
       call('/api/v1/notification/read/count',"GET",null).then((response)=>{
         setAlarmNum(response.toString());
       }).catch((error)=>{
-        alert("알람 건수 조회 실패");
+        console.log("알람 건수 조회 실패");
       });
       }else{
          //마지막 대화 시간 조회
       call('/api/v1/conversation-room/last-conversation-time',"GET",null).then((response)=>{
         setTalkTime(response.conversationEndAt ? detailDate(response.conversationEndAt) : '없음');
       }).catch((error)=>{
-        alert("마지막 대화 시간 조회 실패");
+        console.log("마지막 대화 시간 조회 실패");
       });
       }
       

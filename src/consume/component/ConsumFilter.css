@@ -6,12 +6,12 @@
     justify-content: center;
     align-items: center;
     background-color: #80BAFF;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
+    /* border-top-left-radius: 10px;
+    border-top-right-radius: 10px; */
 }
 .filter-date p{
     color: white;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: bold;
 }
 .filterBtn{
@@ -20,7 +20,7 @@
     border: none;
     border-radius: 15px;
     padding: 5px 15px;
-    margin-left: 5px;
+    margin-left: 10px;
     font-size: 16px;
     font-weight: bold;
 }

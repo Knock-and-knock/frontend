@@ -118,13 +118,14 @@ function WelfareInputBirth() {
                 </div>
 
                 <div
-                    className={`${styles["main-section"]} ${styles["go-input-height"]}`}
+                    className={styles["go-input-height"]}
                     onClick={goInputHeight}
-                    style={{
-                        backgroundColor: isButtonEnabled ? '#80BAFF' : 'rgba(128,186,255,0.5)'
-                    }}
+                   
                 >
-                    <p className={`${styles["main-text"]} ${styles["go-input-height-text"]}`}>다음</p>
+                    <p className={styles["go-input-height-text"]}
+                     style={{
+                        backgroundColor: isButtonEnabled ? '#80BAFF' : 'rgba(128,186,255,0.5)'
+                    }}>다음</p>
                 </div>
             </div>
         </div>
