@@ -45,21 +45,38 @@ function ConsumeReportInfo() {
     };
 
     useEffect(() => {
-        console.log("카드아이디: " + cardList.cardId);
-    }, []);
-
-
-    useEffect(() => {
         fetchData();
     }, [selectedYear, selectedMonth]);
 
+    const getCategoryIcon = (categoryName) => {
+        switch(categoryName) {
+            case '식비':
+                return '🍴';
+            case '잡화':
+                return '👜';
+            case '교통':
+                return '🚍';
+            case '생활':
+                return '🏠';
+            case '쇼핑':
+                return '🛒';
+            case '유흥':
+                return '🍷';
+            case '의료':
+                return '🏥';
+            case '기타':
+                return '💰';
+            default:
+                return ''; // 카테고리가 없는 경우 빈 값 반환
+        }
+    };
+
     const processedData = useMemo(() => {
-        const labels = data.map(item => item.categoryName);
+        const labels = data.map(item => `${getCategoryIcon(item.categoryName)} ${item.categoryName}`);
         const series = data.map(item => item.amount);
         return { labels, series };
     }, [data]);
 
-    // 모든 카테고리의 totalAmount가 0인지 확인
     const isAllZero = data.every(item => item.totalAmount === 0);
 
     const donutData = {
@@ -195,7 +212,7 @@ function ConsumeReportInfo() {
                 enabled: true,
                 formatter: (value) => `${formatPrice(value)} 원`,
                 textAnchor: 'middle',
-                offsetX: 450,
+                offsetX: 260,
                 style: {
                     colors: ['#2c2c2c'],
                     fontSize: '14px',

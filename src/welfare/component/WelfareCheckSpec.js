@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from 'welfare/css/WelfareCheckSpec.module.css';
 import { useNavigate } from 'react-router-dom';
 import Header from 'header/Header.js';
@@ -8,64 +8,47 @@ import { call } from 'login/service/ApiService';
 function WelfareCheckSpec() {
     const navigate = useNavigate();
     const { userSpec, setUserSpec } = useSpecHook();
-
-    const getCurrentFormattedDate = () => {
-        const now = new Date();
-        const year = now.getFullYear();
-        const month = String(now.getMonth() + 1).padStart(2, '0'); // 월은 0부터 시작하므로 1을 더해줍니다.
-        const day = String(now.getDate()).padStart(2, '0');
-        const hours = String(now.getHours()).padStart(2, '0');
-        const minutes = String(now.getMinutes()).padStart(2, '0');
-        const seconds = String(now.getSeconds()).padStart(2, '0');
-        return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}`;
-    };
+    const [loading, setLoading] = useState(true); // 로딩 상태 추가
 
     useEffect(() => {
-        if (localStorage.getItem("loginUser") === "PROTECTOR") {
-          call("/api/v1/match", "GET", null)
-            .then((response) => {
-              setUserSpec({
-                ...userSpec,
-                protegeUserNo: response.protegeUserNo, // 날짜 모달창에서 userSpec에 protegeUserName 추가했으므로 여기서 쓸 수 있음
-              });
-            })
-            .catch((error) => {
-              console.log(error.message);
-            });
-        }
-        else {
-            const userNo = localStorage.getItem("userNo");
-    
-            setUserSpec({
-                ...userSpec,
-                userNo: parseInt( userNo,10)  // userNo를 userSpec 상태에 추가
-
-            });
-            
-        
-        }
-      }, []);
-
-      useEffect(() => {
-        call('/api/v1/users', 'GET', null)
-            .then(response => {
-                setUserSpec({
-                    userName:response.protegeName,
-                    userBirth:response.protegeBirth,
-                    userGender:response.protegeGender,
-                    userHeight:response.protegeHeight,
-                    userWeight:response.protegeWeight,
-                    userDisease:response.protegeDisease,
-                    userAddress:response.protegeAddress,
-                    userAddressDetail:response.protegeAddressDetail,
-                });
-            })
-            .catch(error => {
+        const fetchUserData = async () => {
+            try {
+                if (localStorage.getItem("loginUser") === "PROTECTOR") {
+                    const response = await call("/api/v1/match", "GET", null);
+                    setUserSpec(prevSpec => ({
+                        ...prevSpec,
+                        protegeUserNo: response.protegeUserNo, // 필요한 데이터 설정
+                    }));
+                } else {
+                    const userNo = localStorage.getItem("userNo");
+                    setUserSpec(prevSpec => ({
+                        ...prevSpec,
+                        userNo: parseInt(userNo, 10),
+                    }));
+                }
+                const userResponse = await call('/api/v1/users', 'GET', null);
+                setUserSpec(prevSpec => ({
+                    ...prevSpec,
+                    userName: userResponse.protegeName,
+                    userBirth: userResponse.protegeBirth,
+                    userGender: userResponse.protegeGender,
+                    userHeight: userResponse.protegeHeight,
+                    userWeight: userResponse.protegeWeight,
+                    userDisease: userResponse.protegeDisease,
+                    userAddress: userResponse.protegeAddress,
+                    userAddressDetail: userResponse.protegeAddressDetail,
+                    protegeAddress: userResponse.protegeAddress,
+                    protegeAddressDetail: userResponse.protegeAddressDetail,
+                }));
+                setLoading(false); // 데이터가 모두 로드된 후 로딩 종료
+            } catch (error) {
                 console.error("Failed to fetch user info", error);
-            });
+                setLoading(false); // 에러 발생 시에도 로딩 종료
+            }
+        };
 
-        console.log(userSpec);
-      }, [])
+        fetchUserData();
+    }, [setUserSpec]);
 
     const formattedReservationInfo = () => {
         if (!userSpec.welfareBookStartDate || !userSpec.welfarebookDurationText) return '';
@@ -75,11 +58,11 @@ function WelfareCheckSpec() {
     const welfareName = () => {
         switch(userSpec.welfareNo) {
             case 1:
-            return '일상 가사 돌봄';
+                return '일상 가사 돌봄';
             case 2:
-            return '가정 간병 돌봄';
+                return '가정 간병 돌봄';
             case 3:
-            return '한울 돌봄';
+                return '한울 돌봄';
             default:
                 return null;
         }
@@ -107,7 +90,10 @@ function WelfareCheckSpec() {
             return '없음';
         }
     };
-    
+
+    if (loading) {
+        return <div>Loading...</div>; // 로딩 중일 때 표시할 내용
+    }
 
     return (
         <div className={styles.container}>
@@ -143,14 +129,7 @@ function WelfareCheckSpec() {
                         className={styles["spec-check"]} 
                         type="text" 
                         placeholder="성별" 
-                        value={
-                            formatGender(
-                                // userSpec.userGender !== 0 && userSpec.protegeGender !== 0 ? userSpec.userGender :
-                                // userSpec.userGender !== 0 ? userSpec.userGender :
-                                // userSpec.protegeGender
-                                userSpec.userGender || userSpec.protegeGender
-                            ) || ''
-                        }                        
+                        value={formatGender(userSpec.userGender || userSpec.protegeGender) || ''}                        
                         disabled 
                     />
 
@@ -164,7 +143,6 @@ function WelfareCheckSpec() {
                                 ? `${userSpec.protegeAddress} ${userSpec.protegeAddressDetail}` 
                                 : `${userSpec.userAddress} ${userSpec.userAddressDetail}` || ''
                         }
-                        
                         disabled
                     />
 
@@ -173,13 +151,7 @@ function WelfareCheckSpec() {
                         className={styles["spec-check-hw"]} 
                         type="number" 
                         placeholder="키" 
-                        value={
-                            // userSpec.userHeight !== 0 ? userSpec.userHeight :
-                            // userSpec.protegeHeight !== 0 ? userSpec.protegeHeight :
-                            // userSpec.userHeight || ''
-                            userSpec.userHeight||userSpec.protegeHeight
-                        }
-                        
+                        value={userSpec.userHeight || userSpec.protegeHeight}
                         disabled 
                     />
 
