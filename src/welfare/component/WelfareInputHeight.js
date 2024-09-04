@@ -82,13 +82,12 @@ function WelfareInputHeight() {
                 </div>
 
                 <div
-                    className={`${styles["main-section"]} ${styles["go-input-gender"]}`}
-                    onClick={goInputGender}
+                    className={styles["go-input-gender"]}
+                    onClick={goInputGender}>
+                    <p className={styles["go-input-gender-text"]}
                     style={{
                         backgroundColor: userHeight && userWeight ? '#80BAFF' : 'rgba(128,186,255,0.5)',
-                    }}
-                >
-                    <p className={`${styles["main-text"]} ${styles["go-input-gender-text"]}`}>다음</p>
+                    }}>다음</p>
                 </div>
             </div>
         </div>

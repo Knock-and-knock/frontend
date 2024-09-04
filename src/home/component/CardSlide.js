@@ -28,7 +28,7 @@ function CardSlide({isProtege}) {
             }
             
         }).catch((error)=>{
-            alert("카드조회 실패");
+            console.log("카드조회 실패");
             
     });
     },[userNo,isCard]);

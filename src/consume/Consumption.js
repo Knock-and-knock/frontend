@@ -68,7 +68,7 @@ function Consumption() {
             endDate: end
         })
         .then((response) => setConsumList(response))
-        .catch(() => alert("내역 조회 실패"));
+        .catch(() => console.log("내역 조회 실패"));
 
     }, [cardList.cardId]);
 
@@ -99,7 +99,7 @@ function Consumption() {
                         alt="알림내역없음" 
                         className="no-data-image" 
                     />
-                    <p className='no-data-text'>알림 내역이 없습니다.</p>
+                    <p className='no-data-text'>카드 내역이 없습니다.</p>
                     </div>)} 
 
                 <ConsumDetailModal 
@@ -113,6 +113,8 @@ function Consumption() {
                     closeModal={closeDateModal} 
                     updateDates={updateDates} 
                     cardId={selectedCardId} 
+                    startDate={startDate}
+                    endDate={endDate}
                 />
             </div>
         </div>

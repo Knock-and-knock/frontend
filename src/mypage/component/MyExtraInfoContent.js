@@ -29,7 +29,7 @@ function MyExtraInfoContent({userInfo}) {
             </div>
             <div className='info-content'>
                 <p>질병</p>
-                <p>{userInfo.protegeDisease}</p>
+                <p>{userInfo.protegeDisease?userInfo.protegeDisease :"없음"}</p>
             </div>
             <div className='info-content'>
                 <p>주소</p>

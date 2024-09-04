@@ -19,32 +19,35 @@ function DisconnectionModal({matchNo}) {
     },[isOpen]);
     const customStyles = {
         overlay: {
-            backgroundColor: "rgba(0, 0, 0, 0.5)"
+            backgroundColor: "rgba(0, 0, 0, 0.5)",
+             zIndex: "2"
           },
           content: {
-            height: "220px",
-            margin: "auto",
-            borderRadius: "15px",
-            padding: "20px",
-          },
+            top: "auto",
+            left: "0",
+            right: "0",
+            bottom: "0",
+            height: "auto",
+            borderRadius: "15px 15px 0px 0px",
+            
+        },
     };
     const handleSubmit = ()=>{
         call(`/api/v1/match/${matchNo}`,"DELETE",null).then((response)=>{
             navi('/mypage');
         }).catch((error)=>{
             console.log(error);
-            alert(error.message);
         });
     };
     return (
         <div>
-            <button className='disconnectBtn' onClick={handleOpenModal} >현재 상대와 매칭 종료</button>
+            <button className='substituteBtn orangeBtn' onClick={handleOpenModal} >현재 상대와 매칭 종료</button>
             <Modal isOpen={isOpen} onRequestClose={closeModal} style={customStyles}>
                 <p className='dcModal-title'>매칭종료</p>
                 <p className='dcModal-content'>정말로 매칭을&nbsp;<span>종료</span>하시겠습니까?</p>
                 <div className='dcModal-btn'>
-                    <button onClick={closeModal} className='dcModal-cancelBtn'>닫기</button>
-                    <button className='dcModal-agreeBtn' onClick={handleSubmit}>예</button>
+                    <button onClick={closeModal} className='dcModal-cancelBtn dcModalBtn'>닫기</button>
+                    <button className='dcModal-agreeBtn dcModalBtn' onClick={handleSubmit}>예</button>
                 </div>
                 
             </Modal>

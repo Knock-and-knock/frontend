@@ -7,6 +7,7 @@ import "mypage/MyPage.css"
 import DisconnectionModal from './component/modal/DisconnectionModal';
 import { call } from 'login/service/ApiService';
 import { useNavigate } from 'react-router-dom';
+import MyMatchingInfo from './component/MyMatchingInfo';
 
 
 
@@ -38,7 +39,7 @@ function MyPage(props) {
             localStorage.removeItem('ACCESS_TOKEN');  
             // localStorage.removeItem('loginUser'); // 생체인증때문에 지웠습니다
         })
-        .catch(()=>alert("로그아웃 실패"));
+        .catch(()=>console.log("로그아웃 실패"));
     }
 
     return (
@@ -48,7 +49,7 @@ function MyPage(props) {
             <p className='mypage-name'>{userInfo.userName}</p>
             <MyBasicInfo userInfo={userInfo}/>
             <MyExtraInfo userInfo={userInfo}/>
-            {loginUser==="PROTEGE"&& userInfo.matchNo !== 0?<DisconnectionModal matchNo={userInfo.matchNo}/>:""}
+            <MyMatchingInfo loginUser={loginUser}/>
             <div className='mypage-bottom'>
                 <p className='logoutBtn' onClick={handleLogoutClick}>로그아웃</p>
                 <p className='withdrawalBtn'>회원탈퇴</p>

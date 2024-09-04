@@ -24,7 +24,7 @@ function ConsumList({ setIsOpenDetail, setCardDetail, consumList }) {
     const handleOpenDetailModal = (cardHistoryNo) => {
         call(`/api/v1/card-history/${cardHistoryNo}`)
                 .then((response) => setCardDetail(response))
-                .catch(() => alert("카드 상세 조회 실패"));
+                .catch(() => console.log("카드 상세 조회 실패"));
         setIsOpenDetail(true); // 모달 열기
     };
 
@@ -40,7 +40,7 @@ function ConsumList({ setIsOpenDetail, setCardDetail, consumList }) {
     }, [consumList]);
 
     return (
-        <div>
+        <div className='consumList-container'>
             {displayedConsumList.map((consum, index) => (
                 <div key={index} className='consumList-container' onClick={() => handleOpenDetailModal(consum.cardHistoryNo)}>
                     {consum.showDate && <p className='consumList-date'>{formatDate(consum.cardHistoryApprove)}</p>}

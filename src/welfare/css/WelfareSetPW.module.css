@@ -88,20 +88,21 @@
 .go-pay {
   width: 90%;
   position: absolute;
-  bottom: 3%;
+  bottom: 20px;
   left: 5%;
 }
 
 .go-pay-text {
-    height: 60px;
-    line-height: 60px;
-    text-align: center;
-    color: white;
-    font-size: 18px;
-    font-weight: bold;
-    background-color: #80BAFF;
-    box-sizing: border-box;
-    border-radius: 15px;
+  height: 60px;
+  text-align: center;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  background-color: #80BAFF;
+  box-sizing: border-box;
+  border-radius: 15px;
+  margin: 0px;
+  padding: 20px;
 }
 
 /* 반응형 디자인 */
