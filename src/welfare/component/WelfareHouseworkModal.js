@@ -45,6 +45,10 @@ function WelfareHouseworkModal({ closeModal, loginUser, isExtraInfo }) {
         })
         .catch((error) => {
           console.log(error.message);
+          setUserSpec({
+            ...userSpec,
+            welfareNo: 1 // welfareNo 초기값 설정
+          });
         });
 
     const currentDate = new Date();

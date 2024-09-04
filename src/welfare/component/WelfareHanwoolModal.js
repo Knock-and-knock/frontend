@@ -41,6 +41,10 @@ function WelfareHanwoolModal({ closeModal, loginUser, isExtraInfo }) {
       })
       .catch((error) => {
         console.log(error.message);
+        setUserSpec(prevSpec => ({
+          ...prevSpec,
+          welfareNo: 3 // welfareNo 설정
+        }));
       });
     
     const currentDate = new Date();
