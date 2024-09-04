@@ -5,7 +5,7 @@ import slide03 from "image/slide03.png";
 import { useNavigate } from "react-router-dom";
 import 'swiper/css';
 import 'swiper/css/pagination';
-import { Autoplay, Navigation, Pagination } from 'swiper/modules';
+import { Autoplay, Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 function WelfareSlide(props) {
@@ -25,8 +25,7 @@ function WelfareSlide(props) {
     pagination={{
       clickable: true,
     }}
-    navigation={true}
-    modules={[Autoplay, Pagination, Navigation]}
+    modules={[Autoplay, Pagination]}
     className='slide-container'>
         
             <SwiperSlide><img src={slide01} alt="복지슬라이드01" className="slide" /></SwiperSlide>

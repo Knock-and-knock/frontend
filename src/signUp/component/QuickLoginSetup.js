@@ -21,13 +21,13 @@ function QuickLoginSetup(props) {
         }
     }, [userInfo.userSimplePassword]);
 
-    useEffect(() => {
-        setUserInfo(prevState => ({
-            ...prevState,
-            isBioLogin: isBioChecked
-        }));
-        console.log(isBioChecked);
-    }, [isBioChecked]);
+    // useEffect(() => {
+    //     setUserInfo(prevState => ({
+    //         ...prevState,
+    //         isBioLogin: isBioChecked
+    //     }));
+    //     console.log(isBioChecked);
+    // }, [isBioChecked]);
 
     const handlePinCircleClick = () => {
         if (isPinChecked) {
@@ -36,6 +36,7 @@ function QuickLoginSetup(props) {
                 userSimplePassword: ''
             }));
         }else{
+            setIsBioChecked(isBioChecked);
             setIsPinChecked(!isPinChecked);
             navi("/signup/pinsetup");
         }
@@ -76,6 +77,10 @@ function QuickLoginSetup(props) {
             const credential = await navigator.credentials.create({ publicKey });
             console.log('Biometric authentication successful:', credential);
             setIsBioChecked(true);
+            setUserInfo(prevState => ({
+                ...prevState,
+                isBioLogin: isBioChecked
+            }));
         } catch (error) {
             console.error('Biometric authentication failed:', error);
             setIsBioChecked(false);

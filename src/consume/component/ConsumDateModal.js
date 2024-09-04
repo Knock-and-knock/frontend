@@ -1,16 +1,18 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Modal from 'react-modal';
 import "consume/component/ConsumDateModal.css";
 import { call } from 'login/service/ApiService';
 
-function ConsumDateModal({ isOpen, closeModal, updateDates, setConsumList, cardId }) {
-    const getCurrentDate = () => {
-        const date = new Date();
-        return date.toISOString().split('T')[0]; // 현재 날짜를 'YYYY-MM-DD' 형식으로 반환
-    };
+function ConsumDateModal({ isOpen, closeModal, updateDates, setConsumList, cardId,startDate,endDate }) {
 
-    const [localStartDate, setLocalStartDate] = useState(getCurrentDate());
-    const [localEndDate, setLocalEndDate] = useState(getCurrentDate());
+    const [localStartDate, setLocalStartDate] = useState(startDate);
+    const [localEndDate, setLocalEndDate] = useState(endDate);
+
+    useEffect(() => {
+        setLocalStartDate(startDate);
+        setLocalEndDate(endDate);
+    }, [startDate, endDate]);
+
 
     const handleStartDateChange = (event) => {
         const value = event.target.value;
@@ -49,20 +51,20 @@ function ConsumDateModal({ isOpen, closeModal, updateDates, setConsumList, cardI
                     zIndex: "2"
                 },
                 content: {
-                    top: "50%",
+                    top: "auto",
                     left: "0",
                     right: "0",
                     bottom: "0",
                     height: "auto",
                     borderRadius: "15px 15px 0px 0px",
+                    
                 },
             }}
         >
             <div className="container">
                 <div className="modal-section modal-container">
                     <p className="consume-modal-title">기간 설정</p>
-                    <hr />
-                    <div className="reserve-info-container-box">
+                    <div className="reserve-info-container-box dateModal-line">
                         <div className="consume-info-container1">
                             <span className="consume-info-text">시작일</span>
                             <input 
@@ -82,11 +84,10 @@ function ConsumDateModal({ isOpen, closeModal, updateDates, setConsumList, cardI
                                 onChange={handleEndDateChange} 
                             />
                         </div>
-                        <hr />
                     </div>
-                    <div className="modal-buttons">
-                        <span className="main-text modal-cancel" onClick={closeModal}>닫기</span>
-                        <span className="main-text modal-yeah" onClick={handleSaveDates}>다음</span>
+                    <div className="modal-date-buttons">
+                        <button className="dateBtn modal-cancel" onClick={closeModal}>닫기</button>
+                        <button className="dateBtn modal-yeah" onClick={handleSaveDates}>다음</button>
                     </div>
                 </div>
             </div>

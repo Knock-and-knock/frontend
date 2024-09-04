@@ -73,19 +73,19 @@ function WelfareInputAddress() {
         </div>
       </div>
 
-      <button
-        className="appBtn"
-        onClick={handlePaging}
-        disabled={!isButtonEnabled}
-        style={{
-          backgroundColor: isButtonEnabled
-            ? "#80BAFF"
-            : "rgba(128,186,255,0.5)",
-          height: "60px",
-        }}
-      >
-        다음
-      </button>
+        <button
+          className="appBtn addrBtn"
+          onClick={handlePaging}
+          disabled={!isButtonEnabled}
+          style={{
+            backgroundColor: isButtonEnabled
+              ? "#80BAFF"
+              : "rgba(128,186,255,0.5)",
+            height: "60px",
+          }}
+        >
+          다음
+        </button>
       {isPostcodeOpen && (
         <AddressSearchComponent
           onComplete={handleComplete}

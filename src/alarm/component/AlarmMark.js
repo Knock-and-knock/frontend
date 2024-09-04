@@ -11,7 +11,7 @@ function AlarmMark({getAlarmList, fetchAlarmCount, alarmNum}) {
             fetchAlarmCount();
             getAlarmList();
         }).catch((error)=>{
-            alert("모두 읽음 처리 실패");
+            console.log("모두 읽음 처리 실패");
         });
     };
     const isDisabled = alarmNum === 0; 

@@ -108,7 +108,6 @@ input::placeholder {
 .square-container{
     display: flex;
     justify-content: space-between;
-    padding: 20px;
 }
 .hidden-input {
     opacity: 0;
@@ -155,7 +154,6 @@ input::placeholder {
 /* QuickLoginSetup */
 .signup-quickLogin{
     border-bottom: 1px solid #E1E6EC;
-    margin: 0px 20px;
 }
 .quickLogin-title{
     font-size: 18px;

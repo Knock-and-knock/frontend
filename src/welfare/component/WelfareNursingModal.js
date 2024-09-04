@@ -40,6 +40,10 @@ useEffect(() => {
     })
     .catch((error) => {
       console.log(error.message);
+      setUserSpec({
+        ...userSpec,
+        welfareNo: 2
+      });
     });
 
   const currentDate = new Date();
@@ -56,6 +60,7 @@ const handleDateChange = (event) => {
     welfareBookStartDate: newStartDate,
     welfareBookEndDate: newStartDate
   });
+  
 };
 
 const handleTimeChange = (event) => {
@@ -79,9 +84,11 @@ const formatPrice = (price) => {
 
 const isNextButtonDisabled = !welfareBookStartDate || welfareBookUseTime === 0;
 
+
+
 const handleNextClick = () => {
   if (isExtraInfo === false && (loginUser === 'PROTECTOR' || loginUser === 'PROTEGE')) {
-    goInputBirth();
+    goInputBirth(userSpec);
   } else {
     goCheckSpec();
   }

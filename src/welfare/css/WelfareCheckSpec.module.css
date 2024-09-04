@@ -79,6 +79,11 @@
   margin-bottom: 35px;
 }
 
+.first {
+  margin-bottom: 10px;
+  border: none;
+}
+
 /* .main-section {
   width: 80%;
   padding: 20px;
@@ -116,6 +121,7 @@
   margin: 0 auto;
   border-radius: 15px;
   text-align: center;
+  margin-bottom: 5%;
 }
 
 .main-text {

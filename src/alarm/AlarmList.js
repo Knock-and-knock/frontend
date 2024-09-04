@@ -19,14 +19,14 @@ function AlarmList(props) {
     const getAlarmList = ()=>{
         call('/api/v1/notification/read', "GET", null)
         .then(response => setAlarmList(response))
-        .catch(() => alert("알람 조회 실패"));
+        .catch(() => console.log("알람 조회 실패"));
     };
 
      // 알림 수를 가져오는 함수
      const fetchAlarmCount = () => {
         call('/api/v1/notification/read/count', 'GET', null)
             .then(response => setAlarmNum(response))
-            .catch(() => alert("알람 건수 조회 실패"));
+            .catch(() => console.log("알람 건수 조회 실패"));
     };
 
     return (
