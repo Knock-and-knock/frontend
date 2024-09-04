@@ -88,7 +88,7 @@ const isNextButtonDisabled = !welfareBookStartDate || welfareBookUseTime === 0;
 
 const handleNextClick = () => {
   if (isExtraInfo === false && (loginUser === 'PROTECTOR' || loginUser === 'PROTEGE')) {
-    goInputBirth(userSpec);
+    goInputBirth();
   } else {
     goCheckSpec();
   }

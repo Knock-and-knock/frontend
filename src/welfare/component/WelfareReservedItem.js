@@ -5,10 +5,8 @@ function WelfareReservedItem({ title, welfareBookReservationDate, welfareBookSta
   
   function formatPrice(price) {
     return new Intl.NumberFormat('ko-KR', {
-      style: 'currency',
-      currency: 'KRW',
       minimumFractionDigits: 0 // 소수점 아래 자리수를 0으로 설정하여 정수로 표시
-    }).format(price);
+    }).format(price); // currency: 'KRW' 옵션을 제거하여 원화 기호 제거
   }
 
   function formatDate(dateString) {

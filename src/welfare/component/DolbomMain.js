@@ -40,7 +40,7 @@ function DolbomMain() {
       });
 
       if (storedLoginUser === "PROTECTOR") {
-        call('/api/v1/users', 'GET', null)
+        call('/api/v1/match', 'GET', null)
             .then(response => {
                 setUserSpec(response);
     
