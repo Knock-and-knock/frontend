@@ -21,7 +21,7 @@ import FamilyDefaultInfo from "cardCreate/application/FamilyDefaultInfo";
 import FamilyExtraInfo from "cardCreate/application/FamilyExtraInfo";
 import FamilySimplePW from "cardCreate/application/FamilySimplePW";
 import SimplePW from "cardCreate/application/SimplePW";
-import OnboardingPage from "onboarding/OnboardingPage";
+import OnboardingNew from "onboarding/OnboardingNew";
 import PrivateRoute from "PrivateRoute";
 import { createContext } from "react";
 import Modal from "react-modal";
@@ -32,7 +32,7 @@ export const CommonContext = createContext();
 function App(props) {
   return (
       <Routes>
-        <Route path="/" element={<OnboardingPage />} /> v
+        <Route path="/" element={<OnboardingNew />} /> v
         {/* 첫화면 메인화면으로 가기!! */}
 
       
