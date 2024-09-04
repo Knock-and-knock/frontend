@@ -63,6 +63,7 @@ function LoginPw(props) {
         }).catch((error) => {
             console.error("간편비밀번호로그인 실패", error);
             const localUserNo = localStorage.getItem("userNo");
+
             if(!localUserNo){
                 setErrorMessage("아이디 로그인 1회 이용 이후 사용하실 수 있습니다.");
             }else{
@@ -94,7 +95,7 @@ function LoginPw(props) {
                             </div>
                         ))}
                     </div>               
-                   
+                    <div className='error-message'>{errorMessage}</div>
                 </div>
                 <input
                     ref={inputRef}

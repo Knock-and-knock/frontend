@@ -122,6 +122,13 @@ function LoginBio(props) {
           }).catch(
             (error)=>{
             console.log("못 받았어요" + error);
+
+            const localUserNo = localStorage.getItem("userNo");
+            if(!localUserNo){
+                setErrorMessage("아이디 로그인 1회 이용 이후 사용하실 수 있습니다.");
+            }else{
+                setErrorMessage("로그인에 실패했습니다. 다시 시도해주세요.");
+            }
          });
 
       };
@@ -139,6 +146,7 @@ function LoginBio(props) {
                         className="fingerprint" 
                     />
                 </div>
+                <br/>
                 <div className='error-message'>{errorMessage}</div>
             </div>
             <div className="loginBtn-wrap">
