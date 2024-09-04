@@ -14,7 +14,7 @@ function LoginId(props) {
     const [isUserIdError, setIsUserIdError] = useState(false);
     const [isUserPwError, setIsUserPwError] = useState(false);
 
-    const navi =useNavigate();
+    const navi = useNavigate();
 
     const handleGoSignUp = () =>{
         navi("/signup/register")

@@ -1,7 +1,7 @@
 import "consume/component/ConsumCard.css";
 import "consume/component/ConsumFilter.css";
-import cardP from "image/personalCard.png";
-import cardF from "image/familyCard.png";
+import cardP from "image/personalCard.svg";
+import cardF from "image/familyCard.svg";
 
 function ConsumCard({ cardlist, startDate, endDate, handleOpenModal,totalAmount}) {
     return (
