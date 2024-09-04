@@ -84,9 +84,11 @@ function QuickLoginSetup(props) {
         } catch (error) {
             console.error('Biometric authentication failed:', error);
             setIsBioChecked(false);
+            setUserInfo({ ...userInfo, isBioLogin: false });
         }
     }else{
         setIsBioChecked(false);
+        setUserInfo({ ...userInfo, isBioLogin: false });
     }
 
     };
@@ -113,10 +115,6 @@ function QuickLoginSetup(props) {
 
     const handleSubmit = () => {
         setUserInfo({ ...userInfo, isBioLogin: isBioChecked });
-        console.log("----------------");
-        console.log(isBioChecked);
-        console.log(userInfo);
-        console.log("----------------");
         call('/api/v1/users/signup', "POST", userInfo).then((response) => {
             localStorage.setItem("userBioPassword", response.userBioPassword);
             navi("/signup/signupsuccess");
