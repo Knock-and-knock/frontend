@@ -105,7 +105,7 @@ function WelfareList() {
                     <SwiperSlide><img src={slide03} alt="복지슬라이드03" className={styles['welfare-slide']} /></SwiperSlide>
 
                   </Swiper>  
-                  <span className={styles["go-reserve"]} onClick={goDolbomMain}>예약하러 가기</span>
+                  
                   
                 </div>
 
