@@ -12,7 +12,6 @@ function QuickLoginSetup(props) {
     const [isPasskeyChecked, setIsPasskeyChecked] = useState(false);
     const { userInfo, setUserInfo } = useMember();
     const navi = useNavigate();
-
     useEffect(() => {
         if (userInfo.userSimplePassword) {
             setIsPinChecked(true);
@@ -27,7 +26,12 @@ function QuickLoginSetup(props) {
          }else{
             setIsBioChecked(false);
          }
+       
      }, [userInfo.isBioLogin]);
+
+     useEffect(()=>{
+        setUserInfo({ ...userInfo, isBioLogin: isBioChecked });
+     },[]);
 
     const handlePinCircleClick = () => {
         if (isPinChecked) {

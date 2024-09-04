@@ -3,7 +3,6 @@
     border-bottom: 1px solid #686868;
     font-size: 16px;
     color: #2C2C2C;
-    padding: 0px 20px;
 }
 .consumList-time{
     font-size: 16px;
@@ -23,7 +22,7 @@
 }
 .consumList-box{
     margin-bottom: 10px;
-    padding: 0px 20px;
+
 }
 .cancel-text{
     color: #CCC7C0 !important;
