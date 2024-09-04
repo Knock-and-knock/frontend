@@ -44,7 +44,7 @@ export function handleAutoSub(
       setIsLoading(true);
       setIsSpeaking(false);
       audio.onended = () => {
-        setIsLoading(false); // 음성 출력이 끝나면 로딩 상태 해제
+        setIsLoading(false);
         startAutoRecord();
 
         if(actionRequired === true && redirectionResult){
@@ -66,7 +66,7 @@ export function handleAutoSub(
 }
 
 // 음성 인식의 자동 시작 상태를 제어하는 함수
-export function availabilityFunc(sendMessage) {
+export function availabilityFunc(sendMessage, setIsListening) {
   const newRecognition = new (window.SpeechRecognition ||
     window.webkitSpeechRecognition)();
   newRecognition.lang = "ko";
@@ -74,10 +74,12 @@ export function availabilityFunc(sendMessage) {
 
   newRecognition.addEventListener("speechstart", () => {
     console.log("음성 인식 중...");
+    setIsListening(true);
   });
 
   newRecognition.addEventListener("speechend", () => {
     console.log("음성 인식 종료");
+    setIsListening(false);
   });
 
   newRecognition.addEventListener("result", (e) => {

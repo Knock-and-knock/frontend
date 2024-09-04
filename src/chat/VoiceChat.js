@@ -26,6 +26,8 @@ function VoiceChat(props) {
   //예약확인 모달
   const [isOpen, setIsOpen] = useState(false);
   const [serviceUrl, setServiceUrl] = useState("");
+  const [isListening, setIsListening] = useState(false);
+  const [content, setContent] = useState("");
 
   useEffect(() => {
     async function initializeChat() {
@@ -39,7 +41,7 @@ function VoiceChat(props) {
       //   setServiceUrl
       // );
       await handleChatRoom(userInfo);
-      availabilityFunc(sendMessage);
+      availabilityFunc(sendMessage,setIsListening);
     }
 
     initializeChat();
@@ -49,6 +51,7 @@ function VoiceChat(props) {
   function sendMessage(recognizedText) {
     setChatResponse("");
     setIsLoading(true);
+    setIsListening(false);
     handleAutoSub(
       recognizedText,
       setChatResponse,
@@ -63,9 +66,11 @@ function VoiceChat(props) {
   const handleStartChat = () => {
     if (!isStart) {
       startAutoRecord();
+      setIsListening(true);
       setIsStart(true);
     } else {
       endRecord();
+      setIsListening(false);
       setIsStart(false);
     }
   };
@@ -104,6 +109,7 @@ function VoiceChat(props) {
       {isSpeaking && <SpeakLoading />}
       {isLoading && <Loading />}
       <img src={chatbot} alt="챗봇" className="chatbot" />
+      {isListening && <p className="listening-text">똑똑이가 듣고 있어요</p>}
       <button className="hiddenBtn" onClick={toggleModal}>
         {visible ? "닫기" : "답변보이기"}
       </button>
@@ -120,6 +126,7 @@ function VoiceChat(props) {
           isOpen={isOpen}
           closeModal={closeModal}
           handleSubmit={handleSubmit}
+          content={content}
         />
       )}
     </div>

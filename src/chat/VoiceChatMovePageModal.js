@@ -1,7 +1,7 @@
 import "matching/MatchingModal.css";
 import Modal from "react-modal";
 
-function VoiceChatMovePageModal({ isOpen, closeModal,handleSubmit}) {
+function VoiceChatMovePageModal({ isOpen, closeModal,handleSubmit,content}) {
   const customStyles = {
     overlay: {
       backgroundColor: "rgba(0, 0, 0, 0.5)",
@@ -21,7 +21,9 @@ function VoiceChatMovePageModal({ isOpen, closeModal,handleSubmit}) {
     },
   };
 
-  
+  const handleYesClick = () => {
+    handleSubmit(content); // 예 버튼을 누르면 content 값을 넘겨줌
+  };
 
   return (
     <div>
@@ -36,7 +38,7 @@ function VoiceChatMovePageModal({ isOpen, closeModal,handleSubmit}) {
           <button className="matchModalAgreeBtn" onClick={closeModal}>
             닫기
           </button>
-          <button className="matchModalBtn" onClick={handleSubmit}>
+          <button className="matchModalBtn" onClick={handleYesClick}>
             예
           </button>
         </div>
