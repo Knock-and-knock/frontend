@@ -29,9 +29,6 @@ function QuickLoginSetup(props) {
        
      }, [userInfo.isBioLogin]);
 
-     useEffect(()=>{
-        setUserInfo({ ...userInfo, isBioLogin: isBioChecked });
-     },[]);
 
     const handlePinCircleClick = () => {
         if (isPinChecked) {
@@ -87,11 +84,9 @@ function QuickLoginSetup(props) {
         } catch (error) {
             console.error('Biometric authentication failed:', error);
             setIsBioChecked(false);
-            setUserInfo({ ...userInfo, isBioLogin: false });
         }
     }else{
         setIsBioChecked(false);
-        setUserInfo({ ...userInfo, isBioLogin: false });
     }
 
     };
@@ -107,14 +102,21 @@ function QuickLoginSetup(props) {
             const credential = await navigator.credentials.create({ publicKey });
             console.log('Passkey authentication successful:', credential);
             setIsPasskeyChecked(true);
+            setUserInfo({ ...userInfo, isBioLogin: isBioChecked });
         } catch (error) {
             console.error('Passkey authentication failed:', error);
             setIsPasskeyChecked(false);
+            setUserInfo({ ...userInfo, isBioLogin: isBioChecked });
         }
     };
     
 
     const handleSubmit = () => {
+        setUserInfo({ ...userInfo, isBioLogin: isBioChecked });
+        console.log("----------------");
+        console.log(isBioChecked);
+        console.log(userInfo);
+        console.log("----------------");
         call('/api/v1/users/signup', "POST", userInfo).then((response) => {
             localStorage.setItem("userBioPassword", response.userBioPassword);
             navi("/signup/signupsuccess");
