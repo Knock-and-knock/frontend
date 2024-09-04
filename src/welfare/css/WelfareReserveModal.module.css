@@ -59,21 +59,21 @@ hr {
 .reserve-info-container1 {
   margin: 0 auto;
   margin-top: 50px;
-  width: 80%;
+  width: 90%;
   height: 70px;
 }
 
 .reserve-info-container11 {
   margin: 0 auto;
   margin-top: 30px;
-  width: 80%;
+  width: 90%;
   height: 90px;
 }
 
 .reserve-info-container2 {
   margin: 0 auto;
   margin-top: -10px;
-  width: 80%;
+  width: 90%;
   height: 70px;
 }
 
@@ -84,7 +84,7 @@ hr {
 
 .reserve-info-container3 {
   margin: 0 auto;
-  width: 80%;
+  width: 90%;
   margin-top: 35px;
 }
 
@@ -138,14 +138,14 @@ hr {
 }
 
 .reserve-info-text {
-  font-size: 18px;
+  font-size: 20px;
   font-weight: bold;
   color: #2c2c2c;
 }
 
 .reserve-info-text1 {
   margin-right: 35px;
-  font-size: 18px;
+  font-size: 20px;
   font-weight: bold;
   color: #2c2c2c;
 }
@@ -164,52 +164,54 @@ hr {
 }
 
 .insert-date {
-  width: 125px;
   height: 28px;
-  font-size: 18px;
+  font-size: 20px;
   margin-left: 30px;
   border: 1px solid #c5c5c5;
   border-radius: 5px;
   color: #2c2c2c;
+  font-weight: bold;
 }
 
 .insert-start-date {
-  width: 135px;
   height: 28px;
-  font-size: 18px;
+  font-size: 20px;
   margin-left: 30px;
-  border: 1px solid #c5c5c5;
-  border-radius: 5px;
-  color: #2c2c2c;
+  border: none;
+  color: #FF5959;
+  float: right;
+  font-weight: bold;
 }
 
 .end-date {
-  width: 135px;
   height: 28px;
-  font-size: 18px;
+  font-size: 20px;
   margin-left: 30px;
   margin-top: 5px;
-  border: 1px solid #c5c5c5;
-  border-radius: 5px;
-  color: #2c2c2c;
+  border: none;
+  color: #FF5959;
+  float: right;
+  font-weight: bold;
 }
 
 .insert-time {
-  width: 195px;
   height: 28px;
-  font-size: 18px;
+  font-size: 20px;
   margin-left: 30px;
-  border: 1px solid #c5c5c5;
-  border-radius: 5px;
+  border: none;
+  color: #FF5959;
+  float: right;
+  font-weight: bold;
 }
 
 .insert-period {
-  width: 125px;
   height: 28px;
-  font-size: 18px;
+  font-size: 20px;
   margin-left: 30px;
-  border: 1px solid #c5c5c5;
-  border-radius: 5px;
+  border: none;
+  color: #FF5959;
+  float: right;
+  font-weight: bold;
 }
 
 .main-link {
