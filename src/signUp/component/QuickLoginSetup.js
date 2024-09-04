@@ -6,8 +6,8 @@ import { useMember } from 'signUp/SignUpMain';
 import { call } from 'login/service/ApiService';
 
 function QuickLoginSetup(props) {
-    const [isPinChecked, setIsPinChecked] = useState('');
-    const [isBioChecked, setIsBioChecked] = useState('');
+    const [isPinChecked, setIsPinChecked] = useState(false);
+    const [isBioChecked, setIsBioChecked] = useState(false);
     const [isSecurityKeyChecked, setIsSecurityKeyChecked] = useState(false);
     const [isPasskeyChecked, setIsPasskeyChecked] = useState(false);
     const { userInfo, setUserInfo } = useMember();
