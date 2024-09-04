@@ -84,9 +84,11 @@ const formatPrice = (price) => {
 
 const isNextButtonDisabled = !welfareBookStartDate || welfareBookUseTime === 0;
 
+
+
 const handleNextClick = () => {
   if (isExtraInfo === false && (loginUser === 'PROTECTOR' || loginUser === 'PROTEGE')) {
-    goInputBirth();
+    goInputBirth(userSpec);
   } else {
     goCheckSpec();
   }

@@ -26,7 +26,7 @@ function WelfareCheckSpec() {
             .then((response) => {
               setUserSpec({
                 ...userSpec,
-                protegeUserNo: response.protegeUserNo // 날짜 모달창에서 userSpec에 protegeUserName 추가했으므로 여기서 쓸 수 있음
+                protegeUserNo: response.protegeUserNo, // 날짜 모달창에서 userSpec에 protegeUserName 추가했으므로 여기서 쓸 수 있음
               });
             })
             .catch((error) => {
@@ -35,7 +35,6 @@ function WelfareCheckSpec() {
         }
         else {
             const userNo = localStorage.getItem("userNo");
-            console.log(userNo);
     
             setUserSpec({
                 ...userSpec,
@@ -48,6 +47,23 @@ function WelfareCheckSpec() {
       }, []);
 
       useEffect(() => {
+        call('/api/v1/users', 'GET', null)
+            .then(response => {
+                setUserSpec({
+                    userName:response.protegeName,
+                    userBirth:response.protegeBirth,
+                    userGender:response.protegeGender,
+                    userHeight:response.protegeHeight,
+                    userWeight:response.protegeWeight,
+                    userDisease:response.protegeDisease,
+                    userAddress:response.protegeAddress,
+                    userAddressDetail:response.protegeAddressDetail,
+                });
+            })
+            .catch(error => {
+                console.error("Failed to fetch user info", error);
+            });
+
         console.log(userSpec);
       }, [])
 
@@ -143,7 +159,12 @@ function WelfareCheckSpec() {
                         className={styles["spec-check"]}
                         type="text"
                         placeholder="주소"
-                        value={`${userSpec.protegeAddress} ${userSpec.protegeAddressDetail}` || ''}
+                        value={
+                            (userSpec.protegeAddress && userSpec.protegeAddressDetail) 
+                                ? `${userSpec.protegeAddress} ${userSpec.protegeAddressDetail}` 
+                                : `${userSpec.userAddress} ${userSpec.userAddressDetail}` || ''
+                        }
+                        
                         disabled
                     />
 

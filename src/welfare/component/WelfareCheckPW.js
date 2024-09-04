@@ -10,7 +10,8 @@ function WelfareCheckPW() {
     const navigate = useNavigate();
     const location = useLocation();
     const cardId = location.state.value;
-    const { userSpec} = useSpecHook();
+    const { userSpec } = useSpecHook();
+    
 
     const gopayComplete = () => {
         if (password.length === 6) {
@@ -18,7 +19,7 @@ function WelfareCheckPW() {
                 call('/api/v1/welfare-book/reserve', 'POST', userSpec).then((response)=>{
                     call('/api/v1/card-history', 'POST',{
                             cardHistoryAmount: userSpec.welfareBookTotalPrice,
-                            cardHistoryShopname: "돌봄 서비스",
+                            cardHistoryShopname: "똑똑 돌봄 서비스",
                             cardCategoryNo: 8,
                             cardId: cardId,
                         }).then((response)=> {    
