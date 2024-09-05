@@ -22,7 +22,7 @@ function WelfareInputBirth() {
         if (year && month && day) {
             const birthDate = new Date(year, month - 1, day); // Date 객체로 생성
 
-            const newUserSpec = {...userSpec, userBirth: birthDate}; // Date 객체로 userBirth 저장
+            const newUserSpec = {...userSpec, userBirth: birthDate, protegeBirth: birthDate}; // Date 객체로 userBirth 저장
             setUserSpec(newUserSpec);
             console.log("Updated userSpec:", newUserSpec); // 최신 상태의 userSpec 로그 출력
         }

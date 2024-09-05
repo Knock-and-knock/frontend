@@ -51,7 +51,11 @@ function DolbomMain() {
                   || response.protegeHeight === 0
                   || response.protegeWeight === 0) {
                   setIsExtraInfo(false);
-                } else {
+                } else if(response.protegeAddress === null 
+                  || response.protegeBirth === null 
+                  || response.protegeDisease === null
+                  || response.protegeHeight === 0
+                  || response.protegeWeight === 0) {
                   setIsExtraInfo(true);
                 }
             })
@@ -82,7 +86,7 @@ function DolbomMain() {
     
   }, []);
 
-  useEffect(()=> {
+  useEffect(()=> { // 해당 값 바뀔때마다 콘솔로 찍음
     console.log("isExtraInfo 값: " + isExtraInfo);
   },[isExtraInfo]);
 
