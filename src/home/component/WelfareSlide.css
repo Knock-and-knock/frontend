@@ -1,18 +1,6 @@
-/* .slide-container{
-    background-color: #FFF8F3;
-    height: 30vh;
+.welfare-main-container{
+    box-sizing: border-box;
 }
-.welfare-main-text{
-    z-index: 2;
-}
-.slide{
-    width: 100%;
-    object-fit:contain;
-} */
-
-/* WelfareSlide.css */
-
-  
 .welfare-main-text {
 width: 100%;
 position: absolute;

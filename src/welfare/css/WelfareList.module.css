@@ -25,6 +25,21 @@ hr {
   font-weight: bold;
   margin: 0px 0px 5px !important;
 }
+
+/* .swiper-pagination {
+  background-color: #333;
+  padding: 10px;
+}
+.swiper-pagination-bullet {
+  width: 10px;
+  height: 10px;
+  background-color: #fff;
+  opacity: 0.5;
+}
+.swiper-pagination-bullet-active {
+  opacity: 1;
+} */
+ 
 .welfare-slide-container{
   text-align: center;
 }
@@ -168,7 +183,7 @@ hr {
 }
 
 .reserved-list-btn {
-  color: #FF5959;
+  color: #2c2c2c;
   text-align: center;
   font-weight: bold;
   font-size: 18px;

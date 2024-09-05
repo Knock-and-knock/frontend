@@ -84,3 +84,10 @@
     justify-content: space-between;
     margin: 0 auto;
 }
+.agreement-text p{
+    margin: 5px;
+    padding: 0px 20px;
+    text-align: center;
+    color: #D9D9D9;
+    font-size: 14px;
+}
