@@ -2,12 +2,6 @@ import React from 'react';
 import styles from 'welfare/css/WelfareReservedList.module.css';
 
 function WelfareReservedItem({ title, welfareBookReservationDate, welfareBookStartDate, welfareBookUseTime, welfareTotalPrice, onCancel }) {
-  
-  function formatPrice(price) {
-    return new Intl.NumberFormat('ko-KR', {
-      minimumFractionDigits: 0 // 소수점 아래 자리수를 0으로 설정하여 정수로 표시
-    }).format(price); // currency: 'KRW' 옵션을 제거하여 원화 기호 제거
-  }
 
   function formatDate(dateString) {
     const date = new Date(dateString);
@@ -39,6 +33,23 @@ function WelfareReservedItem({ title, welfareBookReservationDate, welfareBookSta
     }
   }
 
+  function formatPrice(price) {
+    return new Intl.NumberFormat('ko-KR', {
+      minimumFractionDigits: 0 // 소수점 아래 자리수를 0으로 설정하여 정수로 표시
+    }).format(price); // currency: 'KRW' 옵션을 제거하여 원화 기호 제거
+  }
+
+  function calculatePrice(welfareBookUseTime) {
+    if ([1, 2, 3].includes(welfareBookUseTime)) {
+      return 75000 * welfareBookUseTime;
+    } else if ([4, 5, 6, 7, 8, 9].includes(welfareBookUseTime)) {
+      return 2000000 * (welfareBookUseTime - 3);
+    } else {
+      return 0;  // welfareBookUseTime이 예상 범위 밖의 값인 경우
+    }
+  }
+  
+
   const formattedwelfareBookReservationDate = formatDate(welfareBookReservationDate);
   
   return (
@@ -61,7 +72,7 @@ function WelfareReservedItem({ title, welfareBookReservationDate, welfareBookSta
         <hr />
         <div className={styles["detailed-reserved-info-container3"]}>
           <span className={styles["total-price-text"]}>최종결제금액</span>
-          <span className={styles["total-price-number"]}>{formatPrice(welfareTotalPrice)} 원</span>
+          <span className={styles["total-price-number"]}>{formatPrice(calculatePrice(welfareBookUseTime))} 원</span>
         </div>
       </div>
   );

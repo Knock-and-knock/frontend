@@ -1,7 +1,7 @@
 import "matching/MatchingModal.css";
 import Modal from "react-modal";
 
-function VoiceChatMovePageModal({ isOpen, closeModal,handleSubmit,content}) {
+function VoiceChatMovePageModal({ isOpen, closeModal,handleSubmit,welfareNo,welfareBookStartDate,welfareBookUseTime}) {
   const customStyles = {
     overlay: {
       backgroundColor: "rgba(0, 0, 0, 0.5)",
@@ -22,7 +22,7 @@ function VoiceChatMovePageModal({ isOpen, closeModal,handleSubmit,content}) {
   };
 
   const handleYesClick = () => {
-    handleSubmit(content); // 예 버튼을 누르면 content 값을 넘겨줌
+    handleSubmit({welfareNo,welfareBookStartDate,welfareBookUseTime}); // 예 버튼을 누르면 content 값을 넘겨줌
   };
 
   return (
