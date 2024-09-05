@@ -15,22 +15,17 @@ import WelfareNursingModal from 'welfare/component/WelfareNursingModal';
 import styles from 'welfare/css/DolbomMain.module.css';
 import { useSpecHook } from './WelfareInputTotal';
 import ExtraInfo from 'cardCreate/application/ExtraInfo';
-
 Modal.setAppElement('#root');
-
 function DolbomMain() {
   const [selectedId, setSelectedId] = useState('nursing');
   const [isOpen, setIsOpen] = useState(false);
   const [isCard, setIsCard] = useState(false);
   const [isExtraInfo, setIsExtraInfo] = useState(false);
   const [loginUser, setLoginUser] = useState(null); // loginUser 상태 추가
-
   const { userSpec, setUserSpec } = useSpecHook();
-
   useEffect(() => {
     const storedLoginUser = localStorage.getItem("loginUser");
     setLoginUser(storedLoginUser);
-
     call("/api/v1/card/isCard", "GET", null)
       .then((response) => {
         setIsCard(response.isCard);
@@ -38,9 +33,8 @@ function DolbomMain() {
       .catch((error) => {
         console.error("Error fetching card status:", error);
       });
-
       if (storedLoginUser === "PROTECTOR") {
-        call('/api/v1/match', 'GET', null)
+        call('/api/v1/users', 'GET', null)
             .then(response => {
                 setUserSpec(response);
     
@@ -51,11 +45,7 @@ function DolbomMain() {
                   || response.protegeHeight === 0
                   || response.protegeWeight === 0) {
                   setIsExtraInfo(false);
-                } else if(response.protegeAddress === null 
-                  || response.protegeBirth === null 
-                  || response.protegeDisease === null
-                  || response.protegeHeight === 0
-                  || response.protegeWeight === 0) {
+                } else {
                   setIsExtraInfo(true);
                 }
             })
@@ -85,31 +75,25 @@ function DolbomMain() {
     
     
   }, []);
-
   useEffect(()=> { // 해당 값 바뀔때마다 콘솔로 찍음
     console.log("isExtraInfo 값: " + isExtraInfo);
   },[isExtraInfo]);
-
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = 'auto';
     }
-
     return () => {
       document.body.style.overflow = 'auto';
     };
   }, [isOpen]);
-
   const openModal = () => {
     setIsOpen(true);
   };
-
   const closeModal = () => {
     setIsOpen(false);
   };
-
   const ReserveStyles = {
     overlay: {
       backgroundColor: "rgba(0, 0, 0, 0.5)",
@@ -128,11 +112,9 @@ function DolbomMain() {
       boxSizing: "border-box",
     },
   };
-
   const handleClick = (id) => {
     setSelectedId(id);
   };
-
   const renderModalContent = () => {
     switch (selectedId) {
       case 'nursing':
@@ -145,11 +127,9 @@ function DolbomMain() {
         return null;
     }
   };
-
   const renderButtonText = () => {
     return isCard ? '신청하기' : '카드를 신청하고 이용해주세요';
   };
-
   const renderContent = () => {
     switch (selectedId) {
       case 'nursing':
@@ -174,7 +154,6 @@ function DolbomMain() {
             <img src={housework1} alt='일상가사1' className={styles['img-info']} />
             <img src={dolbomi} alt='똑돌보미' className={styles['img-info']} />
             <img src={housework2} alt='일상가사2' className={styles['img-info']} />
-
             <div 
               className={`${styles["button-section"]} ${styles["go-reserve-nursing"]}`} 
               onClick={isCard ? openModal : null}
@@ -190,7 +169,6 @@ function DolbomMain() {
             <img src={hanwool1} alt='한울돌봄1' className={styles['img-info']} />
             <img src={dolbomi} alt='똑돌보미' className={styles['img-info']} />
             <img src={hanwool2} alt='한울돌봄2' className={styles['img-info']} />
-
             <div 
               className={`${styles["button-section"]} ${styles["go-reserve-nursing"]}`} 
               onClick={isCard ? openModal : null}
@@ -204,7 +182,6 @@ function DolbomMain() {
         return null;
     }
   };
-
   return (
     <div className={styles["container"]}>
       <Header />
@@ -224,7 +201,6 @@ function DolbomMain() {
             가정 간병
           </p>
         </div>
-
         <div 
           className={`${styles["main-section"]} ${styles["hanwool-list"]}`} 
           id="housework" 
@@ -239,7 +215,6 @@ function DolbomMain() {
             일상 가사
           </p>
         </div>
-
         <div 
           className={`${styles["main-section"]} ${styles["hanwool-list"]}`} 
           id="hanwool" 
@@ -266,6 +241,4 @@ function DolbomMain() {
     </div>
   );
 }
-
 export default DolbomMain;
-
