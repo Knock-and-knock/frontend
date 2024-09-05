@@ -10,69 +10,157 @@ function WelfareCheckSpec() {
   const { userSpec, setUserSpec } = useSpecHook();
   const [loading, setLoading] = useState(true); // 로딩 상태 추가
   const location = useLocation();
-  const {welfareNo,welfareBookStartDate,welfareBookUseTime} = location.state || {};
-  const [response, setResponse] = useState([]);
+  const {welfareNo,welfareBookStartDate,welfareBookUseTime,isExtraInfo} = location.state || {};
 
-  const fetchUserData = async () => {
-    try {
-      
-      const userResponse = await call("/api/v1/users", "GET", null);
-      setUserSpec((prevSpec) => ({
-        ...prevSpec,
-        userName: userResponse.protegeName,
-        userBirth: userResponse.protegeBirth,
-        protegeBirth: userResponse.userBirth,
-        userGender: userResponse.protegeGender,
-        protegeGender: userResponse.userGender,
-        userHeight: userResponse.protegeHeight,
-        protegeHeight: userResponse.userHeight,
-        userWeight: userResponse.protegeWeight,
-        protegeWeight: userResponse.userWeight,
-        userDisease: userResponse.protegeDisease,
-        protegeDisease: userResponse.protegeDisease,
-        userAddress: userResponse.protegeAddress,
-        userAddressDetail: userResponse.protegeAddressDetail,
-        protegeAddress: userResponse.protegeAddress,
-        protegeAddressDetail: userResponse.protegeAddressDetail,
-      }));
-      setLoading(false); // 데이터가 모두 로드된 후 로딩 종료
-    } catch (error) {
-      console.error("Failed to fetch user info", error);
-      setLoading(false); // 에러 발생 시에도 로딩 종료
-    }
-  };
-  useEffect(() => {
+  const [userInfo, setUserInfo] = useState([]);
+
+  // const fetchUserData = async () => {
+  //   try {
+  //     call("/api/v1/users", "GET", null).then((response)=>{setResponse(response)});
+  //     setUserSpec((prevSpec) => ({
+  //       ...prevSpec,
+  //       userName: response.protegeName,
+  //       userBirth: response.protegeBirth,
+  //       protegeBirth: response.userBirth,
+  //       userGender: response.protegeGender,
+  //       protegeGender: response.userGender,
+  //       userHeight: response.protegeHeight,
+  //       protegeHeight: response.userHeight,
+  //       userWeight: response.protegeWeight,
+  //       protegeWeight: response.userWeight,
+  //       userDisease: response.protegeDisease,
+  //       protegeDisease: response.protegeDisease,
+  //       userAddress: response.protegeAddress,
+  //       userAddressDetail: response.protegeAddressDetail,
+  //       protegeAddress: response.protegeAddress,
+  //       protegeAddressDetail: response.protegeAddressDetail,
+  //     }));
+  //     setLoading(false); // 데이터가 모두 로드된 후 로딩 종료
+  //   } catch (error) {
+  //     console.error("Failed to fetch user info", error);
+  //     setLoading(false); // 에러 발생 시에도 로딩 종료
+  //   }
+  // };
+
+
+  // useEffect(() => {
+  //   if (localStorage.getItem("loginUser") === "PROTECTOR") {
+  //     call("/api/v1/match", "GET", null).then((response)=>{setResponse(response);});
+  //     setUserSpec((prevSpec) => ({
+  //       ...prevSpec,
+  //       protegeUserNo: response.protegeUserNo, // 필요한 데이터 설정
+  //     }));
+  //   } else {
+  //     const userNo = localStorage.getItem("userNo");
+  //     setUserSpec((prevSpec) => ({
+  //       ...prevSpec,
+  //       userNo: parseInt(userNo, 10),
+  //     }));
+  //   }
+
+  //   if (welfareNo != null && welfareBookStartDate != null && welfareBookUseTime != null) {
+  //     setUserSpec((userSpec) => ({
+  //       ...userSpec,
+  //       welfareNo: welfareNo,
+  //       welfareBookStartDate: welfareBookStartDate,
+  //       welfareBookUseTime: welfareBookUseTime,
+  //     }));
+  //   }
+  //   console.log("----------------------------------");
+  //   console.log(userSpec);
+  //   console.log("----------------------------------");
+  // }, [])
+
+  // useEffect(() => {
+  //   console.log("음성인식에서 받는 값 3개!!: " + welfareNo,welfareBookStartDate,welfareBookUseTime);
+  //   fetchUserData();
+  // }, [setUserSpec]);
+
+const getUserInfo = ()=>{
+  call('/api/v1/users',"GET",null).then((response)=>{
+    setUserInfo(response);
+  }).catch((error)=>{
+    console.log("회원정보 에러");
+  });
+}
+
+  useEffect(()=>{
+    //내가 보호자일 때,
     if (localStorage.getItem("loginUser") === "PROTECTOR") {
-      call("/api/v1/match", "GET", null).then((response)=>{setResponse(response);});
-      setUserSpec((prevSpec) => ({
-        ...prevSpec,
-        protegeUserNo: response.protegeUserNo, // 필요한 데이터 설정
-      }));
-    } else {
-      const userNo = localStorage.getItem("userNo");
-      setUserSpec((prevSpec) => ({
-        ...prevSpec,
-        userNo: parseInt(userNo, 10),
-      }));
+      //이전에 입력된 정보가 있는 경우
+      if(isExtraInfo){
+        getUserInfo();
+        call('/api/v1/match',"GET",null).then((response)=>{
+          setUserSpec((prevSpec) => ({
+            ...prevSpec,
+            userNo: response.userNo,
+            userName: response.protegeUserName,
+            userBirth: userInfo.protegeBirth,
+            protegeAddress: userInfo.protegeAddress,
+            protegeAddressDetail: userInfo.protegeAddressDetail,
+            userGender: userInfo.protegeGender,
+            userHeight: userInfo.protegeHeight,
+            userWeight: userInfo.protegeWeight,
+            userDisease: userInfo.protegeDisease
+          }));
+        }).catch((error)=>{
+          console.log("피보호자 매칭조회 실패");
+        });
+        //직접 입력 받은 경우
+      }else{
+        call('/api/v1/match',"GET",null).then((response)=>{
+          setUserSpec((prevSpec) => ({
+            ...prevSpec,
+            userNo: response.userNo,
+            userName: response.protegeUserName,
+          }));
+        }).catch((error)=>{
+          console.log("피보호자 매칭조회 실패");
+        });
+      }
+    }else{
+      //내가 일반사용자일 때, 이전에 입력된 정보가 있는 경우
+      if(isExtraInfo){
+        getUserInfo();
+        setUserSpec((prevSpec) => ({
+          ...prevSpec,
+          userNo: userInfo.userNo,
+          userName: userInfo.userName,
+          userBirth: userInfo.protegeBirth,
+          protegeAddress: userInfo.protegeAddress,
+          protegeAddressDetail: userInfo.protegeAddressDetail,
+          userGender: userInfo.protegeGender,
+          userHeight: userInfo.protegeHeight,
+          userWeight: userInfo.protegeWeight,
+          userDisease: userInfo.protegeDisease
+        }));
+        // 똑똑이가 정보를 넘겨주는 경우
+      }else if(welfareNo && welfareBookStartDate && welfareBookUseTime){
+        getUserInfo();
+        setUserSpec((prevSpec) => ({
+          ...prevSpec,
+          userNo: welfareNo,
+          userBirth: userInfo.protegeBirth,
+          protegeAddress: userInfo.protegeAddress,
+          protegeAddressDetail: userInfo.protegeAddressDetail,
+          userGender: userInfo.protegeGender,
+          userHeight: userInfo.protegeHeight,
+          userWeight: userInfo.protegeWeight,
+          userDisease: userInfo.protegeDisease
+        }));
+      }else{
+        //직접 입력 받은 경우
+        getUserInfo();
+        setUserSpec((prevSpec) => ({
+          ...prevSpec,
+          userNo: userInfo.userNo,
+          userName: userInfo.userName,
+  
+        }));
+      }
     }
-
-    if (welfareNo != null && welfareBookStartDate != null && welfareBookUseTime != null) {
-      setUserSpec((userSpec) => ({
-        ...userSpec,
-        welfareNo: welfareNo,
-        welfareBookStartDate: welfareBookStartDate,
-        welfareBookUseTime: welfareBookUseTime,
-      }));
-    }
-    console.log("----------------------------------");
-    console.log(userSpec);
-    console.log("----------------------------------");
-  }, [])
-
-  useEffect(() => {
-    console.log("음성인식에서 받는 값 3개!!: " + welfareNo,welfareBookStartDate,welfareBookUseTime);
-    fetchUserData();
-  }, [setUserSpec]);
+    setLoading(false); 
+  },[]);
 
   const formattedReservationInfo = () => {
     if (!userSpec.welfareBookStartDate || !userSpec.welfareBookUseTime)
@@ -121,6 +209,7 @@ const welfareTime = () => {
   const goSetPW = () => {
     navigate("/welfare-input/pay");
   };
+
 
   const formatDate = (date) => {
     if (!date) return "";
