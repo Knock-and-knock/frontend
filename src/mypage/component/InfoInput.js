@@ -39,7 +39,7 @@ function InfoInput({ protegeInfo, handleChange }) {
                     name='userBirth' 
                     defaultValue={protegeInfo.userBirth} 
                     onChange={handleChange}
-                    placeholder="생년월일"/>
+                    placeholder="생년월일" required/>
             </div>
             <div className='infoInput-box'>
                 <p>성별</p>
@@ -74,7 +74,7 @@ function InfoInput({ protegeInfo, handleChange }) {
                             name='userHeight' 
                             defaultValue={protegeInfo.userHeight} 
                             onChange={handleChange}
-                            placeholder="키"/>
+                            placeholder="키" required/>
                         <p>cm</p>
                     </div>
                 </div>
@@ -85,7 +85,7 @@ function InfoInput({ protegeInfo, handleChange }) {
                             name='userWeight' 
                             defaultValue={protegeInfo.userWeight} 
                             onChange={handleChange}
-                            placeholder="몸무게"/>
+                            placeholder="몸무게" required/>
                         <p>kg</p>
                     </div>
                 </div>
@@ -108,6 +108,7 @@ function InfoInput({ protegeInfo, handleChange }) {
                         onChange={handleChange} 
                         className='addressInfo'
                         name='userAddress'
+                        required
                     />
                     <img src={glasses} alt="돋보기" className="addressInfo-icon" />
                 </div>
@@ -122,7 +123,7 @@ function InfoInput({ protegeInfo, handleChange }) {
                     name='userAddressDetail' 
                     defaultValue={protegeInfo.userAddressDetail} 
                     onChange={handleChange}
-                    placeholder="상세주소"/>
+                    placeholder="상세주소" required/>
             </div>
         </div>
     );

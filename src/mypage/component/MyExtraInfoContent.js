@@ -7,13 +7,13 @@ function MyExtraInfoContent({userInfo}) {
             setGender('남');
         }else if(userInfo.protegeGender===2){
             setGender('여');
-        }
+        }else{ setGender('없음')}
     },[userInfo.protegeGender]);   
     return (
         <div>
              <div className='info-content'>
                 <p>생년월일</p>
-                <p>{userInfo.protegeBirth}</p>
+                <p>{userInfo.protegeBirth?userInfo.protegeBirth:"없음"}</p>
             </div>
             <div className='info-content'>
                 <p>성별</p>
@@ -33,7 +33,7 @@ function MyExtraInfoContent({userInfo}) {
             </div>
             <div className='info-content'>
                 <p>주소</p>
-                <p>{userInfo.protegeAddress} {userInfo.protegeAddressDetail}</p>
+                <p>{userInfo.protegeAddress!=='null'?userInfo.protegeAddress:"없음"} {userInfo.protegeAddressDetail!=='null'?userInfo.protegeAddressDetail:""}</p>
             </div>
         </div>
 
