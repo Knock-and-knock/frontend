@@ -4,6 +4,7 @@ import {
   handleAutoSub,
   handleChatRoom,
   startAutoRecord,
+  
 } from "chat/chatScript";
 import "chat/VoiceChat.css";
 import VoiceHeader from "chat/VoiceHeader";
@@ -13,6 +14,7 @@ import Modal from "react-modal";
 import Loading from "./Loading";
 import SpeakLoading from "./SpeakLoading";
 import VoiceChatMovePageModal from "./VoiceChatMovePageModal";
+import { useNavigate } from "react-router-dom";
 
 function VoiceChat(props) {
   const [userInfo, setUserInfo] = useState("");
@@ -27,8 +29,11 @@ function VoiceChat(props) {
   const [isOpen, setIsOpen] = useState(false);
   const [serviceUrl, setServiceUrl] = useState("");
   const [isListening, setIsListening] = useState(false);
-  const [content, setContent] = useState("");
+  const [welfareNo, setWelfareNo] = useState("");
+  const [welfareBookStartDate, setWelfareBookStartDate] = useState("");
+  const [welfareBookUseTime, setWelfareBookUseTime] = useState("");
 
+  const navi = useNavigate();
   useEffect(() => {
     async function initializeChat() {
       // await handleChatRoom(userInfo);
@@ -41,12 +46,11 @@ function VoiceChat(props) {
       //   setServiceUrl
       // );
       await handleChatRoom(userInfo);
-      availabilityFunc(sendMessage,setIsListening);
+      availabilityFunc(sendMessage, setIsListening);
     }
 
     initializeChat();
   }, [userInfo]);
-
 
   function sendMessage(recognizedText) {
     setChatResponse("");
@@ -58,10 +62,12 @@ function VoiceChat(props) {
       setIsLoading,
       setIsSpeaking,
       setIsOpen,
-      setServiceUrl 
+      setServiceUrl,
+      setWelfareNo,
+      setWelfareBookStartDate,
+      setWelfareBookUseTime
     );
   }
-  
 
   const handleStartChat = () => {
     if (!isStart) {
@@ -78,6 +84,7 @@ function VoiceChat(props) {
   const customStyles = {
     overlay: {
       backgroundColor: "rgba(0, 0, 0, 0.5)",
+
       zIndex: 100,
     },
     content: {
@@ -90,17 +97,21 @@ function VoiceChat(props) {
     setVisible(!visible);
   };
 
-  const closeModal =()=>{
+  const closeModal = () => {
     setIsOpen(false);
-  }
+  };
 
   const handleSubmit = () => {
-    if (serviceUrl) {
-      window.location.href = serviceUrl;
-    }
-    console.log("이동 처리");
-    closeModal();
-    endRecord();
+      if (serviceUrl) {
+        if(serviceUrl==="/welfare-input/check-spec"){
+          navi("/welfare-input/check-spec",{ state: { welfareNo,welfareBookStartDate,welfareBookUseTime } });
+        }else{
+          window.location.href = serviceUrl;
+        }
+      }
+      console.log("이동 처리");
+      closeModal();
+      endRecord();
   };
 
   return (
@@ -126,7 +137,9 @@ function VoiceChat(props) {
           isOpen={isOpen}
           closeModal={closeModal}
           handleSubmit={handleSubmit}
-          content={content}
+          welfareNo={welfareNo}
+          welfareBookStartDate={welfareBookStartDate}
+          welfareBookUseTime={welfareBookUseTime}
         />
       )}
     </div>

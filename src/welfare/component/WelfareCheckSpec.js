@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styles from "welfare/css/WelfareCheckSpec.module.css";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Header from "header/Header.js";
 import { useSpecHook } from "welfare/component/WelfareInputTotal";
 import { call } from "login/service/ApiService";
@@ -9,12 +9,23 @@ function WelfareCheckSpec() {
   const navigate = useNavigate();
   const { userSpec, setUserSpec } = useSpecHook();
   const [loading, setLoading] = useState(true); // 로딩 상태 추가
-
-  const [reservationDate, setReservationDate] = useState(null);
-  const [serviceTypeNum, setServiceTypeNum] = useState(null);
-  const [serviceTypeNo, setServiceTypeNo] = useState(null);
+  const location = useLocation();
+  const {welfareNo,welfareBookStartDate,welfareBookUseTime} = location.state || {};
 
   useEffect(() => {
+    if (welfareNo != null && welfareBookStartDate != null && welfareBookUseTime != null) {
+      setUserSpec((userSpec) => ({
+        ...userSpec,
+        welfareNo: welfareNo,
+        welfareBookStartDate: welfareBookStartDate,
+        welfareBookUseTime: welfareBookUseTime,
+      }));
+    }
+  }, [])
+
+  useEffect(() => {
+    console.log("음성인식에서 받는 값 3개!!: " + welfareNo,welfareBookStartDate,welfareBookUseTime);
+    
     const fetchUserData = async () => {
       try {
         if (localStorage.getItem("loginUser") === "PROTECTOR") {
@@ -55,20 +66,17 @@ function WelfareCheckSpec() {
   }, [setUserSpec]);
 
   const formattedReservationInfo = () => {
-    if (!userSpec.welfareBookStartDate || !userSpec.welfarebookDurationText)
+    if (!userSpec.welfareBookStartDate || !userSpec.welfareBookUseTime)
       return "";
-    return `${userSpec.welfareBookStartDate} | ${userSpec.welfarebookDurationText}`;
+    return `${userSpec.welfareBookStartDate}  /  ` + welfareTime();
   };
 
   const welfareName = () => {
-    // const welfareNo = userSpec.welfareNo === 0 ? content.serviceTypeNo : userSpec.welfareNo;
-
-
-    switch (userSpec.welfareNo) { // (welfareNo)
+    switch (userSpec.welfareNo) {
       case 1:
         return "일상 가사 돌봄";
       case 2:
-        return "가정 간병 돌봄";
+        return "가정 간병 돌봄";  
       case 3:
         return "한울 돌봄";
       default:
@@ -76,6 +84,30 @@ function WelfareCheckSpec() {
     }
 };
 
+const welfareTime = () => {
+  switch (userSpec.welfareBookUseTime) {
+    case 1:
+      return "3시간 (09:00 ~ 12:00)";
+    case 2:
+      return "6시간 (09:00 ~ 15:00)";  
+    case 3:
+      return "9시간 (09:00 ~ 18:00)";
+    case 4:
+      return "1개월";
+    case 5:
+      return "2개월";
+    case 6:
+      return "3개월";
+    case 7:
+      return "4개월";
+    case 8:
+      return "5개월";
+    case 9:
+      return "6개월";
+    default:
+      return null;
+  }
+};
 
   const goSetPW = () => {
     navigate("/welfare-input/pay");
@@ -101,7 +133,7 @@ function WelfareCheckSpec() {
   };
 
   if (loading) {
-    return <div>Loading...</div>; // 로딩 중일 때 표시할 내용
+    return <div>로딩중입니다...</div>; // 로딩 중일 때 표시할 내용
   }
 
   return (
@@ -150,14 +182,17 @@ function WelfareCheckSpec() {
           <input
             className={styles["spec-check"]}
             type="text"
-            placeholder="주소"
+            placeholder="등록된 주소가 없습니다."
             value={
-              userSpec.protegeAddress && userSpec.protegeAddressDetail
+              (userSpec.protegeAddress && userSpec.protegeAddressDetail
                 ? `${userSpec.protegeAddress} ${userSpec.protegeAddressDetail}`
-                : `${userSpec.userAddress} ${userSpec.userAddressDetail}` || ""
+                : (userSpec.userAddress && userSpec.userAddressDetail
+                  ? `${userSpec.userAddress} ${userSpec.userAddressDetail}`
+                  : "등록된 주소가 없습니다."))
             }
             disabled
           />
+
 
           <p className={styles["spec-info"]}>신체</p>
           <input

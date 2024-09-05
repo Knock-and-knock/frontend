@@ -1,4 +1,5 @@
 import { call } from "login/service/ApiService";
+import { useState } from "react";
 
 var roomNo;
 var recognition;
@@ -10,7 +11,10 @@ export function handleAutoSub(
   setIsLoading,
   setIsSpeaking,
   setIsOpen,
-  setServiceUrl
+  setServiceUrl,
+  setWelfareNo,
+  setWelfareBookStartDate,
+  setWelfareBookUseTime
 ) {
   setIsLoading(false);
   setIsSpeaking(true);
@@ -25,10 +29,15 @@ export function handleAutoSub(
       const actionRequired = response.actionRequired;
       const redirectionResult = response.redirectionResult;
       const reservationResult = response.reservationResult;
-      console.log(content);
+
+      const welfareNo = reservationResult.welfareNo;
+      const welfareBookStartDate = reservationResult.welfareBookStartDate;
+      const welfareBookUseTime = reservationResult.welfareBookUseTime;
       setChatResponse(content);
-      
-      
+      setWelfareNo(welfareNo);
+      setWelfareBookStartDate(welfareBookStartDate);
+      setWelfareBookUseTime(welfareBookUseTime);
+
 
       const byteCharacters = atob(audioData);
       const byteNumbers = new Array(byteCharacters.length);
@@ -105,7 +114,7 @@ export function startAutoRecord() {
 
 // 음성 인식을 중단하는 함수
 export function endRecord() {
-  if (recognition && recognition.stop) { 
+  if (recognition && recognition.stop) {
     recognition.stop();
     console.log("음성 인식 중단");
   } else {
