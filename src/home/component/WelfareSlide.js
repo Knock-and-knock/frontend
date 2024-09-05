@@ -1,38 +1,25 @@
 import "home/component/WelfareSlide.css";
-import slide01 from "image/slide01.png";
-import slide02 from "image/slide02.png";
-import slide03 from "image/slide03.png";
+import slide01 from "image/home_img01.png";
+import slide02 from "image/home-img02.png";
 import { useNavigate } from "react-router-dom";
-import 'swiper/css';
-import 'swiper/css/pagination';
-import { Autoplay, Pagination } from 'swiper/modules';
-import { Swiper, SwiperSlide } from 'swiper/react';
 
-function WelfareSlide(props) {
+function WelfareSlide({isProtege}) {
   const navi = useNavigate();
   const handleGoWelfare = ()=>{
-    navi('/welfare-main');
+    navi('/welfare-list');
   };
     return (
-    <div onClick ={handleGoWelfare} >
-    <Swiper
-    spaceBetween={30}
-    centeredSlides={true}
-    autoplay={{
-      delay: 2500,
-      disableOnInteraction: false,
-    }}
-    pagination={{
-      clickable: true,
-    }}
-    modules={[Autoplay, Pagination]}
-    className='slide-container'>
-        
-            <SwiperSlide><img src={slide01} alt="복지슬라이드01" className="slide" /></SwiperSlide>
-            <SwiperSlide><img src={slide02} alt="복지슬라이드02" className="slide" /></SwiperSlide>
-            <SwiperSlide><img src={slide03} alt="복지슬라이드03" className="slide" /></SwiperSlide>
-     </Swiper>
-     </div>
+    <div className="welfare-main-container" onClick ={handleGoWelfare} >
+      <div className="welfare-main-text">
+        <p>문화, 일자리, 교육 및 맞춤 돌봄</p>
+        <p>복지를 찾아줘, 똑똑!</p>
+        <button className="welfare-main-button">복지서비스 이용하기</button>
+      </div>
+
+      {isProtege?
+      <img src={slide01} alt="복지서비스" className="slide" />:
+      <img src={slide02} alt="복지서비스" className="slide" />}
+    </div>
     );
 }
 
