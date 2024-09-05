@@ -3,7 +3,7 @@ name: knockknock front deploy
 env:
   IMAGE_NAME: knock-knock-front-test
   CONTAINER_NAME: knock-knock-front
-  PROJECT_DIR: /root/project/knock-knock
+  PROJECT_DIR: /home/ubuntu/knock-knock
 
 on:
   push:
@@ -47,7 +47,7 @@ jobs:
           key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
           script: |
             mkdir test-test
-            
+
             # Update .env file with the latest image tag
             sudo echo "PROJECT_ROOT=${{ env.PROJECT_DIR }}" > ${{ env.PROJECT_DIR }}/.env.front
             sudo echo "FRONTEND_DOCKER_USERNAME=${{ secrets.DOCKERHUB_USERNAME }}" >> ${{ env.PROJECT_DIR }}/.env.front
