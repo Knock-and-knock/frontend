@@ -33,11 +33,11 @@ function MatchingModal({ isOpen, closeModal,handleSubmit, protector}) {
           </p>
         </div>
         <div className="modalContainer">
-          <button className="matchModalAgreeBtn" onClick={handleSubmit}>
-            수락
-          </button>
-          <button className="matchModalBtn" onClick={closeModal}>
+          <button className="matchModalAgreeBtn" onClick={closeModal}>
             닫기
+          </button>
+          <button className="matchModalBtn" onClick={handleSubmit}>
+            수락
           </button>
         </div>
       </Modal>

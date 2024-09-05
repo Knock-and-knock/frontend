@@ -1,3 +1,19 @@
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100vh;
+}
+
+.onboarding-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background-image: url("image/onboarding-img.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
 .onboarding-text {
   color: #fff;
   z-index: 1;
@@ -24,8 +40,9 @@
   padding: 15px;
   border-radius: 10px;
   font-size: 20px;
+  bottom: 30px;
   font-weight: bold;
-  width: 350px;
+  width: 90%;
   height: 55px;
   box-sizing: border-box;
 }
