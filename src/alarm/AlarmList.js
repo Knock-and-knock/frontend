@@ -5,6 +5,7 @@ import AlarmMark from './component/AlarmMark';
 import { useEffect, useState } from "react";
 import { call } from "login/service/ApiService";
 
+
 function AlarmList(props) {
 
     const [alarmList, setAlarmList] = useState([]);

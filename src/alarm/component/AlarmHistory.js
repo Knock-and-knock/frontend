@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import 'alarm/component/AlarmHistory.css';
-import { call } from 'login/service/ApiService';
 import AlarmDetailModal from './AlarmDetailModal';
 import info from "image/icon/info.png";
+import alarmImg01 from "image/icon-alarm.svg";
+import alarmImg02 from "image/icon-megaphone.svg";
+
 
 function AlarmHistory({alarmList,getAlarmList,fetchAlarmCount}) {
 
@@ -80,8 +82,16 @@ function AlarmHistory({alarmList,getAlarmList,fetchAlarmCount}) {
                     <div key={index} className='alarmHistory' onClick={() => handleOpenModal(alarm)}>
                         {showDate && <p className='alarm-date'>{date}</p>}
                         <div className='alarmHistory-content'>
-                            <p className='alarm-text'>{alarm.notificationTitle}</p>
-                            {!alarm.notificationIsCheck && <div className='alarm-circle' />}
+                            <div className='alarm-text-wrap'> 
+                                <div className='alarm-text'> 
+                                    <img src={alarm.notificationCategory ==='카드 발급'?alarmImg01:alarmImg02} alt="알림" className="alarmImg" />
+                                    <p><span className={alarm.notificationCategory==='카드 발급'?'alarm-category-blue':'alarm-category'}>[{alarm.notificationCategory}] </span>{alarm.notificationTitle}
+                                
+                                    </p>
+                                </div>
+                                 {!alarm.notificationIsCheck && <div className='alarm-circle' />}
+                            </div>
+                            
                             <p className='alarm-time'>{displayTime}</p> {/* 오늘일 때 상대 시간 표시, 아닐 때 시간만 표시 */}
                         </div>
                     </div>
