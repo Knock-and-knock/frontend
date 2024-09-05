@@ -46,6 +46,8 @@ jobs:
           username: ubuntu
           key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
           script: |
+            mkdir test-test
+            
             # Update .env file with the latest image tag
             sudo echo "PROJECT_ROOT=${{ env.PROJECT_DIR }}" > ${{ env.PROJECT_DIR }}/.env.front
             sudo echo "FRONTEND_DOCKER_USERNAME=${{ secrets.DOCKERHUB_USERNAME }}" >> ${{ env.PROJECT_DIR }}/.env.front
