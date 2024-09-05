@@ -109,7 +109,7 @@ function WelfareList() {
                   
                 </div>
 
-                <div className={styles["main-section-container"]}>
+                <div className={styles["main-button-container"]}>
                     <div className={styles["reserve-list-container"]} onClick={goDetailReserved}>
                           <p className={styles["reserved-list-btn"]}>예약 내역 보기</p>
                     </div>

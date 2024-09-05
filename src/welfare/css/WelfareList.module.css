@@ -31,6 +31,12 @@ hr {
 .welfare-slide{
   width: 90%;
 }
+.main-button-container {
+  display: flex;
+  flex-direction: row;
+  width: 92%;
+  margin-bottom: 10px;
+}
 .main-section-container {
   display: flex;
   flex-direction: row;
