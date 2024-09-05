@@ -18,9 +18,6 @@ function SignUpMain(props) {
             setUserInfo({ ...userInfo, [name]: value });
         }
     };
-     useEffect(()=>{
-        console.log(userInfo);
-     },[userInfo]);
    
     return (
         <div>

@@ -3,13 +3,11 @@ import CardSection from 'home/component/CardSection';
 import "home/component/CardSlide.css";
 import { call } from 'login/service/ApiService';
 import { useEffect, useState } from 'react';
-import { Navigation } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation } from 'swiper/modules';
 
 import 'swiper/css';
-import 'swiper/css/effect-cards';
 
-import { EffectCards } from 'swiper/modules';
 import NCardBottom from './NCardBottom';
 import NCardSection from './NCardSection';
 
@@ -41,16 +39,17 @@ function CardSlide({isProtege}) {
         <div className="cardSwiper-container">
                 {isCard?(
                     <>
-                        <Swiper
-                        effect={'cards'}
-                        grabCursor={true}
-                        modules={[Navigation, EffectCards]}
+                    <Swiper
                         className="mySwiper"
+                        modules={[Navigation]}
                         navigation={{
                             prevEl: '.preBtn',
                             nextEl: '.nextBtn',
                         }}
+                        grabCursor={true}
                         slidesPerView={1}
+                        centeredSlides = {true}
+                        spaceBetween={10}
                         onSlideChange={handleSlideChange}
                     >
                         {cardList.map((card) => (
