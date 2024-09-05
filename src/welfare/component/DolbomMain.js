@@ -1,10 +1,10 @@
 import Header from 'header/Header.js';
 import dolbomi from "image/dolbomi.png";
-import hanwool1 from "image/hanwool1.png";
+import hanwool1 from "image/welfare02.svg";
 import hanwool2 from "image/hanwool_2.png";
-import housework1 from "image/housework1.png";
+import housework1 from "image/welfare01.svg";
 import housework2 from "image/housework_3.png";
-import nursing1 from "image/nursing1.png";
+import nursing1 from "image/welfare03.svg";
 import nursing2 from "image/nursing_3.png";
 import { call } from 'login/service/ApiService';
 import { useEffect, useState } from 'react';
@@ -51,7 +51,11 @@ function DolbomMain() {
                   || response.protegeHeight === 0
                   || response.protegeWeight === 0) {
                   setIsExtraInfo(false);
-                } else {
+                } else if(response.protegeAddress === null 
+                  || response.protegeBirth === null 
+                  || response.protegeDisease === null
+                  || response.protegeHeight === 0
+                  || response.protegeWeight === 0) {
                   setIsExtraInfo(true);
                 }
             })
@@ -82,7 +86,7 @@ function DolbomMain() {
     
   }, []);
 
-  useEffect(()=> {
+  useEffect(()=> { // 해당 값 바뀔때마다 콘솔로 찍음
     console.log("isExtraInfo 값: " + isExtraInfo);
   },[isExtraInfo]);
 
