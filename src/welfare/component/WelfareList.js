@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import styles from 'welfare/css/WelfareList.module.css';
+
 import moonhwaro from "image/moonhwaro.png";
 import education from "image/education.png";
 import job from "image/job.png";
@@ -9,12 +9,15 @@ import Header from 'header/BlueHeader';
 
 import 'swiper/css';
 import 'swiper/css/pagination';
-import { Autoplay, Navigation, Pagination } from 'swiper/modules';
+
+import { Autoplay, Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import slide01 from "image/slide01.png";
 import slide02 from "image/slide02.png";
 import slide03 from "image/slide03.png";
 import { call } from 'login/service/ApiService';
+import styles from 'welfare/css/WelfareList.module.css';
+
 
 function WelfareList() {
     const navigate = useNavigate();
@@ -91,9 +94,7 @@ function WelfareList() {
                       delay: 2500,
                       disableOnInteraction: false,
                     }}
-                    pagination={{
-                      clickable: true,
-                    }}
+                    pagination={{clickable: true}}
                     modules={[Autoplay, Pagination]}
                     className={styles['welfare-slide-container']}>
                         
