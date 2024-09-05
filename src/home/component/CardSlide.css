@@ -36,8 +36,8 @@
     border-top: 3px solid #FFF; /* 선 두께 */
     border-right: 3px solid #FFF; /* 선 두께 */
     transform: rotate(225deg); /* 각도 */
-    left: 8px; 
-    top: 6px;
+    left: 9px; 
+    top: 7px;
 }
   
 .nextBtn::after {
@@ -48,8 +48,8 @@
     border-top: 3px solid #FFF; /* 선 두께 */
     border-right: 3px solid #FFF; /* 선 두께 */
     transform: rotate(45deg); /* 각도 */
-    right: 8px;
-    top: 6px;
+    right: 9px;
+    top: 7px;
 }
 
 .hidden {
