@@ -1,4 +1,3 @@
-
 .welfarePay-container{
     min-height: 100vh;
     position: relative; 
@@ -37,10 +36,16 @@
     color: #555;
     text-align: center;
 }
+.pay-error-message-wrap{
+    margin-top: 50%;
+}
 .pay-error-message{
     text-align: center;
     color: #FF5959;
     font-weight: bold;
+}
+.disabled-btn{
+    opacity: 0.5;
 }
 .goCheckBtn-wrap {
     width: 90%;
