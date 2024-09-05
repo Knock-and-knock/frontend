@@ -11,8 +11,51 @@ function WelfareCheckSpec() {
   const [loading, setLoading] = useState(true); // 로딩 상태 추가
   const location = useLocation();
   const {welfareNo,welfareBookStartDate,welfareBookUseTime} = location.state || {};
+  const [response, setResponse] = useState([]);
 
+  const fetchUserData = async () => {
+    try {
+      
+      const userResponse = await call("/api/v1/users", "GET", null);
+      setUserSpec((prevSpec) => ({
+        ...prevSpec,
+        userName: userResponse.protegeName,
+        userBirth: userResponse.protegeBirth,
+        protegeBirth: userResponse.userBirth,
+        userGender: userResponse.protegeGender,
+        protegeGender: userResponse.userGender,
+        userHeight: userResponse.protegeHeight,
+        protegeHeight: userResponse.userHeight,
+        userWeight: userResponse.protegeWeight,
+        protegeWeight: userResponse.userWeight,
+        userDisease: userResponse.protegeDisease,
+        protegeDisease: userResponse.protegeDisease,
+        userAddress: userResponse.protegeAddress,
+        userAddressDetail: userResponse.protegeAddressDetail,
+        protegeAddress: userResponse.protegeAddress,
+        protegeAddressDetail: userResponse.protegeAddressDetail,
+      }));
+      setLoading(false); // 데이터가 모두 로드된 후 로딩 종료
+    } catch (error) {
+      console.error("Failed to fetch user info", error);
+      setLoading(false); // 에러 발생 시에도 로딩 종료
+    }
+  };
   useEffect(() => {
+    if (localStorage.getItem("loginUser") === "PROTECTOR") {
+      call("/api/v1/match", "GET", null).then((response)=>{setResponse(response);});
+      setUserSpec((prevSpec) => ({
+        ...prevSpec,
+        protegeUserNo: response.protegeUserNo, // 필요한 데이터 설정
+      }));
+    } else {
+      const userNo = localStorage.getItem("userNo");
+      setUserSpec((prevSpec) => ({
+        ...prevSpec,
+        userNo: parseInt(userNo, 10),
+      }));
+    }
+
     if (welfareNo != null && welfareBookStartDate != null && welfareBookUseTime != null) {
       setUserSpec((userSpec) => ({
         ...userSpec,
@@ -21,47 +64,13 @@ function WelfareCheckSpec() {
         welfareBookUseTime: welfareBookUseTime,
       }));
     }
+    console.log("----------------------------------");
+    console.log(userSpec);
+    console.log("----------------------------------");
   }, [])
 
   useEffect(() => {
     console.log("음성인식에서 받는 값 3개!!: " + welfareNo,welfareBookStartDate,welfareBookUseTime);
-    
-    const fetchUserData = async () => {
-      try {
-        if (localStorage.getItem("loginUser") === "PROTECTOR") {
-          const response = await call("/api/v1/match", "GET", null);
-          setUserSpec((prevSpec) => ({
-            ...prevSpec,
-            protegeUserNo: response.protegeUserNo, // 필요한 데이터 설정
-          }));
-        } else {
-          const userNo = localStorage.getItem("userNo");
-          setUserSpec((prevSpec) => ({
-            ...prevSpec,
-            userNo: parseInt(userNo, 10),
-          }));
-        }
-        const userResponse = await call("/api/v1/users", "GET", null);
-        setUserSpec((prevSpec) => ({
-          ...prevSpec,
-          userName: userResponse.protegeName,
-          userBirth: userResponse.protegeBirth,
-          userGender: userResponse.protegeGender,
-          userHeight: userResponse.protegeHeight,
-          userWeight: userResponse.protegeWeight,
-          userDisease: userResponse.protegeDisease,
-          userAddress: userResponse.protegeAddress,
-          userAddressDetail: userResponse.protegeAddressDetail,
-          protegeAddress: userResponse.protegeAddress,
-          protegeAddressDetail: userResponse.protegeAddressDetail,
-        }));
-        setLoading(false); // 데이터가 모두 로드된 후 로딩 종료
-      } catch (error) {
-        console.error("Failed to fetch user info", error);
-        setLoading(false); // 에러 발생 시에도 로딩 종료
-      }
-    };
-
     fetchUserData();
   }, [setUserSpec]);
 
@@ -128,7 +137,7 @@ const welfareTime = () => {
     } else if (gender === 2) {
       return "여성";
     } else {
-      return "없음";
+      return "";
     }
   };
 
@@ -162,8 +171,9 @@ const welfareTime = () => {
             type="date"
             placeholder="생년월일"
             value={
-              formatDate(userSpec.userBirth || userSpec.protegeBirth) || ""
-            }
+              userSpec.userBirth ? formatDate(userSpec.userBirth) : (userSpec.protegeBirth ? formatDate(userSpec.protegeBirth) : "")
+          }
+          
             disabled
           />
 
@@ -177,7 +187,6 @@ const welfareTime = () => {
             }
             disabled
           />
-
           <p className={styles["spec-info"]}>주소</p>
           <input
             className={styles["spec-check"]}
@@ -188,7 +197,7 @@ const welfareTime = () => {
                 ? `${userSpec.protegeAddress} ${userSpec.protegeAddressDetail}`
                 : (userSpec.userAddress && userSpec.userAddressDetail
                   ? `${userSpec.userAddress} ${userSpec.userAddressDetail}`
-                  : "등록된 주소가 없습니다."))
+                  : ""))
             }
             disabled
           />
