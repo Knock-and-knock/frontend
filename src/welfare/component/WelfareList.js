@@ -1,30 +1,28 @@
 import React, { useEffect, useState } from 'react';
-import styles from 'welfare/css/WelfareList.module.css';
+
 import moonhwaro from "image/moonhwaro.png";
 import education from "image/education.png";
 import job from "image/job.png";
 import bokjiro from "image/bokjiro.png";
 import { useNavigate } from 'react-router-dom';
-import Header from 'header/Header';
+import Header from 'header/BlueHeader';
 
 import 'swiper/css';
 import 'swiper/css/pagination';
-import { Autoplay, Navigation, Pagination } from 'swiper/modules';
+
+import { Autoplay, Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import slide01 from "image/slide01.png";
 import slide02 from "image/slide02.png";
 import slide03 from "image/slide03.png";
 import { call } from 'login/service/ApiService';
+import styles from 'welfare/css/WelfareList.module.css';
+
 
 function WelfareList() {
     const navigate = useNavigate();
 
     const [loginUser, setLoginUser] = useState({});
-
-    const goDolbomMain = () => {
-        navigate('/welfare-input/dolbom-main');
-    }
-
 
     const goBokjiro = (id) => {
       if(id === 'bokjiro') {
@@ -48,6 +46,15 @@ function WelfareList() {
       if(id === 'education') {
         window.location.href = "https://k-lifelongedu.co.kr/";
       }
+    }
+
+
+    const goDetailReserved = () => {
+      navigate('/welfare-reserved-list');
+    }
+
+    const goDolbomMain = () => {
+      navigate('/welfare-input/dolbom-main');
     }
 
     useEffect(() => {
@@ -87,9 +94,7 @@ function WelfareList() {
                       delay: 2500,
                       disableOnInteraction: false,
                     }}
-                    pagination={{
-                      clickable: true,
-                    }}
+                    pagination={{clickable: true}}
                     modules={[Autoplay, Pagination]}
                     className={styles['welfare-slide-container']}>
                         
@@ -101,8 +106,18 @@ function WelfareList() {
                     <SwiperSlide><img src={slide03} alt="복지슬라이드03" className={styles['welfare-slide']} /></SwiperSlide>
 
                   </Swiper>  
-                  <span className={styles["go-reserve"]} onClick={goDolbomMain}>예약하러 가기</span>
                   
+                  
+                </div>
+
+                <div className={styles["main-button-container"]}>
+                    <div className={styles["reserve-list-container"]} onClick={goDetailReserved}>
+                          <p className={styles["reserved-list-btn"]}>예약 내역 보기</p>
+                    </div>
+
+                    <div className={styles["reserve-btn-container"]}  onClick={goDolbomMain} >
+                        <p className={styles["reserve-btn"]}>예약하러 가기</p>
+                    </div>
                 </div>
 
                 <div className={styles["main-section-container"]}>
@@ -127,7 +142,7 @@ function WelfareList() {
                     </div>
                 </div>
 
-                <div className={styles["main-section-container"]}>
+                <div className={styles["main-section-container-last"]}>
                     <div className={`${styles["main-section"]} ${styles["detailed-welfare"]}`} onClick={() => goJob('job')}>
                         <p className={`${styles["main-text"]} ${styles["welfare-intro"]}`}>나만의 맞춤형</p>
                         <div className={styles["welfare-title-container"]}>

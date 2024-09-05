@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
 import "./SignUpMain.css";
 
@@ -6,7 +6,7 @@ export const UserContext = createContext();
 export const useMember = ()=>useContext(UserContext);
 
 function SignUpMain(props) {
-    const [userInfo, setUserInfo] = useState({});
+    const [userInfo, setUserInfo] = useState({isBioLogin: false});
     const handlechange =(e)=>{
         setUserInfo({...userInfo, [e.target.name]:e.target.value} );
         const { name, value } = e.target;
@@ -18,7 +18,6 @@ function SignUpMain(props) {
             setUserInfo({ ...userInfo, [name]: value });
         }
     };
-     
    
     return (
         <div>

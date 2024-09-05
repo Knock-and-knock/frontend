@@ -32,9 +32,10 @@ function LoginPw(props) {
                 }
             })
             .catch((error) => {
-                if (error.response && error.response.status === 404) {
+                if (error.matchStatus === null) {
                     navi('/match');
                 } else {
+                    console.log(error);
                     alert("실패");
                 }
             });
@@ -61,7 +62,14 @@ function LoginPw(props) {
 
         }).catch((error) => {
             console.error("간편비밀번호로그인 실패", error);
-            setErrorMessage("로그인에 실패했습니다. 다시 시도해주세요.");
+            const localUserNo = localStorage.getItem("userNo");
+
+            if(!localUserNo){
+                setErrorMessage("아이디 로그인 1회 이용 이후 사용하실 수 있습니다.");
+            }else{
+                setErrorMessage("로그인에 실패했습니다. 다시 시도해주세요.");
+            }
+           
             setPw('');
             inputRef.current.focus();
         });
@@ -89,7 +97,6 @@ function LoginPw(props) {
                     </div>               
                     <div className='error-message'>{errorMessage}</div>
                 </div>
-                
                 <input
                     ref={inputRef}
                     type="tel"

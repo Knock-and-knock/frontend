@@ -33,6 +33,22 @@ function WelfarePayCompl() {
     }
   }
 
+  function formatPrice(price) {
+    return new Intl.NumberFormat('ko-KR', {
+      minimumFractionDigits: 0 // 소수점 아래 자리수를 0으로 설정하여 정수로 표시
+    }).format(price); // currency: 'KRW' 옵션을 제거하여 원화 기호 제거
+  }
+
+  function calculatePrice(welfareBookUseTime) {
+    if ([1, 2, 3].includes(welfareBookUseTime)) {
+      return 75000 * welfareBookUseTime;
+    } else if ([4, 5, 6, 7, 8, 9].includes(welfareBookUseTime)) {
+      return 2000000 * (welfareBookUseTime - 3);
+    } else {
+      return 0;  // welfareBookUseTime이 예상 범위 밖의 값인 경우
+    }
+  }
+
   useEffect(() => {
     const currentDate = new Date();
     const formattedDate = currentDate.toISOString().split('T')[0].replace(/-/g, '.');
@@ -42,10 +58,6 @@ function WelfarePayCompl() {
 
   const goDetailReserved = () => {
     navigate('/welfare-reserved-list');
-  };
-
-  const formatPrice = (price) => {
-    return new Intl.NumberFormat('ko-KR').format(price);
   };
 
   const getProtegeName = (welfareNo)=>{
@@ -92,7 +104,7 @@ function WelfarePayCompl() {
         <hr />
         <p>
           <span className={styles["pay-info-tprice"]}>최종결제금액</span>
-          <span className={styles["pay-info-price"]}>{formatPrice(userSpec.welfareBookTotalPrice)} 원</span>
+          <span className={styles["pay-info-price"]}>{formatPrice(calculatePrice(userSpec.welfareBookUseTime))} 원</span>
         </p>
       </div>
       <div className={`${styles["main-section"]} ${styles["go-main"]}`} onClick={goDetailReserved}>

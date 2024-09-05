@@ -12,7 +12,6 @@ function QuickLoginSetup(props) {
     const [isPasskeyChecked, setIsPasskeyChecked] = useState(false);
     const { userInfo, setUserInfo } = useMember();
     const navi = useNavigate();
-
     useEffect(() => {
         if (userInfo.userSimplePassword) {
             setIsPinChecked(true);
@@ -21,13 +20,15 @@ function QuickLoginSetup(props) {
         }
     }, [userInfo.userSimplePassword]);
 
-    // useEffect(() => {
-    //     setUserInfo(prevState => ({
-    //         ...prevState,
-    //         isBioLogin: isBioChecked
-    //     }));
-    //     console.log(isBioChecked);
-    // }, [isBioChecked]);
+    useEffect(() => {
+         if(userInfo.isBioLogin){
+            setIsBioChecked(true);
+         }else{
+            setIsBioChecked(false);
+         }
+       
+     }, [userInfo.isBioLogin]);
+
 
     const handlePinCircleClick = () => {
         if (isPinChecked) {
@@ -36,8 +37,8 @@ function QuickLoginSetup(props) {
                 userSimplePassword: ''
             }));
         }else{
-            setIsBioChecked(isBioChecked);
-            setIsPinChecked(!isPinChecked);
+            console.log(userInfo);
+            setIsPinChecked(!isPinChecked);    
             navi("/signup/pinsetup");
         }
         
@@ -45,6 +46,7 @@ function QuickLoginSetup(props) {
 
     // 생체 인증을 처리하는 함수
     const handleBiometricAuth = async () => {
+    if(!isBioChecked){
         if (!navigator.credentials) {
             console.error('This browser does not support the Web Authentication API');
             return;
@@ -77,14 +79,18 @@ function QuickLoginSetup(props) {
             const credential = await navigator.credentials.create({ publicKey });
             console.log('Biometric authentication successful:', credential);
             setIsBioChecked(true);
-            setUserInfo(prevState => ({
-                ...prevState,
-                isBioLogin: isBioChecked
-            }));
+            setUserInfo({ ...userInfo, isBioLogin: true });
+            
         } catch (error) {
             console.error('Biometric authentication failed:', error);
             setIsBioChecked(false);
+            setUserInfo({ ...userInfo, isBioLogin: false });
         }
+    }else{
+        setIsBioChecked(false);
+        setUserInfo({ ...userInfo, isBioLogin: false });
+    }
+
     };
     
 
@@ -98,14 +104,17 @@ function QuickLoginSetup(props) {
             const credential = await navigator.credentials.create({ publicKey });
             console.log('Passkey authentication successful:', credential);
             setIsPasskeyChecked(true);
+            setUserInfo({ ...userInfo, isBioLogin: isBioChecked });
         } catch (error) {
             console.error('Passkey authentication failed:', error);
             setIsPasskeyChecked(false);
+            setUserInfo({ ...userInfo, isBioLogin: isBioChecked });
         }
     };
     
 
     const handleSubmit = () => {
+        setUserInfo({ ...userInfo, isBioLogin: isBioChecked });
         call('/api/v1/users/signup', "POST", userInfo).then((response) => {
             localStorage.setItem("userBioPassword", response.userBioPassword);
             navi("/signup/signupsuccess");

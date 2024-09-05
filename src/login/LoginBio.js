@@ -4,15 +4,34 @@ import LoginHeader from './component/header/LoginHeader';
 import { call } from './service/ApiService';
 import { useNavigate } from 'react-router-dom'; // useNavigate 훅 import
 import "login/component/button/LoginBtn.css";
+import LoginOptionModal from './component/modal/LoginOptionModal';
 
 function LoginBio(props) {
     const userNo = localStorage.getItem("userNo");
     const userBioPassword = localStorage.getItem("userBioPassword");
+    const [errorMessage, setErrorMessage] = useState("");
     const navigate = useNavigate(); // useNavigate 훅으로 navigate 함수 초기화
 
     const [check, setCheck] = useState(false);  // 인증 결과를 저장하는 상태 변수
     const [isBioChecked, setIsBioChecked] = useState(false);
-
+    const handleMatchCheck = () => {
+        call("/api/v1/match", "GET", null)
+            .then((response) => {
+                if (response.matchStatus === "ACCEPT") {
+                    navigate('/home');
+                } else {
+                    navigate('/match');
+                }
+            })
+            .catch((error) => {
+                if (error.matchStatus === null) {
+                    navigate('/match');
+                } else {
+                    console.log(error);
+                    alert("실패");
+                }
+            });
+    };
 
     useEffect(() => {
         console.log('인증 상태:', check);
@@ -64,14 +83,25 @@ function LoginBio(props) {
     
             call("/api/v1/auth/login/bio", "POST", { userNo: userNo, userBioPassword: userBioPassword }).then((response)=>{
                 localStorage.setItem("ACCESS_TOKEN", response.accessToken);
+                if (response.userType === "PROTECTOR") {
+                    handleMatchCheck();
+                  } else {
+                    navigate('/home');
+                  }
             }).catch(
                 (error)=>{
                 console.log("못 받았어요" + error);
+                const localUserNo = localStorage.getItem("userNo");
+                if(!localUserNo){
+                    setErrorMessage("아이디 로그인 1회 이용 이후 사용하실 수 있습니다.");
+                }else{
+                    setErrorMessage("로그인에 실패했습니다. 다시 시도해주세요.");
+                }
             });
 
             setCheck(true);
             setIsBioChecked(true);
-            navigate('/home');
+           
             
         } catch (error) {
             console.error('Biometric authentication failed:', error);
@@ -92,6 +122,13 @@ function LoginBio(props) {
           }).catch(
             (error)=>{
             console.log("못 받았어요" + error);
+
+            const localUserNo = localStorage.getItem("userNo");
+            if(!localUserNo){
+                setErrorMessage("아이디 로그인 1회 이용 이후 사용하실 수 있습니다.");
+            }else{
+                setErrorMessage("로그인에 실패했습니다. 다시 시도해주세요.");
+            }
          });
 
       };
@@ -109,9 +146,11 @@ function LoginBio(props) {
                         className="fingerprint" 
                     />
                 </div>
-                
+                <br/>
+                <div className='error-message'>{errorMessage}</div>
             </div>
             <div className="loginBtn-wrap">
+                <LoginOptionModal/>
                 <button type="submit" className={`loginBtn`} onClick={handleBiometricAuth}>로그인</button>
             </div>
             </form>

@@ -94,19 +94,22 @@ dotted-hr {
   border-radius: 15px;
   text-align: center;
   margin: 0 auto;
-  margin-top: 65%;
-  
+  bottom: 20px;
 }
 
 .go-main {
-  border-width: 3px;
-  border-color: #80BAFF;
-  background-color: #80BAFF;
+  height: 60px;
   text-align: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 40px;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  background-color: #80BAFF;
+  box-sizing: border-box;
+  border-radius: 15px;
+  padding: 20px;
+  position: absolute;
+  left: 20px;
+  bottom: 20px;
 }
 
 .main-text {

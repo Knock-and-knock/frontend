@@ -1,4 +1,5 @@
 import { call } from "login/service/ApiService";
+import { useState } from "react";
 
 var roomNo;
 var recognition;
@@ -10,7 +11,10 @@ export function handleAutoSub(
   setIsLoading,
   setIsSpeaking,
   setIsOpen,
-  setServiceUrl
+  setServiceUrl,
+  setWelfareNo,
+  setWelfareBookStartDate,
+  setWelfareBookUseTime
 ) {
   setIsLoading(false);
   setIsSpeaking(true);
@@ -25,10 +29,15 @@ export function handleAutoSub(
       const actionRequired = response.actionRequired;
       const redirectionResult = response.redirectionResult;
       const reservationResult = response.reservationResult;
-      console.log(content);
+
+      const welfareNo = reservationResult.welfareNo;
+      const welfareBookStartDate = reservationResult.welfareBookStartDate;
+      const welfareBookUseTime = reservationResult.welfareBookUseTime;
       setChatResponse(content);
-      
-      
+      setWelfareNo(welfareNo);
+      setWelfareBookStartDate(welfareBookStartDate);
+      setWelfareBookUseTime(welfareBookUseTime);
+
 
       const byteCharacters = atob(audioData);
       const byteNumbers = new Array(byteCharacters.length);
@@ -44,7 +53,7 @@ export function handleAutoSub(
       setIsLoading(true);
       setIsSpeaking(false);
       audio.onended = () => {
-        setIsLoading(false); // 음성 출력이 끝나면 로딩 상태 해제
+        setIsLoading(false);
         startAutoRecord();
 
         if(actionRequired === true && redirectionResult){
@@ -66,7 +75,7 @@ export function handleAutoSub(
 }
 
 // 음성 인식의 자동 시작 상태를 제어하는 함수
-export function availabilityFunc(sendMessage) {
+export function availabilityFunc(sendMessage, setIsListening) {
   const newRecognition = new (window.SpeechRecognition ||
     window.webkitSpeechRecognition)();
   newRecognition.lang = "ko";
@@ -74,10 +83,12 @@ export function availabilityFunc(sendMessage) {
 
   newRecognition.addEventListener("speechstart", () => {
     console.log("음성 인식 중...");
+    setIsListening(true);
   });
 
   newRecognition.addEventListener("speechend", () => {
     console.log("음성 인식 종료");
+    setIsListening(false);
   });
 
   newRecognition.addEventListener("result", (e) => {
@@ -103,7 +114,7 @@ export function startAutoRecord() {
 
 // 음성 인식을 중단하는 함수
 export function endRecord() {
-  if (recognition && recognition.stop) { 
+  if (recognition && recognition.stop) {
     recognition.stop();
     console.log("음성 인식 중단");
   } else {

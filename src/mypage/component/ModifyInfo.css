@@ -133,6 +133,8 @@
 
 .addressSearch {
     position: relative;
+    display: flex;
+    align-items: center;
 }
 
 .addressSearch input {

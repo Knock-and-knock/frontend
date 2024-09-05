@@ -75,7 +75,7 @@ function MainPage() {
   return (
     <div className="main-container">
       <Header isProtege={isProtege} />
-      <WelfareSlide />
+      <WelfareSlide isProtege={isProtege}/>
       <Button isProtege={isProtege} />
       <CardSlide isProtege={isProtege} />
       {isOpen && (

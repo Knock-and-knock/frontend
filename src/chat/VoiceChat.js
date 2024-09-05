@@ -4,6 +4,7 @@ import {
   handleAutoSub,
   handleChatRoom,
   startAutoRecord,
+  
 } from "chat/chatScript";
 import "chat/VoiceChat.css";
 import VoiceHeader from "chat/VoiceHeader";
@@ -13,6 +14,7 @@ import Modal from "react-modal";
 import Loading from "./Loading";
 import SpeakLoading from "./SpeakLoading";
 import VoiceChatMovePageModal from "./VoiceChatMovePageModal";
+import { useNavigate } from "react-router-dom";
 
 function VoiceChat(props) {
   const [userInfo, setUserInfo] = useState("");
@@ -26,7 +28,12 @@ function VoiceChat(props) {
   //예약확인 모달
   const [isOpen, setIsOpen] = useState(false);
   const [serviceUrl, setServiceUrl] = useState("");
+  const [isListening, setIsListening] = useState(false);
+  const [welfareNo, setWelfareNo] = useState("");
+  const [welfareBookStartDate, setWelfareBookStartDate] = useState("");
+  const [welfareBookUseTime, setWelfareBookUseTime] = useState("");
 
+  const navi = useNavigate();
   useEffect(() => {
     async function initializeChat() {
       // await handleChatRoom(userInfo);
@@ -39,33 +46,37 @@ function VoiceChat(props) {
       //   setServiceUrl
       // );
       await handleChatRoom(userInfo);
-      availabilityFunc(sendMessage);
+      availabilityFunc(sendMessage, setIsListening);
     }
 
     initializeChat();
   }, [userInfo]);
 
-
   function sendMessage(recognizedText) {
     setChatResponse("");
     setIsLoading(true);
+    setIsListening(false);
     handleAutoSub(
       recognizedText,
       setChatResponse,
       setIsLoading,
       setIsSpeaking,
       setIsOpen,
-      setServiceUrl 
+      setServiceUrl,
+      setWelfareNo,
+      setWelfareBookStartDate,
+      setWelfareBookUseTime
     );
   }
-  
 
   const handleStartChat = () => {
     if (!isStart) {
       startAutoRecord();
+      setIsListening(true);
       setIsStart(true);
     } else {
       endRecord();
+      setIsListening(false);
       setIsStart(false);
     }
   };
@@ -73,6 +84,7 @@ function VoiceChat(props) {
   const customStyles = {
     overlay: {
       backgroundColor: "rgba(0, 0, 0, 0.5)",
+
       zIndex: 100,
     },
     content: {
@@ -85,17 +97,21 @@ function VoiceChat(props) {
     setVisible(!visible);
   };
 
-  const closeModal =()=>{
+  const closeModal = () => {
     setIsOpen(false);
-  }
+  };
 
   const handleSubmit = () => {
-    if (serviceUrl) {
-      window.location.href = serviceUrl;
-    }
-    console.log("이동 처리");
-    closeModal();
-    endRecord();
+      if (serviceUrl) {
+        if(serviceUrl==="/welfare-input/check-spec"){
+          navi("/welfare-input/check-spec",{ state: { welfareNo,welfareBookStartDate,welfareBookUseTime } });
+        }else{
+          window.location.href = serviceUrl;
+        }
+      }
+      console.log("이동 처리");
+      closeModal();
+      endRecord();
   };
 
   return (
@@ -104,6 +120,7 @@ function VoiceChat(props) {
       {isSpeaking && <SpeakLoading />}
       {isLoading && <Loading />}
       <img src={chatbot} alt="챗봇" className="chatbot" />
+      {isListening && <p className="listening-text">똑똑이가 듣고 있어요</p>}
       <button className="hiddenBtn" onClick={toggleModal}>
         {visible ? "닫기" : "답변보이기"}
       </button>
@@ -120,6 +137,9 @@ function VoiceChat(props) {
           isOpen={isOpen}
           closeModal={closeModal}
           handleSubmit={handleSubmit}
+          welfareNo={welfareNo}
+          welfareBookStartDate={welfareBookStartDate}
+          welfareBookUseTime={welfareBookUseTime}
         />
       )}
     </div>

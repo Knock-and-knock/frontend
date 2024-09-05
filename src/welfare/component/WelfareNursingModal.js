@@ -74,7 +74,7 @@ const handleTimeChange = (event) => {
     ...userSpec,
     welfareBookUseTime: newDuration,
     welfareBookTotalPrice: newPrice,
-    welfarebookDurationText: `${newDuration * 3}시간 (${9 + (newDuration - 1) * 3}:00 ~ ${12 + (newDuration - 1) * 3}:00)`
+    welfarebookDurationText: `${newDuration * 3}시간 (09:00 ~ ${12 + (newDuration - 1) * 3}:00)`
   });
 };
 
@@ -88,7 +88,7 @@ const isNextButtonDisabled = !welfareBookStartDate || welfareBookUseTime === 0;
 
 const handleNextClick = () => {
   if (isExtraInfo === false && (loginUser === 'PROTECTOR' || loginUser === 'PROTEGE')) {
-    goInputBirth(userSpec);
+    goInputBirth();
   } else {
     goCheckSpec();
   }
