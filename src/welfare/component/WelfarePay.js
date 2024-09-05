@@ -14,19 +14,23 @@ function WelfarePay(props) {
     const [cardId, setCardId] = useState(null);
     const [cardList, setCardList] = useState([]);
     const [cardNo, setCardNo] = useState('');
-
+    const [isCard, setIsCard] = useState(true);
     const [errorMsg,setErrorMsg] = useState('');
+    const [errorMsg02,setErrorMsg02] = useState('');
     const navi = useNavigate();
 
     useEffect(() => {
         call('/api/v1/card', "GET", null)
             .then(response => {
-                if(response.length>0){
-                setCardList(response);
-                
-                const firstCard = response[0];
-                setCardId(firstCard.cardId);
-                setCardNo(firstCard.cardNo)
+                if(response[0].cardResponseMessage==="발급된 카드가 없습니다."){
+                    setIsCard(false);
+                    setErrorMsg("결제할 카드가 없습니다.")
+                    setErrorMsg02("카드 발급을 먼저 진행해 주세요.");
+                }else{
+                    setCardList(response);
+                    const firstCard = response[0];
+                    setCardId(firstCard.cardId);
+                    setCardNo(firstCard.cardNo)
                 }
                 
             })
@@ -66,6 +70,8 @@ function WelfarePay(props) {
     return (
         <div className='welfarePay-container'>
             <Header />
+            {isCard?
+            <>
             <div className="information-container-pay">
                 <p className="information-pay">결제할 카드를 선택 해주세요</p>
             </div>
@@ -84,15 +90,19 @@ function WelfarePay(props) {
         
                 ))}
             </Swiper>
-            <p className='pay-cardNo'>신한 Silver Care ({cardNo.slice(-4)})</p>
+            <p className='pay-cardNo'>신한 Silver Care ({cardNo?cardNo.slice(-4):""})</p>
             <div className='pay-card-wrap'>
                 
             </div>
-            
-            <p className='pay-error-message'>{errorMsg}</p>
-            <div className='goCheckBtn-wrap'onClick={handleGoCheckPW}>
-                <p className='goCheckBtn' >다음</p>
+            </>:""}
+            <div className='pay-error-message-wrap'>
+                <p className='pay-error-message'>{errorMsg}</p>
+                <p className='pay-error-message'>{errorMsg02}</p>
             </div>
+            <div className='goCheckBtn-wrap'onClick={isCard?handleGoCheckPW:undefined}>
+                <p className={`goCheckBtn ${!isCard?"disabled-btn":""}`} >다음</p>
+            </div>
+
         </div>
     );
 }

@@ -40,7 +40,7 @@ function DolbomMain() {
       });
 
       if (storedLoginUser === "PROTECTOR") {
-        call('/api/v1/match', 'GET', null)
+        call('/api/v1/users', 'GET', null)
             .then(response => {
                 setUserSpec(response);
     
@@ -51,11 +51,7 @@ function DolbomMain() {
                   || response.protegeHeight === 0
                   || response.protegeWeight === 0) {
                   setIsExtraInfo(false);
-                } else if(response.protegeAddress === null 
-                  || response.protegeBirth === null 
-                  || response.protegeDisease === null
-                  || response.protegeHeight === 0
-                  || response.protegeWeight === 0) {
+                } else {
                   setIsExtraInfo(true);
                 }
             })
