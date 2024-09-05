@@ -23,3 +23,7 @@ env.js
 
 # docker
 docker-compose.yml
+
+.vscode
+.gradle
+jsconfig.json
