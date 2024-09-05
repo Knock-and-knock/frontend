@@ -1,5 +1,4 @@
 import { call } from "login/service/ApiService";
-import { useState } from "react";
 
 var roomNo;
 var recognition;
@@ -28,16 +27,16 @@ export function handleAutoSub(
       const content = response.content;
       const actionRequired = response.actionRequired;
       const redirectionResult = response.redirectionResult;
-      const reservationResult = response.reservationResult;
 
-      const welfareNo = reservationResult.welfareNo;
-      const welfareBookStartDate = reservationResult.welfareBookStartDate;
-      const welfareBookUseTime = reservationResult.welfareBookUseTime;
+      const reservationResult = response.reservationResult || {};
+
+      const welfareNo = reservationResult.welfareNo || ""; // welfareNo가 없으면 빈 문자열
+      const welfareBookStartDate = reservationResult.welfareBookStartDate || ""; // 기본값 설정
+      const welfareBookUseTime = reservationResult.welfareBookUseTime || "";
       setChatResponse(content);
       setWelfareNo(welfareNo);
       setWelfareBookStartDate(welfareBookStartDate);
       setWelfareBookUseTime(welfareBookUseTime);
-
 
       const byteCharacters = atob(audioData);
       const byteNumbers = new Array(byteCharacters.length);
@@ -56,13 +55,13 @@ export function handleAutoSub(
         setIsLoading(false);
         startAutoRecord();
 
-        if(actionRequired === true && redirectionResult){
+        if (actionRequired === true && redirectionResult) {
           setServiceUrl(redirectionResult.serviceUrl);
           setIsOpen(true);
-        }else if(actionRequired === true && reservationResult){
+        } else if (actionRequired === true && reservationResult) {
           setServiceUrl("/welfare-input/check-spec");
           setIsOpen(true);
-        }else{
+        } else {
           setIsOpen(false);
         }
       };

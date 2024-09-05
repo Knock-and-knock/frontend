@@ -4,17 +4,16 @@ import {
   handleAutoSub,
   handleChatRoom,
   startAutoRecord,
-  
 } from "chat/chatScript";
 import "chat/VoiceChat.css";
 import VoiceHeader from "chat/VoiceHeader";
 import chatbot from "image/chat-char.png";
 import { useEffect, useState } from "react";
 import Modal from "react-modal";
+import { useNavigate } from "react-router-dom";
 import Loading from "./Loading";
 import SpeakLoading from "./SpeakLoading";
 import VoiceChatMovePageModal from "./VoiceChatMovePageModal";
-import { useNavigate } from "react-router-dom";
 
 function VoiceChat(props) {
   const [userInfo, setUserInfo] = useState("");
