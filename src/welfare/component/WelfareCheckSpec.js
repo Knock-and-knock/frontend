@@ -83,6 +83,7 @@ function WelfareCheckSpec() {
             setIsKnockInfo(false);
           } else{
             //정보 있을 때
+            console.log("==============");
             setUserSpec((prevSpec) => ({
               ...prevSpec,
               welfareNo: welfareNo,
@@ -100,6 +101,7 @@ function WelfareCheckSpec() {
               welfareBookTotalPrice: calculatePrice(welfareBookUseTime)
             }));
           }
+          console.log(userSpec);
           
         } else {
            // 내가 일반사용자인데, 정보가 없어서 이전 페이지에서 정보를 받았을 때
