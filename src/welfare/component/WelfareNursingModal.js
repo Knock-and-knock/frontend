@@ -19,7 +19,7 @@ function WelfareNursingModal({ closeModal, loginUser, isExtraInfo }) {
 }
 
   const goCheckSpec = () => {
-    navigate('/welfare-input/check-spec');
+    navigate('/welfare-input/check-spec',{ state: {isExtraInfo} });
 }
 
 

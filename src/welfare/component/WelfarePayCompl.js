@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useSpecHook } from 'welfare/component/WelfareInputTotal'; // 가정한 useSpecHook 사용
 import styles from 'welfare/css/WelfarePayCompl.module.css';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { useSpecHook } from 'welfare/component/WelfareInputTotal';  // 가정한 useSpecHook 사용
 
 function WelfarePayCompl() {
   const navigate = useNavigate();

@@ -10,8 +10,10 @@ function WelfareCheckSpec() {
   // const [loading, setLoading] = useState(true); // 로딩 상태 추가
   const location = useLocation();
   const {welfareNo,welfareBookStartDate,welfareBookUseTime,isExtraInfo} = location.state || {};
+
   const [userInfo, setUserInfo] = useState([]);
   const [isKnockInfo, setIsKnockInfo] = useState(true);
+
   const getUserInfo = async () => {
     try {
       const response = await call('/api/v1/users', "GET", null);
@@ -95,6 +97,7 @@ function WelfareCheckSpec() {
               userHeight: userInfo.protegeHeight,
               userWeight: userInfo.protegeWeight,
               userDisease: userInfo.protegeDisease,
+              welfareBookTotalPrice: calculatePrice(welfareBookUseTime)
             }));
           }
           
@@ -111,6 +114,7 @@ function WelfareCheckSpec() {
   
     fetchData(); // 비동기 함수 호출
   }, []);
+
   const formattedReservationInfo = () => {
     if (!userSpec.welfareBookStartDate || !userSpec.welfareBookUseTime)
       return "";
@@ -155,6 +159,18 @@ const welfareTime = () => {
   const goSetPW = () => {
     navigate("/welfare-input/pay");
   };
+
+  function calculatePrice(welfareBookUseTime) {
+    if ([1, 2, 3].includes(welfareBookUseTime)) {
+      return 75000 * welfareBookUseTime;
+    } else if ([4, 5, 6, 7, 8, 9].includes(welfareBookUseTime)) {
+      return 2000000 * (welfareBookUseTime - 3);
+    } else {
+      return 0;  // welfareBookUseTime이 예상 범위 밖의 값인 경우
+    }
+  }
+
+
   const formatDate = (date) => {
     if (!date) return "";
     const d = new Date(date);
@@ -172,9 +188,13 @@ const welfareTime = () => {
       return "";
     }
   };
+
+
   // if (loading) {
   //   return <div>로딩중입니다...</div>; // 로딩 중일 때 표시할 내용
   // }
+
+
   return (
     <div className={styles.container}>
       <Header />

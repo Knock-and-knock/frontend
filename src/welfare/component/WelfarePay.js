@@ -62,7 +62,9 @@ function WelfarePay(props) {
     }
     return (
         <div className='welfarePay-container'>
-            <Header />
+
+            <Header style={{ position: 'relative', zIndex: 5 }}/>
+
             {isCard?
             <>
             <div className="information-container-pay">
@@ -95,6 +97,7 @@ function WelfarePay(props) {
             <div className='goCheckBtn-wrap'onClick={isCard?handleGoCheckPW:undefined}>
                 <p className={`goCheckBtn ${!isCard?"disabled-btn":""}`} >다음</p>
             </div>
+
         </div>
     );
 }
