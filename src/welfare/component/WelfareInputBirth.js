@@ -58,7 +58,7 @@ function WelfareInputBirth() {
     };
 
     const goInputHeight = () => {
-        if (year && month && day) {
+        if (isButtonEnabled) { // 버튼이 활성화된 경우에만 이동
             navigate('/welfare-input/height');
         }
     };
@@ -73,7 +73,7 @@ function WelfareInputBirth() {
         }
     };
 
-    const isButtonEnabled = year && month && day;
+    const isButtonEnabled = year.length === 4 && month && day;
 
     return (
         <div className={styles.container}>
