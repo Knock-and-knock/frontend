@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
-import styles from "welfare/css/WelfareCheckSpec.module.css";
-import { useLocation, useNavigate } from "react-router-dom";
 import Header from "header/Header.js";
-import { useSpecHook } from "welfare/component/WelfareInputTotal";
 import { call } from "login/service/ApiService";
+import { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useSpecHook } from "welfare/component/WelfareInputTotal";
+import styles from "welfare/css/WelfareCheckSpec.module.css";
 function WelfareCheckSpec() {
   const navigate = useNavigate();
   const { userSpec, setUserSpec } = useSpecHook();
@@ -83,6 +83,7 @@ function WelfareCheckSpec() {
             setIsKnockInfo(false);
           } else{
             //정보 있을 때
+            console.log("==============");
             setUserSpec((prevSpec) => ({
               ...prevSpec,
               welfareNo: welfareNo,
@@ -100,6 +101,7 @@ function WelfareCheckSpec() {
               welfareBookTotalPrice: calculatePrice(welfareBookUseTime)
             }));
           }
+          console.log(userSpec);
           
         } else {
            // 내가 일반사용자인데, 정보가 없어서 이전 페이지에서 정보를 받았을 때
@@ -237,8 +239,8 @@ const welfareTime = () => {
             type="text"
             placeholder="등록된 주소가 없습니다."
             value={
-              userSpec.protegeAddress 
-                ? `${userSpec.protegeAddress} ${userSpec.protegeAddressDetail}` 
+              userSpec.protegeAddress && userSpec.protegeAddress !== "null" 
+                ? `${userSpec.protegeAddress} ${userSpec.protegeAddressDetail !== "null" ? userSpec.protegeAddressDetail : ""}` 
                 : ""
             }
             disabled

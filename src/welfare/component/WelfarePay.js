@@ -19,7 +19,7 @@ function WelfarePay(props) {
     useEffect(() => {
         call('/api/v1/card', "GET", null)
             .then(response => {
-                if(response[0].cardResponseMessage==="발급된 카드가 없습니다."){
+                if(!response[0].cardId){
                     setIsCard(false);
                     setErrorMsg("결제할 카드가 없습니다.")
                     setErrorMsg02("카드 발급을 먼저 진행해 주세요.");
