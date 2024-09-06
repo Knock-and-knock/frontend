@@ -26,3 +26,5 @@ docker-compose.yml
 
 .vscode
 .gradle
+
+android
