@@ -1,10 +1,10 @@
-import React, { useState, useMemo, useEffect } from 'react';
 import 'consumeReport/ConsumeReport.css';
-import Chart from "react-apexcharts";
-import ConsumeReportDate from './ConsumeReportDate'; // 날짜 선택 컴포넌트를 불러옴
-import { call } from 'login/service/ApiService';
-import { useLocation } from 'react-router-dom';
 import info from "image/icon/info.png";
+import { call } from 'login/service/ApiService';
+import { useEffect, useMemo, useState } from 'react';
+import Chart from "react-apexcharts";
+import { useLocation } from 'react-router-dom';
+import ConsumeReportDate from './ConsumeReportDate'; // 날짜 선택 컴포넌트를 불러옴
 
 function ConsumeReportInfo() {
     const [selectedFilter, setSelectedFilter] = useState('personal');
@@ -212,7 +212,7 @@ function ConsumeReportInfo() {
                 enabled: true,
                 formatter: (value) => `${formatPrice(value)} 원`,
                 textAnchor: 'middle',
-                offsetX: 260,
+                offsetX: 240,
                 style: {
                     colors: ['#2c2c2c'],
                     fontSize: '14px',
