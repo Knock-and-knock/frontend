@@ -1,4 +1,8 @@
 
+Header{
+    position: relative; 
+    z-index: 2;
+}
 .welfarePay-container{
     min-height: 100vh;
     position: relative; 
@@ -18,6 +22,7 @@
 }
 .payCard-swiper{
     text-align: center;
+    z-index: 1;
 }
 .payCard-swiper .swiper-slide {
     opacity: 0.5; /* 기본 투명도 */
@@ -37,10 +42,16 @@
     color: #555;
     text-align: center;
 }
+.pay-error-message-wrap{
+    margin-top: 50%;
+}
 .pay-error-message{
     text-align: center;
     color: #FF5959;
     font-weight: bold;
+}
+.disabled-btn{
+    opacity: 0.5;
 }
 .goCheckBtn-wrap {
     width: 90%;

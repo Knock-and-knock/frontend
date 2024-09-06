@@ -8,159 +8,113 @@ import { call } from "login/service/ApiService";
 function WelfareCheckSpec() {
   const navigate = useNavigate();
   const { userSpec, setUserSpec } = useSpecHook();
-  const [loading, setLoading] = useState(true); // 로딩 상태 추가
+  // const [loading, setLoading] = useState(true); // 로딩 상태 추가
   const location = useLocation();
   const {welfareNo,welfareBookStartDate,welfareBookUseTime,isExtraInfo} = location.state || {};
 
   const [userInfo, setUserInfo] = useState([]);
+  const [isKnockInfo, setIsKnockInfo] = useState(true);
 
-  // const fetchUserData = async () => {
-  //   try {
-  //     call("/api/v1/users", "GET", null).then((response)=>{setResponse(response)});
-  //     setUserSpec((prevSpec) => ({
-  //       ...prevSpec,
-  //       userName: response.protegeName,
-  //       userBirth: response.protegeBirth,
-  //       protegeBirth: response.userBirth,
-  //       userGender: response.protegeGender,
-  //       protegeGender: response.userGender,
-  //       userHeight: response.protegeHeight,
-  //       protegeHeight: response.userHeight,
-  //       userWeight: response.protegeWeight,
-  //       protegeWeight: response.userWeight,
-  //       userDisease: response.protegeDisease,
-  //       protegeDisease: response.protegeDisease,
-  //       userAddress: response.protegeAddress,
-  //       userAddressDetail: response.protegeAddressDetail,
-  //       protegeAddress: response.protegeAddress,
-  //       protegeAddressDetail: response.protegeAddressDetail,
-  //     }));
-  //     setLoading(false); // 데이터가 모두 로드된 후 로딩 종료
-  //   } catch (error) {
-  //     console.error("Failed to fetch user info", error);
-  //     setLoading(false); // 에러 발생 시에도 로딩 종료
-  //   }
-  // };
-
-
-  // useEffect(() => {
-  //   if (localStorage.getItem("loginUser") === "PROTECTOR") {
-  //     call("/api/v1/match", "GET", null).then((response)=>{setResponse(response);});
-  //     setUserSpec((prevSpec) => ({
-  //       ...prevSpec,
-  //       protegeUserNo: response.protegeUserNo, // 필요한 데이터 설정
-  //     }));
-  //   } else {
-  //     const userNo = localStorage.getItem("userNo");
-  //     setUserSpec((prevSpec) => ({
-  //       ...prevSpec,
-  //       userNo: parseInt(userNo, 10),
-  //     }));
-  //   }
-
-  //   if (welfareNo != null && welfareBookStartDate != null && welfareBookUseTime != null) {
-  //     setUserSpec((userSpec) => ({
-  //       ...userSpec,
-  //       welfareNo: welfareNo,
-  //       welfareBookStartDate: welfareBookStartDate,
-  //       welfareBookUseTime: welfareBookUseTime,
-  //     }));
-  //   }
-  //   console.log("----------------------------------");
-  //   console.log(userSpec);
-  //   console.log("----------------------------------");
-  // }, [])
-
-  // useEffect(() => {
-  //   console.log("음성인식에서 받는 값 3개!!: " + welfareNo,welfareBookStartDate,welfareBookUseTime);
-  //   fetchUserData();
-  // }, [setUserSpec]);
-
-const getUserInfo = ()=>{
-  call('/api/v1/users',"GET",null).then((response)=>{
-    setUserInfo(response);
-  }).catch((error)=>{
-    console.log("회원정보 에러");
-  });
-}
-
-  useEffect(()=>{
-    //내가 보호자일 때,
-    if (localStorage.getItem("loginUser") === "PROTECTOR") {
-      //이전에 입력된 정보가 있는 경우
-      if(isExtraInfo){
-        getUserInfo();
-        call('/api/v1/match',"GET",null).then((response)=>{
+  const getUserInfo = async () => {
+    try {
+      const response = await call('/api/v1/users', "GET", null);
+      setUserInfo(response);
+      return response; // 유저 정보를 반환
+    } catch (error) {
+      console.log("회원정보 에러");
+      return null; // 오류 시 null 반환
+    }
+  };
+  
+  useEffect(() => {
+    const fetchData = async () => {
+      const userInfo = await getUserInfo(); // 유저 정보를 가져온 후에 다음 작업 진행
+      if (!userInfo) return; // 유저 정보를 가져오지 못한 경우, 이후 로직 중단
+  
+      if (localStorage.getItem("loginUser") === "PROTECTOR") {
+        // 내가 보호자인데, 이미 정보가 있을 때
+        if (isExtraInfo) {
+          call('/api/v1/match', "GET", null).then((response) => {
+            setUserSpec((prevSpec) => ({
+              ...prevSpec,
+              userNo: response.userNo,
+              userName: response.protegeUserName,
+              userBirth: userInfo.protegeBirth,
+              protegeAddress: userInfo.protegeAddress,
+              protegeAddressDetail: userInfo.protegeAddressDetail,
+              userGender: userInfo.protegeGender,
+              userHeight: userInfo.protegeHeight,
+              userWeight: userInfo.protegeWeight,
+              userDisease: userInfo.protegeDisease,
+            }));
+          }).catch((error) => {
+            console.log("피보호자 매칭조회 실패");
+          });
+        } else {
+          // 내가 보호자인데, 정보가 없어서 이전 페이지에서 정보를 받았을 때
+          call('/api/v1/match', "GET", null).then((response) => {
+            setUserSpec((prevSpec) => ({
+              ...prevSpec,
+              userNo: response.userNo,
+              userName: response.protegeUserName,
+            }));
+          }).catch((error) => {
+            console.log("피보호자 매칭조회 실패");
+          });
+        }
+      } else {
+        // 내가 일반사용자인데, 이미 정보가 있을 때
+        if (isExtraInfo) {
           setUserSpec((prevSpec) => ({
             ...prevSpec,
-            userNo: response.userNo,
-            userName: response.protegeUserName,
+            userNo: userInfo.userNo,
+            userName: userInfo.userName,
             userBirth: userInfo.protegeBirth,
             protegeAddress: userInfo.protegeAddress,
             protegeAddressDetail: userInfo.protegeAddressDetail,
             userGender: userInfo.protegeGender,
             userHeight: userInfo.protegeHeight,
             userWeight: userInfo.protegeWeight,
-            userDisease: userInfo.protegeDisease
+            userDisease: userInfo.protegeDisease,
           }));
-        }).catch((error)=>{
-          console.log("피보호자 매칭조회 실패");
-        });
-        //직접 입력 받은 경우
-      }else{
-        call('/api/v1/match',"GET",null).then((response)=>{
+        } else if (welfareNo && welfareBookStartDate && welfareBookUseTime) {
+          // 내가 일반사용자인데, 똑똑이로 예약할 때
+          if(userInfo.protegeGender === 0){
+            //정보 없을 때
+            setIsKnockInfo(false);
+          } else{
+            //정보 있을 때
+            setUserSpec((prevSpec) => ({
+              ...prevSpec,
+              welfareNo: welfareNo,
+              welfareBookStartDate: welfareBookStartDate,
+              welfareBookUseTime: welfareBookUseTime,
+              userNo: userInfo.userNo,
+              userName: userInfo.userName,
+              userBirth: userInfo.protegeBirth,
+              protegeAddress: userInfo.protegeAddress,
+              protegeAddressDetail: userInfo.protegeAddressDetail,
+              userGender: userInfo.protegeGender,
+              userHeight: userInfo.protegeHeight,
+              userWeight: userInfo.protegeWeight,
+              userDisease: userInfo.protegeDisease,
+              welfareBookTotalPrice: calculatePrice(welfareBookUseTime)
+            }));
+          }
+          
+        } else {
+           // 내가 일반사용자인데, 정보가 없어서 이전 페이지에서 정보를 받았을 때
           setUserSpec((prevSpec) => ({
             ...prevSpec,
-            userNo: response.userNo,
-            userName: response.protegeUserName,
+            userNo: userInfo.userNo,
+            userName: userInfo.userName,
           }));
-        }).catch((error)=>{
-          console.log("피보호자 매칭조회 실패");
-        });
+        }
       }
-    }else{
-      //내가 일반사용자일 때, 이전에 입력된 정보가 있는 경우
-      if(isExtraInfo){
-        getUserInfo();
-        setUserSpec((prevSpec) => ({
-          ...prevSpec,
-          userNo: userInfo.userNo,
-          userName: userInfo.userName,
-          userBirth: userInfo.protegeBirth,
-          protegeAddress: userInfo.protegeAddress,
-          protegeAddressDetail: userInfo.protegeAddressDetail,
-          userGender: userInfo.protegeGender,
-          userHeight: userInfo.protegeHeight,
-          userWeight: userInfo.protegeWeight,
-          userDisease: userInfo.protegeDisease
-        }));
-        // 똑똑이가 정보를 넘겨주는 경우
-      }else if(welfareNo && welfareBookStartDate && welfareBookUseTime){
-        getUserInfo();
-        setUserSpec((prevSpec) => ({
-          ...prevSpec,
-          userNo: welfareNo,
-          userBirth: userInfo.protegeBirth,
-          protegeAddress: userInfo.protegeAddress,
-          protegeAddressDetail: userInfo.protegeAddressDetail,
-          userGender: userInfo.protegeGender,
-          userHeight: userInfo.protegeHeight,
-          userWeight: userInfo.protegeWeight,
-          userDisease: userInfo.protegeDisease
-        }));
-      }else{
-        //직접 입력 받은 경우
-        getUserInfo();
-        setUserSpec((prevSpec) => ({
-          ...prevSpec,
-          userNo: userInfo.userNo,
-          userName: userInfo.userName,
+    };
   
-        }));
-      }
-    }
-    setLoading(false); 
-  },[]);
+    fetchData(); // 비동기 함수 호출
+  }, []);
 
   const formattedReservationInfo = () => {
     if (!userSpec.welfareBookStartDate || !userSpec.welfareBookUseTime)
@@ -210,6 +164,16 @@ const welfareTime = () => {
     navigate("/welfare-input/pay");
   };
 
+  function calculatePrice(welfareBookUseTime) {
+    if ([1, 2, 3].includes(welfareBookUseTime)) {
+      return 75000 * welfareBookUseTime;
+    } else if ([4, 5, 6, 7, 8, 9].includes(welfareBookUseTime)) {
+      return 2000000 * (welfareBookUseTime - 3);
+    } else {
+      return 0;  // welfareBookUseTime이 예상 범위 밖의 값인 경우
+    }
+  }
+
 
   const formatDate = (date) => {
     if (!date) return "";
@@ -230,9 +194,9 @@ const welfareTime = () => {
     }
   };
 
-  if (loading) {
-    return <div>로딩중입니다...</div>; // 로딩 중일 때 표시할 내용
-  }
+  // if (loading) {
+  //   return <div>로딩중입니다...</div>; // 로딩 중일 때 표시할 내용
+  // }
 
   return (
     <div className={styles.container}>
@@ -249,8 +213,8 @@ const welfareTime = () => {
           <input
             className={styles["spec-check"]}
             type="text"
-            placeholder="이름"
-            value={userSpec.protegeUserName || userSpec.userName || ""}
+            placeholder="등록된 이름이 없습니다."
+            value={userSpec.userName}
             disabled
           />
 
@@ -258,10 +222,8 @@ const welfareTime = () => {
           <input
             className={styles["spec-check"]}
             type="date"
-            placeholder="생년월일"
-            value={
-              userSpec.userBirth ? formatDate(userSpec.userBirth) : (userSpec.protegeBirth ? formatDate(userSpec.protegeBirth) : "")
-          }
+            data-placeholder="날짜 선택"
+            value={formatDate(userSpec.userBirth)}
           
             disabled
           />
@@ -270,9 +232,9 @@ const welfareTime = () => {
           <input
             className={styles["spec-check"]}
             type="text"
-            placeholder="성별"
+            placeholder="등록된 성별이 없습니다."
             value={
-              formatGender(userSpec.userGender || userSpec.protegeGender) || ""
+              formatGender(userSpec.userGender)
             }
             disabled
           />
@@ -282,11 +244,9 @@ const welfareTime = () => {
             type="text"
             placeholder="등록된 주소가 없습니다."
             value={
-              (userSpec.protegeAddress && userSpec.protegeAddressDetail
-                ? `${userSpec.protegeAddress} ${userSpec.protegeAddressDetail}`
-                : (userSpec.userAddress && userSpec.userAddressDetail
-                  ? `${userSpec.userAddress} ${userSpec.userAddressDetail}`
-                  : ""))
+              userSpec.protegeAddress 
+                ? `${userSpec.protegeAddress} ${userSpec.protegeAddressDetail}` 
+                : ""
             }
             disabled
           />
@@ -297,7 +257,7 @@ const welfareTime = () => {
             className={styles["spec-check-hw"]}
             type="number"
             placeholder="키"
-            value={userSpec.userHeight || userSpec.protegeHeight}
+            value={userSpec.userHeight || ""}
             disabled
           />
 
@@ -306,7 +266,7 @@ const welfareTime = () => {
             className={styles["spec-check-hw"]}
             type="number"
             placeholder="몸무게"
-            value={userSpec.userWeight || userSpec.protegeWeight}
+            value={userSpec.userWeight || ""}
             disabled
           />
 
@@ -317,7 +277,7 @@ const welfareTime = () => {
             className={`${styles["spec-check"]} ${styles.disease}`}
             type="text"
             placeholder="질병 내역이 없습니다."
-            value={userSpec.protegeDisease || userSpec.userDisease || ""}
+            value={userSpec.userDisease || ""}
             disabled
           />
 
@@ -325,7 +285,7 @@ const welfareTime = () => {
           <input
             className={`${styles["spec-check"]} ${styles.last} ${styles.first}`}
             type="text"
-            placeholder="정보 없음"
+            placeholder="예약된 정보가 없습니다."
             value={welfareName()}
             disabled
           />
@@ -339,11 +299,11 @@ const welfareTime = () => {
         </div>
 
         <div
-          className={`${styles["main-section"]} ${styles["go-password"]}`}
-          onClick={goSetPW}
+          className={`${styles["main-section"]} ${styles["go-password"]} ${!isKnockInfo ? styles["disabled-btn"] : ""}`}
+          onClick={isKnockInfo ? goSetPW : undefined} // Use `undefined` instead of an empty string
         >
-          <p className={`${styles["main-text"]} ${styles["go-password-text"]}`}>
-            다음
+          <p className={`${styles["main-text"]} ${styles["go-password-text"]} `}>
+          {isKnockInfo ?"다음":"마이페이지에서 정보 입력 후 이용 가능"}
           </p>
         </div>
       </div>

@@ -121,7 +121,9 @@
   text-align: center;
   margin-bottom: 5%;
 }
-
+.disabled-btn{
+  opacity: 0.5 !important;
+}
 .main-text {
   font-size: 18px;
   font-weight: bold;
