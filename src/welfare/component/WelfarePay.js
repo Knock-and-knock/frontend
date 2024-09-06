@@ -6,10 +6,8 @@ import 'welfare/css/WelfarePay.css';
 import cardP from "image/personalCard3.png";
 import cardF from "image/familyCard3.png";
 import { Swiper, SwiperSlide } from 'swiper/react';
-
 import 'swiper/css';
 import 'swiper/css/navigation';
-
 function WelfarePay(props) {
     const [cardId, setCardId] = useState(null);
     const [cardList, setCardList] = useState([]);
@@ -18,7 +16,6 @@ function WelfarePay(props) {
     const [errorMsg,setErrorMsg] = useState('');
     const [errorMsg02,setErrorMsg02] = useState('');
     const navi = useNavigate();
-
     useEffect(() => {
         call('/api/v1/card', "GET", null)
             .then(response => {
@@ -38,7 +35,6 @@ function WelfarePay(props) {
                 setErrorMsg("카드 조회에 실패했습니다.");
             });
     }, []);
-
     const handleGoCheckPW = () => {
         if (cardId) {
             call('/api/v1/users/payment',"GET",null).then((response)=>{
@@ -55,21 +51,20 @@ function WelfarePay(props) {
             setErrorMsg("카드를 선택해 주세요.");
         }
     };
-
     const handleSlideChange = (swiper)=>{
         const currentSlide = swiper.slides[swiper.activeIndex];
         const currentCardId = currentSlide.getAttribute('data-key');
         setCardId(currentCardId);
-
         const selectedCard = cardList.find(card => card.cardId === Number(currentCardId));
         if (selectedCard) {
             setCardNo(selectedCard.cardNo.slice(-4));
         }
     }
-
     return (
         <div className='welfarePay-container'>
+
             <Header style={{ position: 'relative', zIndex: 5 }}/>
+
             {isCard?
             <>
             <div className="information-container-pay">
@@ -106,5 +101,4 @@ function WelfarePay(props) {
         </div>
     );
 }
-
 export default WelfarePay;
