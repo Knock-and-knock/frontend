@@ -69,7 +69,7 @@ function WelfarePay(props) {
 
     return (
         <div className='welfarePay-container'>
-            <Header />
+            <Header style={{ position: 'relative', zIndex: 5 }}/>
             {isCard?
             <>
             <div className="information-container-pay">

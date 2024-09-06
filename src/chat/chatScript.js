@@ -18,7 +18,7 @@ export function handleAutoSub(
   setIsLoading(false);
   setIsSpeaking(true);
 
-  call("/api/v1/conversation/test", "POST", {
+  call("/api/v1/conversation", "POST", {
     input: message,
     conversationRoomNo: roomNo,
   })

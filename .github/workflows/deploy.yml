@@ -9,8 +9,9 @@ env:
   PROJECT_DIR: /home/ubuntu/knockknock/frontend
 
 on:
-  push:
-    branches: [ "main" ]
+  # push:
+  #   branches: [ "main" ]
+  workflow_dispatch:
 
 jobs:
   build-and-push:

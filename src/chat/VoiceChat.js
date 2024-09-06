@@ -77,6 +77,7 @@ function VoiceChat(props) {
       endRecord();
       setIsListening(false);
       setIsStart(false);
+      window.location.reload();
     }
   };
 

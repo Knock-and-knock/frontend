@@ -98,6 +98,7 @@ function WelfareCheckSpec() {
               userHeight: userInfo.protegeHeight,
               userWeight: userInfo.protegeWeight,
               userDisease: userInfo.protegeDisease,
+              welfareBookTotalPrice: calculatePrice(welfareBookUseTime)
             }));
           }
           
@@ -162,6 +163,16 @@ const welfareTime = () => {
   const goSetPW = () => {
     navigate("/welfare-input/pay");
   };
+
+  function calculatePrice(welfareBookUseTime) {
+    if ([1, 2, 3].includes(welfareBookUseTime)) {
+      return 75000 * welfareBookUseTime;
+    } else if ([4, 5, 6, 7, 8, 9].includes(welfareBookUseTime)) {
+      return 2000000 * (welfareBookUseTime - 3);
+    } else {
+      return 0;  // welfareBookUseTime이 예상 범위 밖의 값인 경우
+    }
+  }
 
 
   const formatDate = (date) => {
