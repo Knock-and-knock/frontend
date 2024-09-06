@@ -135,7 +135,7 @@ function DolbomMain() {
       case 'nursing':
         return (
           <div className={styles["info-container"]}>
-            <img src={nursing1} alt='가정간병1' className={styles['img-info']} />
+            <img src={nursing1} alt='가정간병1' className={styles['img-info-first']} />
             <img src={dolbomi} alt='똑돌보미' className={styles['img-info']} />
             <img src={nursing2} alt='가정간병2' className={styles['img-info']} />
             
@@ -151,7 +151,7 @@ function DolbomMain() {
       case 'housework':
         return (
           <div className={styles["info-container"]}>
-            <img src={housework1} alt='일상가사1' className={styles['img-info']} />
+            <img src={housework1} alt='일상가사1' className={styles['img-info-first']} />
             <img src={dolbomi} alt='똑돌보미' className={styles['img-info']} />
             <img src={housework2} alt='일상가사2' className={styles['img-info']} />
             <div 
@@ -166,7 +166,7 @@ function DolbomMain() {
       case 'hanwool':
         return (
           <div className={styles["info-container"]}>
-            <img src={hanwool1} alt='한울돌봄1' className={styles['img-info']} />
+            <img src={hanwool1} alt='한울돌봄1' className={styles['img-info-first']} />
             <img src={dolbomi} alt='똑돌보미' className={styles['img-info']} />
             <img src={hanwool2} alt='한울돌봄2' className={styles['img-info']} />
             <div 
