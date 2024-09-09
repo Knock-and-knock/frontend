@@ -95,6 +95,7 @@ function WelfareCheckSpec() {
               welfareBookUseTime: welfareBookUseTime,
               userNo: userInfo.userNo,
               userName: userInfo.userName,
+              protegeUserName: userInfo.userName,
               userBirth: userInfo.protegeBirth,
               protegeAddress: userInfo.protegeAddress,
               protegeAddressDetail: userInfo.protegeAddressDetail,
