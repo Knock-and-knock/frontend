@@ -88,7 +88,7 @@ function LoginId(props) {
     const isButtonDisabled = !userId || !userPassword;
 
     return (
-        <div>
+        <div className='login-container-wrap'>
             <LoginHeader/>
             <form noValidate onSubmit={handleSubmit}>
                 <div className="login-container">

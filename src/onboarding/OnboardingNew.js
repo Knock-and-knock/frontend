@@ -1,12 +1,37 @@
+import { call } from "login/service/ApiService";
 import "onboarding/OnboardingNew.css";
 import { useNavigate } from "react-router-dom";
 
 function OnboardingNew(props) {
   const navi = useNavigate();
+  const handleMatchCheck = () => {
+    call("/api/v1/match", "GET", null)
+        .then((response) => {
+            if (response.matchStatus === "ACCEPT") {
+                navi('/home');
+            } else {
+                navi('/match');
+            }
+        })
+        .catch((error) => {
+            if (error.matchStatus === null) {
+                navi('/match');
+            } else {
+                console.log(error);
+                alert("실패");
+            }
+        });
+};
+
   const handleBtnClick = () => {
     const ACCESS_TOKEN = localStorage.getItem("ACCESS_TOKEN");
+    const loginUser = localStorage.getItem("loginUser");
     if (ACCESS_TOKEN) {
-      navi("/home");
+      if (loginUser === "PROTECTOR") {
+        handleMatchCheck();
+      } else {
+        navi('/home');
+      }
     } else {
       navi("/loginid");
     }
