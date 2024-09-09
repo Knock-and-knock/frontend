@@ -8,8 +8,12 @@ function WelfareCheckSpec() {
   const navigate = useNavigate();
   const { userSpec, setUserSpec } = useSpecHook();
   // const [loading, setLoading] = useState(true); // 로딩 상태 추가
+
+  // 이전 페이지에서 useNavigate로 보내준 값들을 받겠다는 의미
   const location = useLocation();
+  // state라는 속성(변수)에서 저 4가지 변수를 꺼내서 쓰겠다는 의미
   const {welfareNo,welfareBookStartDate,welfareBookUseTime,isExtraInfo} = location.state || {};
+  
 
   const [userInfo, setUserInfo] = useState([]);
   const [isKnockInfo, setIsKnockInfo] = useState(true);

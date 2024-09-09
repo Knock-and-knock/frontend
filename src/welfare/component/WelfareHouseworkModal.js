@@ -19,8 +19,8 @@ function WelfareHouseworkModal({ closeModal, loginUser, isExtraInfo }) {
   }
 
   const goCheckSpec = () => {
-    navigate('/welfare-input/check-spec');
-  }
+    navigate('/welfare-input/check-spec',{ state: {isExtraInfo} }); // state라는 큰 속성(변수)에 isExtraInfo 값을 담아서 저 페이지로 보냄
+}
 
   const handleNextClick = () => {
     if (isExtraInfo === false && (loginUser === 'PROTECTOR' || loginUser === 'PROTEGE')) {
